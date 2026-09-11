@@ -10,6 +10,7 @@ import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning
 import { firstCommitSections } from "@/topics/git/content/git-first-commit-article";
 import { gitInspectionSections } from "@/topics/git/content/git-inspection-article";
 import { gitIgnoreSections } from "@/topics/git/content/git-ignore-article";
+import { gitBranchSections } from "@/topics/git/content/git-branch-article";
 import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
@@ -21,6 +22,7 @@ export type ArticleBlock =
   | { type: "commit-playground" }
   | { type: "inspection-playground" }
   | { type: "ignore-playground" }
+  | { type: "branch-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -56,7 +58,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -199,6 +201,30 @@ export const articles: Article[] = [
       { title: "Git reference · Which rule matched", url: "https://git-scm.com/docs/git-check-ignore" },
       { title: "Git reference · Removing from the index only", url: "https://git-scm.com/docs/git-rm" },
       { title: "GitHub docs · Ignoring files", url: "https://docs.github.com/en/get-started/git-basics/ignoring-files" },
+    ],
+  },
+  {
+    slug: "branches-are-labels-that-move",
+    title: "Branches are labels that move",
+    excerpt: "A branch is a name that stores one commit ID. Create one, switch, and commit to see exactly which label moves, how a history forks, and what rename and delete really do.",
+    topic: "Git",
+    date: "Sep 11, 2026",
+    readTime: "9 min read",
+    accent: "coral",
+    number: "16",
+    series: {
+      title: "Git, made visible", order: 6, practiceTime: "2 min to explore",
+      nextTitle: "How Git brings two branches together",
+      nextDescription: "Next, we’ll join sci-fi back into main and see when Git can simply move a label and when it must record a merge.",
+      exercise: { id: "try-the-branches", label: "Move the labels" }, illustration: "branches",
+    },
+    sections: gitBranchSections,
+    sources: [
+      { title: "The Git book · Branches in a nutshell", url: "https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell" },
+      { title: "Git reference · Creating, renaming, and deleting branches", url: "https://git-scm.com/docs/git-branch" },
+      { title: "Git reference · Switching branches", url: "https://git-scm.com/docs/git-switch" },
+      { title: "Git reference · Drawing history", url: "https://git-scm.com/docs/git-log" },
+      { title: "Git glossary · HEAD and branch", url: "https://git-scm.com/docs/gitglossary" },
     ],
   },
   {

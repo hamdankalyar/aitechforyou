@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. The snapshots, first-commit, inspection, configuration, and ignore guides are implemented. **The next detailed guide is “Branches are labels that move.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–06 (snapshots, first commit, inspection, configuration, ignore rules, branches) are implemented; the ignore guide is committed at `c39fb92`. **The next detailed guide is “How Git brings two branches together.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -14,9 +14,10 @@ Work by topic, with links between the two formats. One guide can support several
 | Complete | All eight short foundation lessons | A continuous practice path from the basic idea and setup through two commits and history. |
 | Complete | Detailed guide: Read what Git is telling you | Status, three diff comparisons, patch reading, and log; an interactive example checked against real Git. |
 | Complete | Detailed guide: Teach Git what to ignore | Ignore rules, pattern matching with reasons, negation limits, and untracking an already tracked file. |
-| Next | Detailed guide: Branches are labels that move | Create, switch, rename, and delete branches; locate HEAD; watch only one label advance. |
+| Complete | Detailed guide: Branches are labels that move | Create, switch, rename, and delete branches; locate HEAD; watch only one label advance. |
+| Next | Detailed guide: How Git brings two branches together | Fast-forward versus a merge of diverged histories, with the same sci-fi branch joined under both conditions. |
 
-Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the branches guide (06) unless the user names another topic or format. Then develop the merge, conflict, and collaboration material in coherent topic groups.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the merge guide (07) unless the user names another topic or format. Then develop the conflict and collaboration material in coherent topic groups.
 
 ## 1. The direction
 
@@ -287,7 +288,15 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Complete the eight-lesson foundation path; committed at `1adf1b7`.
 - [x] Complete “Read what Git is telling you” as guide 03.
 - [x] Complete “Teach Git what to ignore” as guide 05; guide 04 was already published.
-- [ ] Proceed to “Branches are labels that move” as guide 06.
+- [x] Complete “Branches are labels that move” as guide 06.
+- [ ] Proceed to “How Git brings two branches together” as guide 07.
+
+### Branches guide delivery — September 11, 2026
+
+- URL: `/articles/branches-are-labels-that-move`; guide 06 follows the ignore guide and points at the merge guide as in preparation.
+- Covers branch-as-label, HEAD, which label moves on commit, forked history and parent direction, switching rewriting the working file and refusing to overwrite edits, `git branch`/`switch`/`switch -c`, `log --graph --all`, rename, `-d` refusal rules, and `-D`.
+- Interactive example: create `sci-fi`, switch, commit on either branch (two example books each), with a two-lane graph, HEAD outline, labels, working-file panel, last command, and reset. The transcript covers every outcome including committing without switching.
+- `node topics/git/scripts/check-git-branches.mjs` replays four action sequences against Git 2.50.1: per-branch history and file contents, branch list, HEAD, and working file after every step, plus `-d` and current-branch refusals, dirty-switch refusal, rename, and `-D`.
 
 ### Ignore guide delivery — September 11, 2026
 
