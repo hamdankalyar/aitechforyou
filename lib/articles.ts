@@ -14,6 +14,7 @@ import { gitBranchSections } from "@/topics/git/content/git-branch-article";
 import { gitMergeSections } from "@/topics/git/content/git-merge-article";
 import { gitConflictSections } from "@/topics/git/content/git-conflict-article";
 import { gitRemoteSections } from "@/topics/git/content/git-remote-article";
+import { gitPushSections } from "@/topics/git/content/git-push-article";
 import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
@@ -29,6 +30,7 @@ export type ArticleBlock =
   | { type: "merge-playground" }
   | { type: "conflict-playground" }
   | { type: "remote-playground" }
+  | { type: "push-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -64,7 +66,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "push" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -305,6 +307,31 @@ export const articles: Article[] = [
       { title: "Git reference · Cloning a repository", url: "https://git-scm.com/docs/git-clone" },
       { title: "Git reference · Naming remotes", url: "https://git-scm.com/docs/git-remote" },
       { title: "Git glossary · Remote-tracking branch", url: "https://git-scm.com/docs/gitglossary#def_remote_tracking_branch" },
+    ],
+  },
+  {
+    slug: "push-pull-and-the-upstream-connection",
+    title: "Push, pull, and the upstream connection",
+    excerpt: "Send your commits to a shared server, set the upstream that lets push and pull work without arguments, see why a push gets rejected, and choose how pull answers a divergence.",
+    topic: "Git",
+    date: "Sep 12, 2026",
+    readTime: "11 min read",
+    accent: "coral",
+    number: "20",
+    series: {
+      title: "Git, made visible", order: 10, practiceTime: "3 min to explore",
+      nextTitle: "From fork to pull request",
+      nextDescription: "Next, a repository you cannot push to: fork it, clone your fork, branch, push there, and open a pull request against the original.",
+      exercise: { id: "try-the-push", label: "Try a push" }, illustration: "push",
+    },
+    sections: gitPushSections,
+    sources: [
+      { title: "The Git book · Pushing to your remotes", url: "https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes#_pushing_remotes" },
+      { title: "The Git book · Tracking branches", url: "https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#_tracking_branches" },
+      { title: "Git reference · push, --set-upstream, and the note about fast-forwards", url: "https://git-scm.com/docs/git-push" },
+      { title: "Git reference · pull and divergent branches", url: "https://git-scm.com/docs/git-pull" },
+      { title: "Git reference · push.default, push.autoSetupRemote, pull.ff", url: "https://git-scm.com/docs/git-config" },
+      { title: "Git reference · Bare repositories", url: "https://git-scm.com/docs/git-init#Documentation/git-init.txt---bare" },
     ],
   },
   {

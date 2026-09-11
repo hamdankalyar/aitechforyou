@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–09 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts, remotes) are implemented; guides 05–08 are committed at `c39fb92`, `1f405a0`, `c34391a`, and `43f453f`. **The next detailed guide is “Push, pull, and the upstream connection.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–10 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts, remotes, push/pull) are implemented; guides 05–09 are committed at `c39fb92`, `1f405a0`, `c34391a`, `43f453f`, and `584d78c`. **The next detailed guide is “From fork to pull request.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -18,9 +18,10 @@ Work by topic, with links between the two formats. One guide can support several
 | Complete | Detailed guide: How Git brings two branches together | Fast-forward versus a merge of diverged histories, with the same sci-fi branch joined under both conditions. |
 | Complete | Detailed guide: A conflict is a question you can answer | Read conflict markers, choose or edit the final text, stage it, and finish or abort the merge. |
 | Complete | Detailed guide: Your branch, their branch, and origin/main | Local branches, remote-tracking references, and server branches; what fetch changes and what it leaves alone. |
-| Next | Detailed guide: Push, pull, and the upstream connection | Publish a branch to a shared bare repository, set upstream, and understand what pull does and when it refuses. |
+| Complete | Detailed guide: Push, pull, and the upstream connection | Publish a branch to a shared bare repository, set upstream, and understand what pull does and when it refuses. |
+| Next | Detailed guide: From fork to pull request | Fork, clone, branch, push to the fork, and open a pull request against the original repository. |
 
-Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the push/pull guide (10) unless the user names another topic or format. Then continue with the fork-to-pull-request workflow.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the fork guide (11) unless the user names another topic or format. Then move on to Part III: stash, undo, and reflog.
 
 ## 1. The direction
 
@@ -295,7 +296,15 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Complete “How Git brings two branches together” as guide 07.
 - [x] Complete “A conflict is a question you can answer” as guide 08.
 - [x] Complete “Your branch, their branch, and origin/main” as guide 09.
-- [ ] Proceed to “Push, pull, and the upstream connection” as guide 10.
+- [x] Complete “Push, pull, and the upstream connection” as guide 10.
+- [ ] Proceed to “From fork to pull request” as guide 11.
+
+### Push and pull guide delivery — September 12, 2026
+
+- URL: `/articles/push-pull-and-the-upstream-connection`; guide 10 follows the remotes guide and points at the fork guide as in preparation.
+- Introduces the shared bare repository by showing why a push into a checked-out branch is refused. The project starts locally with `git init` and `git remote add`, so the no-upstream refusal is real; cloning an empty server would have pre-set the upstream. Covers `-u`/`--set-upstream`, `branch -vv`, clone setting the upstream, `push.default` simple and `push.autoSetupRemote` as optional detail, the rejected non-fast-forward push (nothing sent, nothing fetched), pull as fetch plus one of three answers, the divergent-branches refusal after the fetch step has already run, `--ff-only`, `--no-rebase`, `pull.ff only`, and a rebase pointer for later. Force-push is deferred to guide 24 as the plan requires.
+- Interactive example: server, your repository with upstream state, Sam’s pushes, your commit, push with and without `-u`, and pull under three modes, with Git’s real outputs and the status line. The transcript covers every outcome.
+- `node topics/git/scripts/check-git-push.mjs` replays four action sequences against a bare server, your laptop, and Sam’s clone under Git 2.50.1 (push and pull outputs, histories of main, origin/main, and the server, upstream presence, file, both status forms), then runs the article’s walkthrough as one shell session.
 
 ### Remotes guide delivery — September 12, 2026
 

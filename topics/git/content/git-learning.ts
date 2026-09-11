@@ -24,6 +24,7 @@ const guideKeywords: Record<string, string> = {
   "git-status-diff-and-log": "git status diff log inspect inspection empty diff no output staged unstaged index working tree HEAD compare comparison patch hunk MM history",
   "from-edited-file-to-first-commit": "git staging stage staged area index working tree directory commit snapshot edited changes tracked untracked git add first commit",
   "git-is-a-time-machine": "save saving vs snapshot snapshots commit version history remembers",
+  "push-pull-and-the-upstream-connection": "push pull upstream set-upstream -u tracking branch rejected fetch first non-fast-forward divergent branches reconcile ff-only no-rebase bare repository server remote add push.default push.autoSetupRemote pull.ff everything up-to-date",
   "your-branch-their-branch-and-origin-main": "remote remotes origin origin/main remote-tracking branch fetch clone git fetch git clone server teammate behind ahead diverged up to date status remote -v branch --all origin/HEAD",
   "a-conflict-is-a-question-you-can-answer": "conflict conflicts merge conflict CONFLICT markers resolve resolution unmerged UU both modified abort continue ours theirs diff --check leftover conflict marker zdiff3 restore --ours --theirs",
   "how-git-brings-two-branches-together": "git merge merging fast-forward fast forward ff-only no-ff merge commit two parents combine branches join integrate ort strategy auto-merging merge base fork point",
