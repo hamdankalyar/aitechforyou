@@ -80,6 +80,10 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 .learning-article .article-prose > section { margin-bottom: 72px; scroll-margin-top: 105px; }
 .learning-article .article-prose > section > h2 { font-size: clamp(30px, 3.4vw, 42px); line-height: 1.13; text-wrap: balance; }
 .learning-article .article-prose > section > p { font-size: 18px; line-height: 1.85; }
+.guide-points { margin: 0 0 30px; padding-left: 25px; }
+.guide-points li { padding-left: 7px; margin-block: 12px; color: var(--prose); font-size: 18px; line-height: 1.75; }
+.guide-points li::marker { color: var(--blue); }
+.guide-points.compact li { font-size: 16px; }
 .section-counter { display: flex; align-items: center; gap: 12px; font: 600 11px/1 var(--font-body); margin-bottom: 18px; color: var(--muted); }
 .section-counter span { height: 1px; width: 35px; background: var(--border); }
 .learning-kicker { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; line-height: 1.6; }
@@ -284,6 +288,7 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
   .learning-article .article-hero p { font-size: 17px; }
   .learning-article .back-link { margin-bottom: 26px; }
   .learning-article .article-prose > section > p { font-size: 17px; }
+  .guide-points li { font-size: 17px; }
   .learning-article .article-prose > section { margin-bottom: 52px; padding-inline: 6px; }
   .learning-bullets li { grid-template-columns: minmax(0, 1fr); gap: 5px; }
   .snapshot-figure-grid { grid-template-columns: 1fr; }

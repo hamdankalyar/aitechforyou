@@ -15,6 +15,7 @@ for (const id of ["compare-the-levels", "generative-ai", "rag-ai", "tool-ai", "a
 assert.match(guide, /href="\/articles\?topic=AI"/);
 assert.match(guide, /class="learning-bullets"/);
 assert.doesNotMatch(guide, /Where this level reaches its limit/);
+assert.doesNotMatch(guide, /class="section-counter"/);
 assert.doesNotMatch(guide, />Git<!-- --> Guide</);
 
 const aiArchive = await page("/articles?topic=AI");
@@ -24,5 +25,7 @@ assert.match(aiArchive, /Read <!-- -->guide/);
 const gitGuide = await page("/articles/git-is-a-time-machine");
 assert.match(gitGuide, /Git<!-- --> Guide/);
 assert.match(gitGuide, /href="\/learn\/git\?view=guides"/);
+for (const path of ["git-is-a-time-machine", "from-edited-file-to-first-commit", "git-status-diff-and-log", "git-config-identity-and-overrides", "generative-ai-vs-agentic-ai"]) assert.match(await page(`/articles/${path}`), /class="guide-points"/, path);
+assert.doesNotMatch(await page("/learn/git/configure"), /class="guide-points"/);
 
-console.log("AI guide content, navigation, archive listing, and Git guide labels are correct.");
+console.log("Guide bullets, reference separation, navigation, and labels are correct.");

@@ -23,12 +23,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!article) notFound();
   const series = article.series;
   const learning = Boolean(series);
+  const showSectionNumbers = learning && article.topic !== "AI";
   const topicSlug = article.topic.toLowerCase();
   const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : `/articles?topic=${article.topic}`;
   const nextArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order + 1) : undefined;
   const previousArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order - 1) : undefined;
   const sections = article.sections.map((section, index) => ({ ...section, id: section.id ?? `section-${index + 1}` }));
-  const contents = <ol>{sections.map((section, index) => <li key={section.id}><a href={`#${section.id}`}><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>{section.heading}</a></li>)}</ol>;
+  const contents = <ol>{sections.map((section, index) => <li key={section.id}><a href={`#${section.id}`}>{showSectionNumbers && <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>}{section.heading}</a></li>)}</ol>;
 
   return (
     <main id="main" className={`article-page topic-${topicSlug} ${learning ? "learning-article" : ""}`}>
@@ -52,9 +53,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="article-prose">
           {sections.map((section, index) => (
             <section key={section.id} id={section.id}>
-              {learning && <div className="section-counter" aria-hidden="true">{String(index + 1).padStart(2, "0")}<span /></div>}
+              {showSectionNumbers && <div className="section-counter" aria-hidden="true">{String(index + 1).padStart(2, "0")}<span /></div>}
               <h2>{section.heading}</h2>
-              {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              {learning ? <ul className="guide-points">{section.paragraphs.map(paragraph => <li key={paragraph}>{paragraph}</li>)}</ul> : section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
               {section.code && <pre><code>{section.code}</code></pre>}
               {section.blocks?.map((block, index) => <ArticleBlock block={block} key={index} />)}
             </section>
