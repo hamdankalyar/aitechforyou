@@ -1,0 +1,822 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Q&amp;A </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><article id="3a474eae-e48c-80fb-9429-e8ec3cde76fa" class="page sans"><header><h1 class="page-title" dir="auto">Q&amp;A </h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h2 id="3bd74eae-e48c-8070-b5f8-c629f89613ad" class="" dir="auto">1. <code>git switch</code> &amp; Remote Branches</h2><p id="3bd74eae-e48c-8009-8f38-d19f213ecedf" class="" dir="auto"><strong>Q: What happens if I run </strong><code><strong>git switch origin/main</strong></code><strong>?</strong></p><p id="3bd74eae-e48c-8065-9326-df540f59ea84" class="" dir="auto"><strong>A:</strong> Git gives an error because <code>origin/main</code> is a <strong>remote-tracking branch</strong>, not a local branch.</p><p id="3bd74eae-e48c-8017-9969-de43b7cc7ebb" class="" dir="auto">If you want to inspect it directly:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js" integrity="sha512-whYhDwtTmlC/NpZlCr6PSsAaLOrfjVg/iXAnC4H/dtiHawpShhT2SlIMbpIhT/IL/NrpdMm+Hq2C13+VKpHTYw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="3bd74eae-e48c-8000-8744-e62b97aa1f79" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git switch --detach origin/main</code></pre><p id="3bd74eae-e48c-808a-973b-e033bc742ff2" class="" dir="auto">This puts you in a <strong>detached HEAD</strong> state.</p><hr id="3bd74eae-e48c-8010-acfc-e46230c2e507" dir="auto"/><p id="3bd74eae-e48c-804b-9196-d250b343aa33" class="" dir="auto"><strong>Q: What happens if I run </strong><code><strong>git switch -c origin/main origin/main</strong></code><strong>?</strong></p><p id="3bd74eae-e48c-8022-9ddf-db767670080f" class="" dir="auto"><strong>A:</strong> It creates a <strong>local branch literally named </strong><code><strong>origin/main</strong></code> based on the remote-tracking branch.</p><p id="3bd74eae-e48c-8040-9ce6-fd04e6c01201" class="" dir="auto">⚠️ Avoid this because it can cause confusing/ambiguous branch references.</p><hr id="3bd74eae-e48c-8050-8770-eb6cd3b96634" dir="auto"/><p id="3bd74eae-e48c-80b9-883c-ff927cd76691" class="" dir="auto"><strong>Q: What happens if I run </strong><code><strong>git switch origin/main origin/main</strong></code><strong>?</strong></p><p id="3bd74eae-e48c-80ff-bae1-edfbde949b48" class="" dir="auto"><strong>A:</strong> Git gives an error because <code>git switch</code> normally expects <strong>one branch/reference</strong>.</p><hr id="3bd74eae-e48c-80d7-95cf-d439a85344be" dir="auto"/><h2 id="3bd74eae-e48c-8066-a71a-ceb7321a4e05" class="" dir="auto">2. Local Branch vs Remote-Tracking Branch</h2><h3 id="3bd74eae-e48c-8067-ac47-c914974f945a" class="" dir="auto">Local branch</h3><pre id="3bd74eae-e48c-80be-ba36-c60fb598c23c" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">main</code></pre><p id="3bd74eae-e48c-8070-a58d-eff2786911d4" class="" dir="auto">A branch that exists <strong>locally on your computer</strong> and that you can work on.</p><h3 id="3bd74eae-e48c-8099-be77-dcbf680fad86" class="" dir="auto">Remote-tracking branch</h3><pre id="3bd74eae-e48c-804e-a22c-edbd89ed86f1" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">origin/main</code></pre><p id="3bd74eae-e48c-8051-829f-e850488df920" class="" dir="auto">Git&#x27;s <strong>local record of where the </strong><code><strong>main</strong></code><strong> branch on the </strong><code><strong>origin</strong></code><strong> remote was last seen</strong>.</p><p id="3bd74eae-e48c-8050-88ca-cb49bcac94dc" class="" dir="auto">Think:</p><pre id="3bd74eae-e48c-8051-b539-dcd2a7e84689" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">main        → my local branch
+origin/main → my local reference to the remote main</code></pre><hr id="3bd74eae-e48c-8043-83f9-f23e5825b977" dir="auto"/><h2 id="3bd74eae-e48c-80cb-a05a-fedb4e149691" class="" dir="auto">3. How Does <code>git switch &lt;name&gt;</code> Find a Remote Branch?</h2><p id="3bd74eae-e48c-80db-ad26-d7339e1a27d3" class="" dir="auto">If you run:</p><pre id="3bd74eae-e48c-8075-bebe-d7b86d185604" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git switch login</code></pre><p id="3bd74eae-e48c-8083-8e77-de3526c1d68a" class="" dir="auto">and there is no local <code>login</code> branch, Git can often find:</p><pre id="3bd74eae-e48c-80c7-8418-c2be7de39693" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">origin/login</code></pre><p id="3bd74eae-e48c-802a-9396-cb1ba3832947" class="" dir="auto">and create a local <code>login</code> branch that tracks it.</p><p id="3bd74eae-e48c-80c3-bfbc-f2245d25e778" class="" dir="auto">So:</p><pre id="3bd74eae-e48c-8022-aa75-d1e8b87193a6" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">git switch login
+        ↓
+finds origin/login
+        ↓
+creates local login</code></pre><hr id="3bd74eae-e48c-80c5-ab82-d1ece088cf7e" dir="auto"/><h2 id="3bd74eae-e48c-803b-9e32-f019f70957a4" class="" dir="auto">4. Does <code>git switch</code> Download New Code?</h2><p id="3bd74eae-e48c-8095-bcfa-e69aa38bb202" class="" dir="auto"><strong>No.</strong></p><pre id="3bd74eae-e48c-8059-94ea-ff3d7ebaa29a" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git switch main</code></pre><p id="3bd74eae-e48c-80be-a678-d4ca3bb2cd2d" class="" dir="auto">only changes your <strong>current branch/workspace</strong>.</p><p id="3bd74eae-e48c-80e2-8552-ebfa09d66472" class="" dir="auto">It does <strong>not</strong>:</p><ul id="3bd74eae-e48c-80a3-906e-f36c76da4a88" class="bulleted-list" dir="auto"><li style="list-style-type:disc">download changes</li></ul><ul id="3bd74eae-e48c-8090-bcdd-d870902ee2d3" class="bulleted-list" dir="auto"><li style="list-style-type:disc">contact GitHub</li></ul><ul id="3bd74eae-e48c-8091-870a-d7fdb6107a6e" class="bulleted-list" dir="auto"><li style="list-style-type:disc">merge changes</li></ul><ul id="3bd74eae-e48c-8032-9daa-f7f0bd3e8b5b" class="bulleted-list" dir="auto"><li style="list-style-type:disc">update <code>origin/main</code></li></ul><hr id="3bd74eae-e48c-80c0-a45b-cfa6159344f8" dir="auto"/><h2 id="3bd74eae-e48c-8064-9efa-dd0a96c1225b" class="" dir="auto">5. How Do I Update Local <code>main</code> From <code>origin/main</code>?</h2><h3 id="3bd74eae-e48c-80bc-8037-e83ca130dcce" class="" dir="auto">Standard way</h3><pre id="3bd74eae-e48c-80c7-ae98-d9a35b2ede94" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git switch main
+git pull</code></pre><p id="3bd74eae-e48c-803d-a7c6-e4c4dd62cb1f" class="" dir="auto"><code>git pull</code> essentially does:</p><pre id="3bd74eae-e48c-8022-bd0a-eeedf28d8f65" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">git fetch
++
+git merge (or rebase, depending on configuration)</code></pre><h3 id="3bd74eae-e48c-8057-9479-e26b458110ae" class="" dir="auto">Explicit way</h3><pre id="3bd74eae-e48c-8064-9ba6-d4792ea301a5" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git fetch origin
+git merge origin/main</code></pre><p id="3bd74eae-e48c-8033-8c45-f2e53b2f5864" class="" dir="auto">This gives you more control because you explicitly perform each step.</p><h3 id="3bd74eae-e48c-8041-81d7-e79f54de2418" class="" dir="auto">Force local <code>main</code> to exactly match <code>origin/main</code></h3><pre id="3bd74eae-e48c-8067-8761-e37026496b70" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git fetch origin
+git reset --hard origin/main</code></pre><p id="3bd74eae-e48c-802e-b8b3-ed3f29605195" class="" dir="auto">⚠️ This <strong>discards local commits/changes</strong> that aren&#x27;t in <code>origin/main</code>.</p><hr id="3bd74eae-e48c-80d9-81f0-c8ad126bee04" dir="auto"/><h1 id="3bd74eae-e48c-80bc-ada9-c82c7a6148fa" class="" dir="auto">6. Can I Make <code>origin/main</code> Into <code>main</code>?</h1><p id="3bd74eae-e48c-80b4-bd5e-ec8c01f6a7d7" class="" dir="auto">Not literally.</p><p id="3bd74eae-e48c-8088-97e9-ec64b0fbd803" class="" dir="auto"><code>origin/main</code> and <code>main</code> are <strong>different references</strong>:</p><pre id="3bd74eae-e48c-80e7-85ae-dbf3d406b8f7" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">Local:
+main
+
+Remote-tracking:
+origin/main</code></pre><p id="3bd74eae-e48c-80d2-9b69-fbd9f053353a" class="" dir="auto">You can create a local <code>main</code> <strong>based on</strong> <code>origin/main</code>:</p><pre id="3bd74eae-e48c-808d-a359-ca764e4fa932" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git switch -c main origin/main</code></pre><p id="3bd74eae-e48c-801b-bc92-dc4df47cf407" class="" dir="auto">This means:</p><blockquote id="3bd74eae-e48c-8051-a905-e7c7e25421a9" class="" dir="auto">Create a new local branch called <code>main</code>, starting at the same commit as <code>origin/main</code>.</blockquote><p id="3bd74eae-e48c-80ef-b5d5-d8efdd34544d" class="" dir="auto">It does <strong>not</strong> convert or rename <code>origin/main</code>.</p><hr id="3bd74eae-e48c-800c-b696-dbb807f13818" dir="auto"/><h1 id="3bd74eae-e48c-8013-bb0e-c3c995c85763" class="" dir="auto">7. Can I Make <code>main</code> Become <code>origin/main</code>?</h1><p id="3bd74eae-e48c-80cf-8d5d-d90f7a457be1" class="" dir="auto">You cannot directly turn a local branch into a remote-tracking branch.</p><p id="3bd74eae-e48c-8008-a4b9-e547f6f9b277" class="" dir="auto"><code>origin/main</code> is managed by Git as a reference to the remote repository.</p><p id="3bd74eae-e48c-806b-99ed-dea7447ff9e3" class="" dir="auto">It gets updated when you communicate with the remote, mainly through:</p><pre id="3bd74eae-e48c-8076-8b45-eafafa533faf" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git fetch</code></pre><p id="3bd74eae-e48c-80cd-8ba5-eca552e319ce" class="" dir="auto">For example:</p><pre id="3bd74eae-e48c-804e-8d75-e148f4d3a99a" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">GitHub:
+    main
+      ↓
+   git fetch
+      ↓
+Local:
+    origin/main</code></pre><p id="3bd74eae-e48c-8003-9f60-e101132cfe02" class="" dir="auto">Then you can make your local <code>main</code> match it with:</p><pre id="3bd74eae-e48c-8064-9bbd-e7a0d32a89f4" class="code code-wrap" data-notion-code-syntax="bash"><code class="language-bash" style="white-space:pre-wrap;word-break:break-all">git reset --hard origin/main</code></pre><hr id="3bd74eae-e48c-8046-848e-c63a170cca58" dir="auto"/><h1 id="3bd74eae-e48c-809f-bb57-e8876971c53f" class="" dir="auto">⭐ Easy Mental Model</h1><pre id="3bd74eae-e48c-80c8-ba0a-c85b0ff8da40" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">GitHub
+   │
+   │ fetch
+   ↓
+origin/main
+   │
+   │ merge / rebase / reset
+   ↓
+main</code></pre></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

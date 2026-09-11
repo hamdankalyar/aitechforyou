@@ -166,38 +166,6 @@ export const articles: Article[] = [
     sections: aiGenerativeAgenticSections,
   },
   {
-    slug: "ai-agents-without-the-hype",
-    title: "AI agents, without the hype",
-    excerpt:
-      "What makes an agent different from a chatbot—and when a simple script is still the smarter choice.",
-    topic: "AI",
-    date: "Sep 4, 2026",
-    readTime: "8 min read",
-    accent: "blue",
-    number: "02",
-    sections: [
-      {
-        heading: "A loop with choices",
-        paragraphs: [
-          "An AI agent is a system that can observe a situation, choose an action, use a tool, and inspect the result. The important part is not the chat interface. It is the feedback loop.",
-          "A chatbot usually returns an answer. An agent can take several steps toward an outcome, changing its next move based on what happened before.",
-        ],
-      },
-      {
-        heading: "Where agents help",
-        paragraphs: [
-          "Agents are useful when a task has uncertainty: investigating a bug, researching across sources, or deciding which tool to use. Predictable tasks are often safer, faster, and cheaper as ordinary software.",
-        ],
-      },
-      {
-        heading: "A practical test",
-        paragraphs: [
-          "Ask whether the job needs judgment between steps. If every step is already known, build a workflow. If the system must adapt after seeing each result, an agent may be a good fit.",
-        ],
-      },
-    ],
-  },
-  {
     slug: "internet-request-journey",
     title: "What happens after you press Enter?",
     excerpt:
