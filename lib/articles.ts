@@ -7,6 +7,7 @@ import { javascriptSymbolSections } from "@/topics/javascript/content/javascript
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
+import { gitBranchReference, gitConflictReference, gitIgnoreReference, gitInspectReference, gitMergeReference, gitRemoteReference } from "@/topics/git/content/git-references";
 import { firstCommitSections } from "@/topics/git/content/git-first-commit-article";
 import { gitInspectionSections } from "@/topics/git/content/git-inspection-article";
 import { gitIgnoreSections } from "@/topics/git/content/git-ignore-article";
@@ -16,7 +17,6 @@ import { gitConflictSections } from "@/topics/git/content/git-conflict-article";
 import { gitRemoteSections } from "@/topics/git/content/git-remote-article";
 import { gitPushSections } from "@/topics/git/content/git-push-article";
 import { gitForkSections } from "@/topics/git/content/git-fork-article";
-import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
 export type ArticleBlock =
@@ -149,7 +149,7 @@ export const articles: Article[] = [
     readTime: "9 min read",
     accent: "coral",
     number: "07",
-    shortLesson: gitHistoryLesson,
+    shortLesson: gitInspectReference,
     series: {
       title: "Git, made visible", order: 3, practiceTime: "3 min to explore",
       nextTitle: "Set up Git so it knows who you are",
@@ -198,6 +198,7 @@ export const articles: Article[] = [
     readTime: "8 min read",
     accent: "coral",
     number: "15",
+    shortLesson: gitIgnoreReference,
     series: {
       title: "Git, made visible", order: 5, practiceTime: "2 min to explore",
       nextTitle: "Branches are labels that move",
@@ -222,6 +223,7 @@ export const articles: Article[] = [
     readTime: "9 min read",
     accent: "coral",
     number: "16",
+    shortLesson: gitBranchReference,
     series: {
       title: "Git, made visible", order: 6, practiceTime: "2 min to explore",
       nextTitle: "How Git brings two branches together",
@@ -246,6 +248,7 @@ export const articles: Article[] = [
     readTime: "9 min read",
     accent: "coral",
     number: "17",
+    shortLesson: gitMergeReference,
     series: {
       title: "Git, made visible", order: 7, practiceTime: "2 min to explore",
       nextTitle: "A conflict is a question you can answer",
@@ -270,6 +273,7 @@ export const articles: Article[] = [
     readTime: "10 min read",
     accent: "coral",
     number: "18",
+    shortLesson: gitConflictReference,
     series: {
       title: "Git, made visible", order: 8, practiceTime: "2 min to explore",
       nextTitle: "Your branch, their branch, and origin/main",
@@ -295,6 +299,7 @@ export const articles: Article[] = [
     readTime: "10 min read",
     accent: "coral",
     number: "19",
+    shortLesson: gitRemoteReference,
     series: {
       title: "Git, made visible", order: 9, practiceTime: "2 min to explore",
       nextTitle: "Push, pull, and the upstream connection",

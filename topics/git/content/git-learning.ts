@@ -1,5 +1,6 @@
 import type { Article } from "@/lib/articles";
-import { gitConfigReference, gitConfigReferenceSections } from "@/topics/git/content/git-config-reference";
+import { gitConfigReference } from "@/topics/git/content/git-config-reference";
+import { gitReferences } from "@/topics/git/content/git-references";
 import { gitChangeLesson, gitCommitLesson, gitHistoryLesson, gitInstallLesson, gitRememberLesson, gitStageLesson, type GitLessonSummary } from "@/topics/git/content/git-short-lessons";
 
 export const gitSetupLesson = gitConfigReference;
@@ -21,10 +22,10 @@ export const publishedGitLessons = gitLessons;
 export const gitConfigGuide = "/articles/git-config-identity-and-overrides";
 
 const guideKeywords: Record<string, string> = {
-  "from-fork-to-pull-request": "fork forking pull request PR merge request contribute open source upstream remote origin clone fork sync fork FETCH_HEAD three-dot diff github gitlab review branch delete --delete",
   "git-status-diff-and-log": "git status diff log inspect inspection empty diff no output staged unstaged index working tree HEAD compare comparison patch hunk MM history",
   "from-edited-file-to-first-commit": "git staging stage staged area index working tree directory commit snapshot edited changes tracked untracked git add first commit",
   "git-is-a-time-machine": "save saving vs snapshot snapshots commit version history remembers",
+  "from-fork-to-pull-request": "fork forking pull request PR merge request contribute open source upstream remote origin clone fork sync fork FETCH_HEAD three-dot diff github gitlab review branch delete --delete",
   "push-pull-and-the-upstream-connection": "push pull upstream set-upstream -u tracking branch rejected fetch first non-fast-forward divergent branches reconcile ff-only no-rebase bare repository server remote add push.default push.autoSetupRemote pull.ff everything up-to-date",
   "your-branch-their-branch-and-origin-main": "remote remotes origin origin/main remote-tracking branch fetch clone git fetch git clone server teammate behind ahead diverged up to date status remote -v branch --all origin/HEAD",
   "a-conflict-is-a-question-you-can-answer": "conflict conflicts merge conflict CONFLICT markers resolve resolution unmerged UU both modified abort continue ours theirs diff --check leftover conflict marker zdiff3 restore --ours --theirs",
@@ -37,7 +38,7 @@ const guideKeywords: Record<string, string> = {
 
 export function getGitResources(articles: Article[]) {
   return [
-    { ...gitConfigReference, kind: "Reference", content: gitConfigReferenceSections.flatMap(section => [section.heading, ...section.commands.map(command => command.command)]).join(" ") },
+    ...gitReferences.map(reference => ({ ...reference, kind: "Reference", content: reference.sections.flatMap(section => [section.heading, ...section.commands.map(command => command.command)]).join(" ") })),
     ...gitLessons.filter(lesson => lesson.href !== gitConfigReference.href).map(lesson => ({ ...lesson, kind: "Lesson", content: "" })),
     ...articles.filter(article => article.topic === "Git").map(article => ({
       title: article.title,

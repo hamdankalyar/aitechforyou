@@ -32,6 +32,10 @@ for (const [query, expected] of [
   ["read history", "/learn/git/read-history"],
   ["save vs commit", "/articles/git-is-a-time-machine"],
   ["empty diff", "/articles/git-status-diff-and-log"],
+  ["merge conflict", "/learn/git/conflicts"],
+  ["git fetch", "/learn/git/remotes"],
+  ["stop tracking", "/learn/git/ignore"],
+  ["rename branch", "/learn/git/branch"],
   ["unfindable-xyz", undefined],
 ]) {
   const html = await page(`/learn/git?q=${encodeURIComponent(query)}`);
@@ -84,7 +88,8 @@ assert.match(inspectionGuide, /Git inspection practice example/);
 assert.match(inspectionGuide, /Read the example without interacting/);
 assert.match(inspectionGuide, /href="\/articles\/from-edited-file-to-first-commit"/);
 assert.match(inspectionGuide, /href="\/articles\/git-config-identity-and-overrides"/);
-assert.match(inspectionGuide, /href="\/learn\/git\/read-history"/);
+assert.match(inspectionGuide, /href="\/learn\/git\/inspect"/);
+assert.match(inspectionGuide, /Need the commands\?/);
 for (const slug of ["commit-again", "read-history"]) assert.match(await page(`/learn/git/${slug}`), /href="\/articles\/git-status-diff-and-log"/);
 const firstGuide = await page("/articles/git-is-a-time-machine");
 assert.match(firstGuide, /href="\/articles\/from-edited-file-to-first-commit"/);
@@ -94,10 +99,33 @@ assert.match(guide, /id="follow-the-value"/);
 assert.match(guide, /Need the commands\?/);
 assert.match(guide, /Git Config reference/);
 assert.doesNotMatch(guide, /Prefer a short lesson\?/);
+for (const group of ["Setup &amp; configuration", "Recording changes", "Branches &amp; merging", "Remotes"]) assert.match(hub, new RegExp(`<h2 id="group-\\d+">${group}</h2>`));
+for (const [slug, title, id, guide] of [
+  ["commit", "Git Add &amp; Commit", "amend", "from-edited-file-to-first-commit"],
+  ["inspect", "Git Status, Diff &amp; Log", "diff", "git-status-diff-and-log"],
+  ["ignore", "Git Ignore", "stop-tracking", "teach-git-what-to-ignore"],
+  ["branch", "Git Branch", "delete", "branches-are-labels-that-move"],
+  ["merge", "Git Merge", "ff-only", "how-git-brings-two-branches-together"],
+  ["conflicts", "Merge Conflicts", "abort", "a-conflict-is-a-question-you-can-answer"],
+  ["remotes", "Git Remote &amp; Fetch", "fetch", "your-branch-their-branch-and-origin-main"],
+]) {
+  assert.match(hub, new RegExp(`class="git-result" href="/learn/git/${slug}"`));
+  const reference = await page(`/learn/git/${slug}`);
+  assert.match(reference, new RegExp(`<h1>${title}</h1>`));
+  assert.match(reference, new RegExp(`id="${id}"`));
+  assert.match(reference, new RegExp(`href="#${id}"`));
+  assert.match(reference, new RegExp(`href="/articles/${guide}"`));
+  assert.match(reference, /aria-current="page"/);
+  assert.match(reference, /Git \/ Reference/);
+  assert.doesNotMatch(reference, /Before you start|You’re done when|Next lesson|TODO/);
+  const guideHtml = await page(`/articles/${guide}`);
+  if (guide !== "from-edited-file-to-first-commit") { assert.match(guideHtml, new RegExp(`href="/learn/git/${slug}"`)); assert.match(guideHtml, /Need the commands\?/); }
+}
 const sitemap = await page("/sitemap.xml");
+for (const slug of ["commit", "inspect", "ignore", "branch", "merge", "conflicts", "remotes"]) assert.match(sitemap, new RegExp(`/learn/git/${slug}<`));
 assert.match(sitemap, /\/learn\/git\/configure/);
 assert.match(sitemap, /\/learn\/git\/init/);
 assert.match(sitemap, /\/learn\/git\/read-history/);
 assert.match(sitemap, /\/articles\/git-status-diff-and-log/);
 assert.equal((await fetch(new URL("/learn/git/not-a-lesson", base))).status, 404);
-console.log("Git learning checks passed: Config reference, existing lessons, search, navigation, guides, anchors, and sitemap.");
+console.log("Git learning checks passed: command references, existing lessons, search, navigation, guides, anchors, and sitemap.");

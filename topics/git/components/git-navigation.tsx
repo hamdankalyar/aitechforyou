@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { gitConfigReference } from "@/topics/git/content/git-config-reference";
-import { gitConfigGuide } from "@/topics/git/content/git-learning";
+import { gitReferenceGroups } from "@/topics/git/content/git-references";
 
 export function GitNavigation({ current }: { current?: "reference" | "guides" }) {
   return <nav className="git-navigation" aria-label="Git resources">
@@ -12,8 +11,10 @@ export function GitNavigation({ current }: { current?: "reference" | "guides" })
 export function GitReferenceOutline({ current }: { current?: string }) {
   return <nav className="git-reference-outline" aria-label="Git reference topics">
     <Link className="git-reference-home" href="/learn/git">Git Reference</Link>
-    <div className="git-label">Setup & configuration</div>
-    <Link href={gitConfigReference.href} aria-current={current === gitConfigReference.href ? "page" : undefined}>Git Config</Link>
-    <div className="git-reference-related"><div className="git-label">Related guide</div><Link href={gitConfigGuide}>Identity & overrides ↗</Link></div>
+    {gitReferenceGroups.map(group => <div key={group.label}>
+      <div className="git-label">{group.label}</div>
+      {group.references.map(reference => <Link key={reference.href} href={reference.href} aria-current={current === reference.href ? "page" : undefined}>{reference.title}</Link>)}
+    </div>)}
+    <div className="git-reference-related"><div className="git-label">Need the why?</div><Link href="/learn/git?view=guides">Browse the guides ↗</Link></div>
   </nav>;
 }

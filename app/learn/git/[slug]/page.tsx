@@ -6,26 +6,37 @@ import { GitLessonOutline } from "@/topics/git/components/git-lesson-outline";
 import { ArrowRight } from "@/components/icons";
 import { gitLessons } from "@/topics/git/content/git-learning";
 import { getShortGitLesson, shortGitLessons } from "@/topics/git/content/git-short-lessons";
+import { getGitReference, gitReferences } from "@/topics/git/content/git-references";
+import { GitReferencePage, referenceTitle } from "@/topics/git/components/git-reference-page";
+import { JsonLd, breadcrumbSchema, lessonSchema } from "@/lib/seo";
 import "../../../articles/article-learning.css";
 import "@/topics/git/git-learning.css";
 
 export function generateStaticParams() {
-  return shortGitLessons.map(lesson => ({ slug: lesson.slug }));
+  return [...shortGitLessons, ...gitReferences.filter(reference => reference.slug !== "configure")].map(page => ({ slug: page.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const lesson = getShortGitLesson((await params).slug);
-  return lesson ? { title: lesson.title, description: lesson.description } : {};
+  const slug = (await params).slug;
+  const reference = getGitReference(slug);
+  if (reference) return { title: referenceTitle(reference), description: reference.description, alternates: { canonical: reference.href } };
+  const lesson = getShortGitLesson(slug);
+  return lesson ? { title: lesson.title, description: lesson.description, alternates: { canonical: lesson.href } } : {};
 }
 
 export default async function ShortGitLessonPage({ params }: { params: Promise<{ slug: string }> }) {
-  const lesson = getShortGitLesson((await params).slug);
+  const slug = (await params).slug;
+  const reference = getGitReference(slug);
+  if (reference) return <GitReferencePage reference={reference} />;
+  const lesson = getShortGitLesson(slug);
   if (!lesson) notFound();
   const index = gitLessons.findIndex(item => item.href === lesson.href);
   const previous = gitLessons[index - 1];
   const next = gitLessons[index + 1];
 
   return <main id="main" className="git-learning git-lesson learning-article shell">
+    <JsonLd data={lessonSchema({ title: lesson.title, description: lesson.description, path: lesson.href })} />
+    <JsonLd data={breadcrumbSchema([{ name: "Learn Git", path: "/learn/git" }, { name: lesson.title, path: lesson.href }])} />
     <Link className="git-back" href="/learn/git">← Git lessons & guides</Link>
     <div className="git-lesson-grid">
       <aside className="git-lesson-sidebar"><div className="git-desktop-outline"><GitLessonOutline current={lesson.href} /></div><details className="git-mobile-outline"><summary>Lesson outline</summary><GitLessonOutline current={lesson.href} /></details></aside>
