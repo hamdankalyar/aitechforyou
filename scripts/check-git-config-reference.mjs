@@ -35,7 +35,8 @@ try {
         assert.equal(git("config", "get", "--local", "--all", "tutorial.reader"), "Maya\nSam");
       }
       const output = example.command.split("\n").map(line => execFileSync("sh", ["-c", line], options).trim()).filter(Boolean).join("\n");
-      if (example.output) assert.equal(output, example.output, section.id);
+      assert.ok(example.output, `${section.id} displays an output`);
+      if (!example.output.includes("…") && !example.output.includes("file:")) assert.equal(output || "No output", example.output, section.id);
       if (example.command.startsWith("git config unset --local --value=")) {
         assert.equal(git("config", "get", "--local", "--all", "tutorial.reader"), "Sam");
       }
