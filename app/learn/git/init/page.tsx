@@ -4,6 +4,7 @@ import { CommandBlock } from "@/components/articles/command-block";
 import { GitLessonOutline } from "@/components/git-lesson-outline";
 import { ArrowRight } from "@/components/icons";
 import { gitInitLesson, gitSetupLesson } from "@/lib/git-learning";
+import { gitStageLesson } from "@/lib/git-short-lessons";
 import "../../../articles/article-learning.css";
 import "../git-learning.css";
 
@@ -23,7 +24,7 @@ export default function GitInitLesson() {
         <section className="git-completion"><div className="git-label">You’re done when</div><h2>Git recognizes your empty project.</h2><p>You see <strong>On branch main</strong> and <strong>No commits yet</strong>. Keep the practice folder for the next lesson.</p></section>
         <aside className="git-deeper"><span className="git-label">Optional · Go deeper</span><h2>How do you record the first version?</h2><p>Explore working files, staging, and commits. Try an example that shows exactly which contents Git records.</p><Link href="/articles/from-edited-file-to-first-commit">Read the first-commit guide <ArrowRight size={18} /></Link></aside>
         <p>Command reference: <a href="https://git-scm.com/docs/git-init">git init</a> · <a href="https://git-scm.com/docs/git-status">git status</a></p>
-        <footer className="git-lesson-next"><Link href={gitSetupLesson.href}>← Previous: Set your name and email</Link><div className="git-label">Next lesson · Planned</div><h2>Check and stage a file</h2><p>We’ll add a file to this project and choose it for the first recorded version. This lesson is still being written.</p><Link href="/learn/git">Back to available lessons & guides <ArrowRight size={18} /></Link></footer>
+        <footer className="git-lesson-next"><Link href={gitSetupLesson.href}>← Previous: Set your name and email</Link><div className="git-label">Next lesson</div><h2>{gitStageLesson.title}</h2><p>{gitStageLesson.description}</p><Link href={gitStageLesson.href}>Continue learning <ArrowRight size={18} /></Link></footer>
       </article>
     </div>
   </main>;

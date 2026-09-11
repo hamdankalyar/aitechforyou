@@ -4,6 +4,7 @@ import { CommandBlock } from "@/components/articles/command-block";
 import { GitLessonOutline } from "@/components/git-lesson-outline";
 import { ArrowRight } from "@/components/icons";
 import { gitConfigGuide, gitInitLesson, gitSetupLesson } from "@/lib/git-learning";
+import { gitInstallLesson } from "@/lib/git-short-lessons";
 import "../../../articles/article-learning.css";
 import "../git-learning.css";
 
@@ -21,7 +22,7 @@ export default function GitConfigureLesson() {
         <section id="check-identity"><h2><span>02</span> Read them back</h2><CommandBlock command={'git config get --global user.name\ngit config get --global user.email'} explanation="Ask Git to show the two defaults you just saved." output={'Maya Chen\nmaya@example.com'} /><p>You should see <strong>your</strong> name and email instead of Maya’s. If either is wrong or blank, run its <code>set</code> command again, then check it with <code>get</code>.</p></section>
         <section className="git-completion"><div className="git-label">You’re done when</div><h2>Both details match yours.</h2><p>Your defaults are saved. Changing them affects future commits; it does not change old ones. An existing project may have its own settings that override these defaults.</p></section>
         <aside className="git-deeper"><span className="git-label">Optional · Go deeper</span><h2>One laptop. Different project emails?</h2><p>Explore how defaults and project settings work together, and find out which value Git is using.</p><Link href={gitConfigGuide}>Read the configuration guide <ArrowRight size={18} /></Link></aside>
-        <footer className="git-lesson-next"><span className="git-label">Next lesson</span><h2>{gitInitLesson.title}</h2><p>Make a practice folder and get it ready to record your work.</p><Link href={gitInitLesson.href}>Create your repository <ArrowRight size={18} /></Link></footer>
+        <footer className="git-lesson-next"><Link href={gitInstallLesson.href}>← Previous: {gitInstallLesson.title}</Link><div className="git-label">Next lesson</div><h2>{gitInitLesson.title}</h2><p>Make a practice folder and get it ready to record your work.</p><Link href={gitInitLesson.href}>Create your repository <ArrowRight size={18} /></Link></footer>
       </article>
     </div>
   </main>;

@@ -1,20 +1,21 @@
 import type { Article } from "./articles";
+import { gitChangeLesson, gitCommitLesson, gitHistoryLesson, gitInstallLesson, gitRememberLesson, gitStageLesson, type GitLessonSummary } from "./git-short-lessons";
 
-export const gitSetupLesson = { title: "Set your Git name and email", href: "/learn/git/configure" };
-export const gitInitLesson = { title: "Create your first Git repository", href: "/learn/git/init" };
+export const gitSetupLesson: GitLessonSummary = { title: "Set your Git name and email", href: "/learn/git/configure", description: "Save your default name and email, then check that Git has remembered them.", time: "3 min read + practice", keywords: "git config user.name user.email global setup configure configuration set get change name email identity beginner git version" };
+export const gitInitLesson: GitLessonSummary = { title: "Create your first Git repository", href: "/learn/git/init", description: "Make a practice folder, initialize Git, and check that your repository is ready.", time: "3 min read + practice", keywords: "git init initialize initialise repository repo create start new empty project folder mkdir cd git status initial branch main .git" };
 
-export const gitLessons: { title: string; href?: string }[] = [
-  { title: "What Git remembers" },
-  { title: "Install Git and open a terminal" },
+export const gitLessons: GitLessonSummary[] = [
+  gitRememberLesson,
+  gitInstallLesson,
   gitSetupLesson,
   gitInitLesson,
-  { title: "Check and stage a file" },
-  { title: "Make your first commit" },
-  { title: "Change, inspect, commit again" },
-  { title: "Read your project’s history" },
+  gitStageLesson,
+  gitCommitLesson,
+  gitChangeLesson,
+  gitHistoryLesson,
 ];
 
-export const publishedGitLessons = gitLessons.filter(lesson => lesson.href);
+export const publishedGitLessons = gitLessons;
 
 export const gitConfigGuide = "/articles/git-config-identity-and-overrides";
 
@@ -27,24 +28,7 @@ const guideKeywords: Record<string, string> = {
 
 export function getGitResources(articles: Article[]) {
   return [
-    {
-      title: gitSetupLesson.title,
-      href: gitSetupLesson.href,
-      kind: "Lesson",
-      description: "Save your default name and email, then check that Git has remembered them.",
-      time: "3 min read + practice",
-      keywords: "git config user.name user.email global setup configure configuration set get change name email identity beginner git --version",
-      content: "",
-    },
-    {
-      title: gitInitLesson.title,
-      href: gitInitLesson.href,
-      kind: "Lesson",
-      description: "Make a practice folder, initialize Git, and check that your repository is ready.",
-      time: "3 min read + practice",
-      keywords: "git init initialize initialise repository repo create start new empty project folder mkdir cd git status initial branch main .git",
-      content: "",
-    },
+    ...gitLessons.map(lesson => ({ ...lesson, kind: "Lesson", content: "" })),
     ...articles.filter(article => article.topic === "Git").map(article => ({
       title: article.title,
       href: `/articles/${article.slug}`,

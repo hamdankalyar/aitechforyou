@@ -149,7 +149,6 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 .command-heading span { font-size: 10px; color: #c8c5be; }
 .command-heading button { background: transparent; border: 0; color: #fffdf8; padding: 10px; min-width: 44px; min-height: 44px; font-size: 12px; }
 .learning-article .article-command pre { margin: 0; border-radius: 0 0 6px 6px; padding: 20px; font: 13px/1.85 ui-monospace, monospace; background: var(--ink); color: var(--lime); }
-.copy-status { display: block; min-height: 22px; margin: 5px 0; font-size: 11px; color: var(--muted); }
 .output-label { font-size: 10px; color: var(--muted); margin: 10px 0; }
 .learning-article .article-command .command-output { border-left: 2px solid var(--border); border-radius: 0; background: transparent; color: var(--prose); padding: 5px 18px; }
 .knowledge-check { background: var(--white); border: 1px solid var(--border); padding: 30px; border-radius: 12px; margin-top: 28px; }

@@ -24,8 +24,8 @@
 .git-outline ol { list-style: none; padding: 0; margin: 24px 0 0; }
 .git-outline li > a, .git-outline li > div { display: flex; gap: 13px; padding: 13px 12px; margin-inline: -12px; font-size: 13px; line-height: 1.5; border-radius: 6px; }
 .git-outline li > div { color: var(--muted); }
-.git-outline li > a { background: var(--white); border: 1px solid var(--border); }
-.git-outline a[aria-current="page"] { border-left: 3px solid var(--coral); }
+.git-outline li > a { border: 1px solid transparent; }
+.git-outline a[aria-current="page"] { background: var(--white); border-color: var(--border); border-left: 3px solid var(--coral); }
 .git-step { font: 500 11px/1.9 var(--font-body); color: var(--muted); }
 .git-outline small { display: block; font-size: 10px; margin-top: 5px; color: var(--muted); }
 .git-catalog { min-width: 0; }
@@ -55,6 +55,7 @@
 .git-lesson-content p { font-size: 16px; line-height: 1.8; color: var(--prose); }
 .git-lesson-content p a { text-decoration: underline; text-underline-offset: 3px; }
 .git-lesson-content p code { font-size: .9em; background: var(--white); padding: 2px 4px; border-radius: 3px; }
+.git-concept-list { display: grid; gap: 10px; padding-left: 24px; color: var(--prose); font-size: 15px; line-height: 1.65; }
 .git-lesson .article-command { margin-block: 18px; }
 .git-lesson .article-command > p { font-size: 14px; }
 .git-lesson .article-command pre { overflow-x: auto; }
@@ -67,6 +68,7 @@
 .git-deeper { background: var(--white); padding: 26px; border: 1px solid var(--border); border-radius: 8px; }
 .git-deeper h2 { margin-top: 10px; }
 .git-deeper a, .git-lesson-next a { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; font-size: 14px; font-weight: 600; }
+.git-sources { font-size: 13px !important; color: var(--muted) !important; }
 .git-lesson-next { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--border); }
 .git-lesson-next h2 { font-size: 23px; margin-top: 10px; }
 .git-lesson-sidebar { position: sticky; top: 112px; }
