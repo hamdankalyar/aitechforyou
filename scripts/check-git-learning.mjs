@@ -13,16 +13,17 @@ assert.match(hub, /Planned/);
 assert.match(hub, /2 lessons available/);
 assert.doesNotMatch(hub, /href="\/learn\/git\/(?:install|commit)"/);
 for (const [query, expected, count] of [
-  ["set email", "/learn/git/configure", 2],
-  ["GIT CONFIG", "/learn/git/configure", 2],
+  ["set email", "/learn/git/configure", 3],
+  ["GIT CONFIG", "/learn/git/configure", 3],
   ["wrong project email", "/articles/git-config-identity-and-overrides", 1],
-  ["user.email", "/learn/git/configure", 2],
+  ["user.email", "/learn/git/configure", 3],
   ["git config get --global user.email", "/learn/git/configure", 2],
   ["git config get --show-origin --show-scope user.email", "/articles/git-config-identity-and-overrides", 1],
   ["save vs commit", "/articles/git-is-a-time-machine", 1],
-  ["git init", "/learn/git/init", 2],
+  ["git init", "/learn/git/init", 3],
   ["create repo", "/learn/git/init", 1],
-  ["git status", "/learn/git/init", 1],
+  ["git status", "/learn/git/init", 2],
+  ["staging area", "/articles/from-edited-file-to-first-commit", 1],
   ["unfindable-xyz", undefined, 0],
 ]) {
   const html = await page(`/learn/git?q=${encodeURIComponent(query)}`);
@@ -41,7 +42,14 @@ assert.match(initLesson, /<code>cd ~\nmkdir git-practice\ncd git-practice<\/code
 assert.match(initLesson, /git init --initial-branch=main/);
 assert.match(initLesson, /No commits yet/);
 assert.match(initLesson, /href="\/learn\/git\/configure"/);
-assert.match(initLesson, /href="\/articles\/git-is-a-time-machine"/);
+assert.match(initLesson, /href="\/articles\/from-edited-file-to-first-commit"/);
+const commitGuide = await page("/articles/from-edited-file-to-first-commit");
+assert.match(commitGuide, /id="try-the-commit"/);
+assert.match(commitGuide, /Read the example without interacting/);
+assert.match(commitGuide, /href="\/learn\/git\/init"/);
+assert.match(commitGuide, /href="\/articles\/git-is-a-time-machine"/);
+const firstGuide = await page("/articles/git-is-a-time-machine");
+assert.match(firstGuide, /href="\/articles\/from-edited-file-to-first-commit"/);
 const guide = await page("/articles/git-config-identity-and-overrides");
 assert.match(guide, /href="\/learn\/git\/configure"/);
 assert.match(guide, /id="follow-the-value"/);

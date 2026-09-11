@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: the snapshots and configuration guides are implemented, along with the Git learning hub and short lessons for identity setup and repository creation. The snapshots guide has received its beginner-focused editorial revision. **The next delivery is the detailed guide “From edited file to first commit.”**
+Planning date: September 11, 2026. Status: the snapshots, first-commit, and configuration guides are implemented, along with the Git learning hub and short lessons for identity setup and repository creation. The first-commit guide includes both staging outcomes, a terminal walkthrough, and a simulation checked against real Git. **Next are its short staging and commit companions; the next detailed guide is “Read what Git is telling you.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -10,11 +10,11 @@ Work by topic, with links between the two formats. One guide can support several
 
 | Next | Delivery | Purpose |
 | --- | --- | --- |
-| 1 | Detailed guide: From edited file to first commit | Introduce working files, staging, and recorded versions one at a time. Let readers edit, stage, edit again, and commit to see exactly which contents are recorded. |
+| Complete | Detailed guide: From edited file to first commit | Introduces working files, staging, and recorded versions one at a time. Readers edit, stage, edit again, and commit to see exactly which contents are recorded. |
 | 2 | Short lessons: Check and stage a file; Make your first commit | Provide concise practice steps that link to that guide for the explanation. |
 | 3 | Detailed guide: Read what Git is telling you | Explain the distinct questions answered by status, diff, and log, with interactive comparisons. |
 
-Then continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should resume the detailed first-commit guide, unless the user names another topic or format.
+Then continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the short staging companion, unless the user names another topic or format. Return to the detailed inspection guide after the staging and commit companions.
 
 ## 1. The direction
 

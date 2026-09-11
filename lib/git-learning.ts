@@ -19,6 +19,7 @@ export const publishedGitLessons = gitLessons.filter(lesson => lesson.href);
 export const gitConfigGuide = "/articles/git-config-identity-and-overrides";
 
 const guideKeywords: Record<string, string> = {
+  "from-edited-file-to-first-commit": "git staging stage staged area index working tree directory commit snapshot edited changes tracked untracked git add first commit",
   "git-is-a-time-machine": "save saving vs snapshot snapshots commit version history remembers",
   "git-config-identity-and-overrides": "git config user.name user.email global local identity settings setup configure configuration set name email wrong project email override overrides origin scope unset",
   "merge-versus-rebase": "git merge rebase branch branches history combine",

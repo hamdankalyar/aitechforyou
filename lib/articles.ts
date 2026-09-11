@@ -1,11 +1,13 @@
 import { firstGitSections } from "./git-first-article";
 import { gitConfigSections } from "./git-config-article";
-import { gitSetupLesson } from "./git-learning";
+import { gitInitLesson, gitSetupLesson } from "./git-learning";
+import { firstCommitSections } from "./git-first-commit-article";
 
 export type ArticleBlock =
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
+  | { type: "commit-playground" }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
   | { type: "callout"; title: string; text: string }
@@ -40,7 +42,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config";
+    illustration: "snapshots" | "config" | "staging";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -63,6 +65,33 @@ export const articles: Article[] = [
     sources: [
       { title: "The Git book · What Git records", url: "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" },
       { title: "Git reference · Recording a commit", url: "https://git-scm.com/docs/git-commit" },
+    ],
+  },
+  {
+    slug: "from-edited-file-to-first-commit",
+    title: "From edited file to first commit",
+    excerpt: "Your file, your staged version, your recorded moment. See exactly what Git remembers—and why the last thing you saved might not be in your commit.",
+    topic: "Git",
+    date: "Sep 11, 2026",
+    readTime: "9 min read",
+    accent: "coral",
+    number: "06",
+    shortLesson: gitInitLesson,
+    series: {
+      title: "Git, made visible", order: 2, practiceTime: "3 min to explore",
+      nextTitle: "Read what Git is telling you",
+      nextDescription: "Use status, diff, and log to ask different questions about your current work and recorded history.",
+      exercise: { id: "try-the-commit", label: "Try staging and committing" }, illustration: "staging",
+    },
+    sections: firstCommitSections,
+    sources: [
+      { title: "Git book · Recording changes", url: "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" },
+      { title: "Git reference · Staging contents", url: "https://git-scm.com/docs/git-add" },
+      { title: "Git reference · Making a commit", url: "https://git-scm.com/docs/git-commit" },
+      { title: "Git glossary · Working tree, index, and repository", url: "https://git-scm.com/docs/gitglossary" },
+      { title: "Git reference · Status and its two columns", url: "https://git-scm.com/docs/git-status" },
+      { title: "Git reference · Comparing contents", url: "https://git-scm.com/docs/git-diff" },
+      { title: "Git reference · Inspecting a recorded file", url: "https://git-scm.com/docs/git-show" },
     ],
   },
   {
