@@ -1,7 +1,19 @@
+import { firstGitSections } from "./git-first-article";
+
+export type ArticleBlock =
+  | { type: "timeline" }
+  | { type: "callout"; title: string; text: string }
+  | { type: "figure"; caption: string }
+  | { type: "command"; command: string; explanation: string; output?: string }
+  | { type: "quiz"; question: string; answers: { text: string; explanation: string; correct: boolean }[] }
+  | { type: "recap"; items: string[] };
+
 export type ArticleSection = {
+  id?: string;
   heading: string;
   paragraphs: string[];
   code?: string;
+  blocks?: ArticleBlock[];
 };
 
 export type Article = {
@@ -14,6 +26,8 @@ export type Article = {
   featured?: boolean;
   accent: "coral" | "blue" | "lime";
   number: string;
+  series?: { title: string; order: number; practiceTime: string; nextTitle: string };
+  sources?: { title: string; url: string }[];
   sections: ArticleSection[];
 };
 
@@ -22,34 +36,19 @@ export const articles: Article[] = [
     slug: "git-is-a-time-machine",
     title: "Git is a time machine, not a save button",
     excerpt:
-      "A visual mental model for commits, branches, and the small graph living inside every Git project.",
+      "Meet the little history inside your project. Explore a snapshot, change a file, and see what Git actually remembers.",
     topic: "Git",
-    date: "Sep 8, 2026",
+    date: "Sep 11, 2026",
     readTime: "6 min read",
     featured: true,
     accent: "coral",
     number: "01",
-    sections: [
-      {
-        heading: "Start with the right picture",
-        paragraphs: [
-          "Most Git confusion begins with one misleading idea: that a commit is simply a saved version of a folder. A commit is better understood as a named moment in the history of your project.",
-          "Each new commit points back to the moment before it. Put those moments together and you get a timeline—a graph that Git can travel, compare, and rearrange.",
-        ],
-      },
-      {
-        heading: "A branch is a movable label",
-        paragraphs: [
-          "A branch is not a separate folder and it is not a complete copy of your code. It is a lightweight label pointing at one commit. When you commit again, the label moves forward.",
-        ],
-        code: "A ← B ← C  main\n        ↖ D  feature",
-      },
-      {
-        heading: "The useful question",
-        paragraphs: [
-          "Instead of asking ‘Which files are in my branch?’, ask ‘Which commit does my branch point to?’ That small change in language makes checkout, merge, and rebase much easier to reason about.",
-        ],
-      },
+    series: { title: "Git, made visible", order: 1, practiceTime: "2 min to explore", nextTitle: "Set up Git so it knows who you are" },
+    sections: firstGitSections,
+    sources: [
+      { title: "The Git book · Snapshots and the three states", url: "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" },
+      { title: "Git reference · Recording a commit", url: "https://git-scm.com/docs/git-commit" },
+      { title: "Git reference · Inspecting objects with show", url: "https://git-scm.com/docs/git-show" },
     ],
   },
   {
