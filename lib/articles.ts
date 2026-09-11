@@ -4,6 +4,7 @@ import { gitInitLesson, gitSetupLesson } from "./git-learning";
 import { firstCommitSections } from "./git-first-commit-article";
 import { gitInspectionSections } from "./git-inspection-article";
 import { gitHistoryLesson } from "./git-short-lessons";
+import { aiGenerativeAgenticSections } from "./ai-generative-agentic-guide";
 
 export type ArticleBlock =
   | { type: "timeline" }
@@ -11,6 +12,7 @@ export type ArticleBlock =
   | { type: "config-playground" }
   | { type: "commit-playground" }
   | { type: "inspection-playground" }
+  | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
   | { type: "callout"; title: string; text: string }
@@ -45,7 +47,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ai-evolution";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -145,6 +147,23 @@ export const articles: Article[] = [
       { title: "Git reference · Commit identity variables", url: "https://git-scm.com/docs/git#Documentation/git.txt-GIT_AUTHOR_NAME" },
       { title: "Git reference · Worktree-specific configuration", url: "https://git-scm.com/docs/git-worktree#_configuration_file" },
     ],
+  },
+  {
+    slug: "generative-ai-vs-agentic-ai",
+    title: "Generative AI vs. Agentic AI",
+    excerpt: "See how an AI system grows from generating an answer to retrieving knowledge, taking action, and adapting toward a goal.",
+    topic: "AI",
+    date: "Sep 11, 2026",
+    readTime: "6 min read",
+    accent: "blue",
+    number: "08",
+    series: {
+      title: "AI systems, made visible", order: 1, practiceTime: "2 min to compare",
+      nextTitle: "How an AI agent plans and uses tools",
+      nextDescription: "Next, we’ll open the agent loop and see how planning, tool calls, observations, and stopping rules work together.",
+      exercise: { id: "compare-the-levels", label: "Compare the four levels" }, illustration: "ai-evolution",
+    },
+    sections: aiGenerativeAgenticSections,
   },
   {
     slug: "ai-agents-without-the-hype",

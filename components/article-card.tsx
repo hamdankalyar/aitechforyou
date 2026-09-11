@@ -20,7 +20,7 @@ export function ArticleCard({ article }: { article: Article }) {
         <p>{article.excerpt}</p>
       </div>
       <Link className="card-link" href={`/articles/${article.slug}`} aria-label={`Read ${article.title}`}>
-        Read article <ArrowUpRight size={18} />
+        Read {article.series ? "guide" : "article"} <ArrowUpRight size={18} />
       </Link>
     </article>
   );
