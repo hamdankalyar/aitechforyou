@@ -18,7 +18,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const article = getArticle((await params).slug);
   if (!article) notFound();
-  const learning = Boolean(article.series);
+  const series = article.series;
+  const learning = Boolean(series);
+  const nextArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order + 1) : undefined;
+  const previousArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order - 1) : undefined;
   const sections = article.sections.map((section, index) => ({ ...section, id: section.id ?? `section-${index + 1}` }));
   const contents = <ol>{sections.map((section, index) => <li key={section.id}><a href={`#${section.id}`}><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>{section.heading}</a></li>)}</ol>;
 
@@ -32,9 +35,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <div className="article-meta"><span>{article.topic}</span><span>{article.date}</span><span>{article.readTime}</span></div>
             <h1>{article.title}</h1>
             <p>{article.excerpt}</p>
-            {article.series && <div className="learning-hero-actions"><a href="#try-the-timeline" className="button dark">Explore the timeline <ArrowRight /></a><span>{article.series.practiceTime} · Beginner friendly</span></div>}
+            {article.series && <div className="learning-hero-actions"><a href={`#${article.series.exercise.id}`} className="button dark">{article.series.exercise.label} <ArrowRight /></a><span>{article.series.practiceTime} · Beginner friendly</span></div>}
           </div>
-          {learning ? <div className="learning-hero-art" aria-hidden="true"><div className="hero-snapshot back">A<span>Then.</span></div><div className="hero-snapshot front">C<span>Now.</span><i /><i /><i /></div><div className="hero-art-note">Every moment has a story.</div></div> : <div className="article-number" aria-hidden="true">{article.number}</div>}
+          {learning ? <div className="learning-hero-art" aria-hidden="true"><div className="hero-snapshot back">{article.series?.illustration === "config" ? "G" : "A"}<span>{article.series?.illustration === "config" ? "Global." : "Then."}</span></div><div className="hero-snapshot front">{article.series?.illustration === "config" ? "L" : "C"}<span>{article.series?.illustration === "config" ? "Local." : "Now."}</span><i /><i /><i /></div><div className="hero-art-note">{article.series?.illustration === "config" ? "A default. An exception." : "Every moment has a story."}</div></div> : <div className="article-number" aria-hidden="true">{article.number}</div>}
         </div>
       </header>
       <article className="article-body shell">
@@ -50,7 +53,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             </section>
           ))}
           {article.sources && <div className="article-sources"><span className="learning-kicker">Further reading · official Git documentation</span><ul>{article.sources.map(source => <li key={source.url}><a href={source.url}>{source.title} ↗</a></li>)}</ul></div>}
-          {article.series ? <div className="series-next"><span className="learning-kicker">Next in Git, made visible · In preparation</span><h2>{article.series.nextTitle}</h2><p>Now that you know what a commit remembers, we’ll give yours a name and an identity.</p><Link href="/articles?topic=Git">Browse available Git articles <ArrowRight /></Link></div> : <div className="article-end">
+          {article.series ? <nav className="series-navigation" aria-label="Git article series">{previousArticle && <Link className="series-previous" href={`/articles/${previousArticle.slug}`}>← Previous: {previousArticle.title}</Link>}<div className="series-next"><span className="learning-kicker">Next in {article.series.title}{nextArticle ? "" : " · In preparation"}</span><h2>{nextArticle?.title ?? article.series.nextTitle}</h2><p>{article.series.nextDescription}</p>{nextArticle ? <Link href={`/articles/${nextArticle.slug}`}>Read article {String(nextArticle.series?.order).padStart(2, "0")} <ArrowRight /></Link> : <Link href="/articles?topic=Git">Browse available Git articles <ArrowRight /></Link>}</div></nav> : <div className="article-end">
             <span>Keep learning</span>
             <h2>One idea understood.<br />Many more to explore.</h2>
             <Link className="button dark" href="/articles">Read another article <ArrowRight /></Link>

@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { Spark } from "./icons";
+import { BrandLogo } from "./brand-logo";
 
 export function Footer() {
   return (
     <footer className="footer">
       <div className="shell footer-grid">
         <div>
-          <Link className="brand footer-brand" href="/">
-            <span className="brand-mark"><Spark size={18} /></span>
-            <span>AI TECH <i>FOR YOU</i></span>
+          <Link className="brand footer-brand" href="/" aria-label="AI Tech For You home">
+            <BrandLogo />
           </Link>
           <p>Technology, explained like we&apos;re learning it together.</p>
         </div>

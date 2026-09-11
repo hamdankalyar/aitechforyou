@@ -3,10 +3,14 @@ import { snapshots } from "@/lib/git-snapshots";
 import { SnapshotTimeline } from "./snapshot-timeline";
 import { KnowledgeCheck } from "./knowledge-check";
 import { CommandBlock } from "./command-block";
+import { ConfigPlayground } from "./config-playground";
 
 export function ArticleBlock({ block }: { block: Block }) {
   switch (block.type) {
     case "timeline": return <SnapshotTimeline />;
+    case "config-playground": return <ConfigPlayground />;
+    case "table": return <div className="learning-table" role="region" aria-label={block.caption} tabIndex={0}><table><caption>{block.caption}</caption><thead><tr>{block.columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead><tbody>{block.rows.map((row, index) => <tr key={index}>{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row">{cell}</th> : <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
+    case "details": return <details className="learning-details"><summary>{block.title}</summary>{block.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}{block.code && <pre tabIndex={0} aria-label="Configuration file example"><code>{block.code}</code></pre>}{block.commands?.map(command => <CommandBlock {...command} key={command.command} />)}</details>;
     case "quiz": return <KnowledgeCheck {...block} />;
     case "command": return <CommandBlock {...block} />;
     case "callout": return <div className="learning-callout"><span className="learning-kicker">{block.title}</span><p>{block.text}</p></div>;

@@ -1,7 +1,11 @@
 import { firstGitSections } from "./git-first-article";
+import { gitConfigSections } from "./git-config-article";
 
 export type ArticleBlock =
   | { type: "timeline" }
+  | { type: "config-playground" }
+  | { type: "table"; caption: string; columns: string[]; rows: string[][] }
+  | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
   | { type: "callout"; title: string; text: string }
   | { type: "figure"; caption: string }
   | { type: "command"; command: string; explanation: string; output?: string }
@@ -26,7 +30,15 @@ export type Article = {
   featured?: boolean;
   accent: "coral" | "blue" | "lime";
   number: string;
-  series?: { title: string; order: number; practiceTime: string; nextTitle: string };
+  series?: {
+    title: string;
+    order: number;
+    practiceTime: string;
+    nextTitle: string;
+    nextDescription: string;
+    exercise: { id: string; label: string };
+    illustration: "snapshots" | "config";
+  };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
 };
@@ -43,12 +55,36 @@ export const articles: Article[] = [
     featured: true,
     accent: "coral",
     number: "01",
-    series: { title: "Git, made visible", order: 1, practiceTime: "2 min to explore", nextTitle: "Set up Git so it knows who you are" },
+    series: { title: "Git, made visible", order: 1, practiceTime: "2 min to explore", nextTitle: "Set up Git so it knows who you are", nextDescription: "Now that you know what a commit remembers, we’ll give yours a name and an identity.", exercise: { id: "try-the-timeline", label: "Explore the timeline" }, illustration: "snapshots" },
     sections: firstGitSections,
     sources: [
       { title: "The Git book · Snapshots and the three states", url: "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" },
       { title: "Git reference · Recording a commit", url: "https://git-scm.com/docs/git-commit" },
       { title: "Git reference · Inspecting objects with show", url: "https://git-scm.com/docs/git-show" },
+    ],
+  },
+  {
+    slug: "git-config-identity-and-overrides",
+    title: "Set up Git so it knows who you are",
+    excerpt: "One person, different projects. Give your commits an identity—and see which setting wins when Git finds more than one.",
+    topic: "Git",
+    date: "Sep 11, 2026",
+    readTime: "8 min read",
+    accent: "coral",
+    number: "05",
+    series: {
+      title: "Git, made visible", order: 2, practiceTime: "2 min to explore",
+      nextTitle: "From edited file to first commit",
+      nextDescription: "Your identity is ready. Next, we’ll create a repository and follow a file through editing, staging, and committing.",
+      exercise: { id: "try-the-settings", label: "Try the settings" }, illustration: "config",
+    },
+    sections: gitConfigSections,
+    sources: [
+      { title: "The Git book · First-time setup", url: "https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup" },
+      { title: "The Git book · Customizing configuration", url: "https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration" },
+      { title: "Git reference · Configuration, scopes, and files", url: "https://git-scm.com/docs/git-config" },
+      { title: "Git reference · Commit identity variables", url: "https://git-scm.com/docs/git#Documentation/git.txt-GIT_AUTHOR_NAME" },
+      { title: "Git reference · Worktree-specific configuration", url: "https://git-scm.com/docs/git-worktree#_configuration_file" },
     ],
   },
   {

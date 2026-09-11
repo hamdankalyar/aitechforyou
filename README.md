@@ -15,7 +15,9 @@ Open [http://localhost:3000](http://localhost:3000).
 
 All article content is stored in `lib/articles.ts`. Add a new object to the `articles` array with a unique `slug`, then follow the existing section structure. The article archive, topic counts, filters, metadata, and article route will update automatically.
 
-The first interactive Git article keeps its section content in `lib/git-first-article.ts`, referenced from the article registry. Sections can add optional typed blocks for figures, callouts, commands, a timeline, knowledge checks, or a recap. Existing paragraph/code sections continue to work. Interactive controls live in `components/articles/`; article-specific styling lives in `app/articles/article-learning.css`.
+The interactive Git articles keep their section content in `lib/git-first-article.ts` and `lib/git-config-article.ts`, referenced from the article registry. Sections can add optional typed blocks for figures, callouts, commands, tables, expandable details, interactive examples, knowledge checks, or a recap. Existing paragraph/code sections continue to work. Interactive controls live in `components/articles/`; article-specific styling lives in `app/articles/article-learning.css`.
+
+Series metadata supplies each article's exercise link and illustration. Previous/next links resolve against available articles in series order; the next planned topic remains clearly labeled until its article exists.
 
 The topic sequence and delivery checkpoints are in `docs/git-interactive-articles-plan.md`. Planned lessons are not published as empty article pages.
 

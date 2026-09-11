@@ -125,6 +125,47 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 .series-next h2 { font-size: 32px; line-height: 1.2; margin: 20px 0; }
 .series-next p { font-size: 15px; line-height: 1.8; }
 .series-next > a { font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 14px; min-height: 44px; margin-top: 8px; text-decoration: underline; text-underline-offset: 5px; }
+.series-previous { display: inline-flex; min-height: 44px; align-items: center; font-size: 13px; line-height: 1.7; color: var(--muted); margin-top: 24px; text-decoration: underline; text-underline-offset: 4px; }
+.learning-table { overflow-x: auto; margin-block: 30px; border: 1px solid var(--border); border-radius: 8px; background: var(--white); }
+.learning-table table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }
+.learning-table caption { text-align: left; padding: 20px; font-size: 12px; font-weight: 650; }
+.learning-table th, .learning-table td { padding: 16px 20px; border-top: 1px solid var(--border); line-height: 1.7; }
+.learning-table thead th { font-size: 11px; color: var(--muted); background: var(--paper); }
+.learning-table td { color: var(--prose); }
+.learning-table td:last-child { font-family: ui-monospace, monospace; }
+.learning-details { border-block-end: 1px solid var(--border); padding: 12px 0; }
+.learning-details summary { display: list-item; cursor: pointer; padding: 12px 0; min-height: 48px; font-size: 16px; font-weight: 600; line-height: 1.6; }
+.learning-details > p { font-size: 16px; line-height: 1.85; }
+.learning-details[open] { padding-bottom: 24px; }
+.config-scope-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 32px 0 24px; }
+.config-scope { min-width: 0; margin: 0; padding: 0 18px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--paper); }
+.config-scope legend { padding: 0 8px; font-size: 13px; font-weight: 650; display: flex; align-items: center; gap: 8px; }
+.scope-letter { display: inline-grid; place-items: center; height: 28px; width: 28px; font: 600 16px/1 var(--font-display); background: var(--lime); color: var(--ink); border: 1px solid var(--ink); border-radius: 4px; }
+.config-scope-local .scope-letter { background: var(--coral); }
+.config-lab .config-scope-note { font-size: 12px; line-height: 1.7; margin: 16px 0 8px; color: var(--prose); min-height: 40px; }
+.config-file-path { display: block; color: var(--muted); font: 11px/1.7 ui-monospace, monospace; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.config-field { margin-top: 16px; }
+.config-field > label { font-size: 12px; font-weight: 550; display: flex; align-items: center; min-height: 44px; padding-bottom: 8px; }
+.config-field > input { width: 100%; min-width: 0; min-height: 46px; padding: 10px 12px; border: 1px solid var(--muted); border-radius: 5px; background: var(--white); color: var(--text); font: 400 13px/1.6 var(--font-body); }
+.config-field > input:disabled { border-style: dashed; border-color: var(--border); color: var(--muted); background: transparent; }
+.config-field > label.sr-only { display: block; min-height: 0; padding: 0; }
+.config-override-toggle { gap: 8px; cursor: pointer; line-height: 1.5; }
+.config-override-toggle input { width: 17px; height: 17px; flex: 0 0 17px; margin: 0; accent-color: var(--solid); }
+.config-field-state { font-size: 10px; line-height: 1.6; color: var(--muted); display: block; min-height: 32px; margin-top: 8px; }
+.config-result { border: 1px solid var(--border); border-radius: 8px; padding: 22px; background: var(--paper); }
+.config-result-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.config-result-badge { font-size: 10px; color: var(--muted); }
+.config-result dl { margin: 16px 0 0; }
+.config-result-row { padding-block: 16px; border-top: 1px solid var(--border); }
+.config-result dt { color: var(--muted); font: 11px/1.6 ui-monospace, monospace; margin-bottom: 8px; }
+.config-result dd { margin: 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.config-result dd strong { font-size: 17px; font-weight: 600; overflow-wrap: anywhere; min-width: 0; flex: 1 1 160px; }
+.config-origin { font-size: 10px; font-weight: 600; border-radius: 4px; padding: 4px 9px; color: var(--ink); border: 1px solid var(--ink); }
+.config-origin.from-global { background: var(--lime); }
+.config-origin.from-local { background: var(--coral); }
+.config-lab .config-result-explanation { font-size: 12px; line-height: 1.8; margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--border); }
+.config-lab .config-empty-note { font-size: 12px; line-height: 1.8; margin: 16px 0 0; background: var(--white); border-left: 3px solid var(--coral); padding: 12px; }
+.config-lab .config-hint { font-size: 12px; line-height: 1.8; color: var(--muted); max-width: 330px; margin: 0; }
 @media (max-width: 1000px) {
   .learning-article .article-body { gap: 36px; grid-template-columns: 170px minmax(0, 1fr); }
   .learning-article .article-hero-grid { grid-template-columns: minmax(0, 1fr) 190px; gap: 32px; }
@@ -142,6 +183,11 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 }
 @media (max-width: 600px) {
   .snapshot-panels { grid-template-columns: minmax(0, 1fr); }
+  .config-scope-cards { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .config-field > input { font-size: 16px; }
+  .config-lab .config-scope-note { min-height: 0; }
+  .config-field-state { min-height: 0; }
+  .learning-table th, .learning-table td { padding: 12px; }
 }
 @media (max-width: 520px) {
   .learning-article .article-hero { padding: 28px 6px 40px; }
@@ -174,6 +220,6 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 @media print {
   .learning-article .article-body { display: block; }
   .learning-article aside, .learning-hero-actions, .learning-hero-art, .lab-toolbar, .lab-actions, .quiz-answers, .quiz-feedback, .command-heading button { display: none; }
-  .lab-transcript::details-content, .quiz-explanation::details-content { content-visibility: visible; display: block; }
+  .lab-transcript::details-content, .quiz-explanation::details-content, .learning-details::details-content { content-visibility: visible; display: block; }
   .snapshot-lab, .knowledge-check, .snapshot-paper { box-shadow: none; break-inside: avoid; }
 }

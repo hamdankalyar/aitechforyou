@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: article 01 implemented and checked; ready for author review. Article 02 has not started.
+Planning date: September 11, 2026. Status: articles 01 and 02 implemented and approved for commit. Article 03 has not started.
 
 ## 1. The direction
 
@@ -264,8 +264,10 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Record the visual direction and article pattern.
 - [x] Identify correctness fixes and missing bridge material.
 - [x] Define the first article and its completion conditions.
-- [x] Build article 01 and complete implementation checks; author review pending.
-- [ ] Proceed to article 02 after article 01 is settled.
+- [x] Build article 01 and complete implementation checks.
+- [x] Commit article 01 after the author's instruction to proceed: `ef23192`.
+- [x] Build article 02 and complete implementation checks; author requested its commit.
+- [ ] Proceed to article 03 after article 02 is settled.
 
 ### Article 01 delivery — September 11, 2026
 
@@ -275,4 +277,14 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - Kept article prose server-rendered and existing plain-text articles compatible. Added small client components for the interactive controls without new dependencies.
 - Browser checks covered A/B/C selection, current-edit independence, added/removed lines, first-commit comparison, reset, keyboard selection, quiz responses, both themes, and a narrow phone layout. Confirmed server-rendered prose and snapshots remain visible with JavaScript disabled; printed explanations are visible.
 - Verified example command outputs and unchanged saved snapshots in a disposable repository using Git 2.50.1 (Apple Git-155).
-- Type checking and production build passed. Continue with article 02 after the author's first-article review.
+- Type checking and production build passed. The author requested committing this article and continuing on September 11; checkpoint commit: `ef23192`.
+
+### Article 02 delivery — September 11, 2026
+
+- URL: `/articles/git-config-identity-and-overrides`.
+- Covers all seven configuration notes: identity, key/value syntax, get/set, scopes, unset, duplicate values, and section removal. Worktree configuration and temporary overrides are optional detail.
+- Interactive global/local name and email fields show independent winning values and their origins. Per-key overrides can be enabled or removed, empty values are explained, and reset restores the initial mixed-scope example.
+- Added reusable table and expandable-detail blocks. The first article now links forward to the second, and the second links back. Article 03 is labeled as in preparation rather than linked to an empty page.
+- Browser checks covered edits behind an active override, fallback after removing an override, separate name/email scope choices, keyboard toggles, empty values, reset, quiz feedback, both themes, narrow-phone layouts, no-JavaScript content, print explanations, and previous/next navigation.
+- Executed the setup and inspection examples with isolated configuration files and a disposable repository under Git 2.50.1. Verified global/local lookup, origin/scope output, default branch naming, unset, blank values, temporary command overrides, duplicate-key handling, and section removal without changing the author's settings.
+- Type checking and production build passed. The author requested committing article 02 with the remaining site changes on September 11. Article 03 is the next planned delivery.
