@@ -11,6 +11,7 @@ import { firstCommitSections } from "@/topics/git/content/git-first-commit-artic
 import { gitInspectionSections } from "@/topics/git/content/git-inspection-article";
 import { gitIgnoreSections } from "@/topics/git/content/git-ignore-article";
 import { gitBranchSections } from "@/topics/git/content/git-branch-article";
+import { gitMergeSections } from "@/topics/git/content/git-merge-article";
 import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
@@ -23,6 +24,7 @@ export type ArticleBlock =
   | { type: "inspection-playground" }
   | { type: "ignore-playground" }
   | { type: "branch-playground" }
+  | { type: "merge-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -58,7 +60,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -225,6 +227,30 @@ export const articles: Article[] = [
       { title: "Git reference · Switching branches", url: "https://git-scm.com/docs/git-switch" },
       { title: "Git reference · Drawing history", url: "https://git-scm.com/docs/git-log" },
       { title: "Git glossary · HEAD and branch", url: "https://git-scm.com/docs/gitglossary" },
+    ],
+  },
+  {
+    slug: "how-git-brings-two-branches-together",
+    title: "How Git brings two branches together",
+    excerpt: "One command, two shapes. See when a merge only moves a label, when it records a commit with two parents, and how to insist on either.",
+    topic: "Git",
+    date: "Sep 11, 2026",
+    readTime: "9 min read",
+    accent: "coral",
+    number: "17",
+    series: {
+      title: "Git, made visible", order: 7, practiceTime: "2 min to explore",
+      nextTitle: "A conflict is a question you can answer",
+      nextDescription: "Next, both branches change the same lines. We’ll read the conflict markers, choose the final text, and finish the merge by hand.",
+      exercise: { id: "try-the-merge", label: "Try both merges" }, illustration: "merge",
+    },
+    sections: gitMergeSections,
+    sources: [
+      { title: "The Git book · Basic branching and merging", url: "https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging" },
+      { title: "Git reference · Merging, fast-forward, and --no-ff", url: "https://git-scm.com/docs/git-merge" },
+      { title: "Git reference · Deleting a merged branch", url: "https://git-scm.com/docs/git-branch" },
+      { title: "Git reference · Parents and first-parent history", url: "https://git-scm.com/docs/git-log" },
+      { title: "Git glossary · Fast-forward and merge", url: "https://git-scm.com/docs/gitglossary" },
     ],
   },
   {

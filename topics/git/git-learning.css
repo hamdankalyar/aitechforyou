@@ -123,13 +123,17 @@
 .branch-commit strong { display: block; font: 600 20px/1.2 var(--font-display); }
 .branch-commit + .branch-commit::before, .branch-lane.is-fork .branch-commit:first-child::before { content: "←"; position: absolute; left: -14px; top: 10px; width: 16px; text-align: center; color: var(--muted); font-size: 14px; }
 .branch-lane.is-fork .branch-commit:first-child::before { content: "↖"; top: -8px; }
+.branch-parents { display: block; margin-top: 4px; font: 10px/1.5 ui-monospace, monospace; color: var(--muted); }
+.merge-lab .inspection-questions { margin-block: 20px 0; }
+.merge-lab .inspection-answer pre { min-height: 0; margin-bottom: 12px; }
 .branch-labels { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; min-height: 22px; }
 .branch-label { font: 650 10px/1 ui-monospace, monospace; padding: 5px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--white); color: var(--text); }
 .branch-label.is-current { border-color: var(--coral); background: var(--coral); color: var(--ink); }
 .branch-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
 .branch-panels .snapshot-file { margin: 0; }
 .branch-panels .inspection-answer { margin-top: 0; }
-.branch-lab .lab-step-buttons { flex-wrap: wrap; }
+.branch-lab .lab-step-buttons, .merge-lab .lab-step-buttons { flex-wrap: wrap; }
+.merge-lab .branch-graph { margin-top: 20px; }
 @media (max-width: 640px) { .branch-panels { grid-template-columns: minmax(0, 1fr); } }
 
 /* Reference pages prioritize topic navigation and commands. */

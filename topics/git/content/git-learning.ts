@@ -24,6 +24,7 @@ const guideKeywords: Record<string, string> = {
   "git-status-diff-and-log": "git status diff log inspect inspection empty diff no output staged unstaged index working tree HEAD compare comparison patch hunk MM history",
   "from-edited-file-to-first-commit": "git staging stage staged area index working tree directory commit snapshot edited changes tracked untracked git add first commit",
   "git-is-a-time-machine": "save saving vs snapshot snapshots commit version history remembers",
+  "how-git-brings-two-branches-together": "git merge merging fast-forward fast forward ff-only no-ff merge commit two parents combine branches join integrate ort strategy auto-merging merge base fork point",
   "branches-are-labels-that-move": "git branch branches switch checkout create new branch HEAD label pointer rename delete -d -D diverge fork graph log --graph --all sci-fi",
   "teach-git-what-to-ignore": "gitignore ignore ignored untracked tracked rm cached .env secrets node_modules pattern glob negate exclude check-ignore excludesFile info exclude folder",
   "git-config-identity-and-overrides": "git config user.name user.email global local identity settings setup configure configuration set name email wrong project email override overrides origin scope unset",

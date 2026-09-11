@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–06 (snapshots, first commit, inspection, configuration, ignore rules, branches) are implemented; the ignore guide is committed at `c39fb92`. **The next detailed guide is “How Git brings two branches together.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–07 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging) are implemented; the ignore and branches guides are committed at `c39fb92` and `1f405a0`. **The next detailed guide is “A conflict is a question you can answer.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -15,9 +15,10 @@ Work by topic, with links between the two formats. One guide can support several
 | Complete | Detailed guide: Read what Git is telling you | Status, three diff comparisons, patch reading, and log; an interactive example checked against real Git. |
 | Complete | Detailed guide: Teach Git what to ignore | Ignore rules, pattern matching with reasons, negation limits, and untracking an already tracked file. |
 | Complete | Detailed guide: Branches are labels that move | Create, switch, rename, and delete branches; locate HEAD; watch only one label advance. |
-| Next | Detailed guide: How Git brings two branches together | Fast-forward versus a merge of diverged histories, with the same sci-fi branch joined under both conditions. |
+| Complete | Detailed guide: How Git brings two branches together | Fast-forward versus a merge of diverged histories, with the same sci-fi branch joined under both conditions. |
+| Next | Detailed guide: A conflict is a question you can answer | Read conflict markers, choose or edit the final text, stage it, and finish or abort the merge. |
 
-Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the merge guide (07) unless the user names another topic or format. Then develop the conflict and collaboration material in coherent topic groups.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the conflict guide (08) unless the user names another topic or format. Then develop the remote and collaboration material in coherent topic groups.
 
 ## 1. The direction
 
@@ -289,7 +290,15 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Complete “Read what Git is telling you” as guide 03.
 - [x] Complete “Teach Git what to ignore” as guide 05; guide 04 was already published.
 - [x] Complete “Branches are labels that move” as guide 06.
-- [ ] Proceed to “How Git brings two branches together” as guide 07.
+- [x] Complete “How Git brings two branches together” as guide 07.
+- [ ] Proceed to “A conflict is a question you can answer” as guide 08.
+
+### Merge guide delivery — September 11, 2026
+
+- URL: `/articles/how-git-brings-two-branches-together`; guide 07 follows the branches guide and points at the conflict guide as in preparation.
+- Covers the fork-point question, fast-forward versus merge commit, what a merge commit’s snapshot and two parents hold, the merged label never moving, `--ff-only` refusal, `--no-edit`, `Auto-merging` and the `ort` strategy line, `--parents`, `--no-ff`, and deleting merged branches with `-d`. The example changes different lines on each branch on purpose; same-line conflicts are deferred to guide 08.
+- Interactive example: choose whether main moved after the fork and which of three merge commands to run; the graph shows parents per commit, HEAD, and labels; delete before and after a merge shows Git’s refusal and success. The transcript covers every outcome.
+- `node topics/git/scripts/check-git-merge.mjs` checks all six situation × command combinations against Git 2.50.1 (merge output, first-parent history, file, parent count, unmoved `sci-fi`, delete refusal and success), then runs every command block from the article through the shell in order and requires each documented output to end the real output.
 
 ### Branches guide delivery — September 11, 2026
 
