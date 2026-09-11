@@ -25,6 +25,7 @@ const guideKeywords: Record<string, string> = {
   "git-status-diff-and-log": "git status diff log inspect inspection empty diff no output staged unstaged index working tree HEAD compare comparison patch hunk MM history",
   "from-edited-file-to-first-commit": "git staging stage staged area index working tree directory commit snapshot edited changes tracked untracked git add first commit",
   "git-is-a-time-machine": "save saving vs snapshot snapshots commit version history remembers",
+  "put-unfinished-work-on-a-shelf": "stash stashes stashed shelf shelve set aside half-done unfinished work in progress WIP git stash push pop apply drop list show clear branch --include-untracked -u untracked --index stash@{0} newest first conflicting pop Updated upstream Stashed changes entry kept No local changes to save",
   "from-fork-to-pull-request": "fork forking pull request PR merge request contribute open source upstream remote origin clone fork sync fork FETCH_HEAD three-dot diff github gitlab review branch delete --delete",
   "push-pull-and-the-upstream-connection": "push pull upstream set-upstream -u tracking branch rejected fetch first non-fast-forward divergent branches reconcile ff-only no-rebase bare repository server remote add push.default push.autoSetupRemote pull.ff everything up-to-date",
   "your-branch-their-branch-and-origin-main": "remote remotes origin origin/main remote-tracking branch fetch clone git fetch git clone server teammate behind ahead diverged up to date status remote -v branch --all origin/HEAD",

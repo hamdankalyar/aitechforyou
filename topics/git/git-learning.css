@@ -165,13 +165,21 @@
 /* Conflict practice example. */
 .conflict-lab .inspection-panels { margin-top: 24px; }
 .conflict-lab .conflict-file { margin-top: 12px; border: 2px solid var(--coral); }
-.conflict-lab .file-line.is-conflict { background: var(--white); }
-.conflict-lab .line-note { margin-left: auto; padding-left: 10px; font-size: 10px; line-height: 1.6; color: var(--muted); white-space: nowrap; }
+.conflict-lab .file-line.is-conflict, .stash-lab .file-line.is-conflict { background: var(--white); }
+.conflict-lab .line-note, .stash-lab .line-note { margin-left: auto; padding-left: 10px; font-size: 10px; line-height: 1.6; color: var(--muted); white-space: nowrap; }
 .conflict-lab .inspection-questions { margin-block: 20px 0; }
 .conflict-lab .inspection-questions:disabled label { cursor: default; opacity: .55; }
 .conflict-lab .inspection-answer pre { min-height: 0; margin-bottom: 12px; }
 .conflict-lab .lab-step-buttons { flex-wrap: wrap; }
-@media (max-width: 640px) { .conflict-lab .line-note { display: none; } }
+@media (max-width: 640px) { .conflict-lab .line-note, .stash-lab .line-note { display: none; } }
+
+/* Stash practice example. */
+.stash-lab .inspection-panels { margin-top: 24px; }
+.stash-entries { list-style: none; margin: 0; padding: 12px; min-height: 128px; font: 12px/1.6 ui-monospace, monospace; }
+.stash-entries li { padding: 6px 8px; margin-bottom: 6px; border: 1px solid var(--border); border-radius: 5px; background: var(--white); overflow-wrap: anywhere; }
+.stash-entries li:first-child { border-color: var(--coral); }
+.stash-lab .inspection-answer pre { min-height: 0; margin-bottom: 12px; }
+.stash-lab .inspection-answer h4 code { white-space: pre-wrap; }
 
 /* Reference pages prioritize topic navigation and commands. */
 .git-navigation { display: flex; gap: 28px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }

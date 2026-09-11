@@ -36,6 +36,8 @@ for (const [query, expected] of [
   ["git fetch", "/learn/git/remotes"],
   ["stop tracking", "/learn/git/ignore"],
   ["rename branch", "/learn/git/branch"],
+  ["git stash", "/articles/put-unfinished-work-on-a-shelf"],
+  ["stash pop conflict", "/articles/put-unfinished-work-on-a-shelf"],
   ["unfindable-xyz", undefined],
 ]) {
   const html = await page(`/learn/git?q=${encodeURIComponent(query)}`);

@@ -17,6 +17,7 @@ import { gitConflictSections } from "@/topics/git/content/git-conflict-article";
 import { gitRemoteSections } from "@/topics/git/content/git-remote-article";
 import { gitPushSections } from "@/topics/git/content/git-push-article";
 import { gitForkSections } from "@/topics/git/content/git-fork-article";
+import { gitStashSections } from "@/topics/git/content/git-stash-article";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
 export type ArticleBlock =
@@ -33,6 +34,7 @@ export type ArticleBlock =
   | { type: "remote-playground" }
   | { type: "push-playground" }
   | { type: "fork-playground" }
+  | { type: "stash-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -68,7 +70,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "push" | "fork" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "push" | "fork" | "stash" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -364,6 +366,28 @@ export const articles: Article[] = [
       { title: "GitHub docs · Syncing a fork", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork" },
       { title: "The Git book · Contributing to a project on GitHub", url: "https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project" },
       { title: "Git reference · FETCH_HEAD and fetching one branch", url: "https://git-scm.com/docs/git-fetch" },
+    ],
+  },
+  {
+    slug: "put-unfinished-work-on-a-shelf",
+    title: "Put unfinished work on a shelf",
+    excerpt: "Set a half-done change aside to get a clean working tree, keep several shelved changes apart by name, choose apply or pop when you bring one back, and handle the pop that conflicts and keeps its entry.",
+    topic: "Git",
+    date: "Sep 12, 2026",
+    readTime: "10 min read",
+    accent: "coral",
+    number: "22",
+    series: {
+      title: "Git, made visible", order: 12, practiceTime: "2 min to explore",
+      nextTitle: "Undo the right thing",
+      nextDescription: "Next, four ways to undo: restore a file, reset softly or hard, or revert a commit that is already shared. The same starting point each time, so you can compare what each one touches.",
+      exercise: { id: "try-the-shelf", label: "Try the shelf" }, illustration: "stash",
+    },
+    sections: gitStashSections,
+    sources: [
+      { title: "Git reference · git stash", url: "https://git-scm.com/docs/git-stash" },
+      { title: "The Git book · Stashing and Cleaning", url: "https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning" },
+      { title: "Git reference · git restore and unmerged paths", url: "https://git-scm.com/docs/git-restore" },
     ],
   },
   {

@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–11 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts, remotes, push/pull, fork and pull request) are implemented; guides 05–10 are committed at `c39fb92`, `1f405a0`, `c34391a`, `43f453f`, `584d78c`, and `ff2dbe6`. Part II is complete. **The next detailed guide is “Put unfinished work on a shelf.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–12 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts, remotes, push/pull, fork and pull request, stash) are implemented; guides 05–11 are committed at `c39fb92`, `1f405a0`, `c34391a`, `43f453f`, `584d78c`, `ff2dbe6`, and `f7252f0`. Part II is complete and Part III has begun. **The next detailed guide is “Undo the right thing.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -20,9 +20,10 @@ Work by topic, with links between the two formats. One guide can support several
 | Complete | Detailed guide: Your branch, their branch, and origin/main | Local branches, remote-tracking references, and server branches; what fetch changes and what it leaves alone. |
 | Complete | Detailed guide: Push, pull, and the upstream connection | Publish a branch to a shared bare repository, set upstream, and understand what pull does and when it refuses. |
 | Complete | Detailed guide: From fork to pull request | Fork, clone, branch, push to the fork, and open a pull request against the original repository. |
-| Next | Detailed guide: Put unfinished work on a shelf | Stash apply versus pop, older stashes, untracked files, and a conflicting pop that keeps its entry. |
+| Complete | Detailed guide: Put unfinished work on a shelf | Stash apply versus pop, older stashes, untracked files, and a conflicting pop that keeps its entry. |
+| Next | Detailed guide: Undo the right thing | Restore, soft/mixed/hard reset, and revert from one saved scenario; compare HEAD, index, files, and history. |
 
-Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the stash guide (12) unless the user names another topic or format. Then continue Part III with undo and reflog.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the undo guide (13) unless the user names another topic or format. Then continue Part III with the reflog guide (14).
 
 ## 1. The direction
 
@@ -299,7 +300,15 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Complete “Your branch, their branch, and origin/main” as guide 09.
 - [x] Complete “Push, pull, and the upstream connection” as guide 10.
 - [x] Complete “From fork to pull request” as guide 11.
-- [ ] Proceed to “Put unfinished work on a shelf” as guide 12.
+- [x] Complete “Put unfinished work on a shelf” as guide 12.
+- [ ] Proceed to “Undo the right thing” as guide 13.
+
+### Stash guide delivery — September 12, 2026
+
+- URL: `/articles/put-unfinished-work-on-a-shelf`; guide 12 opens Part III and points at the undo guide as in preparation.
+- Covers what `git stash push` records (working tree and index as commits no branch points at) and what it leaves alone (untracked files unless `--include-untracked`, ignored files unless `--all`), the `No local changes to save` case, staged changes returning unstaged unless `--index`, naming entries with `-m` versus the automatic `WIP on main` message, newest-first numbering that shifts as entries arrive, the short `<n>` form, `show` and `show -p`, `apply` versus `pop` as apply-then-drop-only-after-a-clean-apply, the refusal when the working tree already touches the same files, the conflicting pop with `Updated upstream` and `Stashed changes` markers and the retained entry, resolving with an edit and `git add` (there is no `--continue`), dropping the entry by hand, and, as optional detail, undoing the attempt with `git restore --source=HEAD --staged --worktree`, `git stash branch`, and that a dropped entry's commits are not gone immediately.
+- Interactive example: a ten-step storyboard with Back, Next, and Start over showing the working file, the last commit, and the shelf: two named entries, `show`, `apply` (entry kept), commit and `drop`, a conflicting `pop` (entry kept), and the resolution.
+- `node topics/git/scripts/check-git-stash.mjs` runs every storyboard command in a real repository under Git 2.50.1 and compares the output, the working file, HEAD, the stash list, and the status at each step, then runs the article's walkthrough as one shell session.
 
 ### Fork guide delivery — September 12, 2026
 
