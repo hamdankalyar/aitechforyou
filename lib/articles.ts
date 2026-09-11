@@ -13,6 +13,7 @@ import { gitIgnoreSections } from "@/topics/git/content/git-ignore-article";
 import { gitBranchSections } from "@/topics/git/content/git-branch-article";
 import { gitMergeSections } from "@/topics/git/content/git-merge-article";
 import { gitConflictSections } from "@/topics/git/content/git-conflict-article";
+import { gitRemoteSections } from "@/topics/git/content/git-remote-article";
 import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
@@ -27,6 +28,7 @@ export type ArticleBlock =
   | { type: "branch-playground" }
   | { type: "merge-playground" }
   | { type: "conflict-playground" }
+  | { type: "remote-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -62,7 +64,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -278,6 +280,31 @@ export const articles: Article[] = [
       { title: "Git reference · Leftover markers with diff --check", url: "https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check" },
       { title: "Git reference · Restoring one side with --ours and --theirs", url: "https://git-scm.com/docs/git-restore" },
       { title: "Git reference · merge.conflictStyle", url: "https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeconflictStyle" },
+    ],
+  },
+  {
+    slug: "your-branch-their-branch-and-origin-main",
+    title: "Your branch, their branch, and origin/main",
+    excerpt: "Three labels called main, in two repositories. See what origin/main really points at, what git fetch moves, and why status can say up to date while a teammate has moved on.",
+    topic: "Git",
+    date: "Sep 12, 2026",
+    readTime: "10 min read",
+    accent: "coral",
+    number: "19",
+    series: {
+      title: "Git, made visible", order: 9, practiceTime: "2 min to explore",
+      nextTitle: "Push, pull, and the upstream connection",
+      nextDescription: "Next, we’ll send your commits to origin, set the upstream that lets push and pull work without arguments, and see what pull really does.",
+      exercise: { id: "try-the-fetch", label: "Try a fetch" }, illustration: "remotes",
+    },
+    sections: gitRemoteSections,
+    sources: [
+      { title: "The Git book · Working with remotes", url: "https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes" },
+      { title: "The Git book · Remote branches", url: "https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches" },
+      { title: "Git reference · Fetching from a remote", url: "https://git-scm.com/docs/git-fetch" },
+      { title: "Git reference · Cloning a repository", url: "https://git-scm.com/docs/git-clone" },
+      { title: "Git reference · Naming remotes", url: "https://git-scm.com/docs/git-remote" },
+      { title: "Git glossary · Remote-tracking branch", url: "https://git-scm.com/docs/gitglossary#def_remote_tracking_branch" },
     ],
   },
   {

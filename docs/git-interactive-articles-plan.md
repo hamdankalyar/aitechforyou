@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–08 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts) are implemented; guides 05–07 are committed at `c39fb92`, `1f405a0`, and `c34391a`. **The next detailed guide is “Your branch, their branch, and origin/main.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–09 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts, remotes) are implemented; guides 05–08 are committed at `c39fb92`, `1f405a0`, `c34391a`, and `43f453f`. **The next detailed guide is “Push, pull, and the upstream connection.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -17,9 +17,10 @@ Work by topic, with links between the two formats. One guide can support several
 | Complete | Detailed guide: Branches are labels that move | Create, switch, rename, and delete branches; locate HEAD; watch only one label advance. |
 | Complete | Detailed guide: How Git brings two branches together | Fast-forward versus a merge of diverged histories, with the same sci-fi branch joined under both conditions. |
 | Complete | Detailed guide: A conflict is a question you can answer | Read conflict markers, choose or edit the final text, stage it, and finish or abort the merge. |
-| Next | Detailed guide: Your branch, their branch, and origin/main | Local branches, remote-tracking references, and server branches; what fetch changes and what it leaves alone. |
+| Complete | Detailed guide: Your branch, their branch, and origin/main | Local branches, remote-tracking references, and server branches; what fetch changes and what it leaves alone. |
+| Next | Detailed guide: Push, pull, and the upstream connection | Publish a branch to a shared bare repository, set upstream, and understand what pull does and when it refuses. |
 
-Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the remotes guide (09) unless the user names another topic or format. Then continue with push/pull and the fork-to-pull-request workflow.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the push/pull guide (10) unless the user names another topic or format. Then continue with the fork-to-pull-request workflow.
 
 ## 1. The direction
 
@@ -293,7 +294,15 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Complete “Branches are labels that move” as guide 06.
 - [x] Complete “How Git brings two branches together” as guide 07.
 - [x] Complete “A conflict is a question you can answer” as guide 08.
-- [ ] Proceed to “Your branch, their branch, and origin/main” as guide 09.
+- [x] Complete “Your branch, their branch, and origin/main” as guide 09.
+- [ ] Proceed to “Push, pull, and the upstream connection” as guide 10.
+
+### Remotes guide delivery — September 12, 2026
+
+- URL: `/articles/your-branch-their-branch-and-origin-main`; guide 09 follows the conflict guide and points at the push/pull guide as in preparation.
+- The remote is Sam’s ordinary repository folder on the same disk, so the whole guide runs without a network and without push; the shared bare server is introduced with push in guide 10. Covers clone, `origin` as a nickname, `origin/main` as a remote-tracking record, `remote -v`, `branch --all`, `origin/HEAD`, stale “up to date”, `fetch` and its one-line-per-label output, looking before acting (`log main..origin/main`, `show origin/main:file`), merging `origin/main` as a fast-forward, the ahead/behind/diverged status sentences and their short form, a diverged merge, and the `git fetch main` mistake from the source notes.
+- Interactive example: Sam’s history and yours side by side with `main`, `origin/main`, and Sam’s `main` labels; Sam commits, fetch, merge, and your own commit, with Git’s outputs and both status forms. The transcript covers every outcome.
+- `node topics/git/scripts/check-git-remotes.mjs` replays six action sequences against two real repositories under Git 2.50.1 (histories of all three labels, your file, fetch and merge outputs, short and long status), then runs the article’s walkthrough as one shell session so `cd` between the repositories carries over, requiring documented outputs to match.
 
 ### Conflict guide delivery — September 12, 2026
 
