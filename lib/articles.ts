@@ -12,6 +12,7 @@ import { gitInspectionSections } from "@/topics/git/content/git-inspection-artic
 import { gitIgnoreSections } from "@/topics/git/content/git-ignore-article";
 import { gitBranchSections } from "@/topics/git/content/git-branch-article";
 import { gitMergeSections } from "@/topics/git/content/git-merge-article";
+import { gitConflictSections } from "@/topics/git/content/git-conflict-article";
 import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
@@ -25,6 +26,7 @@ export type ArticleBlock =
   | { type: "ignore-playground" }
   | { type: "branch-playground" }
   | { type: "merge-playground" }
+  | { type: "conflict-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -60,7 +62,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -251,6 +253,31 @@ export const articles: Article[] = [
       { title: "Git reference · Deleting a merged branch", url: "https://git-scm.com/docs/git-branch" },
       { title: "Git reference · Parents and first-parent history", url: "https://git-scm.com/docs/git-log" },
       { title: "Git glossary · Fast-forward and merge", url: "https://git-scm.com/docs/gitglossary" },
+    ],
+  },
+  {
+    slug: "a-conflict-is-a-question-you-can-answer",
+    title: "A conflict is a question you can answer",
+    excerpt: "When both branches change the same lines, Git stops and asks. Read the markers, choose the final text, stage it, and finish the merge—or abort and lose nothing.",
+    topic: "Git",
+    date: "Sep 12, 2026",
+    readTime: "10 min read",
+    accent: "coral",
+    number: "18",
+    series: {
+      title: "Git, made visible", order: 8, practiceTime: "2 min to explore",
+      nextTitle: "Your branch, their branch, and origin/main",
+      nextDescription: "Next, a second copy of the project enters the picture. We’ll see what origin/main is, what fetch changes, and what it leaves alone.",
+      exercise: { id: "try-the-conflict", label: "Answer the conflict" }, illustration: "conflict",
+    },
+    sections: gitConflictSections,
+    sources: [
+      { title: "The Git book · Basic merge conflicts", url: "https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging#_basic_merge_conflicts" },
+      { title: "Git reference · How conflicts are presented, --abort, --continue", url: "https://git-scm.com/docs/git-merge#_how_conflicts_are_presented" },
+      { title: "Git reference · Status codes for unmerged paths", url: "https://git-scm.com/docs/git-status#_short_format" },
+      { title: "Git reference · Leftover markers with diff --check", url: "https://git-scm.com/docs/git-diff#Documentation/git-diff.txt---check" },
+      { title: "Git reference · Restoring one side with --ours and --theirs", url: "https://git-scm.com/docs/git-restore" },
+      { title: "Git reference · merge.conflictStyle", url: "https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeconflictStyle" },
     ],
   },
   {

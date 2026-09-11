@@ -11,6 +11,7 @@ import { InspectionPlayground } from "@/topics/git/components/inspection-playgro
 import { IgnorePlayground } from "@/topics/git/components/ignore-playground";
 import { BranchPlayground } from "@/topics/git/components/branch-playground";
 import { MergePlayground } from "@/topics/git/components/merge-playground";
+import { ConflictPlayground } from "@/topics/git/components/conflict-playground";
 
 // Renders **term** as <strong>. Only bold is supported on purpose.
 export function Emphasis({ text }: { text: string }) {
@@ -28,6 +29,7 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "ignore-playground": return <IgnorePlayground />;
     case "branch-playground": return <BranchPlayground />;
     case "merge-playground": return <MergePlayground />;
+    case "conflict-playground": return <ConflictPlayground />;
     case "bullets": return <ul className="learning-bullets">{block.items.map(item => <li key={item.label}><strong><span aria-hidden="true">•</span>{item.label}</strong><p>{item.text}</p></li>)}</ul>;
     case "table": return <div className="learning-table" role="region" aria-label={block.caption} tabIndex={0}><table><caption>{block.caption}</caption><thead><tr>{block.columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead><tbody>{block.rows.map((row, index) => <tr key={index}>{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row">{cell}</th> : <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
     case "details": return <details className="learning-details"><summary>{block.title}</summary><ul className="guide-points compact">{block.paragraphs.map(paragraph => <li key={paragraph}><Emphasis text={paragraph} /></li>)}</ul>{block.code && (runnableCode ? <CodeRunner code={block.code} /> : <pre tabIndex={0} aria-label="Code example"><code>{block.code}</code></pre>)}{block.commands?.map(command => <CommandBlock {...command} key={command.command} />)}</details>;

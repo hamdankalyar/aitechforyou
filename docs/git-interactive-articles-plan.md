@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–07 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging) are implemented; the ignore and branches guides are committed at `c39fb92` and `1f405a0`. **The next detailed guide is “A conflict is a question you can answer.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–08 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts) are implemented; guides 05–07 are committed at `c39fb92`, `1f405a0`, and `c34391a`. **The next detailed guide is “Your branch, their branch, and origin/main.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -16,9 +16,10 @@ Work by topic, with links between the two formats. One guide can support several
 | Complete | Detailed guide: Teach Git what to ignore | Ignore rules, pattern matching with reasons, negation limits, and untracking an already tracked file. |
 | Complete | Detailed guide: Branches are labels that move | Create, switch, rename, and delete branches; locate HEAD; watch only one label advance. |
 | Complete | Detailed guide: How Git brings two branches together | Fast-forward versus a merge of diverged histories, with the same sci-fi branch joined under both conditions. |
-| Next | Detailed guide: A conflict is a question you can answer | Read conflict markers, choose or edit the final text, stage it, and finish or abort the merge. |
+| Complete | Detailed guide: A conflict is a question you can answer | Read conflict markers, choose or edit the final text, stage it, and finish or abort the merge. |
+| Next | Detailed guide: Your branch, their branch, and origin/main | Local branches, remote-tracking references, and server branches; what fetch changes and what it leaves alone. |
 
-Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the conflict guide (08) unless the user names another topic or format. Then develop the remote and collaboration material in coherent topic groups.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the remotes guide (09) unless the user names another topic or format. Then continue with push/pull and the fork-to-pull-request workflow.
 
 ## 1. The direction
 
@@ -291,7 +292,15 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Complete “Teach Git what to ignore” as guide 05; guide 04 was already published.
 - [x] Complete “Branches are labels that move” as guide 06.
 - [x] Complete “How Git brings two branches together” as guide 07.
-- [ ] Proceed to “A conflict is a question you can answer” as guide 08.
+- [x] Complete “A conflict is a question you can answer” as guide 08.
+- [ ] Proceed to “Your branch, their branch, and origin/main” as guide 09.
+
+### Conflict guide delivery — September 12, 2026
+
+- URL: `/articles/a-conflict-is-a-question-you-can-answer`; guide 08 follows the merge guide and points at the remotes guide as in preparation.
+- Covers why same-place changes conflict while distant ones merge, base/ours/theirs, reading the three markers, `UU` and “both modified”, abort versus finish, `git add` as the resolution signal, `git merge --continue` and the editor, `git diff --check`, the index stages `:1:`/`:2:`/`:3:`, `git log --merge`, `git restore --ours/--theirs`, the refusal when finishing before staging, committed markers as a mistake Git does not catch, and the zdiff3 style as optional detail.
+- Interactive example: base, ours, and theirs panels beside the conflicted file with per-line notes; five answers including leaving the markers in; check, stage, finish, abort, and reset, with the refusal when finishing early. The transcript covers every outcome.
+- `node topics/git/scripts/check-git-conflict.mjs` checks all five answers finished and aborted against Git 2.50.1 (conflict output, file, status codes, `diff --check` output and exit, early `--continue` refusal, abort restoring D, merge commit parents and recorded file), then replays every command block in the article through the shell in order, requiring documented outputs to match and undocumented ones to be silent.
 
 ### Merge guide delivery — September 11, 2026
 
