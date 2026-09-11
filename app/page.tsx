@@ -1,13 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/article-card";
 import { ArrowRight, Spark } from "@/components/icons";
 import { articles, topics } from "@/lib/articles";
+import { JsonLd, site, websiteSchema } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: { absolute: `${site.name} — Git, JavaScript, and AI, made clear` },
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   const featured = articles.find((article) => article.featured) ?? articles[0];
 
   return (
     <main id="main">
+      <JsonLd data={websiteSchema} />
       <section className="hero shell">
         <div className="eyebrow"><span /> Learning in public, one idea at a time</div>
         <div className="hero-grid">

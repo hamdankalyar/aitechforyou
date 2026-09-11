@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Article } from "@/lib/articles";
+import { isoDate } from "@/lib/seo";
 import { ArrowUpRight } from "./icons";
 
 export function ArticleCard({ article }: { article: Article }) {
@@ -15,7 +16,7 @@ export function ArticleCard({ article }: { article: Article }) {
         <span className="art-line" />
       </div>
       <div className="card-copy">
-        <p>{article.date} · {article.readTime}</p>
+        <p><time dateTime={isoDate(article.date)}>{article.date}</time> · {article.readTime}</p>
         <h3><Link href={`/articles/${article.slug}`}>{article.title}</Link></h3>
         <p>{article.excerpt}</p>
       </div>

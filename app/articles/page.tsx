@@ -4,7 +4,11 @@ import { redirect } from "next/navigation";
 import { ArticleCard } from "@/components/article-card";
 import { articles, topics } from "@/lib/articles";
 
-export const metadata: Metadata = { title: "Articles", description: "Browse clear, practical lessons about Git, AI, and JavaScript." };
+export const metadata: Metadata = {
+  title: "Articles",
+  description: "Browse clear, practical lessons about Git, AI, and JavaScript: interactive guides, runnable code, and visual explanations.",
+  alternates: { canonical: "/articles" },
+};
 
 export default async function ArticlesPage({ searchParams }: { searchParams: Promise<{ topic?: string | string[] }> }) {
   const { topic } = await searchParams;

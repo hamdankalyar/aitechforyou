@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Spark } from "@/components/icons";
 
-export const metadata: Metadata = { title: "About", description: "Why AI Tech For You exists and how each lesson is made." };
+export const metadata: Metadata = { title: "About", description: "Why AI Tech For You exists and how each lesson is made.", alternates: { canonical: "/about" } };
 
 export default function AboutPage() {
   return (

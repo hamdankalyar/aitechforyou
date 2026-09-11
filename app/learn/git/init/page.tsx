@@ -5,13 +5,17 @@ import { GitLessonOutline } from "@/topics/git/components/git-lesson-outline";
 import { ArrowRight } from "@/components/icons";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
 import { gitStageLesson } from "@/topics/git/content/git-short-lessons";
+import { JsonLd, breadcrumbSchema, lessonSchema } from "@/lib/seo";
 import "../../../articles/article-learning.css";
 import "@/topics/git/git-learning.css";
 
-export const metadata: Metadata = { title: gitInitLesson.title, description: "Create an empty Git repository in a practice folder, understand what git init does, and check the result with git status." };
+const description = "Create an empty Git repository in a practice folder, understand what git init does, and check the result with git status.";
+export const metadata: Metadata = { title: gitInitLesson.title, description, alternates: { canonical: gitInitLesson.href } };
 
 export default function GitInitLesson() {
   return <main id="main" className="git-learning git-lesson learning-article shell">
+    <JsonLd data={lessonSchema({ title: gitInitLesson.title, description, path: gitInitLesson.href })} />
+    <JsonLd data={breadcrumbSchema([{ name: "Learn Git", path: "/learn/git" }, { name: gitInitLesson.title, path: gitInitLesson.href }])} />
     <Link className="git-back" href="/learn/git">← Git lessons & guides</Link>
     <div className="git-lesson-grid">
       <aside className="git-lesson-sidebar"><div className="git-desktop-outline"><GitLessonOutline current={gitInitLesson.href} /></div><details className="git-mobile-outline"><summary>Lesson outline</summary><GitLessonOutline current={gitInitLesson.href} /></details></aside>

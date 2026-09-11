@@ -1,24 +1,40 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, Work_Sans } from "next/font/google";
 import Script from "next/script";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { site } from "@/lib/seo";
 import "./globals.css";
 
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-display" });
 const workSans = Work_Sans({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aitechforyou.com"),
-  title: { default: "AI Tech For You", template: "%s | AI Tech For You" },
-  description: "Technology explained through simple mental models, practical examples, and honest learning notes.",
+  metadataBase: new URL(site.url),
+  title: { default: site.name, template: `%s | ${site.name}` },
+  description: site.description,
+  applicationName: site.name,
+  authors: [{ name: site.author.name, url: site.author.url }],
+  creator: site.author.name,
+  keywords: ["learn git", "git tutorial", "javascript for beginners", "javascript course", "generative ai", "agentic ai", "interactive tutorials", "programming mental models"],
   openGraph: {
-    title: "AI Tech For You",
-    description: "Complex technology, made clear.",
-    url: "https://aitechforyou.com",
-    siteName: "AI Tech For You",
+    title: site.name,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
+    locale: "en_US",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  formatDetection: { telephone: false },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f0e8" },
+    { media: "(prefers-color-scheme: dark)", color: "#111110" },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
