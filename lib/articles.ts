@@ -3,6 +3,7 @@ import { gitConfigSections } from "./git-config-article";
 
 export type ArticleBlock =
   | { type: "timeline" }
+  | { type: "save-commit-comparison" }
   | { type: "config-playground" }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -48,19 +49,18 @@ export const articles: Article[] = [
     slug: "git-is-a-time-machine",
     title: "Git is a time machine, not a save button",
     excerpt:
-      "Meet the little history inside your project. Explore a snapshot, change a file, and see what Git actually remembers.",
+      "See the difference between saving a file now and recording a version you can return to later.",
     topic: "Git",
     date: "Sep 11, 2026",
-    readTime: "6 min read",
+    readTime: "4 min read",
     featured: true,
     accent: "coral",
     number: "01",
-    series: { title: "Git, made visible", order: 1, practiceTime: "2 min to explore", nextTitle: "Set up Git so it knows who you are", nextDescription: "Now that you know what a commit remembers, we’ll give yours a name and an identity.", exercise: { id: "try-the-timeline", label: "Explore the timeline" }, illustration: "snapshots" },
+    series: { title: "Git, made visible", order: 1, practiceTime: "1 min to explore", nextTitle: "From edited file to first commit", nextDescription: "Now that saved moments make sense, we’ll create a project history and record the first one ourselves.", exercise: { id: "try-the-timeline", label: "Try the example" }, illustration: "snapshots" },
     sections: firstGitSections,
     sources: [
-      { title: "The Git book · Snapshots and the three states", url: "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" },
+      { title: "The Git book · What Git records", url: "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" },
       { title: "Git reference · Recording a commit", url: "https://git-scm.com/docs/git-commit" },
-      { title: "Git reference · Inspecting objects with show", url: "https://git-scm.com/docs/git-show" },
     ],
   },
   {
@@ -73,9 +73,9 @@ export const articles: Article[] = [
     accent: "coral",
     number: "05",
     series: {
-      title: "Git, made visible", order: 2, practiceTime: "2 min to explore",
-      nextTitle: "From edited file to first commit",
-      nextDescription: "Your identity is ready. Next, we’ll create a repository and follow a file through editing, staging, and committing.",
+      title: "Git, made visible", order: 4, practiceTime: "2 min to explore",
+      nextTitle: "Teach Git what to ignore",
+      nextDescription: "Next, we’ll decide which project files belong in Git’s history and which ones should stay out.",
       exercise: { id: "try-the-settings", label: "Try the settings" }, illustration: "config",
     },
     sections: gitConfigSections,

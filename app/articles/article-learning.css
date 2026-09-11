@@ -46,23 +46,33 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 .snapshot-paper h3 { font: 600 15px/1.4 var(--font-body); min-height: 42px; margin: 18px 0; }
 .snapshot-paper ul { padding-left: 16px; font-size: 12px; line-height: 1.8; color: var(--prose); }
 .snapshot-figure figcaption { font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.7; }
+.save-commit-comparison { margin: 30px 0; }
+.save-commit-comparison > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.save-commit-comparison article { display: flex; flex-direction: column; min-height: 220px; padding: 24px; border: 1px solid var(--border); border-radius: 10px; background: var(--white); }
+.save-commit-comparison article:first-child { border-top: 4px solid var(--blue); }
+.save-commit-comparison article:last-child { border-top: 4px solid var(--coral); }
+.save-commit-comparison h3 { font: 600 30px/1.2 var(--font-display); letter-spacing: -.03em; margin: 24px 0 8px; }
+.save-commit-comparison p { font-size: 15px; line-height: 1.7; margin: 0; }
+.save-commit-comparison strong { display: block; margin-top: auto; padding-top: 24px; font-size: 12px; }
+.save-commit-comparison figcaption { margin-top: 14px; color: var(--muted); font-size: 12px; line-height: 1.7; }
 .snapshot-lab { padding: 28px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 5px 0 var(--border); margin-top: 30px; }
 .lab-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .lab-local { font-size: 10px; color: var(--muted); }
 .snapshot-lab h3 { font: 600 clamp(23px, 3vw, 30px)/1.2 var(--font-display); letter-spacing: -.03em; margin: 20px 0 8px; }
 .snapshot-lab .lab-instruction { font-size: 13px; line-height: 1.6; margin: 0; }
-.commit-timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; padding: 25px 0 16px; margin-top: 16px; gap: 10px; background-image: radial-gradient(var(--lab-grid) 1px, transparent 1px); background-size: 12px 12px; }
+.commit-timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; padding: 25px 0 16px; margin: 16px 0 0; gap: 10px; border: 0; min-width: 0; background-image: radial-gradient(var(--lab-grid) 1px, transparent 1px); background-size: 12px 12px; }
 .commit-timeline::before { content: ""; position: absolute; height: 2px; top: 50px; left: 16%; right: 16%; background: var(--border); }
 .snapshot-lab button, .knowledge-check button, .article-command button { font-family: inherit; cursor: pointer; color: var(--text); transition: background-color .18s, border-color .18s, color .18s; }
-.commit-stop { border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 4px 8px; position: relative; }
+.commit-stop { border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 4px 8px; position: relative; cursor: pointer; text-align: center; }
 .commit-node { width: 50px; height: 50px; border: 2px solid var(--border); border-radius: 50%; display: grid; place-items: center; background: var(--white); color: var(--text); font: 600 22px/1 var(--font-display); transition: background-color .18s, border-color .18s; }
 .is-selected .commit-node { background: var(--coral); border-color: var(--ink); color: var(--ink); box-shadow: 0 0 0 4px var(--white), 0 0 0 5px var(--coral); }
-.is-parent .commit-node { border-style: dashed; border-color: var(--muted); }
 .commit-stop:hover .commit-node { border-color: var(--text); }
+.commit-stop:has(input:focus-visible) .commit-node { outline: 3px solid var(--blue); outline-offset: 5px; }
 .commit-description { font-size: 11px; font-weight: 600; min-height: 32px; max-width: 130px; line-height: 1.5; }
 .commit-state { font-size: 10px; color: var(--muted); }
-.timeline-legend { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; font-size: 10px; color: var(--muted); padding: 12px 0 20px; }
-.branch-label { color: var(--ink); background: var(--lime); border-radius: 4px; padding: 5px 9px; font-family: ui-monospace, monospace; }
+.timeline-legend { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; font-size: 10px; color: var(--muted); padding: 12px 4px 20px; }
+.timeline-legend strong { color: var(--prose); font: 600 11px/1.5 ui-monospace, monospace; }
+.timeline-legend span:last-child { text-align: right; }
 .lab-toolbar { border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 0; }
 .compare-toggle { font-size: 12px; display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
 .compare-toggle input { width: 18px; height: 18px; margin: 0; accent-color: var(--solid); }
@@ -182,6 +192,8 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
   .mobile-contents summary { min-height: 48px; padding-block: 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
 }
 @media (max-width: 600px) {
+  .save-commit-comparison > div { grid-template-columns: minmax(0, 1fr); }
+  .save-commit-comparison article { min-height: 190px; }
   .snapshot-panels { grid-template-columns: minmax(0, 1fr); }
   .config-scope-cards { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .config-field > input { font-size: 16px; }
@@ -221,5 +233,5 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
   .learning-article .article-body { display: block; }
   .learning-article aside, .learning-hero-actions, .learning-hero-art, .lab-toolbar, .lab-actions, .quiz-answers, .quiz-feedback, .command-heading button { display: none; }
   .lab-transcript::details-content, .quiz-explanation::details-content, .learning-details::details-content { content-visibility: visible; display: block; }
-  .snapshot-lab, .knowledge-check, .snapshot-paper { box-shadow: none; break-inside: avoid; }
+  .snapshot-lab, .knowledge-check, .snapshot-paper, .save-commit-comparison article { box-shadow: none; break-inside: avoid; }
 }

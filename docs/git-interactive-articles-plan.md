@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: articles 01 and 02 implemented and approved for commit. Article 03 has not started.
+Planning date: September 11, 2026. Status: article 01 and the detailed configuration article are implemented. Article 01 is being simplified after editorial review; “From edited file to first commit” is the next planned delivery.
 
 ## 1. The direction
 
@@ -108,9 +108,9 @@ Each row is one article delivery. The main path runs in this order; individual a
 | # | Working title | Reader can… | Main interactive example |
 | --- | --- | --- | --- |
 | 01 | Git is a time machine, not a save button | Explain a snapshot, a commit, and the difference between past history and current files | Select moments in a project timeline and inspect the file snapshot saved at each moment |
-| 02 | Set up Git so it knows who you are | Set identity and explain which configuration scope wins | Edit global and local identity cards; see the effective value and its source |
-| 03 | From edited file to first commit | Create a repository, stage chosen contents, and commit the intended version | Edit → stage → edit again → commit; compare working file, staging area, and saved snapshot |
-| 04 | Read what Git is telling you | Use status, diff, and log for different questions | Switch between working/index/HEAD comparisons; connect each view to the matching command |
+| 02 | From edited file to first commit | Create a repository, handle the minimum identity setup when needed, stage chosen contents, and commit the intended version | Edit → stage → edit again → commit; compare working file, staging area, and saved snapshot |
+| 03 | Read what Git is telling you | Use status, diff, and log for different questions | Switch between working/index/HEAD comparisons; connect each view to the matching command |
+| 04 | Set up Git so it knows who you are | Set identity and explain which configuration scope wins | Edit global and local identity cards; see the effective value and its source |
 | 05 | Teach Git what to ignore | Predict ignore patterns and recognize an already tracked file | Change a small rule list and see which example paths match, with a reason per result |
 
 ### Part II — Branch and collaborate
@@ -223,7 +223,7 @@ Likely touched files during implementation: the article data model, article rout
 
 **Article:** Git is a time machine, not a save button.
 
-**Promise:** “By the end, you can look at a commit and explain what it saved.”
+**Promise:** “By the end, you can explain why saving a file today does not change a version Git recorded yesterday.”
 
 **Source material:** Repository/Commit, Repository/Status, introductory Internals/Storing Data and Trees and Blobs, plus the site's existing article.
 
@@ -231,17 +231,16 @@ Likely touched files during implementation: the article data model, article rout
 
 | Reading beat | Content | Visual or action |
 | --- | --- | --- |
-| 1. The familiar problem | “Your file worked yesterday. Today it doesn't. Which version do you want back?” | Three labeled saved moments and a current file preview |
-| 2. A commit records a snapshot | Explain that the snapshot includes the project state prepared in staging; a commit also connects to history | Select A, B, or C to inspect the saved file and message |
-| 3. A change is visible between snapshots | Show how the reading list evolves | Toggle a comparison of the selected moment with its parent |
-| 4. Your current edits are separate | Add a line to the current working-file example while keeping the selected saved snapshot fixed | “Edit current file” updates that panel; the saved snapshot remains unchanged |
-| 5. History connects moments | Explain parent links and introduce main as a label; reserve branch operations for 06 | Select a commit to highlight its parent, with explicit arrow legend |
-| 6. Make a prediction | “If I edit my file now, does yesterday's commit change?” | Answer choices reveal a short explanation; no scoring requirement |
-| 7. Take the model forward | Recap snapshots, parent links, and separate working edits | Link to setup when article 02 is available |
+| 1. The familiar problem | “Your file worked yesterday. Today it doesn't. Which version do you want back?” | Introduce one reading-list file without requiring terminal or Git knowledge |
+| 2. Saving and recording differ | Contrast an editor save with a Git commit, then introduce “snapshot” as the contents of a recorded moment | Two plain-language cards: current file changes versus a saved moment appears |
+| 3. Visit saved moments | Show the reading list as it was at A, B, and C | Select A, B, or C to inspect that past version beside the current file |
+| 4. Your current edit is separate | Add Piranesi to the current file while keeping A, B, and C fixed | Add/remove Piranesi and inspect all three recorded moments |
+| 5. Make a prediction | Ask where Piranesi exists after saving but before another commit | Answer choices reveal a short explanation; no scoring requirement |
+| 6. Take the model forward | Recap Save, Commit, and unchanged past versions | Point to the first practical commit lesson as the next article |
 
-**Scope boundary:** one timeline with three saved snapshots, a current-file panel, one comparison toggle, one question, and reset. Commit IDs can be clearly labeled illustrative identifiers. No branch editor or merge/rebase simulator in this article.
+**Scope boundary:** one timeline with three recorded moments, a current-file panel, one file edit, one question, and reset. Do not introduce staging, hashes, parent links, branches, `main`, `HEAD`, diffs, or terminal commands in this article.
 
-**Article 01 is done when:** the writing stands alone, the example proves saved snapshots do not mutate when working files change, all controls work with keyboard and touch, static content conveys the same lesson, and the desktop/mobile light/dark layouts have been inspected. Type checking and a production build pass after implementation; the exercise's relevant state transitions are verified.
+**Article 01 is done when:** the writing stands alone, the example proves recorded moments do not mutate when the current file changes, all controls work with keyboard and touch, the written fallback conveys the same lesson, and the desktop/mobile light/dark layouts have been inspected. Type checking and a production build pass after implementation; the exercise's relevant state transitions are verified.
 
 ## 8. How we proceed one by one
 
@@ -266,25 +265,25 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Define the first article and its completion conditions.
 - [x] Build article 01 and complete implementation checks.
 - [x] Commit article 01 after the author's instruction to proceed: `ef23192`.
-- [x] Build article 02 and complete implementation checks; author requested its commit.
-- [ ] Proceed to article 03 after article 02 is settled.
+- [x] Build and commit the detailed configuration article: `9a030c5`.
+- [x] Revise article 01 around one beginner learning outcome after editorial review.
+- [ ] Proceed to “From edited file to first commit” as article 02.
 
 ### Article 01 delivery — September 11, 2026
 
 - URL: `/articles/git-is-a-time-machine` (existing URL retained).
-- Expanded prose, three static snapshot cards, a selectable timeline, parent comparisons, working-file edit/undo, reset, and a knowledge check with explanations for every answer.
-- Added article contents navigation, separate command/output blocks with copy feedback, official references, a recap, and a clearly marked next article in preparation.
-- Kept article prose server-rendered and existing plain-text articles compatible. Added small client components for the interactive controls without new dependencies.
-- Browser checks covered A/B/C selection, current-edit independence, added/removed lines, first-commit comparison, reset, keyboard selection, quiz responses, both themes, and a narrow phone layout. Confirmed server-rendered prose and snapshots remain visible with JavaScript disabled; printed explanations are visible.
-- Verified example command outputs and unchanged saved snapshots in a disposable repository using Git 2.50.1 (Apple Git-155).
-- Type checking and production build passed. The author requested committing this article and continuing on September 11; checkpoint commit: `ef23192`.
+- Refocused the prose on the difference between saving the current file and deliberately recording a commit. Staging, hashes, parent links, branches, `main`, `HEAD`, diffs, and terminal commands are deferred to the articles that teach them.
+- The selectable A/B/C timeline now presents chronological direction and two explicit panels: “Past version” and “Your file now.” Adding or removing Piranesi changes only the current-file panel.
+- Added a plain-language Save/Commit comparison, an applied knowledge check, accessible radio controls, reset, a written fallback, official references, and a clearly marked next article in preparation.
+- Kept article prose server-rendered and existing plain-text articles compatible. The original article shell and first interaction were committed at `ef23192`; the beginner-focused revision followed the author's editorial review.
+- Verified the revision in light and dark themes at phone and desktop widths with no horizontal overflow. A/B/C selection, keyboard navigation, current-file editing, reset, and quiz feedback work; type checking and the production build pass.
 
-### Article 02 delivery — September 11, 2026
+### Detailed configuration article delivery — September 11, 2026
 
 - URL: `/articles/git-config-identity-and-overrides`.
 - Covers all seven configuration notes: identity, key/value syntax, get/set, scopes, unset, duplicate values, and section removal. Worktree configuration and temporary overrides are optional detail.
 - Interactive global/local name and email fields show independent winning values and their origins. Per-key overrides can be enabled or removed, empty values are explained, and reset restores the initial mixed-scope example.
-- Added reusable table and expandable-detail blocks. The first article now links forward to the second, and the second links back. Article 03 is labeled as in preparation rather than linked to an empty page.
+- Added reusable table and expandable-detail blocks. The article is placed fourth in the beginner series so readers first understand snapshots, make a commit, and learn the three local states. Its next topic is clearly marked as in preparation rather than linked to an empty page.
 - Browser checks covered edits behind an active override, fallback after removing an override, separate name/email scope choices, keyboard toggles, empty values, reset, quiz feedback, both themes, narrow-phone layouts, no-JavaScript content, print explanations, and previous/next navigation.
 - Executed the setup and inspection examples with isolated configuration files and a disposable repository under Git 2.50.1. Verified global/local lookup, origin/scope output, default branch naming, unset, blank values, temporary command overrides, duplicate-key handling, and section removal without changing the author's settings.
-- Type checking and production build passed. The author requested committing article 02 with the remaining site changes on September 11. Article 03 is the next planned delivery.
+- Type checking and production build passed. The configuration article and remaining site changes were committed at `9a030c5` on September 11. “From edited file to first commit” is the next planned delivery.
