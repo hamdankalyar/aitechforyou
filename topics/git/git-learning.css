@@ -99,6 +99,22 @@
   .git-lesson-grid { display: block; }
 }
 
+/* Ignore-rules practice example. */
+.ignore-rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; border: 0; padding: 0; margin: 24px 0; min-width: 0; }
+.ignore-rules legend { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.ignore-rules label { display: flex; align-items: baseline; gap: 8px; padding: 12px; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-size: 13px; line-height: 1.6; }
+.ignore-rules label:has(input:checked) { border-color: var(--coral); background: var(--white); }
+.ignore-rules label:has(input:focus-visible) { outline: 2px solid var(--text); outline-offset: 3px; }
+.ignore-rules input { accent-color: var(--coral); }
+.ignore-rules code { display: block; font-size: 13px; }
+.ignore-rules small { display: block; font-size: 12px; color: var(--muted); }
+.ignore-lab .learning-table { margin-block: 0 20px; }
+.ignore-lab .learning-table th, .ignore-lab .learning-table td { padding: 12px 14px; }
+.ignore-lab .learning-table td:last-child { font-family: inherit; }
+.ignore-lab .ignore-status pre { min-height: 0; }
+@media (max-width: 640px) { .ignore-rules { grid-template-columns: minmax(0, 1fr); } }
+@media print { .ignore-rules { display: none; } }
+
 /* Reference pages prioritize topic navigation and commands. */
 .git-navigation { display: flex; gap: 28px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
 .git-navigation > a { display: inline-flex; align-items: center; min-height: 48px; padding: 10px 2px; margin-bottom: -1px; border-bottom: 3px solid transparent; color: var(--muted); font-size: 15px; font-weight: 600; }

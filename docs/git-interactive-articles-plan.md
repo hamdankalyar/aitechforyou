@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. The snapshots, first-commit, inspection, and configuration guides are implemented. **The next detailed guide is “Teach Git what to ignore.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. The snapshots, first-commit, inspection, configuration, and ignore guides are implemented. **The next detailed guide is “Branches are labels that move.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -13,9 +13,10 @@ Work by topic, with links between the two formats. One guide can support several
 | Complete | Detailed guide: From edited file to first commit | Introduces working files, staging, and recorded versions one at a time. Readers edit, stage, edit again, and commit to see exactly which contents are recorded. |
 | Complete | All eight short foundation lessons | A continuous practice path from the basic idea and setup through two commits and history. |
 | Complete | Detailed guide: Read what Git is telling you | Status, three diff comparisons, patch reading, and log; an interactive example checked against real Git. |
-| Next | Detailed guide: Teach Git what to ignore | Explain ignore rules, matching paths, and why already tracked files remain tracked. |
+| Complete | Detailed guide: Teach Git what to ignore | Ignore rules, pattern matching with reasons, negation limits, and untracking an already tracked file. |
+| Next | Detailed guide: Branches are labels that move | Create, switch, rename, and delete branches; locate HEAD; watch only one label advance. |
 
-Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the ignore guide unless the user names another topic or format. Then develop the branching and collaboration material in coherent topic groups.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the branches guide (06) unless the user names another topic or format. Then develop the merge, conflict, and collaboration material in coherent topic groups.
 
 ## 1. The direction
 
@@ -285,7 +286,16 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Complete “From edited file to first commit” as guide 02; committed at `14a75cc`.
 - [x] Complete the eight-lesson foundation path; committed at `1adf1b7`.
 - [x] Complete “Read what Git is telling you” as guide 03.
-- [ ] Proceed to “Teach Git what to ignore” as guide 05; guide 04 is already published.
+- [x] Complete “Teach Git what to ignore” as guide 05; guide 04 was already published.
+- [ ] Proceed to “Branches are labels that move” as guide 06.
+
+### Ignore guide delivery — September 11, 2026
+
+- URL: `/articles/teach-git-what-to-ignore`; guide 05 follows the configuration guide and points at the branches guide as in preparation.
+- Covers the tracked/untracked/ignored model, last-match and negation rules, name-anywhere versus anchored patterns, the excluded-folder limit on `!`, `git check-ignore -v`, `git rm --cached` with the history caveat, `notes/*` versus `notes/`, and the three ignore-file locations.
+- Interactive example: five toggleable rules against seven paths (two tracked), a reason per path, a simulated `git status --short --ignored`, and a stop-tracking action for `.env`. The written transcript covers every outcome.
+- `node topics/git/scripts/check-git-ignore.mjs` verifies all 32 rule combinations before and after untracking `.env` against Git 2.50.1: `check-ignore -v` line, pattern, and path for every example path, plus status output, history retention, and the `notes/*` fix.
+- Type checking, production build, and browser checks passed: rule toggles, stop-tracking and its disabled state, reset, series previous/next links, hub search for “gitignore”, no page overflow at phone width.
 
 ### Inspection guide delivery — September 11, 2026
 

@@ -9,6 +9,7 @@ import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
 import { firstCommitSections } from "@/topics/git/content/git-first-commit-article";
 import { gitInspectionSections } from "@/topics/git/content/git-inspection-article";
+import { gitIgnoreSections } from "@/topics/git/content/git-ignore-article";
 import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
@@ -19,6 +20,7 @@ export type ArticleBlock =
   | { type: "config-playground" }
   | { type: "commit-playground" }
   | { type: "inspection-playground" }
+  | { type: "ignore-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -54,7 +56,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -173,6 +175,30 @@ export const articles: Article[] = [
       { title: "Git reference · Configuration, scopes, and files", url: "https://git-scm.com/docs/git-config" },
       { title: "Git reference · Commit identity variables", url: "https://git-scm.com/docs/git#Documentation/git.txt-GIT_AUTHOR_NAME" },
       { title: "Git reference · Worktree-specific configuration", url: "https://git-scm.com/docs/git-worktree#_configuration_file" },
+    ],
+  },
+  {
+    slug: "teach-git-what-to-ignore",
+    title: "Teach Git what to ignore",
+    excerpt: "Ignore rules decide what Git never starts tracking. See which paths a pattern matches, why a later ! rule sometimes fails, and why an already tracked file needs a different fix.",
+    topic: "Git",
+    date: "Sep 11, 2026",
+    readTime: "8 min read",
+    accent: "coral",
+    number: "15",
+    series: {
+      title: "Git, made visible", order: 5, practiceTime: "2 min to explore",
+      nextTitle: "Branches are labels that move",
+      nextDescription: "Next, we’ll create a second line of work, commit on it, and watch only its label advance.",
+      exercise: { id: "try-the-rules", label: "Try the rules" }, illustration: "ignore",
+    },
+    sections: gitIgnoreSections,
+    sources: [
+      { title: "Git reference · gitignore patterns", url: "https://git-scm.com/docs/gitignore" },
+      { title: "The Git book · Ignoring files", url: "https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring" },
+      { title: "Git reference · Which rule matched", url: "https://git-scm.com/docs/git-check-ignore" },
+      { title: "Git reference · Removing from the index only", url: "https://git-scm.com/docs/git-rm" },
+      { title: "GitHub docs · Ignoring files", url: "https://docs.github.com/en/get-started/git-basics/ignoring-files" },
     ],
   },
   {
