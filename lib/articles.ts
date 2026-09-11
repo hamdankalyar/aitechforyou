@@ -2,12 +2,15 @@ import { firstGitSections } from "./git-first-article";
 import { gitConfigSections } from "./git-config-article";
 import { gitInitLesson, gitSetupLesson } from "./git-learning";
 import { firstCommitSections } from "./git-first-commit-article";
+import { gitInspectionSections } from "./git-inspection-article";
+import { gitHistoryLesson } from "./git-short-lessons";
 
 export type ArticleBlock =
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
   | { type: "commit-playground" }
+  | { type: "inspection-playground" }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
   | { type: "callout"; title: string; text: string }
@@ -42,7 +45,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging";
+    illustration: "snapshots" | "config" | "staging" | "inspection";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -92,6 +95,30 @@ export const articles: Article[] = [
       { title: "Git reference · Status and its two columns", url: "https://git-scm.com/docs/git-status" },
       { title: "Git reference · Comparing contents", url: "https://git-scm.com/docs/git-diff" },
       { title: "Git reference · Inspecting a recorded file", url: "https://git-scm.com/docs/git-show" },
+    ],
+  },
+  {
+    slug: "git-status-diff-and-log",
+    title: "Read what Git is telling you",
+    excerpt: "Status locates changes. Diff compares versions. Log follows recorded history. Learn to ask the right question—and understand an empty answer.",
+    topic: "Git",
+    date: "Sep 11, 2026",
+    readTime: "9 min read",
+    accent: "coral",
+    number: "07",
+    shortLesson: gitHistoryLesson,
+    series: {
+      title: "Git, made visible", order: 3, practiceTime: "3 min to explore",
+      nextTitle: "Set up Git so it knows who you are",
+      nextDescription: "Now inspect another kind of Git state: the name and email settings attached to your work, and where their values come from.",
+      exercise: { id: "try-the-inspector", label: "Try the comparisons" }, illustration: "inspection",
+    },
+    sections: gitInspectionSections,
+    sources: [
+      { title: "Git reference · Status and its two columns", url: "https://git-scm.com/docs/git-status" },
+      { title: "Git reference · Choosing diff endpoints", url: "https://git-scm.com/docs/git-diff" },
+      { title: "Git reference · Reading commit history", url: "https://git-scm.com/docs/git-log" },
+      { title: "Git reference · Inspecting recorded objects", url: "https://git-scm.com/docs/git-show" },
     ],
   },
   {

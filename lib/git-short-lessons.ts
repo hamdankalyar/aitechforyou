@@ -180,6 +180,7 @@ export const gitChangeLesson: ShortGitLesson = {
     },
   ],
   completion: { title: "The log shows two commits.", text: "You completed the core Git loop: edit, inspect, stage, and commit." },
+  deeper: { title: "Why do different diffs show different edits?", text: "Compare your working file, staged version, and latest commit in one interactive example.", href: "/articles/git-status-diff-and-log", label: "Read the inspection guide" },
 };
 
 export const gitHistoryLesson: ShortGitLesson = {
@@ -212,7 +213,7 @@ export const gitHistoryLesson: ShortGitLesson = {
     },
   ],
   completion: { title: "You can answer what changed and when.", text: "You can find the newest commit, inspect its recorded file, and compare it with the previous version." },
-  deeper: { title: "See why old versions stay safe", text: "Return to the visual snapshot guide now that you have made and inspected real commits.", href: "/articles/git-is-a-time-machine", label: "Explore Git’s time machine" },
+  deeper: { title: "Read the whole picture", text: "See how status, diff, and log answer different questions about your work and its history.", href: "/articles/git-status-diff-and-log", label: "Read the inspection guide" },
 };
 
 export const shortGitLessons = [gitRememberLesson, gitInstallLesson, gitStageLesson, gitCommitLesson, gitChangeLesson, gitHistoryLesson];

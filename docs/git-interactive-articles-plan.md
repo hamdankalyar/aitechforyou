@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: the snapshots, first-commit, and configuration guides are implemented, along with the Git learning hub and short lessons for identity setup and repository creation. The first-commit guide includes both staging outcomes, a terminal walkthrough, and a simulation checked against real Git. **Next are its short staging and commit companions; the next detailed guide is “Read what Git is telling you.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. The snapshots, first-commit, inspection, and configuration guides are implemented. **The next detailed guide is “Teach Git what to ignore.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -11,10 +11,11 @@ Work by topic, with links between the two formats. One guide can support several
 | Next | Delivery | Purpose |
 | --- | --- | --- |
 | Complete | Detailed guide: From edited file to first commit | Introduces working files, staging, and recorded versions one at a time. Readers edit, stage, edit again, and commit to see exactly which contents are recorded. |
-| 2 | Short lessons: Check and stage a file; Make your first commit | Provide concise practice steps that link to that guide for the explanation. |
-| 3 | Detailed guide: Read what Git is telling you | Explain the distinct questions answered by status, diff, and log, with interactive comparisons. |
+| Complete | All eight short foundation lessons | A continuous practice path from the basic idea and setup through two commits and history. |
+| Complete | Detailed guide: Read what Git is telling you | Status, three diff comparisons, patch reading, and log; an interactive example checked against real Git. |
+| Next | Detailed guide: Teach Git what to ignore | Explain ignore rules, matching paths, and why already tracked files remain tracked. |
 
-Then continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the short staging companion, unless the user names another topic or format. Return to the detailed inspection guide after the staging and commit companions.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the ignore guide unless the user names another topic or format. Then develop the branching and collaboration material in coherent topic groups.
 
 ## 1. The direction
 
@@ -281,7 +282,19 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Commit article 01 after the author's instruction to proceed: `ef23192`.
 - [x] Build and commit the detailed configuration article: `9a030c5`.
 - [x] Revise article 01 around one beginner learning outcome after editorial review.
-- [ ] Proceed to “From edited file to first commit” as article 02.
+- [x] Complete “From edited file to first commit” as guide 02; committed at `14a75cc`.
+- [x] Complete the eight-lesson foundation path; committed at `1adf1b7`.
+- [x] Complete “Read what Git is telling you” as guide 03.
+- [ ] Proceed to “Teach Git what to ignore” as guide 05; guide 04 is already published.
+
+### Inspection guide delivery — September 11, 2026
+
+- URL: `/articles/git-status-diff-and-log`; guide 03 connects the first-commit and configuration guides.
+- Covers normal and compact status, staged/unstaged modifications, three diff endpoints, patch notation, log/show, two-commit comparisons, untracked files, and misleading empty net comparisons.
+- Reuses the reading-list example with Dune committed, The Hobbit staged, and Piranesi unstaged. Readers choose a comparison, stage or commit, and reset. The written explanation remains available without interaction.
+- `node scripts/check-git-inspection.mjs` verifies all reachable simulation states and both action orders against Git 2.50.1, plus history inspection and the cancellation/untracked examples.
+- Type checking, production build, route/search/sitemap checks passed. Browser checks covered keyboard radio selection, both action orders, disabled states, reset, desktop dark mode and phone light mode with no page overflow.
+- Added reciprocal links from the change-again and history lessons. Next new guide: ignore rules and already tracked files.
 
 ### Article 01 delivery — September 11, 2026
 

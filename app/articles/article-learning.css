@@ -192,6 +192,29 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 .config-scope-local .scope-letter { background: var(--coral); }
 .config-lab .config-scope-note { font-size: 12px; line-height: 1.7; margin: 16px 0 8px; color: var(--prose); min-height: 40px; }
 .config-file-path { display: block; color: var(--muted); font: 11px/1.7 ui-monospace, monospace; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.inspection-questions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; border: 0; padding: 0; margin: 24px 0; min-width: 0; }
+.inspection-questions legend { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.inspection-questions label { display: flex; align-items: baseline; gap: 8px; padding: 12px; border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-size: 13px; line-height: 1.6; }
+.inspection-questions label:has(input:checked) { border-color: var(--coral); background: var(--white); }
+.inspection-questions input { accent-color: var(--coral); }
+.inspection-questions label:has(input:focus-visible) { outline: 2px solid var(--text); outline-offset: 3px; }
+.inspection-questions code { display: block; font-size: 12px; margin-top: 4px; overflow-wrap: anywhere; }
+.inspection-panels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.inspection-panels .snapshot-file { margin: 0; border: 2px solid var(--border); }
+.inspection-panels .is-compared { border-color: var(--coral); }
+.inspection-panels .learning-kicker { font-size: 9px; letter-spacing: .04em; }
+.inspection-answer { margin-top: 20px; padding: 20px; border: 1px solid var(--border); border-radius: 7px; background: var(--white); }
+.inspection-answer h4 { margin: 12px 0; font-size: 16px; overflow-wrap: anywhere; }
+.snapshot-lab .inspection-answer p, .snapshot-lab .inspection-action { font-size: 13px; line-height: 1.7; }
+.inspection-answer pre { padding: 14px; margin-bottom: 0; min-height: 120px; }
+.inspection-answer pre span { white-space: pre; }
+.inspection-empty { min-height: 120px; }
+@media (max-width: 650px) {
+  .inspection-panels, .inspection-questions { grid-template-columns: minmax(0, 1fr); }
+  .inspection-panels .file-lines { min-height: 0; }
+  .inspection-lab .lab-step-buttons { flex-wrap: wrap; }
+}
+@media print { .inspection-questions { display: none; } }
 .config-field { margin-top: 16px; }
 .config-field > label { font-size: 12px; font-weight: 550; display: flex; align-items: center; min-height: 44px; padding-bottom: 8px; }
 .config-field > input { width: 100%; min-width: 0; min-height: 46px; padding: 10px 12px; border: 1px solid var(--muted); border-radius: 5px; background: var(--white); color: var(--text); font: 400 13px/1.6 var(--font-body); }

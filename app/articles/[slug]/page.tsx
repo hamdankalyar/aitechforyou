@@ -4,7 +4,10 @@ import { notFound } from "next/navigation";
 import { ArrowRight } from "@/components/icons";
 import { articles, getArticle } from "@/lib/articles";
 import { ArticleBlock } from "@/components/articles/article-block";
+import { GitNavigation } from "@/components/git-navigation";
+import { gitConfigReference } from "@/lib/git-config-reference";
 import "../article-learning.css";
+import "../../learn/git/git-learning.css";
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -27,18 +30,19 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   return (
     <main id="main" className={`article-page ${learning ? "learning-article" : ""}`}>
+      {article.topic === "Git" && <div className="shell git-article-navigation"><GitNavigation current="guides" /></div>}
       <header className={`article-hero ${article.accent}`}>
         <div className="shell article-hero-grid">
           <div>
-            <Link className="back-link" href={article.topic === "Git" ? "/learn/git" : "/articles"}>← {article.topic === "Git" ? "Git lessons & guides" : "All articles"}</Link>
+            <Link className="back-link" href={article.topic === "Git" ? "/learn/git?view=guides" : "/articles"}>← {article.topic === "Git" ? "All Git guides" : "All articles"}</Link>
             {article.series && <div className="series-eyebrow"><span className="series-dot" />Git Guide<span>{article.series.title}</span></div>}
             <div className="article-meta"><span>{article.topic}</span><span>{article.date}</span><span>{article.readTime}</span></div>
             <h1>{article.title}</h1>
             <p>{article.excerpt}</p>
             {article.series && <div className="learning-hero-actions"><a href={`#${article.series.exercise.id}`} className="button dark">{article.series.exercise.label} <ArrowRight /></a><span>{article.series.practiceTime}</span></div>}
-            {article.shortLesson && <div className="short-lesson-link"><span>Just getting set up?</span><Link href={article.shortLesson.href}>Short lesson: {article.shortLesson.title} <ArrowRight size={16} /></Link></div>}
+            {article.shortLesson && <div className="short-lesson-link"><span>{article.shortLesson.href === gitConfigReference.href ? "Need the commands?" : "Prefer a short lesson?"}</span><Link href={article.shortLesson.href}>{article.shortLesson.href === gitConfigReference.href ? "Git Config reference" : `Short lesson: ${article.shortLesson.title}`} <ArrowRight size={16} /></Link></div>}
           </div>
-          {article.series?.illustration === "staging" ? <div className="commit-hero-art" aria-hidden="true"><div><small>01 · Save</small>Your file</div><span>↓</span><div><small>02 · Stage</small>Prepared</div><span>↓</span><div><small>03 · Commit</small>Recorded</div></div> : learning ? <div className="learning-hero-art" aria-hidden="true"><div className="hero-snapshot back">{article.series?.illustration === "config" ? "G" : "A"}<span>{article.series?.illustration === "config" ? "Global." : "Then."}</span></div><div className="hero-snapshot front">{article.series?.illustration === "config" ? "L" : "C"}<span>{article.series?.illustration === "config" ? "Local." : "Now."}</span><i /><i /><i /></div><div className="hero-art-note">{article.series?.illustration === "config" ? "A default. An exception." : "Every moment has a story."}</div></div> : <div className="article-number" aria-hidden="true">{article.number}</div>}
+          {article.series?.illustration === "inspection" ? <div className="commit-hero-art" aria-hidden="true"><div><small>Locate changes</small>status</div><span>·</span><div><small>Compare versions</small>diff</div><span>·</span><div><small>Read history</small>log</div></div> : article.series?.illustration === "staging" ? <div className="commit-hero-art" aria-hidden="true"><div><small>01 · Save</small>Your file</div><span>↓</span><div><small>02 · Stage</small>Prepared</div><span>↓</span><div><small>03 · Commit</small>Recorded</div></div> : learning ? <div className="learning-hero-art" aria-hidden="true"><div className="hero-snapshot back">{article.series?.illustration === "config" ? "G" : "A"}<span>{article.series?.illustration === "config" ? "Global." : "Then."}</span></div><div className="hero-snapshot front">{article.series?.illustration === "config" ? "L" : "C"}<span>{article.series?.illustration === "config" ? "Local." : "Now."}</span><i /><i /><i /></div><div className="hero-art-note">{article.series?.illustration === "config" ? "A default. An exception." : "Every moment has a story."}</div></div> : <div className="article-number" aria-hidden="true">{article.number}</div>}
         </div>
       </header>
       <article className="article-body shell">

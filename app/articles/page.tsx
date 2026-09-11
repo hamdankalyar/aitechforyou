@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArticleCard } from "@/components/article-card";
 import { articles } from "@/lib/articles";
 
@@ -16,8 +17,8 @@ export default async function ArticlesPage({ searchParams }: { searchParams: Pro
         <p>Notes from what I&apos;m learning, rewritten to make the difficult parts feel obvious.</p>
       </div>
       <div className="filter-row" aria-label="Article filter">
-        <a className={!topic ? "active" : ""} href="/articles">All</a>
-        {['Git', 'AI', 'Web'].map((name) => <a className={topic === name ? "active" : ""} href={`/articles?topic=${name}`} key={name}>{name}</a>)}
+        <Link className={!topic ? "active" : ""} href="/articles" scroll={false}>All</Link>
+        {['Git', 'AI', 'Web'].map((name) => <Link className={topic === name ? "active" : ""} href={`/articles?topic=${name}`} key={name} scroll={false}>{name}</Link>)}
       </div>
       <div className="articles-grid archive-grid">
         {visibleArticles.map((article) => <ArticleCard article={article} key={article.slug} />)}
