@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@/components/icons";
 import { articles, topics } from "@/lib/articles";
-import { publishedGitLessons } from "@/lib/git-learning";
+import { publishedGitLessons } from "@/topics/git/content/git-learning";
 
 export const metadata: Metadata = { title: "Topics", description: "Explore technology lessons by topic." };
 

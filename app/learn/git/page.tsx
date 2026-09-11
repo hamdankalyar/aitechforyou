@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@/components/icons";
-import { GitLessonOutline } from "@/components/git-lesson-outline";
-import { GitNavigation, GitReferenceOutline } from "@/components/git-navigation";
+import { GitLessonOutline } from "@/topics/git/components/git-lesson-outline";
+import { GitNavigation, GitReferenceOutline } from "@/topics/git/components/git-navigation";
 import { articles } from "@/lib/articles";
-import { getGitResources, gitConfigGuide, searchGitResources } from "@/lib/git-learning";
-import "./git-learning.css";
+import { getGitResources, gitConfigGuide, searchGitResources } from "@/topics/git/content/git-learning";
+import "@/topics/git/git-learning.css";
 
 export const metadata: Metadata = { title: "Git Reference & Guides", description: "Find a Git command or understand the concept. Practical references and detailed visual guides, side by side." };
 

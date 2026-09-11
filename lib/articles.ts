@@ -1,12 +1,19 @@
-import { firstGitSections } from "./git-first-article";
-import { gitConfigSections } from "./git-config-article";
-import { gitInitLesson, gitSetupLesson } from "./git-learning";
-import { firstCommitSections } from "./git-first-commit-article";
-import { gitInspectionSections } from "./git-inspection-article";
-import { gitHistoryLesson } from "./git-short-lessons";
-import { aiGenerativeAgenticSections } from "./ai-generative-agentic-guide";
+import { javascriptIntroductionSections } from "@/topics/javascript/content/javascript-introduction-article";
+import { javascriptConsoleLogSections } from "@/topics/javascript/content/javascript-console-log-article";
+import { javascriptDeclarationsSections } from "@/topics/javascript/content/javascript-declarations-article";
+import { javascriptPrimitivesSections } from "@/topics/javascript/content/javascript-primitives-article";
+import { javascriptStringsSections } from "@/topics/javascript/content/javascript-strings-article";
+import { javascriptSymbolSections } from "@/topics/javascript/content/javascript-symbol-article";
+import { firstGitSections } from "@/topics/git/content/git-first-article";
+import { gitConfigSections } from "@/topics/git/content/git-config-article";
+import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
+import { firstCommitSections } from "@/topics/git/content/git-first-commit-article";
+import { gitInspectionSections } from "@/topics/git/content/git-inspection-article";
+import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
+import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
 export type ArticleBlock =
+  | { type: "variables-playground" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -33,11 +40,11 @@ export type Article = {
   slug: string;
   title: string;
   excerpt: string;
-  topic: "Git" | "AI" | "Web";
+  topic: "Git" | "AI" | "JavaScript";
   date: string;
   readTime: string;
   featured?: boolean;
-  accent: "coral" | "blue" | "lime";
+  accent: "coral" | "blue" | "lime" | "yellow";
   number: string;
   shortLesson?: { title: string; href: string };
   series?: {
@@ -47,7 +54,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ai-evolution";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -70,6 +77,26 @@ export const articles: Article[] = [
     sources: [
       { title: "The Git book · What Git records", url: "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" },
       { title: "Git reference · Recording a commit", url: "https://git-scm.com/docs/git-commit" },
+    ],
+  },
+  {
+    slug: "javascript-introduction",
+    title: "Lesson 1: What JavaScript is",
+    excerpt: "Meet the language of the web, run your first line, and learn how to read the code boxes in this course.",
+    topic: "JavaScript",
+    date: "Sep 11, 2026",
+    readTime: "3 min read",
+    accent: "yellow",
+    number: "09",
+    series: {
+      title: "JavaScript, made visible", order: 1, practiceTime: "1 min to explore",
+      nextTitle: "Lesson 2: console.log",
+      nextDescription: "Print text, numbers, and several things at once. The tool you will use in every lesson.",
+      exercise: { id: "your-first-line", label: "Run your first line" }, illustration: "values",
+    },
+    sections: javascriptIntroductionSections,
+    sources: [
+      { title: "MDN · What is JavaScript?", url: "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript" },
     ],
   },
   {
@@ -166,37 +193,6 @@ export const articles: Article[] = [
     sections: aiGenerativeAgenticSections,
   },
   {
-    slug: "internet-request-journey",
-    title: "What happens after you press Enter?",
-    excerpt:
-      "Follow one web request from your keyboard to a server and all the way back to painted pixels.",
-    topic: "Web",
-    date: "Aug 29, 2026",
-    readTime: "7 min read",
-    accent: "lime",
-    number: "03",
-    sections: [
-      {
-        heading: "A name becomes an address",
-        paragraphs: [
-          "Your browser cannot send a request to a domain name alone. It first asks DNS for the numerical IP address of the server responsible for that name.",
-        ],
-      },
-      {
-        heading: "The conversation begins",
-        paragraphs: [
-          "The browser establishes a secure connection and sends an HTTP request. The server reads it, runs the necessary application logic, and returns a response containing HTML, data, or another resource.",
-        ],
-      },
-      {
-        heading: "From text to pixels",
-        paragraphs: [
-          "The browser parses HTML into a document tree, combines it with CSS rules, calculates layout, and paints the result. JavaScript can then change that page and begin new requests.",
-        ],
-      },
-    ],
-  },
-  {
     slug: "merge-versus-rebase",
     title: "Merge vs. rebase: choose by the story",
     excerpt:
@@ -221,6 +217,111 @@ export const articles: Article[] = [
       },
     ],
   },
+  {
+    slug: "javascript-console-log",
+    title: "Lesson 2: console.log",
+    excerpt: "Print text, numbers, and several values at once, write comments, and read your first error message.",
+    topic: "JavaScript",
+    date: "Sep 11, 2026",
+    readTime: "4 min read",
+    accent: "yellow",
+    number: "10",
+    series: {
+      title: "JavaScript, made visible", order: 2, practiceTime: "1 min to explore",
+      nextTitle: "Lesson 3: let, var, and const",
+      nextDescription: "Give a value a name, change it later, or lock it in place.",
+      exercise: { id: "try-it-yourself", label: "Run the example" }, illustration: "values",
+    },
+    sections: javascriptConsoleLogSections,
+    sources: [
+      { title: "MDN · console.log()", url: "https://developer.mozilla.org/en-US/docs/Web/API/console/log_static" },
+    ],
+  },
+  {
+    slug: "javascript-var-let-const",
+    title: "Lesson 3: let, var, and const",
+    excerpt: "A variable is a name for a value. Learn the three keywords that create one, and which to use.",
+    topic: "JavaScript",
+    date: "Sep 11, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "11",
+    series: {
+      title: "JavaScript, made visible", order: 3, practiceTime: "2 min to explore",
+      nextTitle: "Lesson 4: The seven primitive types",
+      nextDescription: "Every value has a type. Meet all seven and learn to check them with typeof.",
+      exercise: { id: "try-the-values", label: "Try the variables" }, illustration: "values",
+    },
+    sections: javascriptDeclarationsSections,
+    sources: [
+      { title: "MDN · let", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" },
+      { title: "MDN · const", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" },
+      { title: "MDN · var", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var" },
+    ],
+  },
+  {
+    slug: "javascript-primitive-types",
+    title: "Lesson 4: The seven primitive types",
+    excerpt: "Every value has a type. Check it with typeof and meet string, number, boolean, undefined, null, bigint, and symbol.",
+    topic: "JavaScript",
+    date: "Sep 11, 2026",
+    readTime: "4 min read",
+    accent: "yellow",
+    number: "12",
+    series: {
+      title: "JavaScript, made visible", order: 4, practiceTime: "1 min to explore",
+      nextTitle: "Lesson 5: Strings",
+      nextDescription: "Text in JavaScript: count characters, search inside, join, and change case.",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+    },
+    sections: javascriptPrimitivesSections,
+    sources: [
+      { title: "MDN · typeof", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof" },
+      { title: "MDN · Primitive values", url: "https://developer.mozilla.org/en-US/docs/Glossary/Primitive" },
+    ],
+  },
+  {
+    slug: "javascript-strings",
+    title: "Lesson 5: Strings",
+    excerpt: "Count characters, find text, join strings, and change case. See why a string never changes in place.",
+    topic: "JavaScript",
+    date: "Sep 11, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "13",
+    series: {
+      title: "JavaScript, made visible", order: 5, practiceTime: "2 min to explore",
+      nextTitle: "Lesson 6: Symbol",
+      nextDescription: "A value that is always unique, and why that is useful.",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+    },
+    sections: javascriptStringsSections,
+    sources: [
+      { title: "MDN · String", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" },
+      { title: "MDN · indexOf()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf" },
+      { title: "MDN · toUpperCase()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase" },
+    ],
+  },
+  {
+    slug: "javascript-symbol",
+    title: "Lesson 6: Symbol",
+    excerpt: "A symbol is a value that is always unique. Learn the optional description, symbol keys, and why symbols exist when strings seem enough.",
+    topic: "JavaScript",
+    date: "Sep 11, 2026",
+    readTime: "6 min read",
+    accent: "yellow",
+    number: "14",
+    series: {
+      title: "JavaScript, made visible", order: 6, practiceTime: "1 min to explore",
+      nextTitle: "Lesson 7: Objects",
+      nextDescription: "Store several values under one name. In preparation.",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+    },
+    sections: javascriptSymbolSections,
+    sources: [
+      { title: "MDN · Symbol", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol" },
+    ],
+  },
 ];
 
 export const topics = [
@@ -231,16 +332,16 @@ export const topics = [
     className: "coral",
   },
   {
-    name: "AI",
-    description: "Models, agents, and tools—understood from first principles.",
+    name: "JavaScript",
+    description: "Values, behavior, and browser APIs explained through examples you can try.",
     index: "02",
-    className: "blue",
+    className: "yellow",
   },
   {
-    name: "Web",
-    description: "The invisible systems that turn code into experiences.",
+    name: "AI",
+    description: "Models, agents, and tools—understood from first principles.",
     index: "03",
-    className: "lime",
+    className: "blue",
   },
 ];
 

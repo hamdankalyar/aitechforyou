@@ -1,10 +1,10 @@
-// Run: node scripts/check-git-inspection.mjs
+// Run: node topics/git/scripts/check-git-inspection.mjs
 import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
-import { inspectReadingList, inspectionLines } from "../lib/git-inspection-lab.ts";
+import { inspectReadingList, inspectionLines } from "../content/git-inspection-lab.ts";
 
 for (const actions of [[], ["stage"], ["commit"], ["stage", "commit"], ["commit", "stage", "commit"]]) {
   const dir = mkdtempSync(join(tmpdir(), "git-inspection-check-"));

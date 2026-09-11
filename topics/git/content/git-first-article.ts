@@ -1,4 +1,4 @@
-import type { ArticleSection } from "./articles";
+import type { ArticleSection } from "@/lib/articles";
 
 export const firstGitSections: ArticleSection[] = [
   {

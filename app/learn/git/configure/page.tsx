@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CommandBlock } from "@/components/articles/command-block";
-import { GitNavigation, GitReferenceOutline } from "@/components/git-navigation";
-import { gitConfigReference, gitConfigReferenceSections } from "@/lib/git-config-reference";
-import { gitConfigGuide } from "@/lib/git-learning";
+import { GitNavigation, GitReferenceOutline } from "@/topics/git/components/git-navigation";
+import { gitConfigReference, gitConfigReferenceSections } from "@/topics/git/content/git-config-reference";
+import { gitConfigGuide } from "@/topics/git/content/git-learning";
 import "../../../articles/article-learning.css";
-import "../git-learning.css";
+import "@/topics/git/git-learning.css";
 
 export const metadata: Metadata = { title: "Git Config — command reference", description: gitConfigReference.description };
 

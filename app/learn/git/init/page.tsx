@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CommandBlock } from "@/components/articles/command-block";
-import { GitLessonOutline } from "@/components/git-lesson-outline";
+import { GitLessonOutline } from "@/topics/git/components/git-lesson-outline";
 import { ArrowRight } from "@/components/icons";
-import { gitInitLesson, gitSetupLesson } from "@/lib/git-learning";
-import { gitStageLesson } from "@/lib/git-short-lessons";
+import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
+import { gitStageLesson } from "@/topics/git/content/git-short-lessons";
 import "../../../articles/article-learning.css";
-import "../git-learning.css";
+import "@/topics/git/git-learning.css";
 
 export const metadata: Metadata = { title: gitInitLesson.title, description: "Create an empty Git repository in a practice folder, understand what git init does, and check the result with git status." };
 

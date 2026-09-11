@@ -1,6 +1,6 @@
-import type { Article } from "./articles";
-import { gitConfigReference, gitConfigReferenceSections } from "./git-config-reference";
-import { gitChangeLesson, gitCommitLesson, gitHistoryLesson, gitInstallLesson, gitRememberLesson, gitStageLesson, type GitLessonSummary } from "./git-short-lessons";
+import type { Article } from "@/lib/articles";
+import { gitConfigReference, gitConfigReferenceSections } from "@/topics/git/content/git-config-reference";
+import { gitChangeLesson, gitCommitLesson, gitHistoryLesson, gitInstallLesson, gitRememberLesson, gitStageLesson, type GitLessonSummary } from "@/topics/git/content/git-short-lessons";
 
 export const gitSetupLesson = gitConfigReference;
 export const gitInitLesson: GitLessonSummary = { title: "Create your first Git repository", href: "/learn/git/init", description: "Make a practice folder, initialize Git, and check that your repository is ready.", time: "3 min read + practice", keywords: "git init initialize initialise repository repo create start new empty project folder mkdir cd git status initial branch main .git" };

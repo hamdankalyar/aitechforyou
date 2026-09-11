@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { inspectReadingList, inspectionLines, inspectionQuestions } from "@/lib/git-inspection-lab";
+import { inspectReadingList, inspectionLines, inspectionQuestions } from "@/topics/git/content/git-inspection-lab";
 
 export function InspectionPlayground() {
   const group = useId();

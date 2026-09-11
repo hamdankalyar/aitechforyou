@@ -1,10 +1,10 @@
-// Run: node scripts/check-git-commit-lab.mjs
+// Run: node topics/git/scripts/check-git-commit-lab.mjs
 import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync, spawnSync } from "node:child_process";
-import { firstReadingList, editedReadingList, getCommitLabState } from "../lib/git-commit-lab.ts";
+import { firstReadingList, editedReadingList, getCommitLabState } from "../content/git-commit-lab.ts";
 
 for (const restaged of [false, true]) {
   const dir = mkdtempSync(join(tmpdir(), "git-commit-example-"));

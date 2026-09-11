@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { snapshots } from "@/lib/git-snapshots";
+import { snapshots } from "@/topics/git/content/git-snapshots";
 
 export function SnapshotTimeline() {
   const [selected, setSelected] = useState(2);

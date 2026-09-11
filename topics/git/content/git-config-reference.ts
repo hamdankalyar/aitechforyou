@@ -1,4 +1,4 @@
-import type { GitLessonSummary } from "./git-short-lessons";
+import type { GitLessonSummary } from "@/topics/git/content/git-short-lessons";
 
 export const gitConfigReference: GitLessonSummary = {
   title: "Git Config",

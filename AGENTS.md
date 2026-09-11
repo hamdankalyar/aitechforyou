@@ -8,3 +8,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 Never ever put the codex , open ai , claude , fable , opus anything in the commit , commit message should be always clean and clear
 <!-- END:nextjs-agent-rules -->
+
+Before writing or editing any JavaScript article, read `topics/javascript/README.md` and follow its rules.

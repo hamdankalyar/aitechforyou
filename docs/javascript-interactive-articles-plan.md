@@ -2,7 +2,7 @@
 
 Planning date: September 11, 2026.
 
-**Status: planning complete; implementation has not started.** This document is the ongoing JavaScript roadmap. The first implementation delivery is the Web → JavaScript topic change together with article JS-01. Continue one article at a time, incorporating new reference notes as they arrive.
+**Status: the JavaScript topic is a six-lesson course (introduction, console.log, let/var/const, primitive types, strings, symbol), listed in `topics/javascript/README.md`. The Web → JavaScript topic change is implemented and verified locally.** The next article is JS-02, “Strings: find text without changing it.” Continue one article at a time, incorporating new reference notes as they arrive. Public deployment has not been performed.
 
 ## 1. Intended result
 
@@ -10,11 +10,13 @@ Replace the website's **Web** topic with **JavaScript**, alongside Git and AI. T
 
 Working series title: **JavaScript, made visible.**
 
+Every `code` field on a JavaScript article (section code and `details` block code) renders as `topics/javascript/components/code-runner.tsx`: an editable textarea with Run/Reset and a console pane. Code executes in a fresh sandboxed iframe per run, so globals never leak between runs and errors surface as console lines.
+
 Audience: readers beginning JavaScript who want to understand what their code actually does. Explain the minimum syntax before using it; require no React, TypeScript, package installation, or framework knowledge in the learning material.
 
 This is an expanding publication, not a fixed course that must be finished before publishing. The seven initial articles below cover the supplied notes; future articles enter through the intake process in section 8. Unwritten topics remain in this document rather than appearing as empty website pages.
 
-This task produces the plan only. Article writing, website changes, and publishing are subsequent deliveries. The existing [Git plan](git-interactive-articles-plan.md) remains a separate roadmap; its current next guide is “Teach Git what to ignore.”
+This document began as a planning-only delivery. Implementation progress is recorded in the delivery log below. The existing [Git plan](git-interactive-articles-plan.md) remains a separate roadmap; its current next guide is “Teach Git what to ignore.”
 
 ## 2. Reference audit and complete coverage
 
@@ -90,7 +92,7 @@ Launch the topic change with JS-01 so JavaScript has real content from its first
 
 ## 4. Initial article roadmap
 
-IDs are stable editorial identifiers. Titles may improve before publication; published slugs should remain stable. Estimated reading lengths are targets, to be recalculated after writing. All entries are currently **planned**, not published.
+IDs are stable editorial identifiers. Titles may improve before publication; published slugs should remain stable. Estimated reading lengths are targets, to be recalculated after writing. JS-01 is **verified locally**; JS-02 through JS-07 remain **planned**. No JavaScript article deployment has been confirmed.
 
 | ID / sequence | Working title and proposed slug | Reader outcome | Notes / prerequisites | Focused example |
 | --- | --- | --- | --- | --- |
@@ -307,13 +309,26 @@ Before editing shared files, inspect the working tree and preserve unrelated cha
 - [x] Record source corrections and documentation links.
 - [x] Plan seven initial articles and a concrete first delivery.
 - [x] Define repeatable intake, verification, status, and delivery records.
-- [ ] Implement Web → JavaScript with JS-01.
+- [x] Implement Web → JavaScript with JS-01 and verify locally.
 - [ ] Deliver and verify JS-02 through JS-05, one at a time.
 - [ ] Deliver and verify JS-06 and JS-07.
 - [ ] Continue mapping future reference batches as they arrive.
 
-**Next action:** implement the JavaScript topic replacement and “A variable names a value” using section 7. A later request to continue JavaScript should resume the earliest unfinished action here unless the author names another article. Continue Git from its own plan.
+**Next action:** write and implement JS-02, “Strings: find text without changing it,” using S02 and the established article/example pattern. A later request to continue JavaScript should resume the earliest unfinished action here unless the author names another article. Continue Git from its own plan.
 
 ### Delivery log
 
 September 11, 2026 — Planning document created. No application files changed, no articles implemented, and no deployment performed. Source mappings and referenced implementation paths were checked; application build/tests are deferred to the implementation phase because this delivery is documentation only.
+
+
+### JS-01 delivery — September 11, 2026
+
+- **Status:** verified locally; not deployed.
+- **Article:** A variable names a value — `/articles/javascript-variables-and-values`.
+- **Sources:** S02 and its immutability comment. Added the beginner declaration/logging explanations, let/const comparison, optional console practice, and prediction question as authored bridge material. Checked let, const, typeof, primitive values, and toUpperCase against the linked MDN references.
+- **Behavior:** three let steps show Ali → Sara → an uppercase result with Sara unchanged. Two separate const steps show a failed reassignment with Ali retained. Includes keyboard-selectable declarations, Back, Next, full reset, a quiz with explanations, seven primitive types, and a written transcript.
+- **Website:** JavaScript replaces Web in the topic registry, homepage ticker/cards, archive filters, and metadata. Mixed-case and repeated query inputs are handled; legacy Web filters redirect to JavaScript. The retired request-journey article returns 404 and leaves the sitemap. Git and AI navigation are preserved.
+- **Verification:** `node topics/javascript/scripts/check-javascript-articles.mjs http://localhost:3000` executed all five interaction states and all standalone article snippets using Node 26.4.0, then checked discovery, topic counts/filter states, redirect/404 behavior, anchors, series links, and sitemap. `node scripts/check-ai-guide.mjs http://localhost:3000`, type checking, and production build passed.
+- **Browser:** inspected desktop dark mode at 1440px and mobile light mode at 390px with no page overflow. Checked let/const switching by keyboard, output order, completion/Back/reset states, incorrect/correct quiz answers, and reduced-motion anchors. Disabled page script execution and opened the native transcript successfully. Print emulation exposes the transcript and quiz explanation while hiding controls. No browser errors were reported. Corrected JavaScript code-block contrast during review.
+- **Scope:** reused the shared article model/renderer, quiz, table, disclosure, and recap; added only a focused variables example and topic styles. No dependencies, general code runner, or learning hub were added.
+- **Next:** JS-02, Strings: find text without changing it. Any public publication URL/date will be recorded only after deployment is confirmed.

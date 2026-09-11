@@ -3,11 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "@/components/icons";
 import { articles, getArticle } from "@/lib/articles";
-import { ArticleBlock } from "@/components/articles/article-block";
-import { GitNavigation } from "@/components/git-navigation";
-import { gitConfigReference } from "@/lib/git-config-reference";
+import { ArticleBlock, Emphasis } from "@/components/articles/article-block";
+import { CodeRunner } from "@/topics/javascript/components/code-runner";
+import { GitNavigation } from "@/topics/git/components/git-navigation";
+import { gitConfigReference } from "@/topics/git/content/git-config-reference";
 import "../article-learning.css";
-import "../../learn/git/git-learning.css";
+import "@/topics/javascript/javascript-learning.css";
+import "@/topics/git/git-learning.css";
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -25,6 +27,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const learning = Boolean(series);
   const showSectionNumbers = learning && article.topic !== "AI";
   const topicSlug = article.topic.toLowerCase();
+  const runnableCode = article.topic === "JavaScript";
   const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : `/articles?topic=${article.topic}`;
   const nextArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order + 1) : undefined;
   const previousArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order - 1) : undefined;
@@ -45,7 +48,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             {article.series && <div className="learning-hero-actions"><a href={`#${article.series.exercise.id}`} className="button dark">{article.series.exercise.label} <ArrowRight /></a><span>{article.series.practiceTime}</span></div>}
             {article.shortLesson && <div className="short-lesson-link"><span>{article.shortLesson.href === gitConfigReference.href ? "Need the commands?" : "Prefer a short lesson?"}</span><Link href={article.shortLesson.href}>{article.shortLesson.href === gitConfigReference.href ? "Git Config reference" : `Short lesson: ${article.shortLesson.title}`} <ArrowRight size={16} /></Link></div>}
           </div>
-          {article.series?.illustration === "ai-evolution" ? <div className="ai-evolution-art" aria-hidden="true"><div><span>01</span>Generate</div><div><span>02</span>Retrieve</div><div><span>03</span>Act</div><div><span>04</span>Adapt</div></div> : article.series?.illustration === "inspection" ? <div className="commit-hero-art" aria-hidden="true"><div><small>Locate changes</small>status</div><span>·</span><div><small>Compare versions</small>diff</div><span>·</span><div><small>Read history</small>log</div></div> : article.series?.illustration === "staging" ? <div className="commit-hero-art" aria-hidden="true"><div><small>01 · Save</small>Your file</div><span>↓</span><div><small>02 · Stage</small>Prepared</div><span>↓</span><div><small>03 · Commit</small>Recorded</div></div> : learning ? <div className="learning-hero-art" aria-hidden="true"><div className="hero-snapshot back">{article.series?.illustration === "config" ? "G" : "A"}<span>{article.series?.illustration === "config" ? "Global." : "Then."}</span></div><div className="hero-snapshot front">{article.series?.illustration === "config" ? "L" : "C"}<span>{article.series?.illustration === "config" ? "Local." : "Now."}</span><i /><i /><i /></div><div className="hero-art-note">{article.series?.illustration === "config" ? "A default. An exception." : "Every moment has a story."}</div></div> : <div className="article-number" aria-hidden="true">{article.number}</div>}
+          {article.series?.illustration === "values" ? <div className="variables-hero-art" aria-hidden="true"><span>const viewerName =</span><strong>"Ali"</strong><div><span>A name.</span><span>A string value.</span></div></div> : article.series?.illustration === "ai-evolution" ? <div className="ai-evolution-art" aria-hidden="true"><div><span>01</span>Generate</div><div><span>02</span>Retrieve</div><div><span>03</span>Act</div><div><span>04</span>Adapt</div></div> : article.series?.illustration === "inspection" ? <div className="commit-hero-art" aria-hidden="true"><div><small>Locate changes</small>status</div><span>·</span><div><small>Compare versions</small>diff</div><span>·</span><div><small>Read history</small>log</div></div> : article.series?.illustration === "staging" ? <div className="commit-hero-art" aria-hidden="true"><div><small>01 · Save</small>Your file</div><span>↓</span><div><small>02 · Stage</small>Prepared</div><span>↓</span><div><small>03 · Commit</small>Recorded</div></div> : learning ? <div className="learning-hero-art" aria-hidden="true"><div className="hero-snapshot back">{article.series?.illustration === "config" ? "G" : "A"}<span>{article.series?.illustration === "config" ? "Global." : "Then."}</span></div><div className="hero-snapshot front">{article.series?.illustration === "config" ? "L" : "C"}<span>{article.series?.illustration === "config" ? "Local." : "Now."}</span><i /><i /><i /></div><div className="hero-art-note">{article.series?.illustration === "config" ? "A default. An exception." : "Every moment has a story."}</div></div> : <div className="article-number" aria-hidden="true">{article.number}</div>}
         </div>
       </header>
       <article className="article-body shell">
@@ -55,9 +58,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <section key={section.id} id={section.id}>
               {showSectionNumbers && <div className="section-counter" aria-hidden="true">{String(index + 1).padStart(2, "0")}<span /></div>}
               <h2>{section.heading}</h2>
-              {learning ? <ul className="guide-points">{section.paragraphs.map(paragraph => <li key={paragraph}>{paragraph}</li>)}</ul> : section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-              {section.code && <pre><code>{section.code}</code></pre>}
-              {section.blocks?.map((block, index) => <ArticleBlock block={block} key={index} />)}
+              {learning ? <ul className="guide-points">{section.paragraphs.map(paragraph => <li key={paragraph}><Emphasis text={paragraph} /></li>)}</ul> : section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+              {section.code && (runnableCode ? <CodeRunner code={section.code} /> : <pre tabIndex={0} aria-label="Code example"><code>{section.code}</code></pre>)}
+              {section.blocks?.map((block, index) => <ArticleBlock block={block} runnableCode={runnableCode} key={index} />)}
             </section>
           ))}
           {article.sources && <div className="article-sources"><span className="learning-kicker">Further reading · {article.topic} sources</span><ul>{article.sources.map(source => <li key={source.url}><a href={source.url}>{source.title} ↗</a></li>)}</ul></div>}

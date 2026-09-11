@@ -1,11 +1,11 @@
-// Run with Node 22.18+: node scripts/check-git-config-reference.mjs
+// Run with Node 22.18+: node topics/git/scripts/check-git-config-reference.mjs
 // Execute the published commands against isolated configuration and a disposable repository.
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { gitConfigReferenceSections } from "../lib/git-config-reference.ts";
+import { gitConfigReferenceSections } from "../content/git-config-reference.ts";
 
 const directory = mkdtempSync(join(tmpdir(), "git-config-reference-"));
 const env = {

@@ -1,4 +1,4 @@
-// Run against a local server: node scripts/check-ai-guide.mjs [base URL]
+// Run against a local server: node topics/ai/scripts/check-ai-guide.mjs [base URL]
 import assert from "node:assert/strict";
 
 const base = process.argv[2] ?? "http://localhost:3001";

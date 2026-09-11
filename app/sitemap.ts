@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { articles } from "@/lib/articles";
-import { publishedGitLessons } from "@/lib/git-learning";
+import { publishedGitLessons } from "@/topics/git/content/git-learning";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://aitechforyou.com";

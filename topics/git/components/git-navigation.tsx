@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { gitConfigReference } from "@/lib/git-config-reference";
-import { gitConfigGuide } from "@/lib/git-learning";
+import { gitConfigReference } from "@/topics/git/content/git-config-reference";
+import { gitConfigGuide } from "@/topics/git/content/git-learning";
 
 export function GitNavigation({ current }: { current?: "reference" | "guides" }) {
   return <nav className="git-navigation" aria-label="Git resources">

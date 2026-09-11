@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { gitLessons } from "@/lib/git-learning";
+import { gitLessons } from "@/topics/git/content/git-learning";
 
 export function GitLessonOutline({ current }: { current?: string }) {
   return <nav className="git-outline" aria-label="Git lesson outline">

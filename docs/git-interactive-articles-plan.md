@@ -292,7 +292,7 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - URL: `/articles/git-status-diff-and-log`; guide 03 connects the first-commit and configuration guides.
 - Covers normal and compact status, staged/unstaged modifications, three diff endpoints, patch notation, log/show, two-commit comparisons, untracked files, and misleading empty net comparisons.
 - Reuses the reading-list example with Dune committed, The Hobbit staged, and Piranesi unstaged. Readers choose a comparison, stage or commit, and reset. The written explanation remains available without interaction.
-- `node scripts/check-git-inspection.mjs` verifies all reachable simulation states and both action orders against Git 2.50.1, plus history inspection and the cancellation/untracked examples.
+- `node topics/git/scripts/check-git-inspection.mjs` verifies all reachable simulation states and both action orders against Git 2.50.1, plus history inspection and the cancellation/untracked examples.
 - Type checking, production build, route/search/sitemap checks passed. Browser checks covered keyboard radio selection, both action orders, disabled states, reset, desktop dark mode and phone light mode with no page overflow.
 - Added reciprocal links from the change-again and history lessons. Next new guide: ignore rules and already tracked files.
 

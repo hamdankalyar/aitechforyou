@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CommandBlock } from "@/components/articles/command-block";
-import { GitLessonOutline } from "@/components/git-lesson-outline";
+import { GitLessonOutline } from "@/topics/git/components/git-lesson-outline";
 import { ArrowRight } from "@/components/icons";
-import { gitLessons } from "@/lib/git-learning";
-import { getShortGitLesson, shortGitLessons } from "@/lib/git-short-lessons";
+import { gitLessons } from "@/topics/git/content/git-learning";
+import { getShortGitLesson, shortGitLessons } from "@/topics/git/content/git-short-lessons";
 import "../../../articles/article-learning.css";
-import "../git-learning.css";
+import "@/topics/git/git-learning.css";
 
 export function generateStaticParams() {
   return shortGitLessons.map(lesson => ({ slug: lesson.slug }));

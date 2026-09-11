@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { getCommitLabState } from "@/lib/git-commit-lab";
+import { getCommitLabState } from "@/topics/git/content/git-commit-lab";
 
 export function CommitPlayground() {
   const [step, setStep] = useState(0);

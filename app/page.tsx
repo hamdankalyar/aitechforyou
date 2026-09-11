@@ -29,8 +29,8 @@ export default function Home() {
         </div>
         <div className="hero-ticker" aria-label="Topics covered">
           <span>Git</span><i />
+          <span>JS</span><i />
           <span>Artificial intelligence</span><i />
-          <span>Web development</span><i />
           <span>And whatever comes next</span>
         </div>
       </section>
