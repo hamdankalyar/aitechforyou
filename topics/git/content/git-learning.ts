@@ -21,6 +21,7 @@ export const publishedGitLessons = gitLessons;
 export const gitConfigGuide = "/articles/git-config-identity-and-overrides";
 
 const guideKeywords: Record<string, string> = {
+  "from-fork-to-pull-request": "fork forking pull request PR merge request contribute open source upstream remote origin clone fork sync fork FETCH_HEAD three-dot diff github gitlab review branch delete --delete",
   "git-status-diff-and-log": "git status diff log inspect inspection empty diff no output staged unstaged index working tree HEAD compare comparison patch hunk MM history",
   "from-edited-file-to-first-commit": "git staging stage staged area index working tree directory commit snapshot edited changes tracked untracked git add first commit",
   "git-is-a-time-machine": "save saving vs snapshot snapshots commit version history remembers",

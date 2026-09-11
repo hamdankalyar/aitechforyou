@@ -147,6 +147,21 @@
 .push-lab .branch-graph > .lab-instruction { padding: 10px 0; color: var(--muted); }
 .push-lab .inspection-questions { margin-block: 20px 0; }
 
+/* Fork and pull request practice example. */
+.fork-places { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 24px; }
+.fork-places .snapshot-file { margin: 0; border: 2px solid var(--border); }
+.fork-labels { list-style: none; margin: 0; padding: 8px 12px 12px; font-size: 12px; line-height: 1.6; min-height: 120px; }
+.fork-labels li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; padding: 4px 0; }
+.fork-labels code { font-family: ui-monospace, monospace; }
+.fork-labels small { font-size: 10px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); background: var(--coral); padding: 2px 5px; border-radius: 3px; }
+.fork-labels .is-removed code { text-decoration: line-through; color: var(--muted); }
+.fork-labels .is-removed small { background: var(--border); }
+.fork-empty { margin: 0; padding: 12px; font-size: 12px; line-height: 1.6; color: var(--muted); min-height: 120px; }
+.fork-legend { margin: 12px 0 0; font-size: 11px; line-height: 1.7; color: var(--muted); }
+.fork-lab .inspection-answer h4 code { white-space: pre-wrap; }
+@media (max-width: 800px) { .fork-places { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .fork-places { grid-template-columns: minmax(0, 1fr); } .fork-labels, .fork-empty { min-height: 0; } }
+
 /* Conflict practice example. */
 .conflict-lab .inspection-panels { margin-top: 24px; }
 .conflict-lab .conflict-file { margin-top: 12px; border: 2px solid var(--coral); }

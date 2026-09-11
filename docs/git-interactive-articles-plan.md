@@ -1,6 +1,6 @@
 # Git notes → interactive articles
 
-Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–10 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts, remotes, push/pull) are implemented; guides 05–09 are committed at `c39fb92`, `1f405a0`, `c34391a`, `43f453f`, and `584d78c`. **The next detailed guide is “From fork to pull request.”**
+Planning date: September 11, 2026. Status: all eight foundation lessons are complete and committed at `1adf1b7`. Guides 01–11 (snapshots, first commit, inspection, configuration, ignore rules, branches, merging, conflicts, remotes, push/pull, fork and pull request) are implemented; guides 05–10 are committed at `c39fb92`, `1f405a0`, `c34391a`, `43f453f`, `584d78c`, and `ff2dbe6`. Part II is complete. **The next detailed guide is “Put unfinished work on a shelf.”**
 
 ## Current delivery plan: lessons and guides together
 
@@ -19,9 +19,10 @@ Work by topic, with links between the two formats. One guide can support several
 | Complete | Detailed guide: A conflict is a question you can answer | Read conflict markers, choose or edit the final text, stage it, and finish or abort the merge. |
 | Complete | Detailed guide: Your branch, their branch, and origin/main | Local branches, remote-tracking references, and server branches; what fetch changes and what it leaves alone. |
 | Complete | Detailed guide: Push, pull, and the upstream connection | Publish a branch to a shared bare repository, set upstream, and understand what pull does and when it refuses. |
-| Next | Detailed guide: From fork to pull request | Fork, clone, branch, push to the fork, and open a pull request against the original repository. |
+| Complete | Detailed guide: From fork to pull request | Fork, clone, branch, push to the fork, and open a pull request against the original repository. |
+| Next | Detailed guide: Put unfinished work on a shelf | Stash apply versus pop, older stashes, untracked files, and a conflicting pop that keeps its entry. |
 
-Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the fork guide (11) unless the user names another topic or format. Then move on to Part III: stash, undo, and reflog.
+Continue the detailed roadmap, skipping the configuration guide already completed, and add short companion lessons where they serve a separate practical need. The next request to “move next” should begin the stash guide (12) unless the user names another topic or format. Then continue Part III with undo and reflog.
 
 ## 1. The direction
 
@@ -297,7 +298,15 @@ For the first delivery, the article shell and article 01 are one coherent piece 
 - [x] Complete “A conflict is a question you can answer” as guide 08.
 - [x] Complete “Your branch, their branch, and origin/main” as guide 09.
 - [x] Complete “Push, pull, and the upstream connection” as guide 10.
-- [ ] Proceed to “From fork to pull request” as guide 11.
+- [x] Complete “From fork to pull request” as guide 11.
+- [ ] Proceed to “Put unfinished work on a shelf” as guide 12.
+
+### Fork guide delivery — September 12, 2026
+
+- URL: `/articles/from-fork-to-pull-request`; guide 11 closes Part II and points at the stash guide as in preparation.
+- The hosting service is a folder with two account folders: `sam/reading-list.git` is the original and `maya/reading-list.git` the fork, created with `git clone --bare`, which is what the Fork button does. Covers the four places a change passes through, `origin` versus `upstream`, `remote add` and `fetch upstream`, branching per change, `push -u` to the fork, what the pull request page shows (`upstream/main..branch` and the three-dot diff), the request as a pointer rather than a copy, the maintainer’s merge done by hand with `FETCH_HEAD` and the service’s message, syncing laptop and fork with `fetch upstream`, `merge --ff-only`, and `push`, deleting the branch locally and remotely, and the refused-push message as an illustration only. Pull request creation itself is described as a service step, since Git has no command for it.
+- Interactive example: an eleven-step storyboard with Back, Next, and Start over showing the original, the fork, the laptop, and the pull request, with new, moved, and removed labels marked at each step. The transcript lists every step.
+- `node topics/git/scripts/check-git-fork.mjs` executes the storyboard against three real repositories under Git 2.50.1 and compares every label map and the checked-out branch at each step, then runs the article’s walkthrough as one shell session.
 
 ### Push and pull guide delivery — September 12, 2026
 

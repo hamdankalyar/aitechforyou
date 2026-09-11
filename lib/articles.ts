@@ -15,6 +15,7 @@ import { gitMergeSections } from "@/topics/git/content/git-merge-article";
 import { gitConflictSections } from "@/topics/git/content/git-conflict-article";
 import { gitRemoteSections } from "@/topics/git/content/git-remote-article";
 import { gitPushSections } from "@/topics/git/content/git-push-article";
+import { gitForkSections } from "@/topics/git/content/git-fork-article";
 import { gitHistoryLesson } from "@/topics/git/content/git-short-lessons";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 
@@ -31,6 +32,7 @@ export type ArticleBlock =
   | { type: "conflict-playground" }
   | { type: "remote-playground" }
   | { type: "push-playground" }
+  | { type: "fork-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
@@ -66,7 +68,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "push" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "push" | "fork" | "ai-evolution" | "values";
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -332,6 +334,31 @@ export const articles: Article[] = [
       { title: "Git reference · pull and divergent branches", url: "https://git-scm.com/docs/git-pull" },
       { title: "Git reference · push.default, push.autoSetupRemote, pull.ff", url: "https://git-scm.com/docs/git-config" },
       { title: "Git reference · Bare repositories", url: "https://git-scm.com/docs/git-init#Documentation/git-init.txt---bare" },
+    ],
+  },
+  {
+    slug: "from-fork-to-pull-request",
+    title: "From fork to pull request",
+    excerpt: "Contribute to a repository you cannot push to: fork it, clone the fork, branch, push there, open a pull request, and bring the merged result back to every copy.",
+    topic: "Git",
+    date: "Sep 12, 2026",
+    readTime: "10 min read",
+    accent: "coral",
+    number: "21",
+    series: {
+      title: "Git, made visible", order: 11, practiceTime: "2 min to explore",
+      nextTitle: "Put unfinished work on a shelf",
+      nextDescription: "Next, Part III begins on your own laptop: stash half-done work, switch away, and bring it back—apply or pop, and what happens when the shelf conflicts.",
+      exercise: { id: "try-the-journey", label: "Follow the change" }, illustration: "fork",
+    },
+    sections: gitForkSections,
+    sources: [
+      { title: "GitHub docs · About forks", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks" },
+      { title: "GitHub docs · Configuring a remote repository for a fork", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-repository-for-a-fork" },
+      { title: "GitHub docs · Creating a pull request from a fork", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork" },
+      { title: "GitHub docs · Syncing a fork", url: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork" },
+      { title: "The Git book · Contributing to a project on GitHub", url: "https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project" },
+      { title: "Git reference · FETCH_HEAD and fetching one branch", url: "https://git-scm.com/docs/git-fetch" },
     ],
   },
   {
