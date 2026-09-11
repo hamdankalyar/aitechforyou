@@ -38,7 +38,7 @@ export default function Home() {
       <section className="featured-section">
         <div className="shell">
           <div className="section-heading">
-            <div><span className="section-index">01</span><p>Featured lesson</p></div>
+            <div><span className="section-index">01</span><p>Featured guide</p></div>
             <p>A good place to start</p>
           </div>
           <article className="featured-card">
@@ -56,7 +56,7 @@ export default function Home() {
               <div className="card-topline"><span>{featured.topic}</span><span>{featured.readTime}</span></div>
               <h2>{featured.title}</h2>
               <p>{featured.excerpt}</p>
-              <Link className="button dark" href={`/articles/${featured.slug}`}>Read the lesson <ArrowRight /></Link>
+              <Link className="button dark" href={`/articles/${featured.slug}`}>Read the guide <ArrowRight /></Link>
             </div>
           </article>
         </div>
@@ -69,7 +69,7 @@ export default function Home() {
         </div>
         <div className="topic-grid">
           {topics.map((topic) => (
-            <Link className={`topic-card ${topic.className}`} href={`/articles?topic=${topic.name}`} key={topic.name}>
+            <Link className={`topic-card ${topic.className}`} href={topic.name === "Git" ? "/learn/git" : `/articles?topic=${topic.name}`} key={topic.name}>
               <span>{topic.index}</span>
               <h3>{topic.name}</h3>
               <p>{topic.description}</p>

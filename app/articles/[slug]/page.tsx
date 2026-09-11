@@ -30,12 +30,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <header className={`article-hero ${article.accent}`}>
         <div className="shell article-hero-grid">
           <div>
-            <Link className="back-link" href="/articles">← All articles</Link>
-            {article.series && <div className="series-eyebrow"><span className="series-dot" />{article.series.title}<span>Article {String(article.series.order).padStart(2, "0")}</span></div>}
+            <Link className="back-link" href={article.topic === "Git" ? "/learn/git" : "/articles"}>← {article.topic === "Git" ? "Git lessons & guides" : "All articles"}</Link>
+            {article.series && <div className="series-eyebrow"><span className="series-dot" />Git Guide<span>{article.series.title}</span></div>}
             <div className="article-meta"><span>{article.topic}</span><span>{article.date}</span><span>{article.readTime}</span></div>
             <h1>{article.title}</h1>
             <p>{article.excerpt}</p>
-            {article.series && <div className="learning-hero-actions"><a href={`#${article.series.exercise.id}`} className="button dark">{article.series.exercise.label} <ArrowRight /></a><span>{article.series.practiceTime} · Beginner friendly</span></div>}
+            {article.series && <div className="learning-hero-actions"><a href={`#${article.series.exercise.id}`} className="button dark">{article.series.exercise.label} <ArrowRight /></a><span>{article.series.practiceTime}</span></div>}
+            {article.shortLesson && <div className="short-lesson-link"><span>Just getting set up?</span><Link href={article.shortLesson.href}>Short lesson: {article.shortLesson.title} <ArrowRight size={16} /></Link></div>}
           </div>
           {learning ? <div className="learning-hero-art" aria-hidden="true"><div className="hero-snapshot back">{article.series?.illustration === "config" ? "G" : "A"}<span>{article.series?.illustration === "config" ? "Global." : "Then."}</span></div><div className="hero-snapshot front">{article.series?.illustration === "config" ? "L" : "C"}<span>{article.series?.illustration === "config" ? "Local." : "Now."}</span><i /><i /><i /></div><div className="hero-art-note">{article.series?.illustration === "config" ? "A default. An exception." : "Every moment has a story."}</div></div> : <div className="article-number" aria-hidden="true">{article.number}</div>}
         </div>
@@ -53,7 +54,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             </section>
           ))}
           {article.sources && <div className="article-sources"><span className="learning-kicker">Further reading · official Git documentation</span><ul>{article.sources.map(source => <li key={source.url}><a href={source.url}>{source.title} ↗</a></li>)}</ul></div>}
-          {article.series ? <nav className="series-navigation" aria-label="Git article series">{previousArticle && <Link className="series-previous" href={`/articles/${previousArticle.slug}`}>← Previous: {previousArticle.title}</Link>}<div className="series-next"><span className="learning-kicker">Next in {article.series.title}{nextArticle ? "" : " · In preparation"}</span><h2>{nextArticle?.title ?? article.series.nextTitle}</h2><p>{article.series.nextDescription}</p>{nextArticle ? <Link href={`/articles/${nextArticle.slug}`}>Read article {String(nextArticle.series?.order).padStart(2, "0")} <ArrowRight /></Link> : <Link href="/articles?topic=Git">Browse available Git articles <ArrowRight /></Link>}</div></nav> : <div className="article-end">
+          {article.series ? <nav className="series-navigation" aria-label="Git guides">{previousArticle && <Link className="series-previous" href={`/articles/${previousArticle.slug}`}>← Previous guide: {previousArticle.title}</Link>}<div className="series-next"><span className="learning-kicker">Next guide in {article.series.title}{nextArticle ? "" : " · In preparation"}</span><h2>{nextArticle?.title ?? article.series.nextTitle}</h2><p>{article.series.nextDescription}</p>{nextArticle ? <Link href={`/articles/${nextArticle.slug}`}>Read the guide <ArrowRight /></Link> : <Link href="/learn/git">Browse Git lessons & guides <ArrowRight /></Link>}</div></nav> : <div className="article-end">
             <span>Keep learning</span>
             <h2>One idea understood.<br />Many more to explore.</h2>
             <Link className="button dark" href="/articles">Read another article <ArrowRight /></Link>

@@ -16,7 +16,7 @@ export function Header() {
         </nav>
         <div className="header-actions">
           <ThemeToggle />
-          <Link className="header-cta" href="/articles">Start learning</Link>
+          <Link className="header-cta" href="/learn/git">Start learning</Link>
         </div>
       </div>
     </header>

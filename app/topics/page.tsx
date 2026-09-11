@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "@/components/icons";
 import { articles, topics } from "@/lib/articles";
+import { publishedGitLessons } from "@/lib/git-learning";
 
 export const metadata: Metadata = { title: "Topics", description: "Explore technology lessons by topic." };
 
@@ -15,11 +16,11 @@ export default function TopicsPage() {
       </div>
       <div className="topics-list">
         {topics.map((topic) => (
-          <Link className={`topic-row ${topic.className}`} href={`/articles?topic=${topic.name}`} key={topic.name}>
+          <Link className={`topic-row ${topic.className}`} href={topic.name === "Git" ? "/learn/git" : `/articles?topic=${topic.name}`} key={topic.name}>
             <span>{topic.index}</span>
             <h2>{topic.name}</h2>
             <p>{topic.description}</p>
-            <small>{articles.filter((article) => article.topic === topic.name).length} articles</small>
+            <small>{topic.name === "Git" ? `${publishedGitLessons.length} lessons · ` : ""}{articles.filter((article) => article.topic === topic.name).length} {topic.name === "Git" ? "guides" : "articles"}</small>
             <ArrowRight size={28} />
           </Link>
         ))}

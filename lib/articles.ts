@@ -1,5 +1,6 @@
 import { firstGitSections } from "./git-first-article";
 import { gitConfigSections } from "./git-config-article";
+import { gitSetupLesson } from "./git-learning";
 
 export type ArticleBlock =
   | { type: "timeline" }
@@ -31,6 +32,7 @@ export type Article = {
   featured?: boolean;
   accent: "coral" | "blue" | "lime";
   number: string;
+  shortLesson?: { title: string; href: string };
   series?: {
     title: string;
     order: number;
@@ -65,6 +67,7 @@ export const articles: Article[] = [
   },
   {
     slug: "git-config-identity-and-overrides",
+    shortLesson: gitSetupLesson,
     title: "Set up Git so it knows who you are",
     excerpt: "One person, different projects. Give your commits an identity—and see which setting wins when Git finds more than one.",
     topic: "Git",

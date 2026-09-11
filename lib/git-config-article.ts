@@ -34,7 +34,7 @@ export const gitConfigSections: ArticleSection[] = [
     ],
     blocks: [
       { type: "table", caption: "The two scopes you will use most", columns: ["Scope", "Applies to", "Common location"], rows: [["Global", "Your repositories, unless overridden", "~/.gitconfig"], ["Local", "This repository", ".git/config"]] },
-      { type: "command", command: 'git config set --local user.email "maya@studio.example"', explanation: "Run this from the studio repository to set its email. If you have no repository yet, use the practice example below and return after the next article." },
+      { type: "command", command: 'git config set --local user.email "maya@studio.example"', explanation: "Run this from the studio repository to set its email. If you have no repository yet, explore the practice example below and return to this command once you have created a project with Git." },
     ],
   },
   {
