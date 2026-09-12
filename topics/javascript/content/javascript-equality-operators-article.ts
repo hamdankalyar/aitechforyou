@@ -2,7 +2,7 @@ import type { ArticleSection } from "@/lib/articles";
 
 export const javascriptEqualityOperatorsSections: ArticleSection[] = [
   {
-    id: "loose-equality", heading: "The equality operator: ==",
+    id: "loose-equality", heading: "The equality operator ==",
     paragraphs: [
       { text: "**A comparison operator** asks a question about two values:", bullets: [
         "**Operands** are the values on either side.",
@@ -21,7 +21,7 @@ export const javascriptEqualityOperatorsSections: ArticleSection[] = [
     code: 'console.log(5 == 5); // true\nconsole.log(5 == 6); // false\nconsole.log(5 == "5"); // true',
   },
   {
-    id: "strict-equality", heading: "The strict equality operator: ===",
+    id: "strict-equality", heading: "The strict equality operator ===",
     paragraphs: [
       { text: "**=== compares without type coercion.** Notice the three equals signs:", bullets: [
         "**Different types** always give false.",
@@ -39,7 +39,7 @@ export const javascriptEqualityOperatorsSections: ArticleSection[] = [
     code: 'console.log(5 === 5); // true\nconsole.log(5 === "5"); // false\nconsole.log("5" === "5"); // true\nconsole.log(5 === 6); // false',
   },
   {
-    id: "loose-inequality", heading: "The inequality operator: !=",
+    id: "loose-inequality", heading: "The inequality operator !=",
     paragraphs: [
       { text: "**!= is the opposite of ==:**", bullets: [
         "**Use the same conversion rules** as loose equality.",
@@ -55,7 +55,7 @@ export const javascriptEqualityOperatorsSections: ArticleSection[] = [
     code: 'console.log(5 != 5); // false\nconsole.log(5 != 6); // true\nconsole.log(5 != "5"); // false',
   },
   {
-    id: "strict-inequality", heading: "The strict inequality operator: !==",
+    id: "strict-inequality", heading: "The strict inequality operator !==",
     paragraphs: [
       { text: "**!== is the opposite of ===:**", bullets: [
         "**No type coercion** happens.",
