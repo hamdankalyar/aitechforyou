@@ -161,6 +161,15 @@ button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 .filter-row a:hover, .filter-row a.active { background: var(--solid); color: var(--on-solid); }
 .archive-grid { grid-template-columns: repeat(3, 1fr); }
 
+.javascript-course > .back-link { margin-bottom: 24px; }
+.course-categories { flex-wrap: wrap; }
+.course-categories a { padding-inline: 20px; }
+.course-section { scroll-margin-top: 110px; margin-top: 56px; padding-top: 24px; border-top: 2px solid var(--solid); }
+.course-section-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 24px; }
+.course-section-heading h2 { margin: 0; font: 600 clamp(32px, 5vw, 48px)/1.1 var(--font-display); letter-spacing: -.04em; }
+.course-section-heading > span, .course-empty { color: var(--muted); }
+.course-empty { padding: 24px; border: 1px dashed var(--border); background: var(--white); }
+
 .article-hero { padding: 70px 0 80px; color: var(--ink); border-bottom: 2px solid var(--ink); }
 .article-hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: end; }
 .back-link { display: inline-block; font-size: 13px; font-weight: 700; margin-bottom: 55px; }

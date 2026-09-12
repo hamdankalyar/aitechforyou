@@ -24,7 +24,7 @@ export default async function GitLearningPage({ searchParams }: { searchParams: 
 
   return <main id="main" className="git-learning git-reference-hub shell">
     <header className="git-hub-hero">
-      <Link className="git-back" href="/topics">← All topics</Link>
+      <Link className="git-back" href="/courses">← All courses</Link>
       <div className="git-label">The Git notebook</div>
       <h1>{query ? "Find a Git answer." : view === "guides" ? "Git Guides" : "Git Reference"}</h1>
       <p>{view === "guides" ? "Understand the ideas behind the commands, with stories, visual examples, and room to explore." : "Find the command. See how to use it. Get back to your project."}</p>

@@ -10,3 +10,11 @@ Never ever put the codex , open ai , claude , fable , opus anything in the commi
 <!-- END:nextjs-agent-rules -->
 
 Before writing or editing any JavaScript article, read `topics/javascript/README.md` and follow its rules.
+
+## Writing articles and lessons
+
+- Always use short bullets instead of long paragraphs so the content is easy to read and remember.
+- Keep one idea per bullet. Put each operator, definition, example, or calculation step on its own line.
+- Group related details under their main point with indented sub-bullets. Keep nesting to one level.
+- Start each bullet with the important term in bold, followed by a short explanation in plain language.
+- Apply this style throughout every article and lesson, including explanations, practice instructions, and recaps.

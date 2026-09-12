@@ -1,30 +1,5 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "@/components/icons";
-import { articles, topics } from "@/lib/articles";
-import { publishedGitLessons } from "@/topics/git/content/git-learning";
-
-export const metadata: Metadata = { title: "Topics", description: "Explore lessons by topic: Git, JavaScript, and AI, each built from mental models and interactive examples.", alternates: { canonical: "/topics" } };
+import { permanentRedirect } from "next/navigation";
 
 export default function TopicsPage() {
-  return (
-    <main id="main" className="page-main shell">
-      <div className="page-hero">
-        <span className="eyebrow"><span /> Choose your rabbit hole</span>
-        <h1>Learn by topic.</h1>
-        <p>Start with what interests you. Follow the questions until the picture becomes clear.</p>
-      </div>
-      <div className="topics-list">
-        {topics.map((topic) => (
-          <Link className={`topic-row ${topic.className}`} href={topic.name === "Git" ? "/learn/git" : `/articles?topic=${topic.name}`} key={topic.name}>
-            <span>{topic.index}</span>
-            <h2>{topic.name}</h2>
-            <p>{topic.description}</p>
-            <small>{topic.name === "Git" ? `${publishedGitLessons.length} lessons · ` : ""}{articles.filter((article) => article.topic === topic.name).length} {topic.name === "Git" ? "guides" : "articles"}</small>
-            <ArrowRight size={28} />
-          </Link>
-        ))}
-      </div>
-    </main>
-  );
+  permanentRedirect("/courses");
 }

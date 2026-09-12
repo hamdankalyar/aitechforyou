@@ -33,7 +33,7 @@ export const javascriptPrimitivesSections: ArticleSection[] = [
     id: "bigint-and-symbol", heading: "bigint and symbol",
     paragraphs: [
       "**bigint** is for whole numbers too large for the normal number type. Add n to the end of the number.",
-      "**symbol** is a value that is always unique. Lesson 6 is all about it.",
+      "**symbol** is a value that is always unique. The Advanced section explains it in detail.",
       "**You will rarely need either one at the start.** They are here so the list of seven is complete.",
     ],
     code: 'console.log(typeof 12345678901234567890n); // bigint\nconsole.log(typeof Symbol("id"));           // symbol',

@@ -4,6 +4,8 @@ import { javascriptDeclarationsSections } from "@/topics/javascript/content/java
 import { javascriptPrimitivesSections } from "@/topics/javascript/content/javascript-primitives-article";
 import { javascriptStringsSections } from "@/topics/javascript/content/javascript-strings-article";
 import { javascriptSymbolSections } from "@/topics/javascript/content/javascript-symbol-article";
+import { javascriptOperatorPrecedenceSections } from "@/topics/javascript/content/javascript-operator-precedence-article";
+import { javascriptEqualityOperatorsSections } from "@/topics/javascript/content/javascript-equality-operators-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -47,16 +49,17 @@ export type ArticleBlock =
 export type ArticleSection = {
   id?: string;
   heading: string;
-  paragraphs: string[];
+  paragraphs: (string | { text: string; bullets: string[] })[];
   code?: string;
   blocks?: ArticleBlock[];
 };
+
+export const javascriptCategories = ["Basic", "Advanced", "Functions", "Interviews", "Performance", "OOP"] as const;
 
 export type Article = {
   slug: string;
   title: string;
   excerpt: string;
-  topic: "Git" | "AI" | "JavaScript";
   date: string;
   readTime: string;
   featured?: boolean;
@@ -74,7 +77,10 @@ export type Article = {
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
-};
+} & (
+  | { topic: "JavaScript"; category: (typeof javascriptCategories)[number] }
+  | { topic: "Git" | "AI"; category?: never }
+);
 
 export const articles: Article[] = [
   {
@@ -97,16 +103,17 @@ export const articles: Article[] = [
   },
   {
     slug: "javascript-introduction",
-    title: "Lesson 1: What JavaScript is",
+    title: "What JavaScript is",
     excerpt: "Meet the language of the web, run your first line, and learn how to read the code boxes in this course.",
     topic: "JavaScript",
+    category: "Basic",
     date: "Sep 11, 2026",
     readTime: "3 min read",
     accent: "yellow",
     number: "09",
     series: {
       title: "JavaScript, made visible", order: 1, practiceTime: "1 min to explore",
-      nextTitle: "Lesson 2: console.log",
+      nextTitle: "console.log",
       nextDescription: "Print text, numbers, and several things at once. The tool you will use in every lesson.",
       exercise: { id: "your-first-line", label: "Run your first line" }, illustration: "values",
     },
@@ -434,16 +441,17 @@ export const articles: Article[] = [
   },
   {
     slug: "javascript-console-log",
-    title: "Lesson 2: console.log",
+    title: "console.log",
     excerpt: "Print text, numbers, and several values at once, write comments, and read your first error message.",
     topic: "JavaScript",
+    category: "Basic",
     date: "Sep 11, 2026",
     readTime: "4 min read",
     accent: "yellow",
     number: "10",
     series: {
       title: "JavaScript, made visible", order: 2, practiceTime: "1 min to explore",
-      nextTitle: "Lesson 3: let, var, and const",
+      nextTitle: "let, var, and const",
       nextDescription: "Give a value a name, change it later, or lock it in place.",
       exercise: { id: "try-it-yourself", label: "Run the example" }, illustration: "values",
     },
@@ -454,16 +462,17 @@ export const articles: Article[] = [
   },
   {
     slug: "javascript-var-let-const",
-    title: "Lesson 3: let, var, and const",
+    title: "let, var, and const",
     excerpt: "A variable is a name for a value. Learn the three keywords that create one, and which to use.",
     topic: "JavaScript",
+    category: "Basic",
     date: "Sep 11, 2026",
     readTime: "5 min read",
     accent: "yellow",
     number: "11",
     series: {
       title: "JavaScript, made visible", order: 3, practiceTime: "2 min to explore",
-      nextTitle: "Lesson 4: The seven primitive types",
+      nextTitle: "The seven primitive types",
       nextDescription: "Every value has a type. Meet all seven and learn to check them with typeof.",
       exercise: { id: "try-the-values", label: "Try the variables" }, illustration: "values",
     },
@@ -476,16 +485,17 @@ export const articles: Article[] = [
   },
   {
     slug: "javascript-primitive-types",
-    title: "Lesson 4: The seven primitive types",
+    title: "The seven primitive types",
     excerpt: "Every value has a type. Check it with typeof and meet string, number, boolean, undefined, null, bigint, and symbol.",
     topic: "JavaScript",
+    category: "Basic",
     date: "Sep 11, 2026",
     readTime: "4 min read",
     accent: "yellow",
     number: "12",
     series: {
       title: "JavaScript, made visible", order: 4, practiceTime: "1 min to explore",
-      nextTitle: "Lesson 5: Strings",
+      nextTitle: "Strings",
       nextDescription: "Text in JavaScript: count characters, search inside, join, and change case.",
       exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
     },
@@ -497,16 +507,17 @@ export const articles: Article[] = [
   },
   {
     slug: "javascript-strings",
-    title: "Lesson 5: Strings",
+    title: "Strings",
     excerpt: "Count characters, find text, join strings, and change case. See why a string never changes in place.",
     topic: "JavaScript",
+    category: "Basic",
     date: "Sep 11, 2026",
     readTime: "5 min read",
     accent: "yellow",
     number: "13",
     series: {
       title: "JavaScript, made visible", order: 5, practiceTime: "2 min to explore",
-      nextTitle: "Lesson 6: Symbol",
+      nextTitle: "Symbol",
       nextDescription: "A value that is always unique, and why that is useful.",
       exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
     },
@@ -519,17 +530,18 @@ export const articles: Article[] = [
   },
   {
     slug: "javascript-symbol",
-    title: "Lesson 6: Symbol",
+    title: "Symbol",
     excerpt: "A symbol is a value that is always unique. Learn the optional description, symbol keys, and why symbols exist when strings seem enough.",
     topic: "JavaScript",
+    category: "Advanced",
     date: "Sep 11, 2026",
     readTime: "6 min read",
     accent: "yellow",
     number: "14",
     series: {
       title: "JavaScript, made visible", order: 6, practiceTime: "1 min to explore",
-      nextTitle: "Lesson 7: Objects",
-      nextDescription: "Store several values under one name. In preparation.",
+      nextTitle: "Operator precedence",
+      nextDescription: "Work out which calculation happens first and how parentheses change the answer.",
       exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
     },
     sections: javascriptSymbolSections,
@@ -537,23 +549,69 @@ export const articles: Article[] = [
       { title: "MDN · Symbol", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol" },
     ],
   },
+  {
+    slug: "javascript-operator-precedence",
+    title: "Operator precedence",
+    excerpt: "Learn which calculation happens first, how equal priorities work, and when parentheses change the answer.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 12, 2026",
+    readTime: "3 min read",
+    accent: "yellow",
+    number: "23",
+    series: {
+      title: "JavaScript, made visible", order: 7, practiceTime: "1 min to explore",
+      nextTitle: "Equality operators",
+      nextDescription: "Compare values with ==, ===, !=, and !==, and see when JavaScript converts types.",
+      exercise: { id: "try-it-yourself", label: "Try the calculations" }, illustration: "values",
+    },
+    sections: javascriptOperatorPrecedenceSections,
+    sources: [
+      { title: "MDN · Operator precedence", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence" },
+    ],
+  },
+  {
+    slug: "javascript-equality-operators",
+    title: "Equality operators",
+    excerpt: "Compare values with ==, ===, !=, and !==. Understand type coercion and why the number 5 differs from the string \"5\".",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 12, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "24",
+    series: {
+      title: "JavaScript, made visible", order: 8, practiceTime: "1 min to explore",
+      nextTitle: "Conditions and the ternary operator",
+      nextDescription: "Use a true-or-false result to choose what happens next. In preparation.",
+      exercise: { id: "try-it-yourself", label: "Try the comparisons" }, illustration: "values",
+    },
+    sections: javascriptEqualityOperatorsSections,
+    sources: [
+      { title: "MDN · Equality (==)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality" },
+      { title: "MDN · Strict equality (===)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality" },
+    ],
+  },
 ];
 
-export const topics = [
+export const courses = [
   {
     name: "Git",
+    href: "/learn/git",
     description: "Version control explained through timelines, stories, and real mistakes.",
     index: "01",
     className: "coral",
   },
   {
     name: "JavaScript",
+    href: "/courses/javascript",
     description: "Values, behavior, and browser APIs explained through examples you can try.",
     index: "02",
     className: "yellow",
   },
   {
     name: "AI",
+    href: "/articles?topic=AI",
     description: "Models, agents, and tools—understood from first principles.",
     index: "03",
     className: "blue",

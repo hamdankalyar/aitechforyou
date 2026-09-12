@@ -8,6 +8,8 @@ import { javascriptDeclarationsSections } from "../content/javascript-declaratio
 import { javascriptPrimitivesSections } from "../content/javascript-primitives-article.ts";
 import { javascriptStringsSections } from "../content/javascript-strings-article.ts";
 import { javascriptSymbolSections } from "../content/javascript-symbol-article.ts";
+import { javascriptOperatorPrecedenceSections } from "../content/javascript-operator-precedence-article.ts";
+import { javascriptEqualityOperatorsSections } from "../content/javascript-equality-operators-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -16,6 +18,8 @@ const articles = {
   "javascript-primitive-types": javascriptPrimitivesSections,
   "javascript-strings": javascriptStringsSections,
   "javascript-symbol": javascriptSymbolSections,
+  "javascript-operator-precedence": javascriptOperatorPrecedenceSections,
+  "javascript-equality-operators": javascriptEqualityOperatorsSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -38,6 +42,21 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-operator-precedence": {
+    "which-calculation-first": { output: ["6", "7", "6"] },
+    "same-priority": { output: ["8", "2", "9", "5"] },
+    "worked-example": { output: ["14", "14", "14", "14"] },
+    "use-parentheses": { output: ["14", "42", "60"] },
+    "try-it-yourself": { output: ["2", "18", "8"] },
+  },
+  "javascript-equality-operators": {
+    "loose-equality": { output: ["true", "false", "true"] },
+    "strict-equality": { output: ["true", "false", "true", "false"] },
+    "loose-inequality": { output: ["false", "true", "false"] },
+    "strict-inequality": { output: ["false", "true", "true"] },
+    "surprising-comparisons": { output: ["true", "false", "true", "false", "false", "false", "true"] },
+    "try-it-yourself": { output: ["true", "false", "false", "true"] },
+  },
   "javascript-introduction": {
     "your-first-line": { output: ["Hello"] },
     "a-program-is-a-list": { output: ["First", "Second", "Third"] },
@@ -124,7 +143,7 @@ const typeTable = allSections.flatMap(section => section.blocks ?? []).find(bloc
 assert.deepEqual(typeTable.rows.map(row => row[0]), ["string", "number", "boolean", "undefined", "null", "bigint", "symbol"]);
 assert.equal(typeof null, "object");
 assert.equal(typeof BigInt("12345678901234567890"), "bigint");
-console.log("All five interaction states and every snippet across the six JavaScript lessons match JavaScript execution.");
+console.log(`All five interaction states and every snippet across the ${Object.keys(articles).length} JavaScript lessons match JavaScript execution.`);
 
 if (process.argv[2]) {
   const base = process.argv[2];
@@ -148,7 +167,9 @@ if (process.argv[2]) {
   }
   assert.match(await page(`/articles/${slug}`), /What JavaScript is/);
   assert.match(await page("/articles/javascript-var-let-const"), /Read both examples without interacting/);
-  assert.match(await page("/articles/javascript-symbol"), /In preparation/);
+  assert.match(await page(`/articles/${Object.keys(articles).at(-1)}`), /In preparation/);
+  assert.match(await page("/articles/javascript-operator-precedence"), /<li><strong>An operator<\/strong>[^<]+<ul><li><strong>\+<\/strong> adds\.<\/li>/, "operator signs render as nested list items");
+  assert.match(await page("/articles/javascript-equality-operators"), /<li><strong>A comparison operator<\/strong>[^<]+<ul><li><strong>Operands<\/strong>/, "comparison details render as nested list items");
   const home = await page("/");
   assert.ok(home.includes(`/articles/${slug}`));
   assert.match(home, /href="\/learn\/git"/);
@@ -156,10 +177,10 @@ if (process.argv[2]) {
   for (const query of ["JavaScript", "javascript", "JAVASCRIPT", "JavaScript&topic=Git"]) {
     const archive = await page(`/articles?topic=${query}`);
     assert.ok(archive.includes(`/articles/${slug}`));
-    assert.match(archive, /class="active" aria-current="page" href="\/articles\?topic=JavaScript"/);
+    assert.match(archive, /aria-label="JavaScript sections"/);
     assert.doesNotMatch(archive, /href="\/articles\/git-is-a-time-machine"/);
   }
-  assert.match(await page("/articles?topic=unknown"), /No articles match this topic yet/);
+  assert.match(await page("/articles?topic=unknown"), /No articles match this course yet/);
   for (const query of ["Web", "web", "WEB"]) {
     const response = await fetch(new URL(`/articles?topic=${query}`, base), { redirect: "manual" });
     assert.equal(response.status, 307);
@@ -167,13 +188,40 @@ if (process.argv[2]) {
   }
   assert.equal((await fetch(new URL("/articles/internet-request-journey", base))).status, 404);
   assert.equal((await fetch(new URL("/articles/javascript-variables-and-values", base))).status, 404);
-  const topics = await page("/topics");
-  assert.match(topics, /JavaScript/);
-  assert.match(topics, /6<!-- --> <!-- -->articles/);
+  const oldTopics = await fetch(new URL("/topics", base), { redirect: "manual" });
+  assert.equal(oldTopics.status, 308);
+  assert.equal(oldTopics.headers.get("location"), "/courses");
+  const courses = await page("/courses");
+  assert.match(courses, /Choose your course/);
+  assert.match(courses, /href="\/courses\/javascript"/);
+  assert.match(courses, new RegExp(`${slugs.length}<!-- --> <!-- -->articles`));
+  assert.doesNotMatch(home + courses, />Topics<|href="\/topics"/);
+  const course = await page("/courses/javascript");
+  assert.doesNotMatch(course, /Lesson [0-9]+:|<div class="card-topline"><span>JavaScript<\/span><span>/);
+  const groupedSlugs = [];
+  for (const category of ["Basic", "Advanced", "Functions", "Interviews", "Performance", "OOP"]) {
+    const id = category.toLowerCase();
+    assert.ok(course.includes(`href="#${id}"`));
+    const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
+    assert.ok(section, `${category} section exists`);
+    const listed = [...section.matchAll(/<h3><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
+    const expected = category === "Basic" ? slugs.filter(slug => slug !== "javascript-symbol") : category === "Advanced" ? ["javascript-symbol"] : [];
+    assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
+    if (!listed.length) assert.match(section, /No articles yet/);
+    for (const articleSlug of listed) {
+      const articlePage = await page(`/articles/${articleSlug}`);
+      assert.ok(articlePage.includes(`href="/courses/javascript#${id}"`));
+      assert.doesNotMatch(articlePage, /Lesson [0-9]+:/);
+    }
+    groupedSlugs.push(...listed);
+  }
+  assert.deepEqual(groupedSlugs.sort(), [...slugs].sort(), "every JavaScript article appears exactly once");
   const sitemap = await page("/sitemap.xml");
   assert.ok(sitemap.includes(`/articles/${slug}`));
   assert.ok(!sitemap.includes("internet-request-journey"));
+  assert.ok(sitemap.includes("/courses/javascript"));
+  assert.ok(!sitemap.includes("/topics"));
   assert.match(await page("/articles/git-is-a-time-machine"), /href="\/learn\/git\?view=guides"/);
   assert.match(await page("/articles/generative-ai-vs-agentic-ai"), /topic-ai/);
-  console.log("Topic migration, case handling, legacy URLs, discovery, series links, and sitemap pass.");
+  console.log("Courses, JavaScript categories, case handling, legacy URLs, series links, and sitemap pass.");
 }

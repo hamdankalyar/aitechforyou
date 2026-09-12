@@ -13,7 +13,7 @@ export function Footer() {
         </div>
         <nav aria-label="Footer navigation">
           <Link href="/articles">Articles</Link>
-          <Link href="/topics">Topics</Link>
+          <Link href="/courses">Courses</Link>
           <Link href="/about">About</Link>
         </nav>
         <p className="footer-note">Built with curiosity.<br />© {new Date().getFullYear()} AI Tech For You.</p>

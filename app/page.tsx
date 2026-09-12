@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/article-card";
 import { ArrowRight, Spark } from "@/components/icons";
-import { articles, topics } from "@/lib/articles";
+import { articles, courses } from "@/lib/articles";
 import { JsonLd, site, websiteSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function Home() {
             <div className="visual-core"><Spark size={54} /><strong>Aha!</strong><small>now it makes sense</small></div>
           </div>
         </div>
-        <div className="hero-ticker" aria-label="Topics covered">
+        <div className="hero-ticker" aria-label="Courses available">
           <span>Git</span><i />
           <span>JS</span><i />
           <span>Artificial intelligence</span><i />
@@ -72,12 +72,12 @@ export default function Home() {
 
       <section className="topics-section shell">
         <div className="section-heading dark-heading">
-          <div><span className="section-index">02</span><p>Explore by topic</p></div>
-          <Link className="text-link" href="/topics">View all topics <ArrowRight size={18} /></Link>
+          <div><span className="section-index">02</span><p>Explore courses</p></div>
+          <Link className="text-link" href="/courses">View all courses <ArrowRight size={18} /></Link>
         </div>
         <div className="topic-grid">
-          {topics.map((topic) => (
-            <Link className={`topic-card ${topic.className}`} href={topic.name === "Git" ? "/learn/git" : `/articles?topic=${topic.name}`} key={topic.name}>
+          {courses.map((topic) => (
+            <Link className={`topic-card ${topic.className}`} href={topic.href} key={topic.name}>
               <span>{topic.index}</span>
               <h3>{topic.name}</h3>
               <p>{topic.description}</p>

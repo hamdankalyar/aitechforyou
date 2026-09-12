@@ -36,7 +36,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const showSectionNumbers = learning && article.topic !== "AI";
   const topicSlug = article.topic.toLowerCase();
   const runnableCode = article.topic === "JavaScript";
-  const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : `/articles?topic=${article.topic}`;
+  const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : article.topic === "JavaScript" ? `/courses/javascript#${article.category.toLowerCase()}` : `/articles?topic=${article.topic}`;
   const nextArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order + 1) : undefined;
   const previousArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order - 1) : undefined;
   const sections = article.sections.map((section, index) => ({ ...section, id: section.id ?? `section-${index + 1}` }));
@@ -50,7 +50,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <header className={`article-hero ${article.accent}`}>
         <div className="shell article-hero-grid">
           <div>
-            <Link className="back-link" href={learning ? topicGuidesHref : "/articles"}>← {learning ? `All ${article.topic} guides` : "All articles"}</Link>
+            <Link className="back-link" href={learning ? topicGuidesHref : "/articles"}>← {article.topic === "JavaScript" ? `JavaScript course · ${article.category}` : learning ? `All ${article.topic} guides` : "All articles"}</Link>
             {article.series && <div className="series-eyebrow"><span className="series-dot" />{article.topic} Guide<span>{article.series.title}</span></div>}
             <div className="article-meta"><span>{article.topic}</span><time dateTime={isoDate(article.date)}>{article.date}</time><span>{article.readTime}</span></div>
             <h1>{article.title}</h1>
@@ -68,7 +68,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <section key={section.id} id={section.id}>
               {showSectionNumbers && <div className="section-counter" aria-hidden="true">{String(index + 1).padStart(2, "0")}<span /></div>}
               <h2>{section.heading}</h2>
-              {learning ? <ul className="guide-points">{section.paragraphs.map(paragraph => <li key={paragraph}><Emphasis text={paragraph} /></li>)}</ul> : section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+              {learning ? <ul className="guide-points">{section.paragraphs.map(paragraph => {
+                const text = typeof paragraph === "string" ? paragraph : paragraph.text;
+                return <li key={text}><Emphasis text={text} />{typeof paragraph !== "string" && <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul>}</li>;
+              })}</ul> : section.paragraphs.map(paragraph => typeof paragraph === "string" ? <p key={paragraph}>{paragraph}</p> : <div key={paragraph.text}><p><Emphasis text={paragraph.text} /></p><ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul></div>)}
               {section.code && (runnableCode ? <CodeRunner code={section.code} /> : <pre tabIndex={0} aria-label="Code example"><code>{section.code}</code></pre>)}
               {section.blocks?.map((block, index) => <ArticleBlock block={block} runnableCode={runnableCode} key={index} />)}
             </section>

@@ -11,7 +11,7 @@ export function Header() {
         </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
           <Link href="/articles">Articles</Link>
-          <Link href="/topics">Topics</Link>
+          <Link href="/courses">Courses</Link>
           <Link href="/about">About</Link>
         </nav>
         <div className="header-actions">

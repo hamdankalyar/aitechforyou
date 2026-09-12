@@ -8,7 +8,7 @@ export function ArticleCard({ article }: { article: Article }) {
     <article className={`article-card ${article.accent}`}>
       <div className="card-topline">
         <span>{article.topic}</span>
-        <span>{article.number}</span>
+        {article.topic !== "JavaScript" && <span>{article.number}</span>}
       </div>
       <div className="card-art" aria-hidden="true">
         <span className="art-ring" />

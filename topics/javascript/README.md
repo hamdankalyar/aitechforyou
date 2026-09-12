@@ -1,19 +1,23 @@
 # JavaScript lessons: rules
 
-Read this before writing or editing any JavaScript article. The JavaScript topic is a course. Each article is one lesson, numbered, and teaches one thing.
+Read this before writing or editing any JavaScript article. Each article teaches one thing.
+
+The course lives at `/courses/javascript`, with separate sections for Basic, Advanced, Functions, Interviews, Performance, and OOP. Set each JavaScript article's `category` in `lib/articles.ts` to one of these names. The first five articles are Basic; Symbol is Advanced. Keep the reading order in `series.order`, but do not show numbers in article titles or cards. Sections without published articles show an empty state.
 
 ## The course
 
-| Lesson | Slug | Teaches |
-|---|---|---|
-| 1 | `javascript-introduction` | What JavaScript is, first line, how to read the code boxes |
-| 2 | `javascript-console-log` | Printing text, numbers, several values, comments, first error |
-| 3 | `javascript-var-let-const` | Variables and the three keywords |
-| 4 | `javascript-primitive-types` | typeof and the seven primitives |
-| 5 | `javascript-strings` | Length, index, search, join, change case, immutability |
-| 6 | `javascript-symbol` | Unique values and symbol keys |
+| Slug | Teaches |
+|---|---|
+| `javascript-introduction` | What JavaScript is, first line, how to read the code boxes |
+| `javascript-console-log` | Printing text, numbers, several values, comments, first error |
+| `javascript-var-let-const` | Variables and the three keywords |
+| `javascript-primitive-types` | typeof and the seven primitives |
+| `javascript-strings` | Length, index, search, join, change case, immutability |
+| `javascript-symbol` | Unique values and symbol keys |
+| `javascript-operator-precedence` | Arithmetic priority, left-to-right grouping, parentheses |
+| `javascript-equality-operators` | Loose and strict equality and inequality, type coercion |
 
-Next lessons continue the numbering (objects, arrays, functions, comparisons, error handling). Set `series.order` to the lesson number and title the article "Lesson N: ...".
+New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 
 ## Beginner first
 
@@ -54,6 +58,7 @@ Next lessons continue the numbering (objects, arrays, functions, comparisons, er
 ## Bullets
 
 - Learning articles are bullet-first: `paragraphs` renders as a list, one idea per bullet.
+- For related examples or steps, use `{ text: "**Main point.**", bullets: ["**Detail.** ..."] }` in `paragraphs`. Keep sub-bullets to one level and one idea per line.
 - Bold the thing the bullet is about, at the start: `"**let** is the keyword that declares..."`, `"**var is hoisted.** The name exists..."`. Only bold is supported (`**text**`); nothing else is parsed.
 - Every bullet adds a fact. Cut bullets that restate the heading or the previous bullet.
 
