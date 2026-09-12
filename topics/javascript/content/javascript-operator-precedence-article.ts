@@ -10,7 +10,17 @@ export const javascriptOperatorPrecedenceSections: ArticleSection[] = [
         "**The * sign** multiplies.",
         "**/** divides.",
       ] },
-      "**An expression** is code that produces a value, such as 4 + 1 * 2.",
+      { text: "**An expression** evaluates (also called resolves) to a value.", bullets: [
+        "**It asks JavaScript for a value.**",
+        "**A variable name:** myAssignedVariable gets the variable's value.",
+        "**A calculation:** 6 + 4 evaluates to 10.",
+        "**A page lookup:** document.getElementById(\"board\") evaluates to the matching page element.",
+      ] },
+      { text: "**A statement** tells JavaScript to do something.", bullets: [
+        "**Declare and assign a variable:** let ten = 6 + 4;",
+        "**Assign a new value:** myDeclaredVariable = \"new value\";",
+        "**Store a page element:** let board = document.getElementById(\"board\");",
+      ] },
       { text: "**Precedence** means which operator takes priority. Without extra parentheses:", bullets: [
         "**First:** multiply and divide.",
         "**Then:** add and subtract.",
