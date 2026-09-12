@@ -5,7 +5,6 @@ export const javascriptSymbolSections: ArticleSection[] = [
     id: "what-a-symbol-is", heading: "What a symbol is",
     paragraphs: [
       "**A symbol creates a unique value.** No other value, and no other symbol, is ever equal to it.",
-      "**Symbol(\"id\") creates one.** Call Symbol like console.log: the name, then parentheses.",
       "**It is commonly used as a unique object property key.** An object stores values under names, called keys. Objects get their own lesson later; this lesson only needs the idea.",
       "**Printing a symbol shows Symbol(id).** Its type is symbol, the seventh primitive type.",
     ],
