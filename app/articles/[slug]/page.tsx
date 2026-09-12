@@ -77,7 +77,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             </section>
           ))}
           {article.sources && <div className="article-sources"><span className="learning-kicker">Further reading · {article.topic} sources</span><ul>{article.sources.map(source => <li key={source.url}><a href={source.url}>{source.title} ↗</a></li>)}</ul></div>}
-          {article.series ? <nav className="series-navigation" aria-label={`${article.topic} guides`}>{previousArticle && <Link className="series-previous" href={`/articles/${previousArticle.slug}`}>← Previous guide: {previousArticle.title}</Link>}<div className="series-next"><span className="learning-kicker">Next guide in {article.series.title}{nextArticle ? "" : " · In preparation"}</span><h2>{nextArticle?.title ?? article.series.nextTitle}</h2><p>{article.series.nextDescription}</p>{nextArticle ? <Link href={`/articles/${nextArticle.slug}`}>Read the guide <ArrowRight /></Link> : <Link href={topicGuidesHref}>Browse {article.topic} {article.topic === "Git" ? "lessons & guides" : "articles & guides"} <ArrowRight /></Link>}</div></nav> : <div className="article-end">
+          {article.series ? <nav className="series-navigation" aria-label={`${article.topic} course navigation`}>
+            {previousArticle && <Link className="series-nav-card series-previous" href={`/articles/${previousArticle.slug}`}><span>← Previous article</span><strong>{previousArticle.title}</strong></Link>}
+            <Link className="series-nav-card series-course" href={topicGuidesHref}><span>Course</span><strong>{article.topic === "Git" ? "Git guides" : `${article.topic} course`}</strong></Link>
+            {nextArticle ? <Link className="series-nav-card series-next" href={`/articles/${nextArticle.slug}`}><span>Next article →</span><strong>{nextArticle.title}</strong></Link> : <div className="series-nav-card series-next is-disabled" aria-disabled="true"><span>Next article · In preparation</span><strong>{article.series.nextTitle}</strong></div>}
+          </nav> : <div className="article-end">
             <span>Keep learning</span>
             <h2>One idea understood.<br />Many more to explore.</h2>
             <Link className="button dark" href="/articles">Read another article <ArrowRight /></Link>

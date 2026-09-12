@@ -216,6 +216,11 @@ if (process.argv[2]) {
     groupedSlugs.push(...listed);
   }
   assert.deepEqual(groupedSlugs.sort(), [...slugs].sort(), "every JavaScript article appears exactly once");
+  const articleNavigation = await page("/articles/javascript-operator-precedence");
+  assert.match(articleNavigation, /aria-label="JavaScript course navigation"/);
+  assert.match(articleNavigation, /class="series-nav-card series-previous" href="\/articles\/javascript-symbol"/);
+  assert.match(articleNavigation, /class="series-nav-card series-course" href="\/courses\/javascript#basic"/);
+  assert.match(articleNavigation, /class="series-nav-card series-next" href="\/articles\/javascript-equality-operators"/);
   const sitemap = await page("/sitemap.xml");
   assert.ok(sitemap.includes(`/articles/${slug}`));
   assert.ok(!sitemap.includes("internet-request-journey"));
