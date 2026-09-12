@@ -16,7 +16,7 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-symbol` | Unique values and symbol keys |
 | `javascript-operator-precedence` | Arithmetic priority, left-to-right grouping, parentheses |
 | `javascript-equality-operators` | Loose and strict equality and inequality, type coercion |
-| `javascript-equality-truthiness-interview-questions` | Interview questions about equality, ToBoolean, and object identity |
+| `javascript-conditions-ternary` | Conditions, AND/OR/NOT, and ternary values |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 
@@ -35,6 +35,7 @@ New articles continue the reading order (objects, arrays, functions, comparisons
 - Styles: `topics/javascript/javascript-learning.css`, scoped under `.topic-javascript`.
 - Verification: `topics/javascript/scripts/check-javascript-articles.mjs` covers every JavaScript article. Add the new sections file to its `articles` map and add expected output for each snippet. It executes every snippet with `node:vm` and asserts the exact console output and any intended error.
 - Source notes: `references/javascript/`. Ground the content in the author's notes; add explanation only where the notes leave a gap.
+- Browser-only snippets: mark their expected output with `browserOnly: true` in the check script and verify their console output with the article's Run button in a real browser. The Node checker reports these separately because it has no document.
 
 ## Code
 

@@ -10,7 +10,7 @@ import { javascriptStringsSections } from "../content/javascript-strings-article
 import { javascriptSymbolSections } from "../content/javascript-symbol-article.ts";
 import { javascriptOperatorPrecedenceSections } from "../content/javascript-operator-precedence-article.ts";
 import { javascriptEqualityOperatorsSections } from "../content/javascript-equality-operators-article.ts";
-import { javascriptEqualityTruthinessInterviewSections } from "../content/javascript-equality-truthiness-interview-article.ts";
+import { javascriptConditionsTernarySections } from "../content/javascript-conditions-ternary-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -21,7 +21,7 @@ const articles = {
   "javascript-symbol": javascriptSymbolSections,
   "javascript-operator-precedence": javascriptOperatorPrecedenceSections,
   "javascript-equality-operators": javascriptEqualityOperatorsSections,
-  "javascript-equality-truthiness-interview-questions": javascriptEqualityTruthinessInterviewSections,
+  "javascript-conditions-ternary": javascriptConditionsTernarySections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -44,6 +44,15 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-conditions-ternary": {
+    "if-and-else": { output: ["Passed"] },
+    "truthy-and-falsy": { output: ["2 runs", "3 runs"] },
+    "logical-and": { output: ["false", "0", "Welcome"] },
+    "logical-or": { output: ["true", "Guest"] },
+    "logical-not": { output: ["true", "true", "false"] },
+    "ternary": { output: ["Passed"] },
+    "try-it-yourself": { output: ["true", "Show lesson"] },
+  },
   "javascript-operator-precedence": {
     "which-calculation-first": { output: ["6", "7", "6"] },
     "same-priority": { output: ["8", "2", "9", "5"] },
@@ -56,16 +65,8 @@ const expected = {
     "strict-equality": { output: ["true", "false", "true", "false"] },
     "loose-inequality": { output: ["false", "true", "false"] },
     "strict-inequality": { output: ["false", "true", "true"] },
-    "surprising-comparisons": { output: ["true", "false", "true", "false", "false", "false", "true"] },
+    "surprising-comparisons": { output: ["true", "false", "true", "false", "false", "false", "true", "NaN", "false", "true"] },
     "try-it-yourself": { output: ["true", "false", "false", "true"] },
-  },
-  "javascript-equality-truthiness-interview-questions": {
-    "empty-array-equals-zero": { output: ['""', "0", "true", "false"] },
-    "empty-array-equals-not-array": { output: ["true", "false", "0", "true"] },
-    "object-comparisons": { output: ["true", "false", "false", "true", "false"] },
-    "booleans-with-loose-equality": { output: ["true", "true", "true", "true"] },
-    "falsy-values": { output: ["false", "false", "false", "false", "true", "true"] },
-    "try-it-yourself": { output: ["true", "false", "true", "false"] },
   },
   "javascript-introduction": {
     "your-first-line": { output: ["Hello"] },
@@ -130,9 +131,13 @@ for (const [articleSlug, sections] of Object.entries(articles)) {
     if (section.code) {
       const want = expected[articleSlug]?.[section.id];
       assert.ok(want, `missing expectation for ${articleSlug} ${section.id}`);
-      const result = execute(section.code);
-      assert.equal(result.error, want.error ?? null, `${articleSlug} ${section.id}`);
-      assert.deepEqual(result.output, want.output, `${articleSlug} ${section.id}`);
+      if (want.browserOnly) {
+        console.log(`Browser check required: /articles/${articleSlug}#${section.id}. Expected console: ${JSON.stringify(want.output)}`);
+      } else {
+        const result = execute(section.code);
+        assert.equal(result.error, want.error ?? null, `${articleSlug} ${section.id}`);
+        assert.deepEqual(result.output, want.output, `${articleSlug} ${section.id}`);
+      }
     }
     for (const block of section.blocks ?? []) {
       if (block.type === "details" && block.code) {
@@ -153,7 +158,7 @@ const typeTable = allSections.flatMap(section => section.blocks ?? []).find(bloc
 assert.deepEqual(typeTable.rows.map(row => row[0]), ["string", "number", "boolean", "undefined", "null", "bigint", "symbol"]);
 assert.equal(typeof null, "object");
 assert.equal(typeof BigInt("12345678901234567890"), "bigint");
-console.log(`All five interaction states and every snippet across the ${Object.keys(articles).length} JavaScript lessons match JavaScript execution.`);
+console.log(`All five interaction states and every Node-compatible snippet across the ${Object.keys(articles).length} JavaScript lessons match JavaScript execution.`);
 
 if (process.argv[2]) {
   const base = process.argv[2];
@@ -198,6 +203,8 @@ if (process.argv[2]) {
   }
   assert.equal((await fetch(new URL("/articles/internet-request-journey", base))).status, 404);
   assert.equal((await fetch(new URL("/articles/javascript-variables-and-values", base))).status, 404);
+  const removedInterviewSlug = "javascript-equality-truthiness-interview-questions";
+  assert.equal((await fetch(new URL(`/articles/${removedInterviewSlug}`, base))).status, 404);
   const oldTopics = await fetch(new URL("/topics", base), { redirect: "manual" });
   assert.equal(oldTopics.status, 308);
   assert.equal(oldTopics.headers.get("location"), "/courses");
@@ -215,7 +222,7 @@ if (process.argv[2]) {
     const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
     assert.ok(section, `${category} section exists`);
     const listed = [...section.matchAll(/<h3><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
-    const expected = category === "Basic" ? slugs.filter(slug => !["javascript-symbol", "javascript-equality-truthiness-interview-questions"].includes(slug)) : category === "Advanced" ? ["javascript-symbol"] : category === "Interviews" ? ["javascript-equality-truthiness-interview-questions"] : [];
+    const expected = category === "Basic" ? slugs.filter(slug => slug !== "javascript-symbol") : category === "Advanced" ? ["javascript-symbol"] : [];
     assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
     if (!listed.length) assert.match(section, /No articles yet/);
     for (const articleSlug of listed) {
@@ -232,6 +239,9 @@ if (process.argv[2]) {
   assert.match(articleNavigation, /class="series-nav-card series-course" href="\/courses\/javascript#basic"/);
   assert.match(articleNavigation, /class="series-nav-card series-next" href="\/articles\/javascript-equality-operators"/);
   const sitemap = await page("/sitemap.xml");
+  for (const html of [home, course, sitemap, await page("/articles?topic=JavaScript"), await page("/articles/javascript-conditions-ternary")]) {
+    assert.ok(!html.includes(removedInterviewSlug), "removed interview article is not linked or indexed");
+  }
   assert.ok(sitemap.includes(`/articles/${slug}`));
   assert.ok(!sitemap.includes("internet-request-journey"));
   assert.ok(sitemap.includes("/courses/javascript"));

@@ -15,7 +15,7 @@ function buildDocument(code: string, token: string) {
     const format = (value) => {
       if (typeof value === "string") return value;
       if (typeof value === "bigint") return value + "n";
-      if (typeof value === "symbol" || typeof value === "function") return String(value);
+      if (typeof value === "number" || typeof value === "symbol" || typeof value === "function") return String(value);
       if (value === undefined) return "undefined";
       if (value instanceof Error) return value.name + ": " + value.message;
       try { const text = JSON.stringify(value); return text === undefined ? String(value) : text; } catch { return String(value); }

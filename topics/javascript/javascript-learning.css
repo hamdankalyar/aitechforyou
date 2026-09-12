@@ -3,6 +3,12 @@
 .topic-javascript .learning-table td:last-child { font-family: inherit; }
 .topic-javascript .guide-points > li > ul { margin-block: 8px 16px; padding-left: 22px; list-style-type: circle; }
 .topic-javascript .guide-points > li > ul > li { margin-block: 6px; }
+.topic-javascript .learning-info { margin-top: 8px; padding: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--paper); }
+.topic-javascript .learning-info summary { display: flex; align-items: center; gap: 10px; padding: 10px 14px; }
+.topic-javascript .learning-info summary::-webkit-details-marker { display: none; }
+.topic-javascript .learning-info summary svg { flex-shrink: 0; }
+.topic-javascript .learning-info[open] summary { border-bottom: 1px solid var(--border); }
+.topic-javascript .learning-info .guide-points { margin: 12px 16px; padding-left: 20px; }
 .topic-javascript .article-prose pre { background: var(--ink); color: var(--yellow); font-size: 14px; }
 .variables-hero-art { padding: 24px 18px; border: 2px solid var(--ink); background: var(--yellow); color: var(--ink); border-radius: 8px; box-shadow: 6px 6px 0 var(--ink); transform: rotate(3deg); }
 .variables-hero-art > span { font: 12px/1.8 ui-monospace, monospace; }

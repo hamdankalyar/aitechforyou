@@ -6,7 +6,7 @@ import { javascriptStringsSections } from "@/topics/javascript/content/javascrip
 import { javascriptSymbolSections } from "@/topics/javascript/content/javascript-symbol-article";
 import { javascriptOperatorPrecedenceSections } from "@/topics/javascript/content/javascript-operator-precedence-article";
 import { javascriptEqualityOperatorsSections } from "@/topics/javascript/content/javascript-equality-operators-article";
-import { javascriptEqualityTruthinessInterviewSections } from "@/topics/javascript/content/javascript-equality-truthiness-interview-article";
+import { javascriptConditionsTernarySections } from "@/topics/javascript/content/javascript-conditions-ternary-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -40,7 +40,7 @@ export type ArticleBlock =
   | { type: "stash-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
-  | { type: "details"; title: string; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
+  | { type: "details"; title: string; icon?: "info"; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
   | { type: "callout"; title: string; text: string }
   | { type: "figure"; caption: string }
   | { type: "command"; command: string; explanation: string; output?: string }
@@ -50,7 +50,7 @@ export type ArticleBlock =
 export type ArticleSection = {
   id?: string;
   heading: string;
-  paragraphs: (string | { text: string; bullets: string[] })[];
+  paragraphs: (string | { text: string; bullets: string[]; info?: Extract<ArticleBlock, { type: "details" }> })[];
   code?: string;
   blocks?: ArticleBlock[];
 };
@@ -584,36 +584,40 @@ export const articles: Article[] = [
     series: {
       title: "JavaScript, made visible", order: 8, practiceTime: "1 min to explore",
       nextTitle: "Conditions and the ternary operator",
-      nextDescription: "Use a true-or-false result to choose what happens next. In preparation.",
+      nextDescription: "Choose what runs with conditions, AND, OR, NOT, and the ternary operator.",
       exercise: { id: "try-it-yourself", label: "Try the comparisons" }, illustration: "values",
     },
     sections: javascriptEqualityOperatorsSections,
     sources: [
       { title: "MDN · Equality (==)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality" },
       { title: "MDN · Strict equality (===)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality" },
+      { title: "ECMAScript · Loose equality rules", url: "https://tc39.es/ecma262/multipage/abstract-operations.html#sec-islooselyequal" },
+      { title: "MDN · isNaN()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN" },
     ],
   },
   {
-    slug: "javascript-equality-truthiness-interview-questions",
-    title: "Equality and truthiness interview questions",
-    excerpt: "Answer the JavaScript equality questions that look impossible by tracing strict equality, loose equality, ToBoolean, and object identity.",
+    slug: "javascript-conditions-ternary",
+    title: "Conditions and the ternary operator",
+    excerpt: "Learn if/else, AND, OR, NOT, and the ternary operator with short examples.",
     topic: "JavaScript",
-    category: "Interviews",
+    category: "Basic",
     date: "Sep 12, 2026",
-    readTime: "5 min read",
+    readTime: "4 min read",
     accent: "yellow",
-    number: "25",
+    number: "26",
     series: {
       title: "JavaScript, made visible", order: 9, practiceTime: "2 min to explore",
-      nextTitle: "Conditions and the ternary operator",
-      nextDescription: "Use truthy and falsy values to choose which code runs next.",
-      exercise: { id: "try-it-yourself", label: "Try the interview questions" }, illustration: "values",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "try-it-yourself", label: "Try the conditions" }, illustration: "values",
     },
-    sections: javascriptEqualityTruthinessInterviewSections,
+    sections: javascriptConditionsTernarySections,
     sources: [
-      { title: "MDN · Equality comparisons and sameness", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness" },
-      { title: "MDN · Truthy", url: "https://developer.mozilla.org/en-US/docs/Glossary/Truthy" },
-      { title: "MDN · Falsy", url: "https://developer.mozilla.org/en-US/docs/Glossary/Falsy" },
+      { title: "MDN · if...else", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else" },
+      { title: "MDN · Logical AND (&&)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND" },
+      { title: "MDN · Logical OR (||)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR" },
+      { title: "MDN · Logical NOT (!)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT" },
+      { title: "MDN · Conditional (ternary) operator", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator" },
     ],
   },
 ];

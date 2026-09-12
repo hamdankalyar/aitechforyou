@@ -12,4 +12,4 @@ Source: author's notes supplied in the conversation on September 12, 2026.
 
 The published material uses separate precedence and equality lessons to follow the course's one-topic-per-lesson rule. It adds boolean, null/undefined, and NaN examples to clarify the limits of the equality shortcuts in the notes.
 
-Follow-up reminders from the author: conditions, the ternary operator, and adding CSS classes with `element.classList.add()`. These need their own lessons. The original wording was "addclasslist".
+The author requested one chapter immediately after equality operators covering conditions, AND, OR, NOT, and the ternary operator. An earlier version also covered `classList.add()`, originally written as "addclasslist", but the author later requested its removal. The author also requested removal of the equality and truthiness interview guide.
