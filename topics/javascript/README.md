@@ -16,6 +16,7 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-symbol` | Unique values and symbol keys |
 | `javascript-operator-precedence` | Arithmetic priority, left-to-right grouping, parentheses |
 | `javascript-equality-operators` | Loose and strict equality and inequality, type coercion |
+| `javascript-equality-truthiness-interview-questions` | Interview questions about equality, ToBoolean, and object identity |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 

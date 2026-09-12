@@ -6,6 +6,7 @@ import { javascriptStringsSections } from "@/topics/javascript/content/javascrip
 import { javascriptSymbolSections } from "@/topics/javascript/content/javascript-symbol-article";
 import { javascriptOperatorPrecedenceSections } from "@/topics/javascript/content/javascript-operator-precedence-article";
 import { javascriptEqualityOperatorsSections } from "@/topics/javascript/content/javascript-equality-operators-article";
+import { javascriptEqualityTruthinessInterviewSections } from "@/topics/javascript/content/javascript-equality-truthiness-interview-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -590,6 +591,29 @@ export const articles: Article[] = [
     sources: [
       { title: "MDN · Equality (==)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality" },
       { title: "MDN · Strict equality (===)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality" },
+    ],
+  },
+  {
+    slug: "javascript-equality-truthiness-interview-questions",
+    title: "Equality and truthiness interview questions",
+    excerpt: "Answer the JavaScript equality questions that look impossible by tracing strict equality, loose equality, ToBoolean, and object identity.",
+    topic: "JavaScript",
+    category: "Interviews",
+    date: "Sep 12, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "25",
+    series: {
+      title: "JavaScript, made visible", order: 9, practiceTime: "2 min to explore",
+      nextTitle: "Conditions and the ternary operator",
+      nextDescription: "Use truthy and falsy values to choose which code runs next.",
+      exercise: { id: "try-it-yourself", label: "Try the interview questions" }, illustration: "values",
+    },
+    sections: javascriptEqualityTruthinessInterviewSections,
+    sources: [
+      { title: "MDN · Equality comparisons and sameness", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness" },
+      { title: "MDN · Truthy", url: "https://developer.mozilla.org/en-US/docs/Glossary/Truthy" },
+      { title: "MDN · Falsy", url: "https://developer.mozilla.org/en-US/docs/Glossary/Falsy" },
     ],
   },
 ];

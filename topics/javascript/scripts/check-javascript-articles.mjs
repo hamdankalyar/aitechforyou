@@ -10,6 +10,7 @@ import { javascriptStringsSections } from "../content/javascript-strings-article
 import { javascriptSymbolSections } from "../content/javascript-symbol-article.ts";
 import { javascriptOperatorPrecedenceSections } from "../content/javascript-operator-precedence-article.ts";
 import { javascriptEqualityOperatorsSections } from "../content/javascript-equality-operators-article.ts";
+import { javascriptEqualityTruthinessInterviewSections } from "../content/javascript-equality-truthiness-interview-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -20,6 +21,7 @@ const articles = {
   "javascript-symbol": javascriptSymbolSections,
   "javascript-operator-precedence": javascriptOperatorPrecedenceSections,
   "javascript-equality-operators": javascriptEqualityOperatorsSections,
+  "javascript-equality-truthiness-interview-questions": javascriptEqualityTruthinessInterviewSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -56,6 +58,14 @@ const expected = {
     "strict-inequality": { output: ["false", "true", "true"] },
     "surprising-comparisons": { output: ["true", "false", "true", "false", "false", "false", "true"] },
     "try-it-yourself": { output: ["true", "false", "false", "true"] },
+  },
+  "javascript-equality-truthiness-interview-questions": {
+    "empty-array-equals-zero": { output: ['""', "0", "true", "false"] },
+    "empty-array-equals-not-array": { output: ["true", "false", "0", "true"] },
+    "object-comparisons": { output: ["true", "false", "false", "true", "false"] },
+    "booleans-with-loose-equality": { output: ["true", "true", "true", "true"] },
+    "falsy-values": { output: ["false", "false", "false", "false", "true", "true"] },
+    "try-it-yourself": { output: ["true", "false", "true", "false"] },
   },
   "javascript-introduction": {
     "your-first-line": { output: ["Hello"] },
@@ -205,7 +215,7 @@ if (process.argv[2]) {
     const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
     assert.ok(section, `${category} section exists`);
     const listed = [...section.matchAll(/<h3><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
-    const expected = category === "Basic" ? slugs.filter(slug => slug !== "javascript-symbol") : category === "Advanced" ? ["javascript-symbol"] : [];
+    const expected = category === "Basic" ? slugs.filter(slug => !["javascript-symbol", "javascript-equality-truthiness-interview-questions"].includes(slug)) : category === "Advanced" ? ["javascript-symbol"] : category === "Interviews" ? ["javascript-equality-truthiness-interview-questions"] : [];
     assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
     if (!listed.length) assert.match(section, /No articles yet/);
     for (const articleSlug of listed) {
