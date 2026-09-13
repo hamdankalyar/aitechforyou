@@ -7,6 +7,8 @@ import { javascriptSymbolSections } from "@/topics/javascript/content/javascript
 import { javascriptOperatorPrecedenceSections } from "@/topics/javascript/content/javascript-operator-precedence-article";
 import { javascriptEqualityOperatorsSections } from "@/topics/javascript/content/javascript-equality-operators-article";
 import { javascriptConditionsTernarySections } from "@/topics/javascript/content/javascript-conditions-ternary-article";
+import { javascriptObjectsSections } from "@/topics/javascript/content/javascript-objects-article";
+import { javascriptArraysSections } from "@/topics/javascript/content/javascript-arrays-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -50,7 +52,7 @@ export type ArticleBlock =
 export type ArticleSection = {
   id?: string;
   heading: string;
-  paragraphs: (string | { text: string; bullets: string[]; info?: Extract<ArticleBlock, { type: "details" }> })[];
+  paragraphs: (string | { text: string; bullets?: string[]; code?: string; info?: Extract<ArticleBlock, { type: "details" }> })[];
   code?: string;
   blocks?: ArticleBlock[];
 };
@@ -607,8 +609,8 @@ export const articles: Article[] = [
     number: "26",
     series: {
       title: "JavaScript, made visible", order: 9, practiceTime: "2 min to explore",
-      nextTitle: "More JavaScript lessons",
-      nextDescription: "More lessons are in preparation.",
+      nextTitle: "Objects",
+      nextDescription: "Group related values under property names and add behavior with methods.",
       exercise: { id: "try-it-yourself", label: "Try the conditions" }, illustration: "values",
     },
     sections: javascriptConditionsTernarySections,
@@ -618,6 +620,51 @@ export const articles: Article[] = [
       { title: "MDN · Logical OR (||)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR" },
       { title: "MDN · Logical NOT (!)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT" },
       { title: "MDN · Conditional (ternary) operator", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator" },
+    ],
+  },
+  {
+    slug: "javascript-objects",
+    title: "Objects",
+    excerpt: "Group related values under property names. Read and change properties, use methods, and nest values.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 13, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "27",
+    series: {
+      title: "JavaScript, made visible", order: 10, practiceTime: "2 min to explore",
+      nextTitle: "Arrays",
+      nextDescription: "Keep several values together, find items, and change the list.",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+    },
+    sections: javascriptObjectsSections,
+    sources: [
+      { title: "MDN · Working with objects", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects" },
+      { title: "MDN · this", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this" },
+      { title: "MDN · Object.freeze()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze" },
+    ],
+  },
+  {
+    slug: "javascript-arrays",
+    title: "Arrays",
+    excerpt: "Keep several values in one list. Find items, change them, and use common array methods.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 13, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "28",
+    series: {
+      title: "JavaScript, made visible", order: 11, practiceTime: "2 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+    },
+    sections: javascriptArraysSections,
+    sources: [
+      { title: "MDN · Array", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" },
+      { title: "MDN · Indexed collections", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections" },
     ],
   },
 ];

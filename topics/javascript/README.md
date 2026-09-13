@@ -17,6 +17,8 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-operator-precedence` | Arithmetic priority, left-to-right grouping, parentheses |
 | `javascript-equality-operators` | Loose and strict equality and inequality, type coercion |
 | `javascript-conditions-ternary` | Conditions, AND/OR/NOT, and ternary values |
+| `javascript-objects` | Object literals, properties, methods, this, and nested values |
+| `javascript-arrays` | Lists, indexes, searches, changes, and common array methods |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 
@@ -61,6 +63,7 @@ New articles continue the reading order (objects, arrays, functions, comparisons
 
 - Learning articles are bullet-first: `paragraphs` renders as a list, one idea per bullet.
 - For related examples or steps, use `{ text: "**Main point.**", bullets: ["**Detail.** ..."] }` in `paragraphs`. Keep sub-bullets to one level and one idea per line.
+- To place a runnable example directly under one teaching point, use `{ text: "**Main point.** ...", code: "..." }` in `paragraphs`.
 - Bold the thing the bullet is about, at the start: `"**let** is the keyword that declares..."`, `"**var is hoisted.** The name exists..."`. Only bold is supported (`**text**`); nothing else is parsed.
 - Every bullet adds a fact. Cut bullets that restate the heading or the previous bullet.
 

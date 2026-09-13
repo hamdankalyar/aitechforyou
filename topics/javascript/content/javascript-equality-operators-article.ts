@@ -123,6 +123,12 @@ export const javascriptEqualityOperatorsSections: ArticleSection[] = [
         "**=** assigns a value, as in let score = 5.",
         "**== and ===** compare values for equality.",
       ] },
+      { text: "**Comparison operators:**", bullets: [
+        "**>** means greater than.",
+        "**<** means less than.",
+        "**>=** means greater than or equal to.",
+        "**<=** means less than or equal to.",
+      ] },
     ],
     blocks: [{ type: "table", caption: "Comparing the number 5 and the string \"5\"", columns: ["Operator", "Question", "Example", "Result"], rows: [
       ["==", "Equal under loose-equality rules?", '5 == "5"', "true"],

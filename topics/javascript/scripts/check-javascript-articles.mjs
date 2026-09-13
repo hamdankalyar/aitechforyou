@@ -11,6 +11,8 @@ import { javascriptSymbolSections } from "../content/javascript-symbol-article.t
 import { javascriptOperatorPrecedenceSections } from "../content/javascript-operator-precedence-article.ts";
 import { javascriptEqualityOperatorsSections } from "../content/javascript-equality-operators-article.ts";
 import { javascriptConditionsTernarySections } from "../content/javascript-conditions-ternary-article.ts";
+import { javascriptObjectsSections } from "../content/javascript-objects-article.ts";
+import { javascriptArraysSections } from "../content/javascript-arrays-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -22,6 +24,8 @@ const articles = {
   "javascript-operator-precedence": javascriptOperatorPrecedenceSections,
   "javascript-equality-operators": javascriptEqualityOperatorsSections,
   "javascript-conditions-ternary": javascriptConditionsTernarySections,
+  "javascript-objects": javascriptObjectsSections,
+  "javascript-arrays": javascriptArraysSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -44,6 +48,55 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-objects": {
+    "what-an-object-is": { examples: [
+      { output: ["[object Object]"] },
+      { output: ["[object Object]"] },
+      { output: ["JavaScript", "1995"] },
+      { output: ["object", "true"] },
+    ] },
+    "read-and-use-properties": { examples: [
+      { output: ["JavaScript"] },
+      { output: ["1995", "JavaScript"] },
+      { output: ["true", "31"] },
+      { output: ["undefined"] },
+    ] },
+    "change-properties": { examples: [
+      { output: ["Sara"] },
+    ] },
+    "add-properties": { examples: [
+      { output: ["20"] },
+    ] },
+    "delete-properties": { examples: [
+      { output: ["undefined"] },
+    ] },
+    "freeze-properties": { examples: [
+      { output: ["Sara"], error: "TypeError" },
+    ] },
+    "methods-and-this": { examples: [
+      { output: ["Woof"] },
+      { output: ["Hi, my name is Anjana"] },
+    ] },
+    "nested-values": { examples: [
+      { output: ["tiramisu"] },
+      { output: ["Spice", "Baby"] },
+    ] },
+    "built-in-objects": { examples: [
+      { output: ["3.141592653589793", "5"] },
+      { output: ["Objects"], browserOnly: true },
+      { output: ["5", "HELLO"] },
+    ] },
+    "quick-check": { examples: [{ output: ["Dune 500"] }] },
+  },
+  "javascript-arrays": {
+    "what-an-array-is": { output: ["", "pop,6,false", "echo,echo,echo"] },
+    "length-and-indexes": { output: ["3", "plethora", "array", "undefined"] },
+    "find-an-item": { output: ["2", "-1", "true", "false"] },
+    "change-an-item": { output: ["variety"], error: "TypeError" },
+    "add-and-remove-items": { output: ["plethora,variety,multitude", "cornucopia"] },
+    "useful-array-methods": { output: ["a,b,c,d", "lions & tigers & bears oh my!", "1,2,3,4,5,6"] },
+    "quick-check": { output: ["10,20,40", "30"] },
+  },
   "javascript-conditions-ternary": {
     "if-and-else": { output: ["Passed"] },
     "truthy-and-falsy": { output: ["2 runs", "3 runs"] },
@@ -139,6 +192,19 @@ for (const [articleSlug, sections] of Object.entries(articles)) {
         assert.deepEqual(result.output, want.output, `${articleSlug} ${section.id}`);
       }
     }
+    const paragraphCodes = section.paragraphs.flatMap(paragraph => typeof paragraph === "string" || !paragraph.code ? [] : [paragraph.code]);
+    for (const [index, code] of paragraphCodes.entries()) {
+      const want = expected[articleSlug]?.[section.id]?.examples?.[index];
+      assert.ok(want, `missing expectation for ${articleSlug} ${section.id} example ${index + 1}`);
+      if (want.browserOnly) {
+        console.log(`Browser check required: /articles/${articleSlug}#${section.id} example ${index + 1}. Expected console: ${JSON.stringify(want.output)}`);
+      } else {
+        const result = execute(code);
+        assert.equal(result.error, want.error ?? null, `${articleSlug} ${section.id} example ${index + 1}`);
+        assert.deepEqual(result.output, want.output, `${articleSlug} ${section.id} example ${index + 1}`);
+      }
+    }
+    if (paragraphCodes.length) assert.equal(expected[articleSlug]?.[section.id]?.examples?.length, paragraphCodes.length, `${articleSlug} ${section.id} example count`);
     for (const block of section.blocks ?? []) {
       if (block.type === "details" && block.code) {
         const wants = expectedDetails[block.title];

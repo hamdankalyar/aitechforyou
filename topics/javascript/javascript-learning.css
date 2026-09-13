@@ -3,6 +3,7 @@
 .topic-javascript .learning-table td:last-child { font-family: inherit; }
 .topic-javascript .guide-points > li > ul { margin-block: 8px 16px; padding-left: 22px; list-style-type: circle; }
 .topic-javascript .guide-points > li > ul > li { margin-block: 6px; }
+.topic-javascript .guide-example > .code-runner { margin-top: 12px; }
 .topic-javascript .learning-info { margin-top: 8px; padding: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--paper); }
 .topic-javascript .learning-info summary { display: flex; align-items: center; gap: 10px; padding: 10px 14px; }
 .topic-javascript .learning-info summary::-webkit-details-marker { display: none; }
