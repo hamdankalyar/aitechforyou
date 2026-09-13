@@ -71,17 +71,17 @@ const expected = {
     "quick-check": { output: ["1", "5", "15", "NaN", "true", "true", "9", "Oh hi, Marc!", "undefined"] },
   },
   "javascript-immutable-vs-mutable": {
-    "primitive-values": { examples: [{ output: ["hello"] }] },
+    "primitive-values": { examples: [
+      { output: ["hello"] },
+      { output: ["Halina", "Halina"] },
+    ] },
     "mutable-items": { examples: [
       { output: ["Ali"] },
       { output: ["1,5,3"] },
       { output: ["1,2,3,4,5,6", "1,2,3,4"] },
     ] },
     "reassignment": { examples: [{ output: ["world"] }] },
-    "reference-types": { examples: [
-      { output: ["Ha", "Ha"] },
-      { output: ["Halina", "Halina"] },
-    ] },
+    "shared-reference": { examples: [{ output: ["Ha", "Ha"] }] },
     "variable-reassignment": { examples: [
       { output: ["3", "1,2"] },
       { output: ["hello"], error: "TypeError" },

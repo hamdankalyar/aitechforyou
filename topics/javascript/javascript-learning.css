@@ -20,8 +20,41 @@
 .topic-javascript .reference-pointer { grid-column: 2; align-self: center; justify-self: center; padding-bottom: 56px; font-size: 12px; }
 .topic-javascript .reference-arrows { grid-area: 2 / 2 / 4 / 3; width: 100%; height: 100%; overflow: visible; color: var(--text); }
 .topic-javascript .reference-arrows > path { fill: none; stroke: currentColor; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.topic-javascript .reference-memory-single { grid-template-rows: auto minmax(180px, 1fr); }
+.topic-javascript .reference-memory-single::before { grid-area: 1 / 1 / 3 / 2; }
+.topic-javascript .reference-memory-single::after { grid-area: 1 / 3 / 3 / 4; }
+.topic-javascript .reference-memory-single .reference-variable { grid-area: 2 / 1; }
+.topic-javascript .reference-memory-single .reference-pointer { grid-area: 2 / 2; padding-bottom: 32px; }
+.topic-javascript .reference-memory-single .reference-arrows { grid-area: 2 / 2; }
+.topic-javascript .reference-memory-single .reference-object { grid-area: 2 / 3; }
+@media (max-width: 760px) {
+  .topic-javascript .reference-memory { grid-template-columns: minmax(68px, .75fr) 36px minmax(0, 1.8fr); font-size: 12px; }
+  .topic-javascript .reference-stack-title, .topic-javascript .reference-heap-title { padding: 6px 8px; font-size: 14px; }
+  .topic-javascript .reference-variable, .topic-javascript .reference-object { margin: 6px; }
+  .topic-javascript .reference-object { padding-inline: 6px; }
+  .topic-javascript .reference-pointer { font-size: 9px; }
+}
 .topic-javascript .primitive-memory { display: grid; gap: 36px; max-width: 460px; margin-inline: auto; padding: 0 12px 32px; border: 2px solid var(--text); border-radius: 16px; background: var(--paper); font: clamp(14px, 2vw, 20px)/1.6 ui-monospace, monospace; overflow-wrap: anywhere; }
 .topic-javascript .primitive-memory > strong { justify-self: center; padding: 8px 24px; border: 2px solid var(--text); background: var(--white); }
+.topic-javascript .value-change-memory { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; font: 14px/1.5 ui-monospace, monospace; }
+.topic-javascript .value-change-slide { min-width: 0; padding: 16px; border: 2px solid var(--text); border-radius: 12px; background: var(--paper); }
+.topic-javascript .value-change-slide > strong { display: block; margin-bottom: 12px; font-family: inherit; }
+.topic-javascript .value-change-flow { display: grid; grid-template-columns: minmax(64px, .7fr) minmax(42px, .55fr) minmax(96px, 1fr); align-items: center; min-height: 120px; }
+.topic-javascript .value-change-node { display: block; min-width: 0; padding: 10px 6px; border: 2px solid var(--text); border-radius: 6px; background: var(--white); text-align: center; overflow-wrap: anywhere; }
+.topic-javascript .value-change-node small { display: block; margin-bottom: 4px; color: var(--muted); font: 11px/1.3 var(--font-sans); }
+.topic-javascript .value-change-variable small { white-space: nowrap; }
+.topic-javascript .value-change-current { background: var(--yellow); color: var(--ink); }
+.topic-javascript .value-change-current small { color: inherit; opacity: .72; }
+.topic-javascript .value-change-values { display: grid; gap: 12px; }
+.topic-javascript .value-change-old { border-style: dashed; color: var(--text); opacity: .78; }
+.topic-javascript .value-change-arrow { width: 100%; height: 120px; overflow: visible; color: var(--text); }
+.topic-javascript .value-change-arrow > path { fill: none; stroke: currentColor; stroke-width: 2; vector-effect: non-scaling-stroke; }
+html[data-theme="dark"] .topic-javascript .value-change-slide { background: var(--white); }
+html[data-theme="dark"] .topic-javascript .value-change-node { background: var(--paper); }
+html[data-theme="dark"] .topic-javascript .value-change-current { background: var(--yellow); color: var(--ink); }
+@media (max-width: 760px) {
+  .topic-javascript .value-change-memory { grid-template-columns: minmax(0, 1fr); }
+}
 .topic-javascript .learning-info { margin-top: 8px; padding: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--paper); }
 .topic-javascript .learning-info summary { display: flex; align-items: center; gap: 10px; padding: 10px 14px; }
 .topic-javascript .learning-info summary::-webkit-details-marker { display: none; }

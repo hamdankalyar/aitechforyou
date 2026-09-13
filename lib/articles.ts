@@ -30,7 +30,11 @@ import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-a
 export type ArticleBlock =
   | { type: "variables-playground" }
   | { type: "reference-memory-diagrams" }
+  | { type: "single-reference-memory-diagram" }
   | { type: "primitive-memory-diagram" }
+  | { type: "reassignment-memory-diagram" }
+  | { type: "object-mutation-diagram" }
+  | { type: "array-mutation-diagram" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -56,7 +60,7 @@ export type ArticleBlock =
 export type ArticleSection = {
   id?: string;
   heading: string;
-  paragraphs: (string | { text: string; bullets?: string[]; code?: string; info?: Extract<ArticleBlock, { type: "details" }> })[];
+  paragraphs: (string | { text: string; bullets?: string[]; code?: string; block?: ArticleBlock; info?: Extract<ArticleBlock, { type: "details" }> })[];
   code?: string;
   blocks?: ArticleBlock[];
 };
