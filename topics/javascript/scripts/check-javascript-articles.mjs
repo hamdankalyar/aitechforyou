@@ -53,22 +53,13 @@ for (const states of Object.values(variablesExamples)) {
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
   "javascript-functions": {
-    "declare-and-call": { examples: [{ output: ["1"] }, { output: ["4"] }] },
-    "parameters-and-arguments": { examples: [
-      { output: ["5"] },
-      { output: ["My parameters are named x, y, z", "I received the arguments 4 5 6", "15"] },
-      { output: ["true"] },
-    ] },
+    "declare-and-call": { examples: [{ output: ["Hello!"] }] },
+    "parameters-and-arguments": { examples: [{ output: ["5", "NaN", "5"] }] },
     "parameter-names": { examples: [
-      { output: [], error: "SyntaxError" },
-      { output: [], error: "SyntaxError" },
-      { output: ["4", "8"] },
-      { output: ["1"], error: "ReferenceError" },
+      { output: ["4", "8"], error: "ReferenceError" },
     ] },
-    "missing-and-extra-arguments": { examples: [{ output: ["undefined", "NaN"] }, { output: ["true"] }] },
-    "return-values": { examples: [{ output: ["9", "16"] }, { output: ["9"] }] },
-    "printing-without-returning": { examples: [{ output: ["Oh hi, Marc!", "undefined"] }, { output: ["undefined"] }] },
-    "quick-check": { output: ["1", "5", "15", "NaN", "true", "true", "9", "Oh hi, Marc!", "undefined"] },
+    "return-values": { examples: [{ output: ["4"] }, { output: ["Hi, Marc", "undefined"] }] },
+    "quick-check": { output: ["9"] },
   },
   "javascript-immutable-vs-mutable": {
     "primitive-values": { examples: [
