@@ -9,6 +9,8 @@ import { javascriptEqualityOperatorsSections } from "@/topics/javascript/content
 import { javascriptConditionsTernarySections } from "@/topics/javascript/content/javascript-conditions-ternary-article";
 import { javascriptObjectsSections } from "@/topics/javascript/content/javascript-objects-article";
 import { javascriptArraysSections } from "@/topics/javascript/content/javascript-arrays-article";
+import { javascriptImmutableMutableSections } from "@/topics/javascript/content/javascript-immutable-vs-mutable-article";
+import { javascriptFunctionsSections } from "@/topics/javascript/content/javascript-functions-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -27,6 +29,8 @@ import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-a
 
 export type ArticleBlock =
   | { type: "variables-playground" }
+  | { type: "reference-memory-diagrams" }
+  | { type: "primitive-memory-diagram" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -657,8 +661,8 @@ export const articles: Article[] = [
     number: "28",
     series: {
       title: "JavaScript, made visible", order: 11, practiceTime: "2 min to explore",
-      nextTitle: "More JavaScript lessons",
-      nextDescription: "More lessons are in preparation.",
+      nextTitle: "Mutable vs. immutable",
+      nextDescription: "Separate changes to a value from variable reassignment, and learn how shared objects behave.",
       exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
     },
     sections: javascriptArraysSections,
@@ -666,6 +670,51 @@ export const articles: Article[] = [
       { title: "MDN · Array", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" },
       { title: "MDN · Indexed collections", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections" },
     ],
+  },
+  {
+    slug: "javascript-immutable-vs-mutable",
+    title: "Mutable vs. immutable",
+    excerpt: "Separate changes to a value from variable reassignment. Learn why strings stay immutable and const arrays can still change.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 13, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "29",
+    series: {
+      title: "JavaScript, made visible", order: 12, practiceTime: "2 min to explore",
+      nextTitle: "Functions",
+      nextDescription: "Create reusable tasks, supply arguments, and return results to the caller.",
+      exercise: { id: "reassignment", label: "Compare the assignments" }, illustration: "values",
+    },
+    sections: javascriptImmutableMutableSections,
+    sources: [
+      { title: "MDN · Primitive values and objects", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures" },
+      { title: "MDN · Memory management", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management" },
+      { title: "MDN · String", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" },
+      { title: "MDN · const", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" },
+      { title: "MDN · push()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push" },
+      { title: "MDN · concat()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat" },
+      { title: "MDN · map()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" },
+    ],
+  },
+  {
+    slug: "javascript-functions",
+    title: "Functions",
+    excerpt: "Create and call functions, understand parameters and arguments, and see how return values differ from printed output.",
+    topic: "JavaScript",
+    category: "Functions",
+    date: "Sep 13, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "30",
+    series: {
+      title: "JavaScript, made visible", order: 13, practiceTime: "2 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "quick-check", label: "Run the complete example" }, illustration: "values",
+    },
+    sections: javascriptFunctionsSections,
   },
 ];
 

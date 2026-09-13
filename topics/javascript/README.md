@@ -19,6 +19,8 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-conditions-ternary` | Conditions, AND/OR/NOT, and ternary values |
 | `javascript-objects` | Object literals, properties, methods, this, and nested values |
 | `javascript-arrays` | Lists, indexes, searches, changes, and common array methods |
+| `javascript-immutable-vs-mutable` | Primitive immutability, shared references, reassignment, const, and immutable updates |
+| `javascript-functions` | Declarations, calls, parameters, arguments, local names, and return values |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 

@@ -1,5 +1,6 @@
 import type { ArticleBlock as Block } from "@/lib/articles";
 import { VariablesPlayground } from "@/topics/javascript/components/variables-playground";
+import { PrimitiveMemoryDiagram, ReferenceMemoryDiagrams } from "@/topics/javascript/components/reference-memory-diagrams";
 import { CodeRunner } from "@/topics/javascript/components/code-runner";
 import { snapshots } from "@/topics/git/content/git-snapshots";
 import { SnapshotTimeline } from "@/topics/git/components/snapshot-timeline";
@@ -25,6 +26,8 @@ export function Emphasis({ text }: { text: string }) {
 export function ArticleBlock({ block, runnableCode = false }: { block: Block; runnableCode?: boolean }) {
   switch (block.type) {
     case "variables-playground": return <VariablesPlayground />;
+    case "reference-memory-diagrams": return <ReferenceMemoryDiagrams />;
+    case "primitive-memory-diagram": return <PrimitiveMemoryDiagram />;
     case "timeline": return <SnapshotTimeline />;
     case "save-commit-comparison": return <figure className="save-commit-comparison"><div><article><span className="learning-kicker">Your editor</span><h3>Save</h3><p>Updates the file on your computer.</p><strong>Current file changes</strong></article><article><span className="learning-kicker">Git</span><h3>Commit</h3><p>Records a chosen project version in its history.</p><strong>A saved moment appears</strong></article></div><figcaption>Saving answers “What is in my file now?” Committing answers “Which version should Git remember?”</figcaption></figure>;
     case "config-playground": return <ConfigPlayground />;

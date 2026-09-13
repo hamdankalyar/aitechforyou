@@ -13,6 +13,8 @@ import { javascriptEqualityOperatorsSections } from "../content/javascript-equal
 import { javascriptConditionsTernarySections } from "../content/javascript-conditions-ternary-article.ts";
 import { javascriptObjectsSections } from "../content/javascript-objects-article.ts";
 import { javascriptArraysSections } from "../content/javascript-arrays-article.ts";
+import { javascriptImmutableMutableSections } from "../content/javascript-immutable-vs-mutable-article.ts";
+import { javascriptFunctionsSections } from "../content/javascript-functions-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -26,6 +28,8 @@ const articles = {
   "javascript-conditions-ternary": javascriptConditionsTernarySections,
   "javascript-objects": javascriptObjectsSections,
   "javascript-arrays": javascriptArraysSections,
+  "javascript-immutable-vs-mutable": javascriptImmutableMutableSections,
+  "javascript-functions": javascriptFunctionsSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -48,6 +52,42 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-functions": {
+    "declare-and-call": { examples: [{ output: ["1"] }, { output: ["4"] }] },
+    "parameters-and-arguments": { examples: [
+      { output: ["5"] },
+      { output: ["My parameters are named x, y, z", "I received the arguments 4 5 6", "15"] },
+      { output: ["true"] },
+    ] },
+    "parameter-names": { examples: [
+      { output: [], error: "SyntaxError" },
+      { output: [], error: "SyntaxError" },
+      { output: ["4", "8"] },
+      { output: ["1"], error: "ReferenceError" },
+    ] },
+    "missing-and-extra-arguments": { examples: [{ output: ["undefined", "NaN"] }, { output: ["true"] }] },
+    "return-values": { examples: [{ output: ["9", "16"] }, { output: ["9"] }] },
+    "printing-without-returning": { examples: [{ output: ["Oh hi, Marc!", "undefined"] }, { output: ["undefined"] }] },
+    "quick-check": { output: ["1", "5", "15", "NaN", "true", "true", "9", "Oh hi, Marc!", "undefined"] },
+  },
+  "javascript-immutable-vs-mutable": {
+    "primitive-values": { examples: [{ output: ["hello"] }] },
+    "mutable-items": { examples: [
+      { output: ["Ali"] },
+      { output: ["1,5,3"] },
+      { output: ["1,2,3,4,5,6", "1,2,3,4"] },
+    ] },
+    "reassignment": { examples: [{ output: ["world"] }] },
+    "reference-types": { examples: [
+      { output: ["Ha", "Ha"] },
+      { output: ["Halina", "Halina"] },
+    ] },
+    "variable-reassignment": { examples: [
+      { output: ["3", "1,2"] },
+      { output: ["hello"], error: "TypeError" },
+    ] },
+    "const-reference-types": { examples: [{ output: ["10,2,3,4,5"], error: "TypeError" }] },
+  },
   "javascript-objects": {
     "what-an-object-is": { examples: [
       { output: ["[object Object]"] },
@@ -243,6 +283,12 @@ if (process.argv[2]) {
     assert.equal(new Set(sections.map(section => section.id)).size, sections.length, articleSlug);
   }
   const slugs = Object.keys(articles);
+  const referenceLesson = await page("/articles/javascript-immutable-vs-mutable");
+  assert.equal((referenceLesson.match(/class="reference-memory" role="img"/g) ?? []).length, 1, "the supplied object reference diagram renders");
+  assert.equal((referenceLesson.match(/class="primitive-memory" role="img"/g) ?? []).length, 1, "the supplied primitive value diagram renders");
+  for (const label of ["staff2", "staff", "Strengthened", "43", "reading", "swimming", "student2", "student1", "Halina"]) {
+    assert.ok(referenceLesson.includes(label), `source diagram label: ${label}`);
+  }
   for (let index = 0; index < slugs.length - 1; index += 1) {
     assert.match(await page(`/articles/${slugs[index]}`), new RegExp(`href="/articles/${slugs[index + 1]}"`), `${slugs[index]} links to the next lesson`);
   }
@@ -288,7 +334,7 @@ if (process.argv[2]) {
     const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
     assert.ok(section, `${category} section exists`);
     const listed = [...section.matchAll(/<h3><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
-    const expected = category === "Basic" ? slugs.filter(slug => slug !== "javascript-symbol") : category === "Advanced" ? ["javascript-symbol"] : [];
+    const expected = category === "Basic" ? slugs.filter(slug => !["javascript-symbol", "javascript-functions"].includes(slug)) : category === "Advanced" ? ["javascript-symbol"] : category === "Functions" ? ["javascript-functions"] : [];
     assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
     if (!listed.length) assert.match(section, /No articles yet/);
     for (const articleSlug of listed) {
