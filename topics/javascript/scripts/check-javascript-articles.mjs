@@ -15,6 +15,7 @@ import { javascriptObjectsSections } from "../content/javascript-objects-article
 import { javascriptArraysSections } from "../content/javascript-arrays-article.ts";
 import { javascriptImmutableMutableSections } from "../content/javascript-immutable-vs-mutable-article.ts";
 import { javascriptFunctionsSections } from "../content/javascript-functions-article.ts";
+import { javascriptArrowFunctionsSections } from "../content/javascript-arrow-functions-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -30,6 +31,7 @@ const articles = {
   "javascript-arrays": javascriptArraysSections,
   "javascript-immutable-vs-mutable": javascriptImmutableMutableSections,
   "javascript-functions": javascriptFunctionsSections,
+  "javascript-arrow-functions": javascriptArrowFunctionsSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -52,6 +54,16 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-arrow-functions": {
+    "what-an-arrow-function-is": { examples: [{ output: ["5"] }, { output: ["5"] }] },
+    "one-parameter": { examples: [{ output: ["25"] }, { output: ["Hello!"] }] },
+    "multiple-parameters": { examples: [
+      { output: ["Ada Lovelace"] },
+      { output: [], error: "SyntaxError" },
+    ] },
+    "block-body": { examples: [{ output: ["The sum is 5", "5"] }, { output: ["undefined"] }] },
+    "quick-check": { output: ["5", "hello there", "true"] },
+  },
   "javascript-functions": {
     "declare-and-call": { examples: [{ output: ["Hello!"] }] },
     "parameters-and-arguments": { examples: [{ output: ["5", "NaN", "5"] }] },
@@ -326,7 +338,7 @@ if (process.argv[2]) {
     const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
     assert.ok(section, `${category} section exists`);
     const listed = [...section.matchAll(/<h3><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
-    const expected = category === "Basic" ? slugs.filter(slug => !["javascript-symbol", "javascript-functions"].includes(slug)) : category === "Advanced" ? ["javascript-symbol"] : category === "Functions" ? ["javascript-functions"] : [];
+    const expected = category === "Basic" ? slugs.filter(slug => !["javascript-symbol", "javascript-functions", "javascript-arrow-functions"].includes(slug)) : category === "Advanced" ? ["javascript-symbol"] : category === "Functions" ? ["javascript-functions", "javascript-arrow-functions"] : [];
     assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
     if (!listed.length) assert.match(section, /No articles yet/);
     for (const articleSlug of listed) {

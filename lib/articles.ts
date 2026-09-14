@@ -11,6 +11,7 @@ import { javascriptObjectsSections } from "@/topics/javascript/content/javascrip
 import { javascriptArraysSections } from "@/topics/javascript/content/javascript-arrays-article";
 import { javascriptImmutableMutableSections } from "@/topics/javascript/content/javascript-immutable-vs-mutable-article";
 import { javascriptFunctionsSections } from "@/topics/javascript/content/javascript-functions-article";
+import { javascriptArrowFunctionsSections } from "@/topics/javascript/content/javascript-arrow-functions-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -714,11 +715,32 @@ export const articles: Article[] = [
     number: "30",
     series: {
       title: "JavaScript, made visible", order: 13, practiceTime: "2 min to explore",
-      nextTitle: "More JavaScript lessons",
-      nextDescription: "More lessons are in preparation.",
+      nextTitle: "Arrow functions",
+      nextDescription: "Write shorter functions with the fat arrow and learn when a return is still required.",
       exercise: { id: "quick-check", label: "Try a function" }, illustration: "values",
     },
     sections: javascriptFunctionsSections,
+  },
+  {
+    slug: "javascript-arrow-functions",
+    title: "Arrow functions",
+    excerpt: "Write functions with the fat arrow, return a value on one line, and learn when parentheses and return are required.",
+    topic: "JavaScript",
+    category: "Functions",
+    date: "Sep 14, 2026",
+    readTime: "3 min read",
+    accent: "yellow",
+    number: "31",
+    series: {
+      title: "JavaScript, made visible", order: 14, practiceTime: "2 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "quick-check", label: "Write three arrow functions" }, illustration: "values",
+    },
+    sections: javascriptArrowFunctionsSections,
+    sources: [
+      { title: "MDN · Arrow function expressions", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" },
+    ],
   },
 ];
 
