@@ -56,9 +56,10 @@ const expected = {
     "declare-and-call": { examples: [{ output: ["Hello!"] }] },
     "parameters-and-arguments": { examples: [{ output: ["5", "NaN", "5"] }] },
     "parameter-names": { examples: [
-      { output: ["4", "8"], error: "ReferenceError" },
+      { output: ["8"], error: "ReferenceError" },
     ] },
     "return-values": { examples: [{ output: ["4"] }, { output: ["Hi, Marc", "undefined"] }] },
+    "function-expression": { examples: [{ output: ["Hello, Ali!"] }] },
     "quick-check": { output: ["9"] },
   },
   "javascript-immutable-vs-mutable": {

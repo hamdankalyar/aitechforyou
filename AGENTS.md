@@ -13,8 +13,11 @@ Before writing or editing any JavaScript article, read `topics/javascript/README
 
 ## Writing articles and lessons
 
-- Always use short bullets instead of long paragraphs so the content is easy to read and remember.
-- Keep one idea per bullet. Put each operator, definition, example, or calculation step on its own line.
+- Mandatory: write all article and lesson explanations as short bullets, never prose paragraphs.
+- Each bullet must contain one short sentence and one idea. Split separate definitions, actions, results, and warnings into separate bullets, even when they relate to the same example.
+- Do not disguise a paragraph as one long bullet. Split it into bullets or one level of sub-bullets instead of joining ideas with commas, semicolons, or multiple sentences.
+- Put each operator, definition, example, and calculation step on its own line. Keep code examples below the relevant bullet.
 - Group related details under their main point with indented sub-bullets. Keep nesting to one level.
 - Start each bullet with the important term in bold, followed by a short explanation in plain language.
 - Apply this style throughout every article and lesson, including explanations, practice instructions, and recaps.
+- Before finishing, check every bullet for combined ideas and split them without adding repeated explanations.
