@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { ActiveSection } from "@/components/articles/active-section";
 import { CommandBlock } from "@/components/articles/command-block";
 import { GitNavigation, GitReferenceOutline } from "@/topics/git/components/git-navigation";
 import { nextGitReference, type GitReference } from "@/topics/git/content/git-references";
@@ -39,6 +40,7 @@ export function GitReferencePage({ reference, intro, extraContents = [], childre
         <footer className="git-reference-footer"><span>{reference.docs.map((doc, index) => <span key={doc.href}>{index > 0 && " · "}<a href={doc.href}>Official {doc.label} documentation ↗</a></span>)}</span>{next && <Link href={next.href}>{next.label}</Link>}</footer>
       </article>
       <aside className="git-reference-toc"><div className="git-label">On this page</div>{contents}</aside>
+      <ActiveSection links='nav[aria-label="On this page"] a' />
     </div>
   </main>;
 }

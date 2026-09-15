@@ -5,6 +5,7 @@ import { ArrowRight } from "@/components/icons";
 import { articles, getArticle } from "@/lib/articles";
 import { JsonLd, articleSchema, breadcrumbSchema, isoDate, site } from "@/lib/seo";
 import { ArticleBlock, Emphasis } from "@/components/articles/article-block";
+import { ActiveSection } from "@/components/articles/active-section";
 import { CodeRunner } from "@/topics/javascript/components/code-runner";
 import { GitNavigation } from "@/topics/git/components/git-navigation";
 import { gitReferences } from "@/topics/git/content/git-references";
@@ -62,7 +63,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
       </header>
       <article className="article-body shell">
-        <aside>{learning ? <><div className="desktop-contents"><span>Inside this article</span><nav aria-label="Article contents">{contents}</nav><div className="contents-footnote">One idea at a time.<br />At your own pace.</div></div><details className="mobile-contents"><summary>Inside this article</summary><nav aria-label="Article contents">{contents}</nav></details></> : <><span>In one sentence</span><p>{article.excerpt}</p></>}</aside>
+        <aside>{learning ? <><div className="desktop-contents"><span>Inside this article</span><nav aria-label="Article contents">{contents}</nav><ActiveSection links='nav[aria-label="Article contents"] a' /><div className="contents-footnote">One idea at a time.<br />At your own pace.</div></div><details className="mobile-contents"><summary>Inside this article</summary><nav aria-label="Article contents">{contents}</nav></details></> : <><span>In one sentence</span><p>{article.excerpt}</p></>}</aside>
         <div className="article-prose">
           {sections.map((section, index) => (
             <section key={section.id} id={section.id}>

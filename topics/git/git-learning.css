@@ -220,7 +220,7 @@
 .git-reference-content .git-reference-note { border-left: 2px solid var(--border); padding-left: 14px; font-size: 13px; color: var(--prose); }
 .git-reference-toc ul, .git-reference-mobile-contents ul { margin: 10px 0 0; padding: 0; list-style: none; }
 .git-reference-toc a, .git-reference-mobile-contents nav a { display: flex; align-items: center; min-height: 44px; padding-block: 8px; color: var(--muted); font-size: 12px; line-height: 1.5; }
-.git-reference-toc a:hover, .git-reference-mobile-contents nav a:hover { color: var(--text); }
+.git-reference-toc a:hover, .git-reference-mobile-contents nav a:hover, .git-reference-toc a[aria-current], .git-reference-mobile-contents nav a[aria-current] { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
 .git-reference-mobile-contents { display: none; }
 .git-reference-table { overflow-x: auto; margin-block: 20px; }
 .git-reference-table table { width: 100%; min-width: 520px; border-collapse: collapse; text-align: left; font-size: 13px; }

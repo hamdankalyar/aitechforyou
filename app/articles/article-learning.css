@@ -71,7 +71,8 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 .learning-article .article-body aside { border-top: 0; padding: 0; max-height: calc(100svh - 140px); overflow-y: auto; }
 .learning-article .article-body aside nav ol { list-style: none; padding: 0; margin: 20px 0; }
 .learning-article .article-body aside nav a { display: flex; align-items: baseline; gap: 12px; min-height: 44px; font-size: 12px; padding-block: 10px; line-height: 1.4; color: var(--muted); }
-.learning-article .article-body aside nav a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+.learning-article .article-body aside nav a:hover, .learning-article .article-body aside nav a[aria-current] { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+.learning-article .article-body aside nav a[aria-current] span { color: var(--text); }
 .learning-article .article-body aside nav a span { font-size: 10px; color: var(--muted); font-weight: 500; }
 .contents-footnote { border-top: 1px solid var(--border); padding-top: 24px; color: var(--muted); font-size: 12px; line-height: 1.8; }
 .mobile-contents { display: none; }
