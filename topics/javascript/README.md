@@ -22,6 +22,7 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-immutable-vs-mutable` | Primitive immutability, shared references, reassignment, const, and immutable updates |
 | `javascript-functions` | Declarations, calls, parameters, arguments, local names, and return values |
 | `javascript-arrow-functions` | Fat arrow syntax, implicit return, parentheses rules, and block bodies |
+| `javascript-scope` | Global and function scope, nesting, reading outward, and changing outer variables |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 

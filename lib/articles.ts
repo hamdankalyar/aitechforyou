@@ -12,6 +12,7 @@ import { javascriptArraysSections } from "@/topics/javascript/content/javascript
 import { javascriptImmutableMutableSections } from "@/topics/javascript/content/javascript-immutable-vs-mutable-article";
 import { javascriptFunctionsSections } from "@/topics/javascript/content/javascript-functions-article";
 import { javascriptArrowFunctionsSections } from "@/topics/javascript/content/javascript-arrow-functions-article";
+import { javascriptScopeSections } from "@/topics/javascript/content/javascript-scope-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -733,13 +734,34 @@ export const articles: Article[] = [
     number: "31",
     series: {
       title: "JavaScript, made visible", order: 14, practiceTime: "2 min to explore",
-      nextTitle: "More JavaScript lessons",
-      nextDescription: "More lessons are in preparation.",
+      nextTitle: "Scope",
+      nextDescription: "See where a variable can be used and how a function can change an outer one.",
       exercise: { id: "quick-check", label: "Write three arrow functions" }, illustration: "values",
     },
     sections: javascriptArrowFunctionsSections,
     sources: [
       { title: "MDN · Arrow function expressions", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" },
+    ],
+  },
+  {
+    slug: "javascript-scope",
+    title: "Scope",
+    excerpt: "Learn where a variable can be used, how function scopes nest inside global scope, and how a function can change an outer variable.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 14, 2026",
+    readTime: "3 min read",
+    accent: "yellow",
+    number: "32",
+    series: {
+      title: "JavaScript, made visible", order: 15, practiceTime: "2 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "quick-check", label: "Change the scope" }, illustration: "values",
+    },
+    sections: javascriptScopeSections,
+    sources: [
+      { title: "MDN · Scope", url: "https://developer.mozilla.org/en-US/docs/Glossary/Scope" },
     ],
   },
 ];

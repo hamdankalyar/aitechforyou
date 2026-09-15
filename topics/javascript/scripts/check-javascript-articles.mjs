@@ -16,6 +16,7 @@ import { javascriptArraysSections } from "../content/javascript-arrays-article.t
 import { javascriptImmutableMutableSections } from "../content/javascript-immutable-vs-mutable-article.ts";
 import { javascriptFunctionsSections } from "../content/javascript-functions-article.ts";
 import { javascriptArrowFunctionsSections } from "../content/javascript-arrow-functions-article.ts";
+import { javascriptScopeSections } from "../content/javascript-scope-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -32,6 +33,7 @@ const articles = {
   "javascript-immutable-vs-mutable": javascriptImmutableMutableSections,
   "javascript-functions": javascriptFunctionsSections,
   "javascript-arrow-functions": javascriptArrowFunctionsSections,
+  "javascript-scope": javascriptScopeSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -54,6 +56,18 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-scope": {
+    "what-scope-is": { examples: [{ output: [], error: "ReferenceError" }] },
+    "global-and-function-scope": { examples: [{ output: ["Inner planet: Mars", "Outer planet: Jupiter"] }] },
+    "inside-sees-outside": { examples: [{ output: ["I live in global scope"], error: "ReferenceError" }] },
+    "changing-outer-variables": { examples: [{ output: ["boxedIn"] }] },
+    "block-scope": { examples: [{ output: ["block only"], error: "ReferenceError" }] },
+    "var-scope": { examples: [
+      { output: ["block ignored"] },
+      { output: [], error: "ReferenceError" },
+    ] },
+    "quick-check": { output: ["Inside: 20", "Outside: 20"] },
+  },
   "javascript-arrow-functions": {
     "what-an-arrow-function-is": { examples: [{ output: ["5"] }, { output: ["5"] }] },
     "one-parameter": { examples: [{ output: ["25"] }, { output: ["Hello!"] }] },
