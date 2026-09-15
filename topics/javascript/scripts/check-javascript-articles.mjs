@@ -17,6 +17,11 @@ import { javascriptImmutableMutableSections } from "../content/javascript-immuta
 import { javascriptFunctionsSections } from "../content/javascript-functions-article.ts";
 import { javascriptArrowFunctionsSections } from "../content/javascript-arrow-functions-article.ts";
 import { javascriptScopeSections } from "../content/javascript-scope-article.ts";
+import { javascriptEventsSections } from "../content/javascript-events-article.ts";
+import { javascriptLoopsSections } from "../content/javascript-loops-article.ts";
+import { javascriptLoopObjectsSections } from "../content/javascript-loop-objects-article.ts";
+import { javascriptForInSections } from "../content/javascript-for-in-article.ts";
+import { javascriptMapFilterReduceSections } from "../content/javascript-map-filter-reduce-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -34,6 +39,11 @@ const articles = {
   "javascript-functions": javascriptFunctionsSections,
   "javascript-arrow-functions": javascriptArrowFunctionsSections,
   "javascript-scope": javascriptScopeSections,
+  "javascript-events": javascriptEventsSections,
+  "javascript-loops": javascriptLoopsSections,
+  "javascript-loop-objects": javascriptLoopObjectsSections,
+  "javascript-for-in": javascriptForInSections,
+  "javascript-map-filter-reduce": javascriptMapFilterReduceSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -56,6 +66,70 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-map-filter-reduce": {
+    "map": { examples: [
+      { output: ["Baby Spice,Ginger Spice,Scary Spice,Sporty Spice,Posh Spice"] },
+      { output: ["21.98,49.98,15.98,29.98", "10.99,24.99,7.99,14.99"] },
+    ] },
+    "string-templates": { examples: [
+      { output: ["string to insert a value into"] },
+      { output: ["Baby Spice,Ginger Spice", "Baby Spice,Ginger Spice"] },
+    ] },
+    "filter": { examples: [ // the runner prints the objects as JSON
+      { output: ["[object Object],[object Object]"] },
+      { output: ["[object Object],[object Object]"] },
+    ] },
+    "reduce": { examples: [
+      { output: ["168.96"] },
+      { output: ["60"] },
+      { output: ["[object Object]20", "30"] },
+    ] },
+    "how-reduce-works": { examples: [{ output: ["168.96"] }] },
+    "chain": { examples: [{ output: ["Shirt,Hat", "38.98"] }] },
+    "quick-check": { output: ["75,90,55", "150,180,110", "440"] },
+  },
+  "javascript-for-in": {
+    "what-for-in-does": { output: ["name: Alice", "age: 25", "city: Wonderland"] },
+    "inherited-properties": { examples: [
+      { output: ["[object Object]", "working"] }, // the runner prints {"speed":100}
+      { output: ["for in speed", "for in engine", "for of speed"] },
+    ] },
+    "which-loop": { output: ["1", "2"] },
+    "quick-check": { output: ["rating", "title", "pages"] },
+  },
+  "javascript-loop-objects": {
+    "objects-are-not-iterable": { examples: [
+      { output: [], error: "TypeError" },
+      { output: ["red", "orange", "yellow"] },
+    ] },
+    "object-keys": { output: ["speed,color"] },
+    "object-values": { output: ["300,yellow"] },
+    "object-entries": { output: ["speed,400,color,magenta"] },
+    "loop-through-an-object": { output: ["price : 50", "color : beige", "material : cotton", "season : autumn"] },
+    "quick-check": { output: ["brand: Dell", "ram: 16", "ssd: true"] },
+  },
+  "javascript-loops": {
+    "what-a-loop-is": { output: [...Array.from({ length: 10 }, (_, rep) => `now doing rep ${rep}`), "do you even lift bro"] },
+    "three-parts": { output: Array.from({ length: 11 }, (_, index) => String(index * 10)) },
+    "for-of": { output: ["1", "2", "3", "1", "2", "3"] },
+    "iterables": { examples: [
+      { output: ["A", "L", "O", "H", "A"] },
+      { output: ["string", "number", "string"] },
+    ] },
+    "foreach": { examples: [
+      { output: ["as", "bs", "cs", "a,b,c"] },
+      { output: ["Index 0: 1", "Index 1: 2", "Index 2: 3", "Index 3: 4"] },
+      { output: ["x 0 x,y", "y 1 x,y"] }, // the runner prints ["x","y"]
+    ] },
+    "quick-check": { output: ["0 apple", "1 mango", "2 kiwi"] },
+  },
+  "javascript-events": {
+    "add-event-listener": { output: [], browserOnly: true },
+    "handler-function": { output: [], browserOnly: true },
+    "event-object": { output: [], browserOnly: true },
+    "other-events": { output: [], browserOnly: true },
+    "quick-check": { output: [], browserOnly: true },
+  },
   "javascript-scope": {
     "what-scope-is": { examples: [{ output: [], error: "ReferenceError" }] },
     "global-and-function-scope": { examples: [{ output: ["Inner planet: Mars", "Outer planet: Jupiter"] }] },
@@ -301,6 +375,7 @@ if (process.argv[2]) {
     assert.equal(new Set(sections.map(section => section.id)).size, sections.length, articleSlug);
   }
   const slugs = Object.keys(articles);
+  assert.match(await page("/articles/javascript-map-filter-reduce"), /class="snapshot-lab variables-lab reduce-lab"/, "the reduce stepper renders");
   const referenceLesson = await page("/articles/javascript-immutable-vs-mutable");
   assert.equal((referenceLesson.match(/class="reference-memory" role="img"/g) ?? []).length, 1, "the supplied object reference diagram renders");
   assert.equal((referenceLesson.match(/class="primitive-memory" role="img"/g) ?? []).length, 1, "the supplied primitive value diagram renders");

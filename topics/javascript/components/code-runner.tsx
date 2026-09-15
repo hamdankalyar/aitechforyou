@@ -7,7 +7,10 @@ type Status = "idle" | "running" | "done";
 
 // Runs the code in a fresh sandboxed iframe (no same-origin access), so every run starts with clean globals
 // and a crash or thrown error never touches the article page. Console calls are relayed back via postMessage.
-function buildDocument(code: string, token: string) {
+// A small demo page for event lessons. Shown inside the sandbox when `page` is set, so real clicks reach the code.
+const demoPage = `<style>body{margin:0;padding:16px 20px;font:16px/1.5 system-ui,sans-serif;color:#111;background:#fff}h1{font-size:22px;margin:0 0 12px}.box{border:3px solid #999;padding:24px 16px;margin:0 0 14px}button{font:inherit;padding:10px 20px;border:0;border-radius:6px;background:#7b1a8a;color:#fff;cursor:pointer}</style><body><h1>Very Exciting Web Page</h1><div class="box">Hello I am in a box</div><button>Click me</button>`;
+
+function buildDocument(code: string, token: string, page: boolean) {
   const safeCode = code.replace(/<\/script/gi, "<\\/script");
   const bridge = `
     const token = ${JSON.stringify(token)};
@@ -24,16 +27,18 @@ function buildDocument(code: string, token: string) {
     window.addEventListener("error", (event) => { send("error", event.message.replace(/^Uncaught /, "")); event.preventDefault(); });
     window.addEventListener("unhandledrejection", (event) => send("error", "Unhandled promise rejection: " + format(event.reason)));
   `;
-  return `<!doctype html><meta charset="utf-8"><script>${bridge}</script><script>${safeCode}\n</script><script>parent.postMessage({ token: ${JSON.stringify(token)}, kind: "done" }, "*");</script>`;
+  return `<!doctype html><meta charset="utf-8"><script>${bridge}</script>${page ? demoPage : ""}<script>${safeCode}\n</script><script>parent.postMessage({ token: ${JSON.stringify(token)}, kind: "done" }, "*");</script>`;
 }
 
-export function CodeRunner({ code, label = "Editable example" }: { code: string; label?: string }) {
+export function CodeRunner({ code, label = "Editable example", page = false }: { code: string; label?: string; page?: boolean }) {
   const id = useId();
   const [source, setSource] = useState(code);
   const [lines, setLines] = useState<Line[]>([]);
   const [status, setStatus] = useState<Status>("idle");
   const [run, setRun] = useState(0);
-  const [document, setDocument] = useState<string | null>(null);
+  // In page mode the demo page is visible before Run, so the reader sees what the code will listen to.
+  const idle = page ? buildDocument("", `${id}-0`, true) : null;
+  const [document, setDocument] = useState<string | null>(idle);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const token = `${id}-${run}`;
 
@@ -54,12 +59,12 @@ export function CodeRunner({ code, label = "Editable example" }: { code: string;
     setLines([]);
     setStatus("running");
     setRun(next);
-    setDocument(buildDocument(source, `${id}-${next}`));
+    setDocument(buildDocument(source, `${id}-${next}`, page));
   };
 
-  const reset = () => { setSource(code); setLines([]); setStatus("idle"); setDocument(null); };
+  const reset = () => { setSource(code); setLines([]); setStatus("idle"); setDocument(idle); };
   const rows = Math.min(24, Math.max(4, source.split("\n").length + 1));
-  const summary = status === "idle" ? "Press Run to execute this code." : status === "running" ? "Running…" : lines.length === 0 ? "Finished with no output. Add console.log(...) to print a value." : `Finished · ${lines.length} ${lines.length === 1 ? "line" : "lines"} printed.`;
+  const summary = status === "idle" ? (page ? "Press Run, then click inside the page above." : "Press Run to execute this code.") : status === "running" ? "Running…" : lines.length === 0 ? (page ? "Running. Click inside the page above to fire events." : "Finished with no output. Add console.log(...) to print a value.") : `Finished · ${lines.length} ${lines.length === 1 ? "line" : "lines"} printed.`;
 
   return <div className="code-runner" aria-label={label}>
     <div className="code-runner-topline"><span className="learning-kicker">{label}</span><span>JavaScript · runs in your browser</span></div>
@@ -69,11 +74,11 @@ export function CodeRunner({ code, label = "Editable example" }: { code: string;
       <button type="button" className="lab-primary" onClick={execute}>Run<span aria-hidden="true">▶</span></button>
       <div className="lab-step-buttons"><button type="button" onClick={reset} disabled={source === code && status === "idle"}>Reset</button><span className="code-runner-hint">⌘/Ctrl + Enter also runs</span></div>
     </div>
+    {document && <iframe key={run} ref={frameRef} hidden={!page} className={page ? "code-runner-page" : undefined} sandbox="allow-scripts" srcDoc={document} title={page ? "Demo page" : "JavaScript sandbox"} />}
     <section className="code-runner-output" aria-label="Console output">
       <h4>Console</h4>
       <pre tabIndex={0}><code>{lines.length === 0 ? <span className="code-runner-empty">{summary}</span> : lines.map((line, index) => <span key={index} className={`code-runner-line ${line.kind}`}>{line.text}{"\n"}</span>)}</code></pre>
       <p className={`code-runner-status ${lines.length === 0 ? "sr-only" : ""}`} role="status" aria-live="polite">{summary}</p>
     </section>
-    {document && <iframe key={run} ref={frameRef} hidden sandbox="allow-scripts" srcDoc={document} title="JavaScript sandbox" />}
   </div>;
 }

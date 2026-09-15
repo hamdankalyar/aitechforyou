@@ -23,6 +23,11 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-functions` | Declarations, calls, parameters, arguments, local names, and return values |
 | `javascript-arrow-functions` | Fat arrow syntax, implicit return, parentheses rules, and block bodies |
 | `javascript-scope` | Global and function scope, nesting, reading outward, and changing outer variables |
+| `javascript-events` | Event listeners, handler functions, the event object, and common event names |
+| `javascript-loops` | for loops, iteration, for...of over strings and arrays, and forEach |
+| `javascript-loop-objects` | Objects are not iterable, Object.keys, Object.values, Object.entries, and looping keys with brackets |
+| `javascript-for-in` | for...in, inherited properties, and which loop to use |
+| `javascript-map-filter-reduce` | map, string templates, filter, reduce, and chaining them |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 
@@ -42,6 +47,7 @@ New articles continue the reading order (objects, arrays, functions, comparisons
 - Verification: `topics/javascript/scripts/check-javascript-articles.mjs` covers every JavaScript article. Add the new sections file to its `articles` map and add expected output for each snippet. It executes every snippet with `node:vm` and asserts the exact console output and any intended error.
 - Source notes: `references/javascript/`. Ground the content in the author's notes; add explanation only where the notes leave a gap.
 - Browser-only snippets: mark their expected output with `browserOnly: true` in the check script and verify their console output with the article's Run button in a real browser. The Node checker reports these separately because it has no document.
+- Event snippets: set `page: true` on the section (or paragraph) so the runner shows a small demo page (heading, box, "Click me" button) inside its sandbox, visible before and after Run. Clicks in that page reach the listener and print to the console box. Mark these `browserOnly` with `output: []`, then click inside the page in a real browser to verify.
 
 ## Code
 

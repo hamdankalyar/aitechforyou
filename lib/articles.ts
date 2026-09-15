@@ -13,6 +13,11 @@ import { javascriptImmutableMutableSections } from "@/topics/javascript/content/
 import { javascriptFunctionsSections } from "@/topics/javascript/content/javascript-functions-article";
 import { javascriptArrowFunctionsSections } from "@/topics/javascript/content/javascript-arrow-functions-article";
 import { javascriptScopeSections } from "@/topics/javascript/content/javascript-scope-article";
+import { javascriptEventsSections } from "@/topics/javascript/content/javascript-events-article";
+import { javascriptLoopsSections } from "@/topics/javascript/content/javascript-loops-article";
+import { javascriptLoopObjectsSections } from "@/topics/javascript/content/javascript-loop-objects-article";
+import { javascriptForInSections } from "@/topics/javascript/content/javascript-for-in-article";
+import { javascriptMapFilterReduceSections } from "@/topics/javascript/content/javascript-map-filter-reduce-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -37,6 +42,7 @@ export type ArticleBlock =
   | { type: "reassignment-memory-diagram" }
   | { type: "object-mutation-diagram" }
   | { type: "array-mutation-diagram" }
+  | { type: "reduce-diagram" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -62,8 +68,10 @@ export type ArticleBlock =
 export type ArticleSection = {
   id?: string;
   heading: string;
-  paragraphs: (string | { text: string; bullets?: string[]; code?: string; block?: ArticleBlock; info?: Extract<ArticleBlock, { type: "details" }> })[];
+  paragraphs: (string | { text: string; bullets?: string[]; code?: string; page?: boolean; block?: ArticleBlock; info?: Extract<ArticleBlock, { type: "details" }> })[];
   code?: string;
+  /** Run `code` inside a visible demo page so clicks and other events reach it. */
+  page?: boolean;
   blocks?: ArticleBlock[];
 };
 
@@ -755,13 +763,127 @@ export const articles: Article[] = [
     number: "32",
     series: {
       title: "JavaScript, made visible", order: 15, practiceTime: "2 min to explore",
-      nextTitle: "More JavaScript lessons",
-      nextDescription: "More lessons are in preparation.",
+      nextTitle: "Events and handlers",
+      nextDescription: "Make the page interactive by listening for clicks and other events.",
       exercise: { id: "quick-check", label: "Change the scope" }, illustration: "values",
     },
     sections: javascriptScopeSections,
     sources: [
       { title: "MDN · Scope", url: "https://developer.mozilla.org/en-US/docs/Glossary/Scope" },
+    ],
+  },
+  {
+    slug: "javascript-events",
+    title: "Events and handlers",
+    excerpt: "Listen for clicks and other events with addEventListener, write a handler function, and read the event object.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 15, 2026",
+    readTime: "4 min read",
+    accent: "yellow",
+    number: "33",
+    series: {
+      title: "JavaScript, made visible", order: 16, practiceTime: "3 min to explore",
+      nextTitle: "Loops",
+      nextDescription: "Run the same code many times with for, for...of, and forEach.",
+      exercise: { id: "quick-check", label: "Listen for a click" }, illustration: "values",
+    },
+    sections: javascriptEventsSections,
+    sources: [
+      { title: "MDN · addEventListener()", url: "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener" },
+      { title: "MDN · Event.target", url: "https://developer.mozilla.org/en-US/docs/Web/API/Event/target" },
+    ],
+  },
+  {
+    slug: "javascript-loops",
+    title: "Loops",
+    excerpt: "Run the same code many times with a for loop, walk through strings and arrays with for...of, and use forEach on arrays.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 15, 2026",
+    readTime: "4 min read",
+    accent: "yellow",
+    number: "34",
+    series: {
+      title: "JavaScript, made visible", order: 17, practiceTime: "2 min to explore",
+      nextTitle: "Looping over objects",
+      nextDescription: "Objects are not iterable. Object.keys, Object.values, and Object.entries turn them into arrays you can loop over.",
+      exercise: { id: "quick-check", label: "Count the items" }, illustration: "values",
+    },
+    sections: javascriptLoopsSections,
+    sources: [
+      { title: "MDN · for", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for" },
+      { title: "MDN · for...of", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" },
+      { title: "MDN · Array.prototype.forEach()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" },
+    ],
+  },
+  {
+    slug: "javascript-loop-objects",
+    title: "Looping over objects",
+    excerpt: "See why for...of fails on an object, then loop over its keys, values, and entries with three built-in methods.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 15, 2026",
+    readTime: "3 min read",
+    accent: "yellow",
+    number: "35",
+    series: {
+      title: "JavaScript, made visible", order: 18, practiceTime: "2 min to explore",
+      nextTitle: "for...in",
+      nextDescription: "Loop over an object's property keys, including the ones it inherits.",
+      exercise: { id: "quick-check", label: "Loop over the keys" }, illustration: "values",
+    },
+    sections: javascriptLoopObjectsSections,
+    sources: [
+      { title: "MDN · Object.keys()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys" },
+      { title: "MDN · Object.values()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values" },
+      { title: "MDN · Object.entries()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries" },
+    ],
+  },
+  {
+    slug: "javascript-for-in",
+    title: "for...in",
+    excerpt: "Loop over an object's property keys, see which properties are inherited, and pick between for...of, forEach, and for...in.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 15, 2026",
+    readTime: "3 min read",
+    accent: "yellow",
+    number: "36",
+    series: {
+      title: "JavaScript, made visible", order: 19, practiceTime: "2 min to explore",
+      nextTitle: "map, filter, and reduce",
+      nextDescription: "Build new arrays from old ones with map and filter, and combine an array into one value with reduce.",
+      exercise: { id: "quick-check", label: "List the keys" }, illustration: "values",
+    },
+    sections: javascriptForInSections,
+    sources: [
+      { title: "MDN · for...in", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in" },
+      { title: "MDN · Object.create()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create" },
+    ],
+  },
+  {
+    slug: "javascript-map-filter-reduce",
+    title: "map, filter, and reduce",
+    excerpt: "Build a new array from every item with map, keep only some items with filter, and combine an array into one value with reduce.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 15, 2026",
+    readTime: "4 min read",
+    accent: "yellow",
+    number: "37",
+    series: {
+      title: "JavaScript, made visible", order: 20, practiceTime: "2 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "quick-check", label: "Filter, map, reduce" }, illustration: "values",
+    },
+    sections: javascriptMapFilterReduceSections,
+    sources: [
+      { title: "MDN · Array.prototype.map()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" },
+      { title: "MDN · Array.prototype.filter()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter" },
+      { title: "MDN · Array.prototype.reduce()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" },
+      { title: "MDN · Template literals", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" },
     ],
   },
 ];
