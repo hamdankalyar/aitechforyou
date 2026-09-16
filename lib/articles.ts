@@ -798,7 +798,7 @@ export const articles: Article[] = [
   {
     slug: "javascript-loops",
     title: "Loops",
-    excerpt: "Run the same code many times with a for loop, walk through strings and arrays with for...of, and use forEach on arrays.",
+    excerpt: "Run the same code many times with a for loop or a while loop, walk through strings and arrays with for...of, and use forEach on arrays.",
     topic: "JavaScript",
     category: "Basic",
     date: "Sep 15, 2026",
@@ -814,6 +814,7 @@ export const articles: Article[] = [
     sections: javascriptLoopsSections,
     sources: [
       { title: "MDN · for", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for" },
+      { title: "MDN · while", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while" },
       { title: "MDN · for...of", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" },
       { title: "MDN · Array.prototype.forEach()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" },
     ],

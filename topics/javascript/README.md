@@ -24,7 +24,7 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-arrow-functions` | Fat arrow syntax, implicit return, parentheses rules, and block bodies |
 | `javascript-scope` | Global and function scope, nesting, reading outward, and changing outer variables |
 | `javascript-events` | Event listeners, handler functions, the event object, and common event names |
-| `javascript-loops` | for loops, iteration, for...of over strings and arrays, and forEach |
+| `javascript-loops` | for loops, while loops, iteration, for...of over strings and arrays, and forEach |
 | `javascript-loop-objects` | Objects are not iterable, Object.keys, Object.values, Object.entries, and looping keys with brackets |
 | `javascript-for-in` | for...in, inherited properties, and which loop to use |
 | `javascript-map-filter-reduce` | map, string templates, filter, reduce, and chaining them |

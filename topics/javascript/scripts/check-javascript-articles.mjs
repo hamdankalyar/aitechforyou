@@ -128,6 +128,10 @@ const expected = {
   "javascript-loops": {
     "what-a-loop-is": { output: [...Array.from({ length: 10 }, (_, rep) => `now doing rep ${rep}`), "do you even lift bro"] },
     "three-parts": { output: Array.from({ length: 11 }, (_, index) => String(index * 10)) },
+    "while-loops": { examples: [
+      { output: ["5"] },
+      { output: ["try 0", "try 1", "try 2"] },
+    ] },
     "for-of": { output: ["1", "2", "3", "1", "2", "3"] },
     "iterables": { examples: [
       { output: ["A", "L", "O", "H", "A"] },

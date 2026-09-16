@@ -8,4 +8,5 @@
 - **Runner limits:** The Node checker prints objects as `[object Object]` while the runner uses JSON.
 - **Parked:** The class examples (`Object.create(car)` with a class, `Object.create(Car.prototype)`) confused readers before the OOP lessons. They live in `later.md` at the project root for the OOP section. Removed on September 15, 2026.
 - **Added:** `+=` and `i++` meaning, a TypeError snippet for for...of on an object, a break snippet for the comparison, and the definition of enumerable.
-- **Out of scope:** while loops, classes and prototypes in depth (OOP section), maps and sets.
+- **Added on September 16, 2026:** The while slides (`fiveRandomNumbers`, the `while (true)` warning) joined `javascript-loops` after the three-parts section. The random example prints the array length, so the checker gets a fixed value. The infinite loop stays in text, because every code box is a live editor with no timeout.
+- **Out of scope:** classes and prototypes in depth (OOP section), maps and sets.

@@ -27,6 +27,24 @@ export const javascriptLoopsSections: ArticleSection[] = [
     code: "for (let count = 0; count <= 100; count += 10) {\n  console.log(count); // 0, 10, 20, up to 100\n}",
   },
   {
+    id: "while-loops", heading: "while loops",
+    paragraphs: [
+      "**while** repeats a chunk of code while a condition is true.",
+      "**Only the condition** goes inside the parentheses. There is no counter and no step.",
+      "**The condition is checked before every iteration.** The loop stops as soon as it is false.",
+      {
+        text: "**Math.random()** gives a random number between 0 and 1. push makes the array longer, so length reaches 5 and the loop stops.",
+        code: "let fiveRandomNumbers = [];\nwhile (fiveRandomNumbers.length < 5) {\n  fiveRandomNumbers.push(Math.random());\n}\nconsole.log(fiveRandomNumbers.length); // 5",
+      },
+      "**Something in the body must change the condition.** Otherwise the loop never ends.",
+      "**while (true)** never stops, because true is never false. Do not use it unless you want to see your computer burn.",
+      {
+        text: "**A counter** you change inside the body is the usual shape. Remove tries += 1 and the loop never ends.",
+        code: 'let tries = 0;\nwhile (tries < 3) {\n  console.log("try", tries); // try 0, try 1, try 2\n  tries += 1;\n}',
+      },
+    ],
+  },
+  {
     id: "for-of", heading: "for...of loops over items in a collection",
     paragraphs: [
       "**for...of** loops over the items in a collection more easily.",
@@ -81,6 +99,7 @@ export const javascriptLoopsSections: ArticleSection[] = [
       "**Press Run** and read the three lines.",
       "**Change i < fruits.length to i < 2** and run again.",
       "**Rewrite the loop with for...of** so it prints only the names.",
+      "**Rewrite it with while.** Declare let i = 0 above the loop and put i++ inside the body.",
       "**Reset** restores the example.",
     ],
     code: 'const fruits = ["apple", "mango", "kiwi"];\nfor (let i = 0; i < fruits.length; i++) {\n  console.log(i, fruits[i]); // 0 apple, 1 mango, 2 kiwi\n}',
@@ -95,6 +114,7 @@ export const javascriptLoopsSections: ArticleSection[] = [
     paragraphs: [
       "**A loop** runs the same code many times. This is called iteration.",
       "**for (start; condition; change)** counts with a loop counter.",
+      "**while (condition)** repeats until the condition turns false, so the body must change it.",
       "**for...of** gives each item of an iterable, such as a string or an array.",
       "**forEach** runs a function for each array item and cannot stop early.",
     ],
