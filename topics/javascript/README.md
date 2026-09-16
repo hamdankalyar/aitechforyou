@@ -28,6 +28,7 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-loop-objects` | Objects are not iterable, Object.keys, Object.values, Object.entries, and looping keys with brackets |
 | `javascript-for-in` | for...in, inherited properties, and which loop to use |
 | `javascript-map-filter-reduce` | map, string templates, filter, reduce, and chaining them |
+| `javascript-spread-rest` | Spread into arrays, calls, and objects, and the rest parameter |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 
@@ -42,6 +43,7 @@ New articles continue the reading order (objects, arrays, functions, comparisons
 ## Where things go
 
 - Content: `topics/javascript/content/<slug>-article.ts` exporting `ArticleSection[]`. Register it in `lib/articles.ts` with `topic: "JavaScript"` and `accent: "yellow"`.
+- Hero card: set `series.illustration` to `{ line, value, notes }` with one short code line, one big value (11 characters or fewer), and two short notes about it. Every lesson gets its own card; never reuse another lesson's.
 - Interactive components: `topics/javascript/components/`. Shared blocks (table, quiz, details, callout, recap) already exist in `components/articles/article-block.tsx`; reuse them.
 - Styles: `topics/javascript/javascript-learning.css`, scoped under `.topic-javascript`.
 - Verification: `topics/javascript/scripts/check-javascript-articles.mjs` covers every JavaScript article. Add the new sections file to its `articles` map and add expected output for each snippet. It executes every snippet with `node:vm` and asserts the exact console output and any intended error.

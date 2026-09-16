@@ -22,6 +22,7 @@ import { javascriptLoopsSections } from "../content/javascript-loops-article.ts"
 import { javascriptLoopObjectsSections } from "../content/javascript-loop-objects-article.ts";
 import { javascriptForInSections } from "../content/javascript-for-in-article.ts";
 import { javascriptMapFilterReduceSections } from "../content/javascript-map-filter-reduce-article.ts";
+import { javascriptSpreadRestSections } from "../content/javascript-spread-rest-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -44,6 +45,7 @@ const articles = {
   "javascript-loop-objects": javascriptLoopObjectsSections,
   "javascript-for-in": javascriptForInSections,
   "javascript-map-filter-reduce": javascriptMapFilterReduceSections,
+  "javascript-spread-rest": javascriptSpreadRestSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -66,6 +68,21 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-spread-rest": {
+    "what-spread-is": { examples: [{ output: ["1,2,3,4,5", "1,2,3,4,5"] }] }, // the runner prints [[1,2,3],4,5] for the second line
+    "combine-arrays": { examples: [
+      { output: ["square,wack,basic,dusty,sus", "square,wack,basic,dusty,sus"] },
+      { output: ["square,wack", "square,wack,basic"] },
+    ] },
+    "spread-arguments": { examples: [{ output: ["HTML CSS JS React TypeScript Node", "HTML,CSS,JS,React,TypeScript,Node"] }] },
+    "spread-objects": { examples: [{ output: ["[object Object]", "[object Object]", "[object Object]"] }] },
+    "rest-parameter": { examples: [
+      { output: ["6", "30"] },
+      { output: ["Name: John", "Details: 30,New York"] },
+    ] },
+    "spread-vs-rest": { output: ["30"] },
+    "quick-check": { output: ["1,2,3,4", "4"] },
+  },
   "javascript-map-filter-reduce": {
     "map": { examples: [
       { output: ["Baby Spice,Ginger Spice,Scary Spice,Sporty Spice,Posh Spice"] },

@@ -18,6 +18,7 @@ import { javascriptLoopsSections } from "@/topics/javascript/content/javascript-
 import { javascriptLoopObjectsSections } from "@/topics/javascript/content/javascript-loop-objects-article";
 import { javascriptForInSections } from "@/topics/javascript/content/javascript-for-in-article";
 import { javascriptMapFilterReduceSections } from "@/topics/javascript/content/javascript-map-filter-reduce-article";
+import { javascriptSpreadRestSections } from "@/topics/javascript/content/javascript-spread-rest-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -94,7 +95,7 @@ export type Article = {
     nextTitle: string;
     nextDescription: string;
     exercise: { id: string; label: string };
-    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "push" | "fork" | "stash" | "ai-evolution" | "values";
+    illustration: "snapshots" | "config" | "staging" | "inspection" | "ignore" | "branches" | "merge" | "conflict" | "remotes" | "push" | "fork" | "stash" | "ai-evolution" | { line: string; value: string; notes: [string, string] };
   };
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
@@ -136,7 +137,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 1, practiceTime: "1 min to explore",
       nextTitle: "console.log",
       nextDescription: "Print text, numbers, and several things at once. The tool you will use in every lesson.",
-      exercise: { id: "your-first-line", label: "Run your first line" }, illustration: "values",
+      exercise: { id: "your-first-line", label: "Run your first line" }, illustration: { line: '<script src="app.js">', value: "JS", notes: ["A language.", "The browser runs it."] },
     },
     sections: javascriptIntroductionSections,
     sources: [
@@ -474,7 +475,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 2, practiceTime: "1 min to explore",
       nextTitle: "let, var, and const",
       nextDescription: "Give a value a name, change it later, or lock it in place.",
-      exercise: { id: "try-it-yourself", label: "Run the example" }, illustration: "values",
+      exercise: { id: "try-it-yourself", label: "Run the example" }, illustration: { line: 'console.log("Hello")', value: "Hello", notes: ["You print it.", "The console shows it."] },
     },
     sections: javascriptConsoleLogSections,
     sources: [
@@ -495,7 +496,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 3, practiceTime: "2 min to explore",
       nextTitle: "The seven primitive types",
       nextDescription: "Every value has a type. Meet all seven and learn to check them with typeof.",
-      exercise: { id: "try-the-values", label: "Try the variables" }, illustration: "values",
+      exercise: { id: "try-the-values", label: "Try the variables" }, illustration: { line: "const viewerName =", value: '"Ali"', notes: ["A name.", "A string value."] },
     },
     sections: javascriptDeclarationsSections,
     sources: [
@@ -518,7 +519,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 4, practiceTime: "1 min to explore",
       nextTitle: "Strings",
       nextDescription: "Text in JavaScript: count characters, search inside, join, and change case.",
-      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: { line: "typeof 42", value: '"number"', notes: ["One of seven types.", "typeof tells you."] },
     },
     sections: javascriptPrimitivesSections,
     sources: [
@@ -540,7 +541,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 5, practiceTime: "2 min to explore",
       nextTitle: "Symbol",
       nextDescription: "A value that is always unique, and why that is useful.",
-      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: { line: '"Ali".length', value: "3", notes: ["Three letters.", "One number back."] },
     },
     sections: javascriptStringsSections,
     sources: [
@@ -563,7 +564,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 6, practiceTime: "1 min to explore",
       nextTitle: "Operator precedence",
       nextDescription: "Work out which calculation happens first and how parentheses change the answer.",
-      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: { line: "const id = Symbol()", value: "Symbol()", notes: ["Always unique.", "Never equal."] },
     },
     sections: javascriptSymbolSections,
     sources: [
@@ -584,7 +585,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 7, practiceTime: "1 min to explore",
       nextTitle: "Equality operators",
       nextDescription: "Compare values with ==, ===, !=, and !==, and see when JavaScript converts types.",
-      exercise: { id: "try-it-yourself", label: "Try the calculations" }, illustration: "values",
+      exercise: { id: "try-it-yourself", label: "Try the calculations" }, illustration: { line: "2 + 3 * 4", value: "14", notes: ["Multiply first.", "Then add."] },
     },
     sections: javascriptOperatorPrecedenceSections,
     sources: [
@@ -605,7 +606,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 8, practiceTime: "1 min to explore",
       nextTitle: "Conditions and the ternary operator",
       nextDescription: "Choose what runs with conditions, AND, OR, NOT, and the ternary operator.",
-      exercise: { id: "try-it-yourself", label: "Try the comparisons" }, illustration: "values",
+      exercise: { id: "try-it-yourself", label: "Try the comparisons" }, illustration: { line: '1 === "1"', value: "false", notes: ["Same value.", "Different type."] },
     },
     sections: javascriptEqualityOperatorsSections,
     sources: [
@@ -629,7 +630,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 9, practiceTime: "2 min to explore",
       nextTitle: "Objects",
       nextDescription: "Group related values under property names and add behavior with methods.",
-      exercise: { id: "try-it-yourself", label: "Try the conditions" }, illustration: "values",
+      exercise: { id: "try-it-yourself", label: "Try the conditions" }, illustration: { line: 'open ? "Yes" : "No"', value: '"Yes"', notes: ["open is true.", "First branch wins."] },
     },
     sections: javascriptConditionsTernarySections,
     sources: [
@@ -654,7 +655,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 10, practiceTime: "2 min to explore",
       nextTitle: "Arrays",
       nextDescription: "Keep several values together, find items, and change the list.",
-      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: { line: "book.title", value: '"Dune"', notes: ["A key.", "Its value."] },
     },
     sections: javascriptObjectsSections,
     sources: [
@@ -677,7 +678,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 11, practiceTime: "2 min to explore",
       nextTitle: "Mutable vs. immutable",
       nextDescription: "Separate changes to a value from variable reassignment, and learn how shared objects behave.",
-      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Take the quick check" }, illustration: { line: "const nums =", value: "[1, 2, 3]", notes: ["Three items.", "Index starts at 0."] },
     },
     sections: javascriptArraysSections,
     sources: [
@@ -699,7 +700,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 12, practiceTime: "2 min to explore",
       nextTitle: "Functions",
       nextDescription: "Create reusable tasks, supply arguments, and return results to the caller.",
-      exercise: { id: "reassignment", label: "Compare the assignments" }, illustration: "values",
+      exercise: { id: "reassignment", label: "Compare the assignments" }, illustration: { line: "const list = [1];", value: ".push(2)", notes: ["Fixed reference.", "Mutable items."] },
     },
     sections: javascriptImmutableMutableSections,
     sources: [
@@ -726,7 +727,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 13, practiceTime: "2 min to explore",
       nextTitle: "Arrow functions",
       nextDescription: "Write shorter functions with the fat arrow and learn when a return is still required.",
-      exercise: { id: "quick-check", label: "Try a function" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Try a function" }, illustration: { line: "function greet() {", value: "greet()", notes: ["Define once.", "Call many times."] },
     },
     sections: javascriptFunctionsSections,
   },
@@ -744,7 +745,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 14, practiceTime: "2 min to explore",
       nextTitle: "Scope",
       nextDescription: "See where a variable can be used and how a function can change an outer one.",
-      exercise: { id: "quick-check", label: "Write three arrow functions" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Write three arrow functions" }, illustration: { line: "const double =", value: "n => n * 2", notes: ["Fat arrow.", "Returns n * 2."] },
     },
     sections: javascriptArrowFunctionsSections,
     sources: [
@@ -765,7 +766,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 15, practiceTime: "2 min to explore",
       nextTitle: "Events and handlers",
       nextDescription: "Make the page interactive by listening for clicks and other events.",
-      exercise: { id: "quick-check", label: "Change the scope" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Change the scope" }, illustration: { line: "{ let secret = 1; }", value: "secret", notes: ["Seen inside.", "Hidden outside."] },
     },
     sections: javascriptScopeSections,
     sources: [
@@ -786,7 +787,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 16, practiceTime: "3 min to explore",
       nextTitle: "Loops",
       nextDescription: "Run the same code many times with for, for...of, and forEach.",
-      exercise: { id: "quick-check", label: "Listen for a click" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Listen for a click" }, illustration: { line: "button.addEventListener(", value: '"click"', notes: ["Wait for it.", "Then run a handler."] },
     },
     sections: javascriptEventsSections,
     sources: [
@@ -808,7 +809,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 17, practiceTime: "2 min to explore",
       nextTitle: "Looping over objects",
       nextDescription: "Objects are not iterable. Object.keys, Object.values, and Object.entries turn them into arrays you can loop over.",
-      exercise: { id: "quick-check", label: "Count the items" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Count the items" }, illustration: { line: "for (let i = 0; i < 3; i++)", value: "i++", notes: ["Start. Check. Step.", "Runs 3 times."] },
     },
     sections: javascriptLoopsSections,
     sources: [
@@ -831,7 +832,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 18, practiceTime: "2 min to explore",
       nextTitle: "for...in",
       nextDescription: "Loop over an object's property keys, including the ones it inherits.",
-      exercise: { id: "quick-check", label: "Loop over the keys" }, illustration: "values",
+      exercise: { id: "quick-check", label: "Loop over the keys" }, illustration: { line: "Object.keys(book)", value: '["title"]', notes: ["Keys as an array.", "Now loop it."] },
     },
     sections: javascriptLoopObjectsSections,
     sources: [
@@ -854,7 +855,7 @@ export const articles: Article[] = [
       title: "JavaScript, made visible", order: 19, practiceTime: "2 min to explore",
       nextTitle: "map, filter, and reduce",
       nextDescription: "Build new arrays from old ones with map and filter, and combine an array into one value with reduce.",
-      exercise: { id: "quick-check", label: "List the keys" }, illustration: "values",
+      exercise: { id: "quick-check", label: "List the keys" }, illustration: { line: "for (const key in book)", value: "key", notes: ["Each key in turn.", "Always a string."] },
     },
     sections: javascriptForInSections,
     sources: [
@@ -874,9 +875,9 @@ export const articles: Article[] = [
     number: "37",
     series: {
       title: "JavaScript, made visible", order: 20, practiceTime: "2 min to explore",
-      nextTitle: "More JavaScript lessons",
-      nextDescription: "More lessons are in preparation.",
-      exercise: { id: "quick-check", label: "Filter, map, reduce" }, illustration: "values",
+      nextTitle: "Spread and rest",
+      nextDescription: "Lay out an array's items one by one with spread, and collect many arguments into one array with rest.",
+      exercise: { id: "quick-check", label: "Filter, map, reduce" }, illustration: { line: "[1, 2, 3].map(n => n * 2)", value: "[2, 4, 6]", notes: ["Same length.", "New array."] },
     },
     sections: javascriptMapFilterReduceSections,
     sources: [
@@ -884,6 +885,28 @@ export const articles: Article[] = [
       { title: "MDN · Array.prototype.filter()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter" },
       { title: "MDN · Array.prototype.reduce()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" },
       { title: "MDN · Template literals", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" },
+    ],
+  },
+  {
+    slug: "javascript-spread-rest",
+    title: "Spread and rest",
+    excerpt: "Use three dots to spread an array's items into a new array or a function call, and to collect any number of arguments into one array.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 15, 2026",
+    readTime: "4 min read",
+    accent: "yellow",
+    number: "38",
+    series: {
+      title: "JavaScript, made visible", order: 21, practiceTime: "2 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "quick-check", label: "Spread the arrays" }, illustration: { line: "[...a, ...b]", value: "...", notes: ["Spread unpacks.", "Rest gathers."] },
+    },
+    sections: javascriptSpreadRestSections,
+    sources: [
+      { title: "MDN · Spread syntax (...)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" },
+      { title: "MDN · Rest parameters", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" },
     ],
   },
 ];
