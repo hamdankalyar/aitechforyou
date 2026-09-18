@@ -22,6 +22,7 @@ import { javascriptSpreadRestSections } from "@/topics/javascript/content/javasc
 import { javascriptDestructuringSections } from "@/topics/javascript/content/javascript-destructuring-article";
 import { javascriptAsynchronousSections } from "@/topics/javascript/content/javascript-asynchronous-article";
 import { javascriptEventLoopSections } from "@/topics/javascript/content/javascript-event-loop-article";
+import { javascriptErrorHandlingSections } from "@/topics/javascript/content/javascript-error-handling-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -972,8 +973,8 @@ export const articles: Article[] = [
     number: "41",
     series: {
       title: "JavaScript, made visible", order: 24, practiceTime: "4 min to explore",
-      nextTitle: "More JavaScript lessons",
-      nextDescription: "More lessons are in preparation.",
+      nextTitle: "Error handling",
+      nextDescription: "Handle errors with try, catch, throw, and finally.",
       exercise: { id: "the-event-loop-turn", label: "Trace the event loop" }, illustration: { line: "Promise.then(...) ", value: "before", notes: ["Microtasks drain.", "Then a task runs."] },
     },
     sections: javascriptEventLoopSections,
@@ -981,6 +982,29 @@ export const articles: Article[] = [
       { title: "MDN · In depth: Microtasks and the JavaScript runtime environment", url: "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth" },
       { title: "MDN · Using microtasks in JavaScript with queueMicrotask()", url: "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide" },
       { title: "HTML Standard · Event loops", url: "https://html.spec.whatwg.org/multipage/webappapis.html#event-loops" },
+    ],
+  },
+  {
+    slug: "javascript-error-handling",
+    title: "Error handling",
+    excerpt: "Handle problems with try and catch, create your own errors with throw, and run cleanup code with finally.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 18, 2026",
+    readTime: "4 min read",
+    accent: "yellow",
+    number: "42",
+    series: {
+      title: "JavaScript, made visible", order: 25, practiceTime: "3 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "quick-check", label: "Handle division" }, illustration: { line: "try { ... } catch", value: "error", notes: ["Try code.", "Handle errors."] },
+    },
+    sections: javascriptErrorHandlingSections,
+    sources: [
+      { title: "MDN · try...catch", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch" },
+      { title: "MDN · throw", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw" },
+      { title: "MDN · Error", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" },
     ],
   },
 ];

@@ -26,6 +26,7 @@ import { javascriptSpreadRestSections } from "../content/javascript-spread-rest-
 import { javascriptDestructuringSections } from "../content/javascript-destructuring-article.ts";
 import { javascriptAsynchronousSections } from "../content/javascript-asynchronous-article.ts";
 import { javascriptEventLoopSections } from "../content/javascript-event-loop-article.ts";
+import { javascriptErrorHandlingSections } from "../content/javascript-error-handling-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -52,6 +53,7 @@ const articles = {
   "javascript-destructuring": javascriptDestructuringSections,
   "javascript-asynchronous": javascriptAsynchronousSections,
   "javascript-event-loop": javascriptEventLoopSections,
+  "javascript-error-handling": javascriptErrorHandlingSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -74,6 +76,13 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-error-handling": {
+    "try-and-catch": { examples: [{ output: ["Before the error", "Something went wrong"] }] },
+    "throw-your-own-error": { examples: [{ output: ["You must be 18."] }] },
+    "error-name-and-message": { examples: [{ output: ["TypeError", "Name must be text."] }] },
+    "finally": { examples: [{ output: ["No connection", "Cleaning up."] }] },
+    "quick-check": { output: ["Error", "Cannot divide by zero."] },
+  },
   "javascript-destructuring": {
     "object-destructuring": { examples: [{ output: ["John", "30"] }] },
     "array-destructuring": { examples: [{ output: ["1", "2", "3"] }] },
