@@ -100,9 +100,9 @@ export const javascriptConditionsTernarySections: ArticleSection[] = [
   {
     id: "take-it-with-you", heading: "Remember",
     paragraphs: [
-      "**if, else if, and else** run only the first matching branch.",
-      "**Truthy and falsy values** decide whether conditional code runs.",
-      "**&&, ||, and !** combine or reverse conditions.",
+      "**&&** returns the left value if it is falsy. Otherwise, it returns the right value.",
+      "**||** returns the left value if it is truthy. Otherwise, it returns the right value.",
+      "**!** reverses truthiness and always returns true or false.",
       "**? :** chooses a value based on a condition.",
     ],
   },

@@ -40,8 +40,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const topicSlug = article.topic.toLowerCase();
   const runnableCode = article.topic === "JavaScript";
   const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : article.topic === "JavaScript" ? `/courses/javascript#${article.category.toLowerCase()}` : `/articles?topic=${article.topic}`;
-  const nextArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order + 1) : undefined;
-  const previousArticle = series ? articles.find(candidate => candidate.series?.title === series.title && candidate.series?.order === series.order - 1) : undefined;
+  const courseArticles = series ? articles.filter(candidate => candidate.series?.title === series.title && (article.topic !== "JavaScript" || candidate.category === article.category)).sort((a, b) => a.series!.order - b.series!.order) : [];
+  const seriesIndex = courseArticles.findIndex(candidate => candidate.slug === article.slug);
+  const nextArticle = courseArticles[seriesIndex + 1];
+  const previousArticle = courseArticles[seriesIndex - 1];
   const sections = article.sections.map((section, index) => ({ ...section, id: section.id ?? `section-${index + 1}` }));
   const contents = <ol>{sections.map((section, index) => <li key={section.id}><a href={`#${section.id}`}>{showSectionNumbers && <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>}{section.heading}</a></li>)}</ol>;
 

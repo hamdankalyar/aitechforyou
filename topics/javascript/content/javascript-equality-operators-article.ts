@@ -113,29 +113,79 @@ export const javascriptEqualityOperatorsSections: ArticleSection[] = [
     code: 'console.log(0 == false); // true\nconsole.log(0 === false); // false\nconsole.log(null == undefined); // true\nconsole.log(null === undefined); // false\nconsole.log(NaN == NaN); // false\nconsole.log(NaN === NaN); // false\nconsole.log(NaN !== NaN); // true\nconsole.log(Number("hello")); // NaN\nconsole.log(isNaN(8)); // false\nconsole.log(isNaN("hello")); // true',
   },
   {
-    id: "compare-the-operators", heading: "The four operators together",
+    id: "interview-questions", heading: "Interview questions",
     paragraphs: [
-      { text: "**Choose the comparison you need:**", bullets: [
-        "**=== and !==** compare without automatic conversion.",
-        "**== and !=** use loose-equality conversion rules.",
+      "**Answer each question before opening it.**",
+    ],
+    blocks: [
+      { type: "details", title: "What is the difference between == and ===?", paragraphs: [
+        "**==** can convert a value before comparing it.",
+        "**===** compares the type and the value without conversion.",
       ] },
-      { text: "**One equals sign has a different job:**", bullets: [
-        "**=** assigns a value, as in let score = 5.",
-        "**== and ===** compare values for equality.",
+      { type: "details", title: "What is the difference between != and !==?", paragraphs: [
+        "**!=** can convert a value before deciding whether the values differ.",
+        "**!==** checks whether the type or value differs without conversion.",
       ] },
-      { text: "**Comparison operators:**", bullets: [
-        "**>** means greater than.",
-        "**<** means less than.",
-        "**>=** means greater than or equal to.",
-        "**<=** means less than or equal to.",
+      { type: "details", title: "Why do developers usually prefer ===?", paragraphs: [
+        "**===** avoids unexpected results from automatic type conversion.",
+        "**Use ==** only when its conversion rule is deliberately needed.",
+      ] },
+      { type: "details", title: "Why does 5 == \"5\" return true?", paragraphs: [
+        "**Types.** JavaScript sees a number and a string.",
+        "**Conversion.** Loose equality converts the string \"5\" to the number 5.",
+        "**Result.** JavaScript compares 5 == 5 and returns true.",
+      ] },
+      { type: "details", title: "What do 0 == false and 0 === false return?", paragraphs: [
+        "**0 == false** returns true because false converts to 0.",
+        "**0 === false** returns false because a number and a boolean have different types.",
+      ] },
+      { type: "details", title: "Why does null == undefined return true?", paragraphs: [
+        "**Special rule.** == has a special rule for null and undefined.",
+        "**Result.** JavaScript returns true when one side is null and the other is undefined.",
+        "**No conversion.** JavaScript does not convert either value.",
+      ] },
+      { type: "details", title: "Why does null === undefined return false?", paragraphs: [
+        "**Strict equality.** === does not use the special loose-equality rule.",
+        "**typeof null.** typeof null returns \"object\" because of a historical JavaScript behavior.",
+        "**typeof undefined.** typeof undefined returns \"undefined\".",
+        "**Language types.** Null and Undefined are distinct language types, so strict equality returns false.",
+      ] },
+      { type: "details", title: "Why does [] == 0 return true?", paragraphs: [
+        "**Array object.** An empty array is an object.",
+        "**First conversion.** JavaScript converts [] to the empty string \"\".",
+        "**Second conversion.** JavaScript converts \"\" to the number 0.",
+        "**Result.** JavaScript compares 0 == 0 and returns true.",
+      ] },
+      { type: "details", title: "Why does an empty object == 0 return false?", paragraphs: [
+        "**Object conversion.** JavaScript converts an empty object to \"[object Object]\".",
+        "**Number conversion.** \"[object Object]\" cannot become a number, so JavaScript gets NaN.",
+        "**Result.** NaN == 0 is false.",
+      ] },
+      { type: "details", title: "Why do {} == {} and [] == {} return false?", paragraphs: [
+        "**Objects.** Both sides are objects.",
+        "**References.** JavaScript compares object references when both values are objects.",
+        "**Result.** Separately created objects have different references, so each comparison returns false.",
+      ] },
+      { type: "details", title: "Why does [] == ![] return true?", paragraphs: [
+        "**Truthy array.** An array is truthy, so ![] becomes false.",
+        "**Boolean conversion.** false becomes 0 for loose equality.",
+        "**Array conversion.** [] becomes \"\", and \"\" becomes 0.",
+        "**Result.** JavaScript compares 0 == 0 and returns true.",
+      ] },
+      { type: "details", title: "What do truthy and falsy mean?", paragraphs: [
+        "**Truthy values.** JavaScript treats truthy values as true in a condition.",
+        "**Falsy values.** JavaScript treats falsy values as false in a condition.",
+        "**Arrays and objects.** Arrays and objects are truthy, even when empty.",
+        "**Negation.** ! reverses a truthy or falsy value.",
+      ] },
+      { type: "details", title: "Why is NaN not equal to itself?", paragraphs: [
+        "**NaN says:** \"I tried to make a number, but there is no valid numeric answer.\"",
+        "**Failure marker.** NaN is a failure marker, not a valid numeric answer.",
+        "**Comparison.** JavaScript must not claim that two failed calculations have the same numeric value.",
+        "**Result.** NaN == NaN and NaN === NaN both return false.",
+        "**Number.isNaN(value)** checks whether a value is NaN without converting it first.",
       ] },
     ],
-    blocks: [{ type: "table", caption: "Comparing the number 5 and the string \"5\"", columns: ["Operator", "Question", "Example", "Result"], rows: [
-      ["==", "Equal under loose-equality rules?", '5 == "5"', "true"],
-      ["===", "Equal without conversion?", '5 === "5"', "false"],
-      ["!=", "Not equal under loose-equality rules?", '5 != "5"', "false"],
-      ["!==", "Not equal without conversion?", '5 !== "5"', "true"],
-    ] }],
   },
   {
     id: "try-it-yourself", heading: "Run it yourself",

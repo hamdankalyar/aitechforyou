@@ -446,6 +446,11 @@ if (process.argv[2]) {
     assert.equal(new Set(sections.map(section => section.id)).size, sections.length, articleSlug);
   }
   const slugs = Object.keys(articles);
+  const categoryLessons = {
+    Basic: slugs.filter(slug => !["javascript-symbol", "javascript-event-loop", "javascript-functions", "javascript-arrow-functions"].includes(slug)),
+    Advanced: ["javascript-symbol", "javascript-event-loop"],
+    Functions: ["javascript-functions", "javascript-arrow-functions"],
+  };
   assert.match(await page("/articles/javascript-map-filter-reduce"), /class="snapshot-lab variables-lab reduce-lab"/, "the reduce stepper renders");
   const eventLoopLesson = await page("/articles/javascript-event-loop");
   assert.match(eventLoopLesson, /Watch one event-loop turn unfold\./, "the event loop trace renders");
@@ -456,14 +461,21 @@ if (process.argv[2]) {
   for (const label of ["staff2", "staff", "Strengthened", "43", "reading", "swimming", "student2", "student1", "Halina"]) {
     assert.ok(referenceLesson.includes(label), `source diagram label: ${label}`);
   }
-  for (let index = 0; index < slugs.length - 1; index += 1) {
-    assert.match(await page(`/articles/${slugs[index]}`), new RegExp(`href="/articles/${slugs[index + 1]}"`), `${slugs[index]} links to the next lesson`);
+  for (const [category, lessons] of Object.entries(categoryLessons)) {
+    for (let index = 0; index < lessons.length - 1; index += 1) {
+      assert.match(await page(`/articles/${lessons[index]}`), new RegExp(`href="/articles/${lessons[index + 1]}"`), `${lessons[index]} links to the next ${category} lesson`);
+    }
+    assert.match(await page(`/articles/${lessons.at(-1)}`), /series-next is-disabled/, `${category} ends at its final lesson`);
   }
+  const stringsNavigation = await page("/articles/javascript-strings");
+  assert.match(stringsNavigation, /class="series-nav-card series-next" href="\/articles\/javascript-operator-precedence"/);
+  assert.doesNotMatch(stringsNavigation, /class="series-nav-card series-next" href="\/articles\/javascript-symbol"/);
   assert.match(await page(`/articles/${slug}`), /What JavaScript is/);
   assert.match(await page("/articles/javascript-var-let-const"), /Read both examples without interacting/);
   assert.match(await page(`/articles/${Object.keys(articles).at(-1)}`), /In preparation/);
   assert.match(await page("/articles/javascript-operator-precedence"), /<li><strong>An operator<\/strong>[^<]+<ul><li><strong>\+<\/strong> adds\.<\/li>/, "operator signs render as nested list items");
   assert.match(await page("/articles/javascript-equality-operators"), /<li><strong>A comparison operator<\/strong>[^<]+<ul><li><strong>Operands<\/strong>/, "comparison details render as nested list items");
+  assert.match(await page("/articles/javascript-equality-operators"), /id="interview-questions"[^>]*>[\s\S]*?<h2>Interview questions<\/h2>/, "equality interview questions render");
   const home = await page("/");
   assert.ok(home.includes(`/articles/${slug}`));
   assert.match(home, /href="\/learn\/git"/);
@@ -501,7 +513,7 @@ if (process.argv[2]) {
     const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
     assert.ok(section, `${category} section exists`);
     const listed = [...section.matchAll(/<h3><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
-    const expected = category === "Basic" ? slugs.filter(slug => !["javascript-symbol", "javascript-event-loop", "javascript-functions", "javascript-arrow-functions"].includes(slug)) : category === "Advanced" ? ["javascript-symbol", "javascript-event-loop"] : category === "Functions" ? ["javascript-functions", "javascript-arrow-functions"] : [];
+    const expected = categoryLessons[category] ?? [];
     assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
     if (!listed.length) assert.match(section, /No articles yet/);
     for (const articleSlug of listed) {
@@ -514,7 +526,7 @@ if (process.argv[2]) {
   assert.deepEqual(groupedSlugs.sort(), [...slugs].sort(), "every JavaScript article appears exactly once");
   const articleNavigation = await page("/articles/javascript-operator-precedence");
   assert.match(articleNavigation, /aria-label="JavaScript course navigation"/);
-  assert.match(articleNavigation, /class="series-nav-card series-previous" href="\/articles\/javascript-symbol"/);
+  assert.match(articleNavigation, /class="series-nav-card series-previous" href="\/articles\/javascript-strings"/);
   assert.match(articleNavigation, /class="series-nav-card series-course" href="\/courses\/javascript#basic"/);
   assert.match(articleNavigation, /class="series-nav-card series-next" href="\/articles\/javascript-equality-operators"/);
   const sitemap = await page("/sitemap.xml");
