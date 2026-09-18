@@ -23,6 +23,8 @@ import { javascriptLoopObjectsSections } from "../content/javascript-loop-object
 import { javascriptForInSections } from "../content/javascript-for-in-article.ts";
 import { javascriptMapFilterReduceSections } from "../content/javascript-map-filter-reduce-article.ts";
 import { javascriptSpreadRestSections } from "../content/javascript-spread-rest-article.ts";
+import { javascriptAsynchronousSections } from "../content/javascript-asynchronous-article.ts";
+import { javascriptEventLoopSections } from "../content/javascript-event-loop-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -46,6 +48,8 @@ const articles = {
   "javascript-for-in": javascriptForInSections,
   "javascript-map-filter-reduce": javascriptMapFilterReduceSections,
   "javascript-spread-rest": javascriptSpreadRestSections,
+  "javascript-asynchronous": javascriptAsynchronousSections,
+  "javascript-event-loop": javascriptEventLoopSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -68,6 +72,22 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-asynchronous": {
+    "synchronous-code": { examples: [{ output: ["This prints first", "This prints second"] }] },
+    "promise-states": { examples: [{ output: ["true"] }] },
+    "create-a-promise": { examples: [
+      { output: ["Yes, found it"], browserOnly: true },
+      { output: ["undefined"], browserOnly: true },
+    ] },
+    "then-and-catch": { examples: [{ output: ["Camera blocked."], browserOnly: true }] },
+    "await": { output: ["200", "success", '["afghan","basset","blood","english","ibizan","plott","walker"]'], browserOnly: true },
+    "quick-check": { output: ["Start", "JavaScript keeps going", "Done"], browserOnly: true },
+  },
+  "javascript-event-loop": {
+    "read-the-output": { output: ["start", "end", "promise", "timeout"], browserOnly: true },
+    "microtasks-can-delay-work": { output: ["task", "microtask 1", "microtask 2", "timer"], browserOnly: true },
+    "quick-check": { output: ["A", "B", "C", "D"], browserOnly: true },
+  },
   "javascript-spread-rest": {
     "what-spread-is": { examples: [{ output: ["1,2,3,4,5", "1,2,3,4,5"] }] }, // the runner prints [[1,2,3],4,5] for the second line
     "combine-arrays": { examples: [
@@ -397,6 +417,9 @@ if (process.argv[2]) {
   }
   const slugs = Object.keys(articles);
   assert.match(await page("/articles/javascript-map-filter-reduce"), /class="snapshot-lab variables-lab reduce-lab"/, "the reduce stepper renders");
+  const eventLoopLesson = await page("/articles/javascript-event-loop");
+  assert.match(eventLoopLesson, /Watch one event-loop turn unfold\./, "the event loop trace renders");
+  for (const label of ["CALL STACK", "MICROTASK QUEUE", "TASK QUEUE", "EVENT"]) assert.ok(eventLoopLesson.includes(label), `event loop diagram label: ${label}`);
   const referenceLesson = await page("/articles/javascript-immutable-vs-mutable");
   assert.equal((referenceLesson.match(/class="reference-memory" role="img"/g) ?? []).length, 1, "the supplied object reference diagram renders");
   assert.equal((referenceLesson.match(/class="primitive-memory" role="img"/g) ?? []).length, 1, "the supplied primitive value diagram renders");
@@ -448,7 +471,7 @@ if (process.argv[2]) {
     const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
     assert.ok(section, `${category} section exists`);
     const listed = [...section.matchAll(/<h3><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
-    const expected = category === "Basic" ? slugs.filter(slug => !["javascript-symbol", "javascript-functions", "javascript-arrow-functions"].includes(slug)) : category === "Advanced" ? ["javascript-symbol"] : category === "Functions" ? ["javascript-functions", "javascript-arrow-functions"] : [];
+    const expected = category === "Basic" ? slugs.filter(slug => !["javascript-symbol", "javascript-event-loop", "javascript-functions", "javascript-arrow-functions"].includes(slug)) : category === "Advanced" ? ["javascript-symbol", "javascript-event-loop"] : category === "Functions" ? ["javascript-functions", "javascript-arrow-functions"] : [];
     assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
     if (!listed.length) assert.match(section, /No articles yet/);
     for (const articleSlug of listed) {

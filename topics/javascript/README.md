@@ -29,6 +29,7 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-for-in` | for...in, inherited properties, and which loop to use |
 | `javascript-map-filter-reduce` | map, string templates, filter, reduce, and chaining them |
 | `javascript-spread-rest` | Spread into arrays, calls, and objects, and the rest parameter |
+| `javascript-asynchronous` | Synchronous code, promises, fetch, async functions, and await |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 

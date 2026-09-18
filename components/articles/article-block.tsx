@@ -3,6 +3,7 @@ import { VariablesPlayground } from "@/topics/javascript/components/variables-pl
 import { ArrayMutationDiagram, ObjectMutationDiagram, PrimitiveMemoryDiagram, ReassignmentMemoryDiagram, ReferenceMemoryDiagrams, SingleReferenceMemoryDiagram } from "@/topics/javascript/components/reference-memory-diagrams";
 import { CodeRunner } from "@/topics/javascript/components/code-runner";
 import { ReduceStepper } from "@/topics/javascript/components/reduce-stepper";
+import { EventLoopTrace } from "@/topics/javascript/components/event-loop-trace";
 import { snapshots } from "@/topics/git/content/git-snapshots";
 import { SnapshotTimeline } from "@/topics/git/components/snapshot-timeline";
 import { KnowledgeCheck } from "@/components/articles/knowledge-check";
@@ -34,6 +35,7 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "object-mutation-diagram": return <ObjectMutationDiagram />;
     case "array-mutation-diagram": return <ArrayMutationDiagram />;
     case "reduce-diagram": return <ReduceStepper />;
+    case "event-loop-trace": return <EventLoopTrace />;
     case "timeline": return <SnapshotTimeline />;
     case "save-commit-comparison": return <figure className="save-commit-comparison"><div><article><span className="learning-kicker">Your editor</span><h3>Save</h3><p>Updates the file on your computer.</p><strong>Current file changes</strong></article><article><span className="learning-kicker">Git</span><h3>Commit</h3><p>Records a chosen project version in its history.</p><strong>A saved moment appears</strong></article></div><figcaption>Saving answers “What is in my file now?” Committing answers “Which version should Git remember?”</figcaption></figure>;
     case "config-playground": return <ConfigPlayground />;
