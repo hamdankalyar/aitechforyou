@@ -10,7 +10,7 @@ type Status = "idle" | "running" | "done";
 // A small demo page for event lessons. Shown inside the sandbox when `page` is set, so real clicks reach the code.
 const demoPage = `<style>body{margin:0;padding:16px 20px;font:16px/1.5 system-ui,sans-serif;color:#111;background:#fff}h1{font-size:22px;margin:0 0 12px}.box{border:3px solid #999;padding:24px 16px;margin:0 0 14px}button{font:inherit;padding:10px 20px;border:0;border-radius:6px;background:#7b1a8a;color:#fff;cursor:pointer}</style><body><h1>Very Exciting Web Page</h1><div class="box">Hello I am in a box</div><button>Click me</button>`;
 
-function buildDocument(code: string, token: string, page: boolean) {
+function buildDocument(code: string, token: string, page: boolean, module = false, moduleFiles: Record<string, string> = {}) {
   const safeCode = code.replace(/<\/script/gi, "<\\/script");
   const bridge = `
     const token = ${JSON.stringify(token)};
@@ -27,17 +27,30 @@ function buildDocument(code: string, token: string, page: boolean) {
     window.addEventListener("error", (event) => { send("error", event.message.replace(/^Uncaught /, "")); event.preventDefault(); });
     window.addEventListener("unhandledrejection", (event) => send("error", "Unhandled promise rejection: " + format(event.reason)));
   `;
+  if (module) {
+    const moduleRunner = `
+      const moduleFiles = ${JSON.stringify(moduleFiles)};
+      const moduleUrls = Object.fromEntries(Object.entries(moduleFiles).map(([path, source]) => [path, URL.createObjectURL(new Blob([source], { type: "text/javascript" }))]));
+      let entryCode = ${JSON.stringify(safeCode)};
+      for (const [path, url] of Object.entries(moduleUrls)) entryCode = entryCode.replaceAll(path, url);
+      const entryUrl = URL.createObjectURL(new Blob([entryCode], { type: "text/javascript" }));
+      import(entryUrl)
+        .catch(error => send("error", error.name + ": " + error.message))
+        .finally(() => parent.postMessage({ token, kind: "done" }, "*"));
+    `;
+    return `<!doctype html><meta charset="utf-8"><script>${bridge}${moduleRunner}</script>${page ? demoPage : ""}`;
+  }
   return `<!doctype html><meta charset="utf-8"><script>${bridge}</script>${page ? demoPage : ""}<script>${safeCode}\n</script><script>parent.postMessage({ token: ${JSON.stringify(token)}, kind: "done" }, "*");</script>`;
 }
 
-export function CodeRunner({ code, label = "Editable example", page = false }: { code: string; label?: string; page?: boolean }) {
+export function CodeRunner({ code, label = "Editable example", page = false, module = false, moduleFiles = {} }: { code: string; label?: string; page?: boolean; module?: boolean; moduleFiles?: Record<string, string> }) {
   const id = useId();
   const [source, setSource] = useState(code);
   const [lines, setLines] = useState<Line[]>([]);
   const [status, setStatus] = useState<Status>("idle");
   const [run, setRun] = useState(0);
   // In page mode the demo page is visible before Run, so the reader sees what the code will listen to.
-  const idle = page ? buildDocument("", `${id}-0`, true) : null;
+  const idle = page ? buildDocument("", `${id}-0`, true, module, moduleFiles) : null;
   const [document, setDocument] = useState<string | null>(idle);
   const frameRef = useRef<HTMLIFrameElement>(null);
   const token = `${id}-${run}`;
@@ -59,7 +72,7 @@ export function CodeRunner({ code, label = "Editable example", page = false }: {
     setLines([]);
     setStatus("running");
     setRun(next);
-    setDocument(buildDocument(source, `${id}-${next}`, page));
+    setDocument(buildDocument(source, `${id}-${next}`, page, module, moduleFiles));
   };
 
   const reset = () => { setSource(code); setLines([]); setStatus("idle"); setDocument(idle); };

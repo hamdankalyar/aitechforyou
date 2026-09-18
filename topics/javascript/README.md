@@ -32,6 +32,7 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-destructuring` | Object and array destructuring, skipped items, and remaining items |
 | `javascript-asynchronous` | Synchronous code, promises, fetch, async functions, and await |
 | `javascript-error-handling` | try, catch, throw, finally, and error details |
+| `javascript-modules` | Default and named exports, imports, and browser module scripts |
 
 New articles continue the reading order (objects, arrays, functions, comparisons, error handling). Set `series.order` to the next value, and use only the topic as the article title.
 

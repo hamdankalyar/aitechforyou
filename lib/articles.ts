@@ -23,6 +23,7 @@ import { javascriptDestructuringSections } from "@/topics/javascript/content/jav
 import { javascriptAsynchronousSections } from "@/topics/javascript/content/javascript-asynchronous-article";
 import { javascriptEventLoopSections } from "@/topics/javascript/content/javascript-event-loop-article";
 import { javascriptErrorHandlingSections } from "@/topics/javascript/content/javascript-error-handling-article";
+import { javascriptModulesSections } from "@/topics/javascript/content/javascript-modules-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -74,10 +75,12 @@ export type ArticleBlock =
 export type ArticleSection = {
   id?: string;
   heading: string;
-  paragraphs: (string | { text: string; bullets?: string[]; code?: string; page?: boolean; block?: ArticleBlock; info?: Extract<ArticleBlock, { type: "details" }> })[];
+  paragraphs: (string | { text: string; bullets?: string[]; code?: string; page?: boolean; module?: boolean; moduleFiles?: Record<string, string>; block?: ArticleBlock; info?: Extract<ArticleBlock, { type: "details" }> })[];
   code?: string;
   /** Run `code` inside a visible demo page so clicks and other events reach it. */
   page?: boolean;
+  module?: boolean;
+  moduleFiles?: Record<string, string>;
   blocks?: ArticleBlock[];
 };
 
@@ -996,8 +999,8 @@ export const articles: Article[] = [
     number: "42",
     series: {
       title: "JavaScript, made visible", order: 25, practiceTime: "3 min to explore",
-      nextTitle: "More JavaScript lessons",
-      nextDescription: "More lessons are in preparation.",
+      nextTitle: "Modules",
+      nextDescription: "Split code into files with exports and imports.",
       exercise: { id: "quick-check", label: "Handle division" }, illustration: { line: "try { ... } catch", value: "error", notes: ["Try code.", "Handle errors."] },
     },
     sections: javascriptErrorHandlingSections,
@@ -1005,6 +1008,29 @@ export const articles: Article[] = [
       { title: "MDN · try...catch", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch" },
       { title: "MDN · throw", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw" },
       { title: "MDN · Error", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" },
+    ],
+  },
+  {
+    slug: "javascript-modules",
+    title: "Modules",
+    excerpt: "Split JavaScript into files, then share code with default exports, named exports, and imports.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 18, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "43",
+    series: {
+      title: "JavaScript, made visible", order: 26, practiceTime: "4 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "quick-check", label: "Import multiply" }, illustration: { line: "import { add }", value: "module", notes: ["Share code.", "Import values."] },
+    },
+    sections: javascriptModulesSections,
+    sources: [
+      { title: "MDN · JavaScript modules", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules" },
+      { title: "MDN · export", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" },
+      { title: "MDN · import", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" },
     ],
   },
 ];

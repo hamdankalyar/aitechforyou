@@ -27,6 +27,7 @@ import { javascriptDestructuringSections } from "../content/javascript-destructu
 import { javascriptAsynchronousSections } from "../content/javascript-asynchronous-article.ts";
 import { javascriptEventLoopSections } from "../content/javascript-event-loop-article.ts";
 import { javascriptErrorHandlingSections } from "../content/javascript-error-handling-article.ts";
+import { javascriptModulesSections } from "../content/javascript-modules-article.ts";
 
 const articles = {
   "javascript-introduction": javascriptIntroductionSections,
@@ -54,6 +55,7 @@ const articles = {
   "javascript-asynchronous": javascriptAsynchronousSections,
   "javascript-event-loop": javascriptEventLoopSections,
   "javascript-error-handling": javascriptErrorHandlingSections,
+  "javascript-modules": javascriptModulesSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -76,6 +78,14 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-modules": {
+    "default-export": { examples: [{ output: ["5"], browserOnly: true }] },
+    "named-exports": { examples: [{ output: ["5", "6"], browserOnly: true }] },
+    "import-default": { examples: [{ output: ["5"], browserOnly: true }] },
+    "import-named": { examples: [{ output: ["5"], browserOnly: true }] },
+    "browser-modules": { output: ['<script type="module" src="./mathOperations.js"></script>'] },
+    "quick-check": { output: ["20"], browserOnly: true },
+  },
   "javascript-error-handling": {
     "try-and-catch": { examples: [{ output: ["Before the error", "Something went wrong"] }] },
     "throw-your-own-error": { examples: [{ output: ["You must be 18."] }] },
