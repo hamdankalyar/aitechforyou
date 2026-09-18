@@ -19,6 +19,7 @@ import { javascriptLoopObjectsSections } from "@/topics/javascript/content/javas
 import { javascriptForInSections } from "@/topics/javascript/content/javascript-for-in-article";
 import { javascriptMapFilterReduceSections } from "@/topics/javascript/content/javascript-map-filter-reduce-article";
 import { javascriptSpreadRestSections } from "@/topics/javascript/content/javascript-spread-rest-article";
+import { javascriptDestructuringSections } from "@/topics/javascript/content/javascript-destructuring-article";
 import { javascriptAsynchronousSections } from "@/topics/javascript/content/javascript-asynchronous-article";
 import { javascriptEventLoopSections } from "@/topics/javascript/content/javascript-event-loop-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
@@ -903,14 +904,35 @@ export const articles: Article[] = [
     number: "38",
     series: {
       title: "JavaScript, made visible", order: 21, practiceTime: "2 min to explore",
-      nextTitle: "Asynchronous JavaScript",
-      nextDescription: "Learn how promises, fetch, async functions, and await handle work that finishes later.",
+      nextTitle: "Destructuring",
+      nextDescription: "Take values from objects and arrays with a short pattern.",
       exercise: { id: "quick-check", label: "Spread the arrays" }, illustration: { line: "[...a, ...b]", value: "...", notes: ["Spread unpacks.", "Rest gathers."] },
     },
     sections: javascriptSpreadRestSections,
     sources: [
       { title: "MDN · Spread syntax (...)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" },
       { title: "MDN · Rest parameters", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" },
+    ],
+  },
+  {
+    slug: "javascript-destructuring",
+    title: "Destructuring",
+    excerpt: "Take values from objects and arrays, skip items you do not need, and collect remaining items with three dots.",
+    topic: "JavaScript",
+    category: "Basic",
+    date: "Sep 18, 2026",
+    readTime: "4 min read",
+    accent: "yellow",
+    number: "39",
+    series: {
+      title: "JavaScript, made visible", order: 22, practiceTime: "3 min to explore",
+      nextTitle: "Asynchronous JavaScript",
+      nextDescription: "Learn how promises, fetch, async functions, and await handle work that finishes later.",
+      exercise: { id: "quick-check", label: "Destructure a book" }, illustration: { line: "const { name } =", value: "person", notes: ["Pick named values.", "Make variables."] },
+    },
+    sections: javascriptDestructuringSections,
+    sources: [
+      { title: "MDN · Destructuring assignment", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" },
     ],
   },
   {
@@ -922,9 +944,9 @@ export const articles: Article[] = [
     date: "Sep 16, 2026",
     readTime: "4 min read",
     accent: "yellow",
-    number: "39",
+    number: "40",
     series: {
-      title: "JavaScript, made visible", order: 22, practiceTime: "3 min to explore",
+      title: "JavaScript, made visible", order: 23, practiceTime: "3 min to explore",
       nextTitle: "The Event Loop",
       nextDescription: "See how the Call Stack, microtasks, tasks, and browser rendering share one thread.",
       exercise: { id: "quick-check", label: "Wait for a promise" }, illustration: { line: "const value = await", value: "promise", notes: ["Wait in here.", "Other work runs."] },
@@ -947,9 +969,9 @@ export const articles: Article[] = [
     date: "Sep 16, 2026",
     readTime: "6 min read",
     accent: "yellow",
-    number: "40",
+    number: "41",
     series: {
-      title: "JavaScript, made visible", order: 23, practiceTime: "4 min to explore",
+      title: "JavaScript, made visible", order: 24, practiceTime: "4 min to explore",
       nextTitle: "More JavaScript lessons",
       nextDescription: "More lessons are in preparation.",
       exercise: { id: "the-event-loop-turn", label: "Trace the event loop" }, illustration: { line: "Promise.then(...) ", value: "before", notes: ["Microtasks drain.", "Then a task runs."] },

@@ -23,6 +23,7 @@ import { javascriptLoopObjectsSections } from "../content/javascript-loop-object
 import { javascriptForInSections } from "../content/javascript-for-in-article.ts";
 import { javascriptMapFilterReduceSections } from "../content/javascript-map-filter-reduce-article.ts";
 import { javascriptSpreadRestSections } from "../content/javascript-spread-rest-article.ts";
+import { javascriptDestructuringSections } from "../content/javascript-destructuring-article.ts";
 import { javascriptAsynchronousSections } from "../content/javascript-asynchronous-article.ts";
 import { javascriptEventLoopSections } from "../content/javascript-event-loop-article.ts";
 
@@ -48,6 +49,7 @@ const articles = {
   "javascript-for-in": javascriptForInSections,
   "javascript-map-filter-reduce": javascriptMapFilterReduceSections,
   "javascript-spread-rest": javascriptSpreadRestSections,
+  "javascript-destructuring": javascriptDestructuringSections,
   "javascript-asynchronous": javascriptAsynchronousSections,
   "javascript-event-loop": javascriptEventLoopSections,
 };
@@ -72,6 +74,15 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-destructuring": {
+    "object-destructuring": { examples: [{ output: ["John", "30"] }] },
+    "array-destructuring": { examples: [{ output: ["1", "2", "3"] }] },
+    "matching-names": { examples: [{ output: ["true", "undefined"] }] },
+    "separate-number": { examples: [{ output: ["true", "false"] }] },
+    "skip-array-items": { examples: [{ output: ["Ginger"] }] },
+    "collect-the-rest": { examples: [{ output: ["Sporty", "Scary,Ginger,Mel B"] }] },
+    "quick-check": { output: ["Dune", "1965"] },
+  },
   "javascript-asynchronous": {
     "synchronous-code": { examples: [{ output: ["This prints first", "This prints second"] }] },
     "promise-states": { examples: [{ output: ["true"] }] },
