@@ -25,6 +25,9 @@ import { javascriptEventLoopSections } from "@/topics/javascript/content/javascr
 import { javascriptErrorHandlingSections } from "@/topics/javascript/content/javascript-error-handling-article";
 import { javascriptModulesSections } from "@/topics/javascript/content/javascript-modules-article";
 import { reactNativeProjectSetupSections } from "@/topics/react-native/content/react-native-project-setup-article";
+import { reactNativeExpoGoSections } from "@/topics/react-native/content/react-native-expo-go-article";
+import { reactNativeFrameworksOverviewSections } from "@/topics/react-native/content/react-native-frameworks-overview-article";
+import { reactNativeLintingFormattingSections } from "@/topics/react-native/content/react-native-linting-formatting-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -70,7 +73,7 @@ export type ArticleBlock =
   | { type: "details"; title: string; icon?: "info"; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
   | { type: "callout"; title: string; text: string }
   | { type: "figure"; caption: string }
-  | { type: "command"; command: string; explanation: string; output?: string }
+  | { type: "command"; command: string; explanation: string; output?: string; label?: string }
   | { type: "quiz"; question: string; answers: { text: string; explanation: string; correct: boolean }[] }
   | { type: "recap"; items: string[] };
 
@@ -149,8 +152,8 @@ export const articles: Article[] = [
       title: "React Native, made visible",
       order: 1,
       practiceTime: "5 min to set up",
-      nextTitle: "Why this course uses Expo",
-      nextDescription: "Understand what Expo adds around React Native before building the first screen.",
+      nextTitle: "Run a React Native app with Expo Go",
+      nextDescription: "Start the JavaScript side, use Expo Go for the native app side, and connect them with the QR code.",
       exercise: { id: "create-the-project", label: "Create the project" },
       illustration: { line: "npx create-expo-app", value: "taskly", notes: ["One command.", "A mobile project."] },
     },
@@ -163,6 +166,77 @@ export const articles: Article[] = [
       { title: "Expo · Package managers and isolated dependencies", url: "https://docs.expo.dev/guides/monorepos/" },
       { title: "Yarn · Plug'n'Play and node_modules", url: "https://yarnpkg.com/features/pnp" },
       { title: "Node.js · Release status", url: "https://nodejs.org/en/about/previous-releases" },
+    ],
+  },
+  {
+    slug: "react-native-expo-go",
+    title: "Run a React Native app with Expo Go",
+    excerpt: "Start the JavaScript side, use Expo Go for the native app side, and fix local network connection problems.",
+    topic: "React Native",
+    category: "Basics",
+    date: "Sep 21, 2026",
+    readTime: "7 min read",
+    accent: "lime",
+    number: "45",
+    series: {
+      title: "React Native, made visible",
+      order: 2,
+      practiceTime: "5 min to run",
+      nextTitle: "Why React Native apps use a framework",
+      nextDescription: "See what React Native provides, what frameworks add, and where Expo Go fits inside Expo.",
+      exercise: { id: "start-javascript-side", label: "Start the app" },
+      illustration: { line: "npx expo start", value: "Expo Go", notes: ["JavaScript side.", "Native app side."] },
+    },
+    sections: reactNativeExpoGoSections,
+  },
+  {
+    slug: "react-native-frameworks-overview",
+    title: "Why React Native apps use a framework",
+    excerpt: "See what React Native provides, what frameworks add, and why the course uses Expo Go for learning.",
+    topic: "React Native",
+    category: "Basics",
+    date: "Sep 21, 2026",
+    readTime: "6 min read",
+    accent: "lime",
+    number: "46",
+    series: {
+      title: "React Native, made visible",
+      order: 3,
+      practiceTime: "4 min to read",
+      nextTitle: "Set up linting and formatting",
+      nextDescription: "Use the built-in Expo lint command, connect Prettier to ESLint, and fix formatting errors automatically.",
+      exercise: { id: "use-expo-go", label: "Understand Expo Go" },
+      illustration: { line: "React Native", value: "Expo", notes: ["Native foundation.", "Framework tools."] },
+    },
+    sections: reactNativeFrameworksOverviewSections,
+    sources: [
+      { title: "Kadi Kraman · React Native frameworks overview", url: "https://master.dev/courses/react-native-v3/react-native-frameworks-overview/" },
+      { title: "React Native · React Native Framework RFC", url: "https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md" },
+    ],
+  },
+  {
+    slug: "react-native-linting-formatting",
+    title: "Set up linting and formatting",
+    excerpt: "Use Expo's lint command, connect Prettier to ESLint, and fix formatting errors automatically.",
+    topic: "React Native",
+    category: "Basics",
+    date: "Sep 21, 2026",
+    readTime: "3 min read",
+    accent: "lime",
+    number: "47",
+    series: {
+      title: "React Native, made visible",
+      order: 4,
+      practiceTime: "3 min to set up",
+      nextTitle: "More React Native lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "set-up-linting", label: "Set up linting" },
+      illustration: { line: "npx expo lint", value: "--fix", notes: ["Check the code.", "Fix on save."] },
+    },
+    sections: reactNativeLintingFormattingSections,
+    sources: [
+      { title: "Kadi Kraman · Setup linting and formatting", url: "https://master.dev/courses/react-native-v3/setup-linting-and-formatting/" },
+      { title: "React Native v3 course · Linting", url: "https://kadikraman.github.io/react-native-v3-course/docs/linting/" },
     ],
   },
   {
