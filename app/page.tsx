@@ -6,7 +6,7 @@ import { articles, courses } from "@/lib/articles";
 import { JsonLd, site, websiteSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: { absolute: `${site.name} — Git, JavaScript, and AI, made clear` },
+  title: { absolute: `${site.name} — Git, JavaScript, React Native, and AI, made clear` },
   alternates: { canonical: "/" },
 };
 
@@ -38,6 +38,7 @@ export default function Home() {
         <div className="hero-ticker" aria-label="Courses available">
           <span>Git</span><i />
           <span>JS</span><i />
+          <span>React Native</span><i />
           <span>Artificial intelligence</span><i />
           <span>And whatever comes next</span>
         </div>

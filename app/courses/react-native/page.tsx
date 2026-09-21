@@ -1,32 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleCard } from "@/components/article-card";
-import { articles, javascriptCategories } from "@/lib/articles";
+import { articles, reactNativeCategories } from "@/lib/articles";
 
 export const metadata: Metadata = {
-  title: "JavaScript Course",
-  description: "Learn JavaScript with articles organized into Basic, Advanced, Functions, Interviews, Performance, and OOP.",
-  alternates: { canonical: "/courses/javascript" },
+  title: "React Native Course",
+  description: "Learn React Native through lessons on components, styling, navigation, state, device APIs, and performance.",
+  alternates: { canonical: "/courses/react-native" },
 };
 
-export default function JavaScriptCoursePage() {
-  const lessons = articles.filter(article => article.topic === "JavaScript")
+export default function ReactNativeCoursePage() {
+  const lessons = articles.filter(article => article.topic === "React Native")
     .sort((a, b) => (a.series?.order ?? 0) - (b.series?.order ?? 0));
 
   return (
     <main id="main" className="page-main shell course-page">
       <Link className="back-link" href="/courses">← All courses</Link>
       <div className="page-hero">
-        <span className="eyebrow"><span /> {lessons.length} articles · 6 sections</span>
-        <h1>JavaScript.</h1>
-        <p>Start with the basics, then explore each part of the language. Every article has examples you can run.</p>
+        <span className="eyebrow"><span /> {lessons.length} articles · {reactNativeCategories.length} sections</span>
+        <h1>React Native.</h1>
+        <p>Learn to build mobile apps from reusable components, then connect navigation, data, and device features.</p>
       </div>
-      <nav className="filter-row course-categories" aria-label="JavaScript sections">
-        {javascriptCategories.map(category => (
+      <nav className="filter-row course-categories" aria-label="React Native sections">
+        {reactNativeCategories.map(category => (
           <a href={`#${category.toLowerCase()}`} key={category}>{category}</a>
         ))}
       </nav>
-      {javascriptCategories.map(category => {
+      {reactNativeCategories.map(category => {
         const categoryArticles = lessons.filter(article => article.category === category);
         const id = category.toLowerCase();
         return (

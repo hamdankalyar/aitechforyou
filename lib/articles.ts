@@ -24,6 +24,7 @@ import { javascriptAsynchronousSections } from "@/topics/javascript/content/java
 import { javascriptEventLoopSections } from "@/topics/javascript/content/javascript-event-loop-article";
 import { javascriptErrorHandlingSections } from "@/topics/javascript/content/javascript-error-handling-article";
 import { javascriptModulesSections } from "@/topics/javascript/content/javascript-modules-article";
+import { reactNativeProjectSetupSections } from "@/topics/react-native/content/react-native-project-setup-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -50,6 +51,7 @@ export type ArticleBlock =
   | { type: "array-mutation-diagram" }
   | { type: "reduce-diagram" }
   | { type: "event-loop-trace" }
+  | { type: "package-manager-architecture" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -85,6 +87,7 @@ export type ArticleSection = {
 };
 
 export const javascriptCategories = ["Basic", "Advanced", "Functions", "Interviews", "Performance", "OOP"] as const;
+export const reactNativeCategories = ["Basics", "Components", "Styling", "Navigation", "State", "Device", "Performance"] as const;
 
 export type Article = {
   slug: string;
@@ -109,6 +112,7 @@ export type Article = {
   sections: ArticleSection[];
 } & (
   | { topic: "JavaScript"; category: (typeof javascriptCategories)[number] }
+  | { topic: "React Native"; category: (typeof reactNativeCategories)[number] }
   | { topic: "Git" | "AI"; category?: never }
 );
 
@@ -129,6 +133,36 @@ export const articles: Article[] = [
     sources: [
       { title: "The Git book · What Git records", url: "https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" },
       { title: "Git reference · Recording a commit", url: "https://git-scm.com/docs/git-commit" },
+    ],
+  },
+  {
+    slug: "react-native-project-setup",
+    title: "React Native project setup and dependency architecture",
+    excerpt: "See why native iOS and Android tooling affects the package manager choice, then create and run a blank Expo app.",
+    topic: "React Native",
+    category: "Basics",
+    date: "Sep 21, 2026",
+    readTime: "8 min read",
+    accent: "lime",
+    number: "44",
+    series: {
+      title: "React Native, made visible",
+      order: 1,
+      practiceTime: "5 min to set up",
+      nextTitle: "Why this course uses Expo",
+      nextDescription: "Understand what Expo adds around React Native before building the first screen.",
+      exercise: { id: "create-the-project", label: "Create the project" },
+      illustration: { line: "npx create-expo-app", value: "taskly", notes: ["One command.", "A mobile project."] },
+    },
+    sections: reactNativeProjectSetupSections,
+    sources: [
+      { title: "Kadi Kraman · React Native project setup lesson", url: "https://master.dev/courses/react-native-v3/react-native-project-setup/" },
+      { title: "Kadi Kraman · New project", url: "https://kadikraman.github.io/react-native-v3-course/docs/new-project/" },
+      { title: "Expo · create-expo-app reference", url: "https://docs.expo.dev/more/create-expo/" },
+      { title: "Expo · Autolinking native modules", url: "https://docs.expo.dev/modules/autolinking/" },
+      { title: "Expo · Package managers and isolated dependencies", url: "https://docs.expo.dev/guides/monorepos/" },
+      { title: "Yarn · Plug'n'Play and node_modules", url: "https://yarnpkg.com/features/pnp" },
+      { title: "Node.js · Release status", url: "https://nodejs.org/en/about/previous-releases" },
     ],
   },
   {
@@ -1056,6 +1090,13 @@ export const courses = [
     description: "Models, agents, and tools—understood from first principles.",
     index: "03",
     className: "blue",
+  },
+  {
+    name: "React Native",
+    href: "/courses/react-native",
+    description: "Build mobile apps through practical lessons on components, navigation, device APIs, and performance.",
+    index: "04",
+    className: "lime",
   },
 ];
 

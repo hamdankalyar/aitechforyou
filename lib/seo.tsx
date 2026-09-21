@@ -3,7 +3,7 @@ import type { Article } from "@/lib/articles";
 export const site = {
   name: "AI Tech For You",
   url: "https://aitechforyou.com",
-  description: "Git, JavaScript, and AI explained through simple mental models, interactive examples, and honest learning notes.",
+  description: "Git, JavaScript, React Native, and AI explained through simple mental models, interactive examples, and honest learning notes.",
   author: { name: "Hamdan Kalyar", url: "https://github.com/hamdankalyar" },
   repo: "https://github.com/hamdankalyar/aitechforyou",
 };

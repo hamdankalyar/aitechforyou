@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/seo";
 
-export const alt = `${site.name} — Git, JavaScript, and AI, made clear`;
+export const alt = `${site.name} — Git, JavaScript, React Native, and AI, made clear`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -19,7 +19,7 @@ export default function Image() {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
         <div style={{ fontSize: 96, lineHeight: 1, letterSpacing: -4 }}>Complex tech. Made clear.</div>
-        <div style={{ fontSize: 34, color: "#c8c5be" }}>Git · JavaScript · AI — interactive lessons and visual guides</div>
+        <div style={{ fontSize: 34, color: "#c8c5be" }}>Git · JavaScript · React Native · AI</div>
       </div>
     </div>,
     size,

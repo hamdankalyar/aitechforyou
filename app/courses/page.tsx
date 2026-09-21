@@ -4,7 +4,7 @@ import { ArrowRight } from "@/components/icons";
 import { articles, courses } from "@/lib/articles";
 import { publishedGitLessons } from "@/topics/git/content/git-learning";
 
-export const metadata: Metadata = { title: "Courses", description: "Explore courses in Git, JavaScript, and AI, each built from mental models and interactive examples.", alternates: { canonical: "/courses" } };
+export const metadata: Metadata = { title: "Courses", description: "Explore courses in Git, JavaScript, React Native, and AI, each built from mental models and interactive examples.", alternates: { canonical: "/courses" } };
 
 export default function CoursesPage() {
   return (

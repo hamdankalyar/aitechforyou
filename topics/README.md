@@ -7,6 +7,7 @@ topics/
   ai/          Generative and agentic AI guides
   git/         Git guides, short lessons, config reference, interactive labs
   javascript/  JavaScript guides, runnable code boxes, variable playground
+  react-native/ React Native guides and mobile app lessons
 ```
 
 Each topic folder uses the same layout:

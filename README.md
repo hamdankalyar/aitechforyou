@@ -1,6 +1,6 @@
 # AI Tech For You
 
-Interactive, visual lessons on Git, JavaScript, and AI, published at [aitechforyou.com](https://aitechforyou.com).
+Interactive, visual lessons on Git, JavaScript, React Native, and AI, published at [aitechforyou.com](https://aitechforyou.com).
 
 Every guide starts with a mental model, connects it to something familiar, and then lets you try the idea in the browser: a Git commit playground, runnable JavaScript boxes, knowledge checks, and small labs. Built with Next.js 16, React 19, and TypeScript. No database, no CMS: articles are plain TypeScript files in this repo.
 
@@ -8,6 +8,7 @@ Every guide starts with a mental model, connects it to something familiar, and t
 
 - **Git, made visible** – detailed guides (snapshots, first commit, status/diff/log, config) plus eight short hands-on lessons and command references (config, commit, inspect, ignore, branch, merge, conflicts, remotes) under `/learn/git`.
 - **JavaScript, made visible** – a six-lesson beginner course with a live code runner (introduction, `console.log`, `let`/`var`/`const`, primitive types, strings, `Symbol`).
+- **React Native, made visible** – a growing mobile development course organized around components, styling, navigation, state, device APIs, and performance.
 - **AI systems, made visible** – generative vs. agentic AI, with more agent guides planned.
 
 ## Run locally

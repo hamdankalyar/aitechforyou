@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   applicationName: site.name,
   authors: [{ name: site.author.name, url: site.author.url }],
   creator: site.author.name,
-  keywords: ["learn git", "git tutorial", "javascript for beginners", "javascript course", "generative ai", "agentic ai", "interactive tutorials", "programming mental models"],
+  keywords: ["learn git", "git tutorial", "javascript for beginners", "javascript course", "react native course", "react native for beginners", "generative ai", "agentic ai", "interactive tutorials", "programming mental models"],
   openGraph: {
     title: site.name,
     description: site.description,

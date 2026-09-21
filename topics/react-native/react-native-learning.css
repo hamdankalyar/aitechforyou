@@ -1,0 +1,20 @@
+.package-architecture { margin: 34px 0; }
+.architecture-path-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.architecture-course-path { padding: 22px; border: 1px solid var(--border); border-top: 4px solid var(--lime); background: var(--white); }
+.architecture-problem-path { border-top-color: var(--solid); }
+.architecture-course-path > span { display: block; margin-bottom: 18px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.architecture-step { padding: 14px 16px; border: 1px solid var(--solid); background: var(--paper); }
+.architecture-step strong, .architecture-native strong { display: block; font: 650 14px/1.4 ui-monospace, monospace; overflow-wrap: anywhere; }
+.architecture-step small, .architecture-native small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.architecture-folder { background: var(--lime); color: var(--ink); }
+.architecture-folder small { color: #393733; }
+.architecture-arrow { display: flex; align-items: center; gap: 8px; min-height: 45px; color: var(--muted); font-size: 11px; }
+.architecture-arrow span { color: var(--text); font-size: 18px; }
+.architecture-native { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.architecture-native > div { padding: 13px; border: 1px solid var(--border); background: var(--paper); }
+.package-architecture figcaption { margin-top: 14px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+@media (max-width: 700px) {
+  .architecture-course-path { padding: 18px; }
+  .architecture-path-grid { grid-template-columns: minmax(0, 1fr); }
+}

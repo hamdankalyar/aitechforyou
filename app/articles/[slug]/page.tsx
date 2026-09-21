@@ -13,6 +13,7 @@ import { gitReferences } from "@/topics/git/content/git-references";
 import "../article-learning.css";
 import "@/topics/javascript/javascript-learning.css";
 import "@/topics/git/git-learning.css";
+import "@/topics/react-native/react-native-learning.css";
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -37,10 +38,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const learning = Boolean(series);
   const heroCard = series && typeof series.illustration === "object" ? series.illustration : undefined;
   const showSectionNumbers = learning && article.topic !== "AI";
-  const topicSlug = article.topic.toLowerCase();
+  const topicSlug = article.topic.toLowerCase().replaceAll(" ", "-");
   const runnableCode = article.topic === "JavaScript";
-  const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : article.topic === "JavaScript" ? `/courses/javascript#${article.category.toLowerCase()}` : `/articles?topic=${article.topic}`;
-  const courseArticles = series ? articles.filter(candidate => candidate.series?.title === series.title && (article.topic !== "JavaScript" || candidate.category === article.category)).sort((a, b) => a.series!.order - b.series!.order) : [];
+  const categorizedCourse = article.topic === "JavaScript" || article.topic === "React Native";
+  const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : categorizedCourse ? `/courses/${article.topic === "JavaScript" ? "javascript" : "react-native"}#${article.category.toLowerCase()}` : `/articles?topic=${article.topic}`;
+  const courseArticles = series ? articles.filter(candidate => candidate.series?.title === series.title && (!categorizedCourse || candidate.category === article.category)).sort((a, b) => a.series!.order - b.series!.order) : [];
   const seriesIndex = courseArticles.findIndex(candidate => candidate.slug === article.slug);
   const nextArticle = courseArticles[seriesIndex + 1];
   const previousArticle = courseArticles[seriesIndex - 1];
@@ -55,7 +57,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <header className={`article-hero ${article.accent}`}>
         <div className="shell article-hero-grid">
           <div>
-            <Link className="back-link" href={learning ? topicGuidesHref : "/articles"}>← {article.topic === "JavaScript" ? `JavaScript course · ${article.category}` : learning ? `All ${article.topic} guides` : "All articles"}</Link>
+            <Link className="back-link" href={learning ? topicGuidesHref : "/articles"}>← {categorizedCourse ? `${article.topic} course · ${article.category}` : learning ? `All ${article.topic} guides` : "All articles"}</Link>
             {article.series && <div className="series-eyebrow"><span className="series-dot" />{article.topic} Guide<span>{article.series.title}</span></div>}
             <div className="article-meta"><span>{article.topic}</span><time dateTime={isoDate(article.date)}>{article.date}</time><span>{article.readTime}</span></div>
             <h1>{article.title}</h1>
