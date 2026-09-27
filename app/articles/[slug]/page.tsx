@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight } from "@/components/icons";
 import { articles, getArticle } from "@/lib/articles";
 import { JsonLd, articleSchema, breadcrumbSchema, isoDate, site } from "@/lib/seo";
-import { ArticleBlock, Emphasis } from "@/components/articles/article-block";
+import { ArticleBlock, ArticlePoints, Emphasis } from "@/components/articles/article-block";
 import { ActiveSection } from "@/components/articles/active-section";
 import { CodeRunner } from "@/topics/javascript/components/code-runner";
 import { GitNavigation } from "@/topics/git/components/git-navigation";
@@ -75,10 +75,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <section key={section.id} id={section.id}>
               {showSectionNumbers && <div className="section-counter" aria-hidden="true">{String(index + 1).padStart(2, "0")}<span /></div>}
               <h2>{section.heading}</h2>
-              {learning ? <ul className="guide-points">{section.paragraphs.map(paragraph => {
-                const text = typeof paragraph === "string" ? paragraph : paragraph.text;
-                return <li className={typeof paragraph !== "string" && paragraph.code ? "guide-example" : undefined} key={text}><Emphasis text={text} />{typeof paragraph !== "string" && <>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} module={paragraph.module} moduleFiles={paragraph.moduleFiles} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</>}</li>;
-              })}</ul> : section.paragraphs.map(paragraph => typeof paragraph === "string" ? <p key={paragraph}>{paragraph}</p> : <div key={paragraph.text}><p><Emphasis text={paragraph.text} /></p>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</div>)}
+              {learning ? <ArticlePoints paragraphs={section.paragraphs} runnableCode={runnableCode} /> : section.paragraphs.map(paragraph => typeof paragraph === "string" ? <p key={paragraph}>{paragraph}</p> : <div key={paragraph.text}><p><Emphasis text={paragraph.text} /></p>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</div>)}
               {section.code && (runnableCode ? <CodeRunner code={section.code} page={section.page} module={section.module} moduleFiles={section.moduleFiles} /> : <pre tabIndex={0} aria-label="Code example"><code>{section.code}</code></pre>)}
               {section.blocks?.map((block, index) => <ArticleBlock block={block} runnableCode={runnableCode} key={index} />)}
             </section>

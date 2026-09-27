@@ -28,6 +28,13 @@ import { reactNativeProjectSetupSections } from "@/topics/react-native/content/r
 import { reactNativeExpoGoSections } from "@/topics/react-native/content/react-native-expo-go-article";
 import { reactNativeFrameworksOverviewSections } from "@/topics/react-native/content/react-native-frameworks-overview-article";
 import { reactNativeLintingFormattingSections } from "@/topics/react-native/content/react-native-linting-formatting-article";
+import { reactNativeViewTextStylingSections } from "@/topics/react-native/content/react-native-view-text-styling-article";
+import { reactNativePressableTouchableAlertSections } from "@/topics/react-native/content/react-native-pressable-touchable-alert-article";
+import { reactNativeReusableComponentsPropsSections } from "@/topics/react-native/content/react-native-reusable-components-props-article";
+import { reactNativeConditionalStylingSections } from "@/topics/react-native/content/react-native-conditional-styling-article";
+import { reactNativeIconsSections } from "@/topics/react-native/content/react-native-icons-article";
+import { reactNativeExpoRouterSections } from "@/topics/react-native/content/react-native-expo-router-article";
+import { reactNativeScreenNavigationSections } from "@/topics/react-native/content/react-native-screen-navigation-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -70,10 +77,10 @@ export type ArticleBlock =
   | { type: "stash-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
-  | { type: "details"; title: string; icon?: "info"; paragraphs: string[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
+  | { type: "details"; title: string; icon?: "info"; paragraphs: ArticleSection["paragraphs"]; sections?: Pick<ArticleSection, "heading" | "paragraphs">[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
   | { type: "callout"; title: string; text: string }
   | { type: "figure"; caption: string }
-  | { type: "command"; command: string; explanation: string; output?: string; label?: string }
+  | { type: "command"; command: string; explanation?: string; output?: string; label?: string; highlightLines?: number[] }
   | { type: "quiz"; question: string; answers: { text: string; explanation: string; correct: boolean }[] }
   | { type: "recap"; items: string[] };
 
@@ -238,6 +245,158 @@ export const articles: Article[] = [
       { title: "Kadi Kraman · Setup linting and formatting", url: "https://master.dev/courses/react-native-v3/setup-linting-and-formatting/" },
       { title: "React Native v3 course · Linting", url: "https://kadikraman.github.io/react-native-v3-course/docs/linting/" },
     ],
+  },
+  {
+    slug: "react-native-view-text-styling",
+    title: "View, Text, and built-in styles",
+    excerpt: "Learn how View and Text behave, how conditional rendering can expose text values, and how built-in React Native styles work.",
+    topic: "React Native",
+    category: "Components",
+    date: "Sep 21, 2026",
+    readTime: "7 min read",
+    accent: "lime",
+    number: "48",
+    series: {
+      title: "React Native, made visible",
+      order: 5,
+      practiceTime: "5 min to read",
+      nextTitle: "Pressable, TouchableOpacity, and Alert",
+      nextDescription: "Compare React Native button components, style press feedback, and open a platform-specific confirmation alert.",
+      exercise: { id: "use-view", label: "Learn the components" },
+      illustration: { line: "<View><Text>", value: "UI", notes: ["Views contain.", "Text renders."] },
+    },
+    sections: reactNativeViewTextStylingSections,
+  },
+  {
+    slug: "react-native-pressable-touchable-alert",
+    title: "Pressable, TouchableOpacity, and Alert",
+    excerpt: "Compare React Native button components, style press feedback, and open a platform-specific confirmation alert.",
+    topic: "React Native",
+    category: "Components",
+    date: "Sep 22, 2026",
+    readTime: "7 min read",
+    accent: "lime",
+    number: "49",
+    series: {
+      title: "React Native, made visible",
+      order: 6,
+      practiceTime: "5 min to read",
+      nextTitle: "Reusable components, typed props, and StyleSheet utilities",
+      nextDescription: "Split UI into reusable components, pass typed props, and understand what StyleSheet.create does.",
+      exercise: { id: "choose-a-button-component", label: "Compare the components" },
+      illustration: { line: "<TouchableOpacity>", value: "Press", notes: ["Wrap content.", "Handle presses."] },
+    },
+    sections: reactNativePressableTouchableAlertSections,
+  },
+  {
+    slug: "react-native-reusable-components-props",
+    title: "Reusable components, typed props, and StyleSheet utilities",
+    excerpt: "Split UI into reusable components, pass required typed props, and understand what StyleSheet.create does.",
+    topic: "React Native",
+    category: "Components",
+    date: "Sep 22, 2026",
+    readTime: "7 min read",
+    accent: "lime",
+    number: "50",
+    series: {
+      title: "React Native, made visible",
+      order: 7,
+      practiceTime: "5 min to read",
+      nextTitle: "Conditional styling for a component",
+      nextDescription: "Use a style array to change how a shopping list item looks when it is completed.",
+      exercise: { id: "understand-components", label: "Learn reusable components" },
+      illustration: { line: "<Item name=...>", value: "Props", notes: ["Pass data in.", "Reuse the UI."] },
+    },
+    sections: reactNativeReusableComponentsPropsSections,
+  },
+  {
+    slug: "react-native-conditional-styling",
+    title: "Conditional styling for a component",
+    excerpt: "Use an optional Boolean prop and a style array to show a completed shopping list item.",
+    topic: "React Native",
+    category: "Components",
+    date: "Sep 26, 2026",
+    readTime: "4 min read",
+    accent: "lime",
+    number: "51",
+    series: {
+      title: "React Native, made visible",
+      order: 8,
+      practiceTime: "3 min to style",
+      nextTitle: "Icons in React Native",
+      nextDescription: "Learn about Expo vector icons, SVGs, and Expo Go.",
+      exercise: { id: "conditional-styles", label: "See conditional styles" },
+      illustration: { line: "isCompleted", value: "Done", notes: ["Gray the item.", "Cross out text."] },
+    },
+    sections: reactNativeConditionalStylingSections,
+  },
+  {
+    slug: "react-native-icons",
+    title: "Icons in React Native",
+    excerpt: "Learn about Expo vector icons, SVGs, and Expo Go.",
+    topic: "React Native",
+    category: "Components",
+    date: "Sep 26, 2026",
+    readTime: "4 min read",
+    accent: "lime",
+    number: "52",
+    series: {
+      title: "React Native, made visible",
+      order: 9,
+      practiceTime: "3 min to read",
+      nextTitle: "More React Native components",
+      nextDescription: "More component lessons are in preparation.",
+      exercise: { id: "use-svgs-sparingly", label: "Understand SVG use" },
+      illustration: { line: "@expo/vector-icons", value: "Icons", notes: ["Convenient library.", "Included in Expo Go."] },
+    },
+    sections: reactNativeIconsSections,
+  },
+  {
+    slug: "react-native-expo-router",
+    title: "Navigation with Expo Router",
+    excerpt: "Use file system-based routing, configure the app entry point, and add a stack layout with a custom screen title.",
+    topic: "React Native",
+    category: "Navigation",
+    date: "Sep 26, 2026",
+    readTime: "7 min read",
+    accent: "lime",
+    number: "53",
+    series: {
+      title: "React Native, made visible",
+      order: 10,
+      practiceTime: "7 min to read",
+      nextTitle: "More React Native navigation",
+      nextDescription: "More navigation lessons are in preparation.",
+      exercise: { id: "understand-app-entry", label: "Set up Expo Router" },
+      illustration: { line: "app/_layout.tsx", value: "Stack", notes: ["File names define screens.", "Layouts arrange screens."] },
+    },
+    sections: reactNativeExpoRouterSections,
+    sources: [
+      { title: "Expo documentation: Linking into your app", url: "https://docs.expo.dev/linking/into-your-app/" },
+      { title: "Expo overview: Linking", url: "https://docs.expo.dev/linking/overview/" },
+      { title: "Expo explanation: Universal links and app links", url: "https://expo.dev/blog/universal-and-app-links" },
+    ],
+  },
+  {
+    slug: "react-native-screen-navigation",
+    title: "Stack navigation, links, and router methods",
+    excerpt: "Navigate between screens with Link, useRouter, and header buttons, and see how navigate, push, and replace affect the stack.",
+    topic: "React Native",
+    category: "Navigation",
+    date: "Sep 26, 2026",
+    readTime: "4 min read",
+    accent: "lime",
+    number: "54",
+    series: {
+      title: "React Native, made visible",
+      order: 11,
+      practiceTime: "4 min to read",
+      nextTitle: "More React Native navigation",
+      nextDescription: "More navigation lessons are in preparation.",
+      exercise: { id: "navigate-with-link", label: "Navigate with Link" },
+      illustration: { line: "Link · useRouter", value: "Stack", notes: ["New screens on top.", "Go back to the previous screen."] },
+    },
+    sections: reactNativeScreenNavigationSections,
   },
   {
     slug: "javascript-introduction",

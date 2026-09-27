@@ -1,4 +1,4 @@
-import type { ArticleBlock as Block } from "@/lib/articles";
+import type { ArticleBlock as Block, ArticleSection } from "@/lib/articles";
 import { VariablesPlayground } from "@/topics/javascript/components/variables-playground";
 import { ArrayMutationDiagram, ObjectMutationDiagram, PrimitiveMemoryDiagram, ReassignmentMemoryDiagram, ReferenceMemoryDiagrams, SingleReferenceMemoryDiagram } from "@/topics/javascript/components/reference-memory-diagrams";
 import { CodeRunner } from "@/topics/javascript/components/code-runner";
@@ -24,6 +24,13 @@ import { PackageManagerArchitecture } from "@/topics/react-native/components/pac
 // Renders **term** as <strong>. Only bold is supported on purpose.
 export function Emphasis({ text }: { text: string }) {
   return <>{text.split("**").map((part, index) => index % 2 ? <strong key={index}>{part}</strong> : part)}</>;
+}
+
+export function ArticlePoints({ paragraphs, runnableCode = false, compact = false }: { paragraphs: ArticleSection["paragraphs"]; runnableCode?: boolean; compact?: boolean }) {
+  return (<ul className={compact ? "guide-points compact" : "guide-points"}>{paragraphs.map(paragraph => {
+    const text = typeof paragraph === "string" ? paragraph : paragraph.text;
+    return <li className={typeof paragraph !== "string" && paragraph.code ? "guide-example" : undefined} key={text}><Emphasis text={text} />{typeof paragraph !== "string" && <>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} module={paragraph.module} moduleFiles={paragraph.moduleFiles} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</>}</li>;
+  })}</ul>);
 }
 
 export function ArticleBlock({ block, runnableCode = false }: { block: Block; runnableCode?: boolean }) {
@@ -53,7 +60,7 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "stash-playground": return <StashPlayground />;
     case "bullets": return <ul className="learning-bullets">{block.items.map(item => <li key={item.label}><strong><span aria-hidden="true">•</span>{item.label}</strong><p>{item.text}</p></li>)}</ul>;
     case "table": return <div className="learning-table" role="region" aria-label={block.caption} tabIndex={0}><table><caption>{block.caption}</caption><thead><tr>{block.columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead><tbody>{block.rows.map((row, index) => <tr key={index}>{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row">{cell}</th> : <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
-    case "details": return <details className={`learning-details${block.icon === "info" ? " learning-info" : ""}`}><summary>{block.icon === "info" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7v2" /></svg>}{block.title}</summary><ul className="guide-points compact">{block.paragraphs.map(paragraph => <li key={paragraph}><Emphasis text={paragraph} /></li>)}</ul>{block.code && (runnableCode ? <CodeRunner code={block.code} /> : <pre tabIndex={0} aria-label="Code example"><code>{block.code}</code></pre>)}{block.commands?.map(command => <CommandBlock {...command} key={command.command} />)}</details>;
+    case "details": return <details className={`learning-details${block.icon === "info" ? " learning-info" : ""}`}><summary>{block.icon === "info" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7v2" /></svg>}{block.title}</summary><ArticlePoints paragraphs={block.paragraphs} runnableCode={runnableCode} compact />{block.sections?.map(section => <div key={section.heading}><h3>{section.heading}</h3><ArticlePoints paragraphs={section.paragraphs} runnableCode={runnableCode} compact /></div>)}{block.code && (runnableCode ? <CodeRunner code={block.code} /> : <pre tabIndex={0} aria-label="Code example"><code>{block.code}</code></pre>)}{block.commands?.map(command => <CommandBlock {...command} key={command.command} />)}</details>;
     case "quiz": return <KnowledgeCheck {...block} />;
     case "command": return <CommandBlock {...block} />;
     case "callout": return <div className="learning-callout"><span className="learning-kicker">{block.title}</span><p>{block.text}</p></div>;
