@@ -35,6 +35,8 @@ import { reactNativeConditionalStylingSections } from "@/topics/react-native/con
 import { reactNativeIconsSections } from "@/topics/react-native/content/react-native-icons-article";
 import { reactNativeExpoRouterSections } from "@/topics/react-native/content/react-native-expo-router-article";
 import { reactNativeScreenNavigationSections } from "@/topics/react-native/content/react-native-screen-navigation-article";
+import { reactNativeModalTabsNavigationSections } from "@/topics/react-native/content/react-native-modal-tabs-navigation-article";
+import { reactNativeNestedNavigatorsSections } from "@/topics/react-native/content/react-native-nested-navigators-article";
 import { firstGitSections } from "@/topics/git/content/git-first-article";
 import { gitConfigSections } from "@/topics/git/content/git-config-article";
 import { gitInitLesson, gitSetupLesson } from "@/topics/git/content/git-learning";
@@ -166,6 +168,7 @@ export const articles: Article[] = [
     },
     sections: reactNativeProjectSetupSections,
     sources: [
+      { title: "DailyList implementation · branch 01-02-03", url: "https://github.com/hamdankalyar/dailylist/tree/01-02-03" },
       { title: "Kadi Kraman · React Native project setup lesson", url: "https://master.dev/courses/react-native-v3/react-native-project-setup/" },
       { title: "Kadi Kraman · New project", url: "https://kadikraman.github.io/react-native-v3-course/docs/new-project/" },
       { title: "Expo · create-expo-app reference", url: "https://docs.expo.dev/more/create-expo/" },
@@ -195,6 +198,9 @@ export const articles: Article[] = [
       illustration: { line: "npx expo start", value: "Expo Go", notes: ["JavaScript side.", "Native app side."] },
     },
     sections: reactNativeExpoGoSections,
+    sources: [
+      { title: "DailyList implementation · branch 01-02-03", url: "https://github.com/hamdankalyar/dailylist/tree/01-02-03" },
+    ],
   },
   {
     slug: "react-native-frameworks-overview",
@@ -217,6 +223,7 @@ export const articles: Article[] = [
     },
     sections: reactNativeFrameworksOverviewSections,
     sources: [
+      { title: "DailyList implementation · branch 01-02-03", url: "https://github.com/hamdankalyar/dailylist/tree/01-02-03" },
       { title: "Kadi Kraman · React Native frameworks overview", url: "https://master.dev/courses/react-native-v3/react-native-frameworks-overview/" },
       { title: "React Native · React Native Framework RFC", url: "https://github.com/react-native-community/discussions-and-proposals/blob/main/proposals/0759-react-native-frameworks.md" },
     ],
@@ -242,6 +249,7 @@ export const articles: Article[] = [
     },
     sections: reactNativeLintingFormattingSections,
     sources: [
+      { title: "DailyList implementation · branch 04-react-native-linting-formatting", url: "https://github.com/hamdankalyar/dailylist/tree/04-react-native-linting-formatting" },
       { title: "Kadi Kraman · Setup linting and formatting", url: "https://master.dev/courses/react-native-v3/setup-linting-and-formatting/" },
       { title: "React Native v3 course · Linting", url: "https://kadikraman.github.io/react-native-v3-course/docs/linting/" },
     ],
@@ -266,6 +274,9 @@ export const articles: Article[] = [
       illustration: { line: "<View><Text>", value: "UI", notes: ["Views contain.", "Text renders."] },
     },
     sections: reactNativeViewTextStylingSections,
+    sources: [
+      { title: "DailyList implementation · branch 05-react-native-view-text-styling", url: "https://github.com/hamdankalyar/dailylist/tree/05-react-native-view-text-styling" },
+    ],
   },
   {
     slug: "react-native-pressable-touchable-alert",
@@ -287,6 +298,9 @@ export const articles: Article[] = [
       illustration: { line: "<TouchableOpacity>", value: "Press", notes: ["Wrap content.", "Handle presses."] },
     },
     sections: reactNativePressableTouchableAlertSections,
+    sources: [
+      { title: "DailyList implementation · branch 06-react-native-pressable-touchable-alert", url: "https://github.com/hamdankalyar/dailylist/tree/06-react-native-pressable-touchable-alert" },
+    ],
   },
   {
     slug: "react-native-reusable-components-props",
@@ -308,6 +322,9 @@ export const articles: Article[] = [
       illustration: { line: "<Item name=...>", value: "Props", notes: ["Pass data in.", "Reuse the UI."] },
     },
     sections: reactNativeReusableComponentsPropsSections,
+    sources: [
+      { title: "DailyList implementation · branch 07-react-native-reusable-components-props", url: "https://github.com/hamdankalyar/dailylist/tree/07-react-native-reusable-components-props" },
+    ],
   },
   {
     slug: "react-native-conditional-styling",
@@ -329,6 +346,9 @@ export const articles: Article[] = [
       illustration: { line: "isCompleted", value: "Done", notes: ["Gray the item.", "Cross out text."] },
     },
     sections: reactNativeConditionalStylingSections,
+    sources: [
+      { title: "DailyList implementation · branch 08-react-native-conditional-styling", url: "https://github.com/hamdankalyar/dailylist/tree/08-react-native-conditional-styling" },
+    ],
   },
   {
     slug: "react-native-icons",
@@ -350,6 +370,9 @@ export const articles: Article[] = [
       illustration: { line: "@expo/vector-icons", value: "Icons", notes: ["Convenient library.", "Included in Expo Go."] },
     },
     sections: reactNativeIconsSections,
+    sources: [
+      { title: "DailyList implementation · branch 09-react-native-icons", url: "https://github.com/hamdankalyar/dailylist/tree/09-react-native-icons" },
+    ],
   },
   {
     slug: "react-native-expo-router",
@@ -372,6 +395,7 @@ export const articles: Article[] = [
     },
     sections: reactNativeExpoRouterSections,
     sources: [
+      { title: "DailyList implementation · branch 10-react-native-expo-router", url: "https://github.com/hamdankalyar/dailylist/tree/10-react-native-expo-router" },
       { title: "Expo documentation: Linking into your app", url: "https://docs.expo.dev/linking/into-your-app/" },
       { title: "Expo overview: Linking", url: "https://docs.expo.dev/linking/overview/" },
       { title: "Expo explanation: Universal links and app links", url: "https://expo.dev/blog/universal-and-app-links" },
@@ -397,6 +421,54 @@ export const articles: Article[] = [
       illustration: { line: "Link · useRouter", value: "Stack", notes: ["New screens on top.", "Go back to the previous screen."] },
     },
     sections: reactNativeScreenNavigationSections,
+    sources: [
+      { title: "DailyList implementation · snapshot at commit aef18ca", url: "https://github.com/hamdankalyar/dailylist/tree/aef18ca4cf526cafc8316139ec65e7900638d0c2" },
+    ],
+  },
+  {
+    slug: "react-native-modal-tabs-navigation",
+    title: "Modal navigation and bottom tabs",
+    excerpt: "Understand stacks, modal placement, bottom tabs, and shared colors for tab text and icons.",
+    topic: "React Native",
+    category: "Navigation",
+    date: "Sep 27, 2026",
+    readTime: "3 min read",
+    accent: "lime",
+    number: "55",
+    series: {
+      title: "React Native, made visible",
+      order: 12,
+      practiceTime: "3 min to read",
+      nextTitle: "More React Native navigation",
+      nextDescription: "More navigation lessons are in preparation.",
+      exercise: { id: "navigation-types", label: "Understand navigation" },
+      illustration: { line: "Stack → Tabs", value: "Tabs", notes: ["Navigate between screens.", "Share icon colors."] },
+    },
+    sections: reactNativeModalTabsNavigationSections,
+  },
+  {
+    slug: "react-native-nested-navigators",
+    title: "Nested navigators and header buttons",
+    excerpt: "Understand a nested counter stack, its screen paths, and a history header button with a larger touchable area.",
+    topic: "React Native",
+    category: "Navigation",
+    date: "Sep 27, 2026",
+    readTime: "5 min read",
+    accent: "lime",
+    number: "56",
+    series: {
+      title: "React Native, made visible",
+      order: 13,
+      practiceTime: "5 min to read",
+      nextTitle: "More React Native lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "example-structure", label: "See the example" },
+      illustration: { line: "counter → history", value: "Stack", notes: ["Keep the inner header.", "Increase the touchable area."] },
+    },
+    sections: reactNativeNestedNavigatorsSections,
+    sources: [
+      { title: "Nested navigators · Transcript", url: "https://master.dev/courses/react-native-v3/nested-navigators/" },
+    ],
   },
   {
     slug: "javascript-introduction",

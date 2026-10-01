@@ -51,30 +51,8 @@ export const reactNativeScreenNavigationSections: ArticleSection[] = [
 </Link>`,
         },
       },
-      {
-        text: "**The styles** make the link easier to see on the screen.",
-        bullets: [
-          '**textAlign** is set to "center".',
-          "**marginBottom** is set to 18.",
-          "**fontSize** is set to 24.",
-        ],
-      },
+      
       "**Pressing the link** places the counter screen on top of the shopping list screen.",
-    ],
-  },
-  {
-    id: "platform-navigation",
-    heading: "Gestures and platform styling",
-    paragraphs: [
-      "**A back gesture** lets you swipe from the side to return to the previous screen.",
-      "**Platform-specific styling** means Android and iOS look slightly different by default.",
-      "**The header** looks slightly different on each platform.",
-      "**Elevation** is used for the different shadow on Android.",
-      "**The Android heading** is aligned left.",
-      "**These differences** are intentional because they look more natural to each platform.",
-      "**Customization** can make both apps look the same.",
-      "**The back animation** is different on a physical Android device.",
-      "**The emulator** may not show that animation difference clearly.",
     ],
   },
   {
@@ -119,8 +97,7 @@ export const reactNativeScreenNavigationSections: ArticleSection[] = [
 │ index screen   │
 └────────────────┘`,
       },
-      "**Navigating to idea** goes back because the idea screen already exists in this stack.",
-      "**push** guarantees forward navigation by adding another screen on top.",
+      
       {
         text: "**navigate** is used here to open the idea screen.",
         block: {
