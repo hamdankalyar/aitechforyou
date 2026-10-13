@@ -60,6 +60,7 @@ import { gitPushSections } from "@/topics/git/content/git-push-article";
 import { gitForkSections } from "@/topics/git/content/git-fork-article";
 import { gitStashSections } from "@/topics/git/content/git-stash-article";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
+import { electronIntroductionSections } from "@/topics/electron/content/electron-introduction-article";
 
 export type ArticleBlock =
   | { type: "variables-playground" }
@@ -72,6 +73,7 @@ export type ArticleBlock =
   | { type: "reduce-diagram" }
   | { type: "event-loop-trace" }
   | { type: "package-manager-architecture" }
+  | { type: "electron-runtime-diagram" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -92,6 +94,7 @@ export type ArticleBlock =
   | { type: "figure"; caption: string }
   | { type: "command"; command: string; explanation?: string; output?: string; label?: string; highlightLines?: number[] }
   | { type: "quiz"; question: string; answers: { text: string; explanation: string; correct: boolean }[] }
+  | { type: "quiz-mode"; title: string; questions: { question: string; answers: { text: string; explanation: string; correct: boolean }[] }[] }
   | { type: "recap"; items: string[] };
 
 export type ArticleSection = {
@@ -108,6 +111,7 @@ export type ArticleSection = {
 
 export const javascriptCategories = ["Basic", "Advanced", "Functions", "Interviews", "Performance", "OOP"] as const;
 export const reactNativeCategories = ["Basics", "Components", "Styling", "Navigation", "State", "Device", "Performance"] as const;
+export const electronCategories = ["Basics", "Processes", "Files", "Frameworks", "Desktop", "Native"] as const;
 
 export type Article = {
   slug: string;
@@ -133,6 +137,7 @@ export type Article = {
 } & (
   | { topic: "JavaScript"; category: (typeof javascriptCategories)[number] }
   | { topic: "React Native"; category: (typeof reactNativeCategories)[number] }
+  | { topic: "Electron"; category: (typeof electronCategories)[number] }
   | { topic: "Git" | "AI"; category?: never }
 );
 
@@ -1557,6 +1562,35 @@ export const articles: Article[] = [
       { title: "MDN · import", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" },
     ],
   },
+  {
+    slug: "electron-introduction",
+    title: "Introduction to Electron",
+    excerpt: "See how Electron joins Chromium and Node.js so web developers can build desktop apps, and meet the three apps this course builds.",
+    topic: "Electron",
+    category: "Basics",
+    date: "Oct 13, 2026",
+    readTime: "6 min read",
+    accent: "blue",
+    number: "65",
+    series: {
+      title: "Electron, made visible",
+      order: 1,
+      practiceTime: "10 questions in quiz mode",
+      nextTitle: "Electron's process model",
+      nextDescription: "See how the main process and renderer processes send messages to each other.",
+      exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
+      illustration: { line: "Chromium + Node.js", value: "Electron", notes: ["Web UI.", "Desktop powers."] },
+    },
+    sections: electronIntroductionSections,
+    sources: [
+      { title: "Steve Kinney · Electron, v3 (Frontend Masters)", url: "https://frontendmasters.com/courses/electron-v3/" },
+      { title: "Electron · What is Electron?", url: "https://www.electronjs.org/docs/latest/" },
+      { title: "Electron · Process model", url: "https://www.electronjs.org/docs/latest/tutorial/process-model" },
+      { title: "Electron · contextBridge", url: "https://www.electronjs.org/docs/latest/api/context-bridge" },
+      { title: "Electron · Security checklist", url: "https://www.electronjs.org/docs/latest/tutorial/security" },
+      { title: "Electron Forge", url: "https://www.electronforge.io/" },
+    ],
+  },
 ];
 
 export const courses = [
@@ -1587,6 +1621,13 @@ export const courses = [
     description: "Build mobile apps through practical lessons on components, navigation, device APIs, and performance.",
     index: "04",
     className: "lime",
+  },
+  {
+    name: "Electron",
+    href: "/courses/electron",
+    description: "Build desktop apps with web skills: two processes, the file system, and the operating system.",
+    index: "05",
+    className: "blue",
   },
 ];
 

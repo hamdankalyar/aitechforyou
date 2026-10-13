@@ -1,0 +1,6 @@
+.topic-electron .variables-hero-art { background: var(--blue); }
+.topic-electron .series-dot { background: var(--blue); }
+.topic-electron .learning-callout { border-left-color: var(--blue); }
+.topic-electron .architecture-course-path:not(.architecture-problem-path) { border-top-color: var(--blue); }
+.topic-electron .architecture-folder { background: var(--blue); }
+.electron-bridge { margin-top: 12px; text-align: center; }

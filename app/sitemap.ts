@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/courses", 0.6),
     page("/courses/javascript", 0.9, "weekly"),
     page("/courses/react-native", 0.9, "weekly"),
+    page("/courses/electron", 0.9, "weekly"),
     page("/about", 0.4),
     ...publishedGitLessons.map(lesson => page(lesson.href, 0.7)),
     ...gitReferences.filter(reference => reference.href !== "/learn/git/configure").map(reference => page(reference.href, 0.8)),
