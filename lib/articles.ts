@@ -61,6 +61,7 @@ import { gitForkSections } from "@/topics/git/content/git-fork-article";
 import { gitStashSections } from "@/topics/git/content/git-stash-article";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 import { electronIntroductionSections } from "@/topics/electron/content/electron-introduction-article";
+import { electronProcessModelSections } from "@/topics/electron/content/electron-process-model-article";
 
 export type ArticleBlock =
   | { type: "variables-playground" }
@@ -74,6 +75,7 @@ export type ArticleBlock =
   | { type: "event-loop-trace" }
   | { type: "package-manager-architecture" }
   | { type: "electron-runtime-diagram" }
+  | { type: "electron-process-diagram" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -1577,7 +1579,7 @@ export const articles: Article[] = [
       order: 1,
       practiceTime: "10 questions in quiz mode",
       nextTitle: "Electron's process model",
-      nextDescription: "See how the main process and renderer processes send messages to each other.",
+      nextDescription: "See why an app has one main process and many renderer processes, and how preload scripts connect them safely.",
       exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
       illustration: { line: "Chromium + Node.js", value: "Electron", notes: ["Web UI.", "Desktop powers."] },
     },
@@ -1589,6 +1591,36 @@ export const articles: Article[] = [
       { title: "Electron · contextBridge", url: "https://www.electronjs.org/docs/latest/api/context-bridge" },
       { title: "Electron · Security checklist", url: "https://www.electronjs.org/docs/latest/tutorial/security" },
       { title: "Electron Forge", url: "https://www.electronforge.io/" },
+    ],
+  },
+  {
+    slug: "electron-process-model",
+    title: "Electron's process model",
+    excerpt: "See why an Electron app has one main process and one or more renderer processes, and how preload scripts and IPC let them talk safely.",
+    topic: "Electron",
+    category: "Basics",
+    date: "Oct 13, 2026",
+    readTime: "7 min read",
+    accent: "blue",
+    number: "66",
+    series: {
+      title: "Electron, made visible",
+      order: 2,
+      practiceTime: "10 questions in quiz mode",
+      nextTitle: "More Electron lectures",
+      nextDescription: "More lectures are in preparation.",
+      exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
+      illustration: { line: "main ↔ renderer", value: "IPC", notes: ["One main process.", "Many windows."] },
+    },
+    sections: electronProcessModelSections,
+    sources: [
+      { title: "Steve Kinney · Electron, v3 (Frontend Masters)", url: "https://frontendmasters.com/courses/electron-v3/" },
+      { title: "Electron · Process model", url: "https://www.electronjs.org/docs/latest/tutorial/process-model" },
+      { title: "Electron · Using preload scripts", url: "https://www.electronjs.org/docs/latest/tutorial/tutorial-preload" },
+      { title: "Electron · Context isolation", url: "https://www.electronjs.org/docs/latest/tutorial/context-isolation" },
+      { title: "Electron · Inter-process communication", url: "https://www.electronjs.org/docs/latest/tutorial/ipc" },
+      { title: "Electron · Electron releases", url: "https://www.electronjs.org/docs/latest/tutorial/electron-timelines" },
+      { title: "Electron · Updating applications", url: "https://www.electronjs.org/docs/latest/tutorial/updates" },
     ],
   },
 ];

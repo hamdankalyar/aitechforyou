@@ -4,3 +4,11 @@
 .topic-electron .architecture-course-path:not(.architecture-problem-path) { border-top-color: var(--blue); }
 .topic-electron .architecture-folder { background: var(--blue); }
 .electron-bridge { margin-top: 12px; text-align: center; }
+.electron-process-main { text-align: center; }
+.electron-process-ipc { justify-content: center; }
+.electron-process-windows { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.electron-process-windows .architecture-course-path { padding: 16px; }
+
+@media (max-width: 700px) {
+  .electron-process-windows { grid-template-columns: minmax(0, 1fr); }
+}

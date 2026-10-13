@@ -2,8 +2,9 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { electronIntroductionSections } from "../content/electron-introduction-article.ts";
+import { electronProcessModelSections } from "../content/electron-process-model-article.ts";
 
-const lectures = { "electron-introduction": electronIntroductionSections };
+const lectures = { "electron-introduction": electronIntroductionSections, "electron-process-model": electronProcessModelSections };
 const registry = readFileSync(new URL("../../../lib/articles.ts", import.meta.url), "utf8").replaceAll("\r\n", "\n");
 const boldStart = /^\*\*[^*]+\*\*/;
 
@@ -13,6 +14,7 @@ for (const [slug, sections] of Object.entries(lectures)) {
   assert.ok(registry.includes(`slug: "${slug}"`), `${slug}: registered in lib/articles.ts`);
   const entry = registry.slice(registry.indexOf(`slug: "${slug}"`)).split("\n  },\n")[0];
   assert.match(entry, /topic: "Electron"/, `${slug}: topic is Electron`);
+  assert.ok(sections.every(section => !section.code), `${slug}: section code uses a command block`);
   const exercise = entry.match(/exercise: \{ id: "([^"]+)"/)?.[1];
   assert.ok(ids.includes(exercise), `${slug}: the hero exercise links to a real section`);
 
@@ -21,6 +23,8 @@ for (const [slug, sections] of Object.entries(lectures)) {
     const text = typeof paragraph === "string" ? paragraph : paragraph.text;
     assert.match(text, boldStart, `${slug}#${section.id}: "${text}" starts with a bold term`);
     for (const bullet of typeof paragraph === "string" ? [] : paragraph.bullets ?? []) assert.match(bullet, boldStart, `${slug}#${section.id}: "${bullet}" starts with a bold term`);
+    // Consistent UI: code goes in the dark command block, never the plain paragraph code box.
+    assert.ok(typeof paragraph === "string" || !paragraph.code, `${slug}#${section.id}: "${text}" uses a command block for code`);
   }
 
   // Quiz mode: the last section holds exactly one quiz, and every question has one right answer.
@@ -46,15 +50,21 @@ for (const detail of ["Chromium", "Node.js", "renderer process", "main process",
   assert.ok(intro.includes(detail), `the introduction explains ${detail}`);
 }
 
+// Lecture 2 covers the process model from the workshop.
+const processModel = JSON.stringify(electronProcessModelSections);
+for (const detail of ["main process", "renderer process", "preload script", "IPC", "inter-process communication", "allow list", "Least access", "Electron 12", "fs.writeFile", "Squirrel", "server"]) {
+  assert.ok(processModel.includes(detail), `the process model lecture explains ${detail}`);
+}
+
 const base = process.argv[2];
 if (base) {
-  for (const path of ["/courses/electron", "/articles/electron-introduction"]) {
+  for (const path of ["/courses/electron", ...Object.keys(lectures).map(slug => `/articles/${slug}`)]) {
     const response = await fetch(new URL(path, base));
     assert.equal(response.status, 200, path);
     const html = (await response.text()).replaceAll("<!-- -->", "");
-    if (path === "/courses/electron") assert.match(html, /href="\/articles\/electron-introduction"/);
-    else { assert.match(html, /Lecture quiz/); assert.match(html, /Question 1 of 10/); assert.match(html, /Context bridge/); }
+    if (path === "/courses/electron") for (const slug of Object.keys(lectures)) assert.match(html, new RegExp(`href="/articles/${slug}"`));
+    else { assert.match(html, /Lecture quiz/); assert.match(html, /Question 1 of 10/); }
   }
 }
 
-console.log(`Electron lectures pass: ${Object.keys(lectures).length} lecture, writing rules, quiz answers${base ? ", and rendered pages" : ""}.`);
+console.log(`Electron lectures pass: ${Object.keys(lectures).length} lectures, writing rules, quiz answers${base ? ", and rendered pages" : ""}.`);
