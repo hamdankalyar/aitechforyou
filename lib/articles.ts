@@ -78,6 +78,8 @@ export type ArticleBlock =
   | { type: "electron-runtime-diagram" }
   | { type: "electron-process-diagram" }
   | { type: "electron-startup-diagram" }
+  | { type: "electron-lifecycle-playground" }
+  | { type: "electron-startup-playground" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }

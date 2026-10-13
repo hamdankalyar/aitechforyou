@@ -1,10 +1,12 @@
 // Run: node topics/electron/scripts/check-electron-articles.mjs [local base URL]
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { Script } from "node:vm";
+import { Script, createContext, runInContext } from "node:vm";
 import { electronIntroductionSections } from "../content/electron-introduction-article.ts";
 import { electronProcessModelSections } from "../content/electron-process-model-article.ts";
-import { electronSmallestAppSections } from "../content/electron-smallest-app-article.ts";
+import { appLifecycleCode, electronSmallestAppSections } from "../content/electron-smallest-app-article.ts";
+import { lifecycle, platforms } from "../content/electron-lifecycle-lab.ts";
+import { startupSteps } from "../content/electron-startup-lab.ts";
 
 const lectures = { "electron-introduction": electronIntroductionSections, "electron-process-model": electronProcessModelSections, "electron-smallest-app": electronSmallestAppSections };
 const registry = readFileSync(new URL("../../../lib/articles.ts", import.meta.url), "utf8").replaceAll("\r\n", "\n");
@@ -71,6 +73,44 @@ const smallestApp = JSON.stringify(electronSmallestAppSections);
 for (const detail of ["Electron Fiddle", "Electron Forge", "package.json", "main.js", "preload.js", "renderer.js", "index.html", "BrowserWindow", "webPreferences", "window-all-closed", "activate", "darwin", "win32", "process.versions", "Content-Security-Policy"]) {
   assert.ok(smallestApp.includes(detail), `the smallest app lecture explains ${detail}`);
 }
+
+// The lifecycle simulation must match the lecture's real main.js code, run against a mock of Electron's app events.
+function runLectureCode(platform, actions) {
+  let handlers = {};
+  let running = false;
+  let nextId = 1;
+  const windows = [];
+  const boot = () => {
+    handlers = {};
+    let ready;
+    const app = { whenReady: () => ({ then: callback => { ready = callback; } }), on: (name, callback) => { (handlers[name] ??= []).push(callback); }, quit: () => { running = false; } };
+    const createWindow = () => windows.push(nextId++);
+    runInContext(appLifecycleCode, createContext({ app, createWindow, BrowserWindow: { getAllWindows: () => windows }, process: { platform } }));
+    running = true;
+    ready();
+  };
+  const emit = name => (handlers[name] ?? []).forEach(handler => handler());
+  for (const action of actions) {
+    if (action === "start" && !running) { nextId = 1; boot(); }
+    if (action === "open" && running) windows.push(nextId++);
+    if (action === "close" && running && windows.length) { windows.pop(); if (!windows.length) emit("window-all-closed"); }
+    if (action === "dock" && running && platform === "darwin") emit("activate");
+  }
+  return { running, windows: [...windows] };
+}
+const allActions = ["start", "open", "close", "dock"];
+const sequences = [[]];
+for (let length = 0; length < 6; length++) for (const sequence of sequences.filter(item => item.length === length)) for (const action of allActions) sequences.push([...sequence, action]);
+for (const { id } of platforms) for (const sequence of sequences) {
+  const simulated = lifecycle(id, sequence);
+  const real = runLectureCode(id, sequence);
+  assert.deepEqual({ running: simulated.running, windows: simulated.windows }, real, `${id}: ${sequence.join(" → ") || "nothing"}`);
+}
+
+// The startup storyboard runs the four files in order, and versions appear only after DOMContentLoaded.
+assert.deepEqual([...new Set(startupSteps.map(step => step.file))], ["package.json", "main.js", "preload.js", "index.html", "renderer.js"], "startup visits every file in order");
+assert.ok(startupSteps.slice(0, -1).every(step => !step.page.join(" ").match(/\d+\.\d+/)), "version numbers stay empty until the last step");
+assert.match(startupSteps.at(-1).page.join(" "), /Node\.js \d/, "the last step fills in the versions");
 
 const base = process.argv[2];
 if (base) {

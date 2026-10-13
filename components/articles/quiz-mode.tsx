@@ -20,7 +20,7 @@ export function QuizMode({ title, questions }: { title: string; questions: Quest
     setPosition(0);
     setPicks(previous => Object.fromEntries(Object.entries(previous).filter(([index]) => !indexes.includes(Number(index)))));
   };
-  const steps = <ol className="commit-lab-steps quiz-mode-steps" style={{ "--count": round.length } as CSSProperties} aria-label="Quiz progress">
+  const steps = <ol className="commit-lab-steps lab-steps-count quiz-mode-steps" style={{ "--count": round.length } as CSSProperties} aria-label="Quiz progress">
     {round.map((index, step) => <li key={index} aria-current={step === position ? "step" : undefined} className={step < position ? (questions[index].answers[picks[index]]?.correct ? "is-right" : "is-wrong") : undefined}><span aria-hidden="true">{step + 1}</span></li>)}
   </ol>;
 

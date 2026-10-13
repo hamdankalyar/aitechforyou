@@ -15,7 +15,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 }`;
 
-const appLifecycleCode = `app.whenReady().then(() => {
+export const appLifecycleCode = `app.whenReady().then(() => {
   createWindow()
 
   app.on('activate', function () {
@@ -221,7 +221,7 @@ export const electronSmallestAppSections: ArticleSection[] = [
         ["Windows", "win32", "Used for both 32-bit and 64-bit Windows"],
         ["Linux", "linux", "Just the system name"],
       ],
-    }],
+    }, { type: "electron-lifecycle-playground" }],
   },
   {
     id: "preload-js",
@@ -281,6 +281,44 @@ export const electronSmallestAppSections: ArticleSection[] = [
       "**These four files** are all you need for a working Electron app.",
     ],
     blocks: [{ type: "callout", title: "Remember this one", text: "package.json points to main.js. main.js opens a window with a preload script. The window loads index.html, which loads renderer.js." }],
+  },
+  {
+    id: "watch-it-start",
+    heading: "Watch the app start, step by step",
+    paragraphs: [
+      "**This example** plays the startup in slow motion.",
+      "**Each step** shows what the main process, the renderer process, and the window are doing.",
+      "**Watch for the moment** the version numbers appear.",
+    ],
+    blocks: [{ type: "electron-startup-playground" }],
+  },
+  {
+    id: "try-it-in-electron-fiddle",
+    heading: "Run the real app in Electron Fiddle",
+    paragraphs: [
+      "**The examples above** are simulations in your browser.",
+      "**Electron Fiddle** runs the real code on your computer.",
+      {
+        text: "**Set it up** in three steps.",
+        bullets: [
+          "**Download** Electron Fiddle for free from electronjs.org/fiddle.",
+          "**Open it**, and it starts with the same starter files you read in this lecture.",
+          "**Press Run**, and a real window opens with your Node, Chromium, and Electron versions.",
+        ],
+      },
+      {
+        text: "**Try these changes** and press Run after each one.",
+        bullets: [
+          "**Change width: 800** to width: 400 in main.js and see a narrower window.",
+          "**Add minWidth: 300** next to width and try to make the window smaller.",
+          "**Close the window** and see whether the app quits on your system.",
+          "**Add mainWindow.webContents.openDevTools()** after loadFile to open DevTools.",
+        ],
+      },
+      "**console.log in main.js** prints in Fiddle's own console, not in the window's DevTools.",
+      "**Fiddle lets you pick** which Electron version to run.",
+    ],
+    blocks: [{ type: "command", label: "main.js", command: "mainWindow.loadFile('index.html')\nmainWindow.webContents.openDevTools()", highlightLines: [2], explanation: "Add the second line inside createWindow to open DevTools when the window starts." }],
   },
   {
     id: "lecture-quiz",
