@@ -3,7 +3,8 @@ import type { Article } from "@/lib/articles";
 import { isoDate } from "@/lib/seo";
 import { ArrowUpRight } from "./icons";
 
-export function ArticleCard({ article }: { article: Article }) {
+export function ArticleCard({ article, headingLevel = 3 }: { article: Article; headingLevel?: 3 | 4 }) {
+  const Heading = headingLevel === 4 ? "h4" : "h3";
   return (
     <article className={`article-card ${article.accent}`}>
       <div className="card-topline">
@@ -16,7 +17,7 @@ export function ArticleCard({ article }: { article: Article }) {
       </div>
       <div className="card-copy">
         <p><time dateTime={isoDate(article.date)}>{article.date}</time> · {article.readTime}</p>
-        <h3><Link href={`/articles/${article.slug}`}>{article.title}</Link></h3>
+        <Heading><Link href={`/articles/${article.slug}`}>{article.title}</Link></Heading>
         <p>{article.excerpt}</p>
       </div>
       <Link className="card-link" href={`/articles/${article.slug}`} aria-label={`Read ${article.title}`}>

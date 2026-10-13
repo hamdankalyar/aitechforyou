@@ -11,6 +11,8 @@ import { javascriptObjectsSections } from "@/topics/javascript/content/javascrip
 import { javascriptArraysSections } from "@/topics/javascript/content/javascript-arrays-article";
 import { javascriptImmutableMutableSections } from "@/topics/javascript/content/javascript-immutable-vs-mutable-article";
 import { javascriptFunctionsSections } from "@/topics/javascript/content/javascript-functions-article";
+import { javascriptPrinciplesSections } from "@/topics/javascript/content/javascript-principles-article";
+import { javascriptGeneralizingFunctionsSections } from "@/topics/javascript/content/javascript-generalizing-functions-article";
 import { javascriptArrowFunctionsSections } from "@/topics/javascript/content/javascript-arrow-functions-article";
 import { javascriptScopeSections } from "@/topics/javascript/content/javascript-scope-article";
 import { javascriptEventsSections } from "@/topics/javascript/content/javascript-events-article";
@@ -71,6 +73,8 @@ export type ArticleBlock =
   | { type: "array-mutation-diagram" }
   | { type: "reduce-diagram" }
   | { type: "event-loop-trace" }
+  | { type: "execution-context-trace"; example?: "copy-array" | "callback-array" }
+  | { type: "call-stack-trace" }
   | { type: "package-manager-architecture" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
@@ -106,7 +110,8 @@ export type ArticleSection = {
   blocks?: ArticleBlock[];
 };
 
-export const javascriptCategories = ["Basic", "Advanced", "Functions", "Interviews", "Performance", "OOP"] as const;
+export const javascriptCategories = ["Basic", "Advanced", "Functions", "Mental Model", "Interviews", "Performance", "OOP"] as const;
+export const javascriptMentalModelCategories = ["Principles of JavaScript", "Callbacks and higher order functions"] as const;
 export const reactNativeCategories = ["Basics", "Components", "Styling", "Navigation", "State", "Device", "Performance"] as const;
 
 export type Article = {
@@ -131,7 +136,7 @@ export type Article = {
   sources?: { title: string; url: string }[];
   sections: ArticleSection[];
 } & (
-  | { topic: "JavaScript"; category: (typeof javascriptCategories)[number] }
+  | { topic: "JavaScript"; category: Exclude<(typeof javascriptCategories)[number], "Mental Model"> | (typeof javascriptMentalModelCategories)[number] }
   | { topic: "React Native"; category: (typeof reactNativeCategories)[number] }
   | { topic: "Git" | "AI"; category?: never }
 );
@@ -1556,6 +1561,51 @@ export const articles: Article[] = [
       { title: "MDN · export", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" },
       { title: "MDN · import", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" },
     ],
+  },
+  {
+    slug: "javascript-principles",
+    title: "Principles of JavaScript",
+    excerpt: "Follow code line by line as function calls create execution contexts, store local values, and return results to global memory.",
+    topic: "JavaScript",
+    category: "Principles of JavaScript",
+    date: "Oct 6, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "44",
+    series: {
+      title: "JavaScript, made visible", order: 27, practiceTime: "3 min to explore",
+      nextTitle: "More JavaScript lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "trace-the-code", label: "Trace the execution" },
+      illustration: { line: "multiplyBy2(3)", value: "6", notes: ["A fresh context.", "A returned value."] },
+    },
+    sections: javascriptPrinciplesSections,
+    sources: [
+      { title: "JavaScript: The Hard Parts · Call Stack", url: "https://master.dev/courses/javascript-hard-parts-v3/call-stack/" },
+      { title: "MDN · Call stack", url: "https://developer.mozilla.org/en-US/docs/Glossary/Call_stack" },
+      { title: "MDN · JavaScript execution model", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model" },
+      { title: "MDN · Function declarations and hoisting", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function" },
+      { title: "MDN · return", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/return" },
+    ],
+  },
+  {
+    slug: "javascript-generalizing-functions",
+    title: "Callback and Higher Order Function",
+    excerpt: "Understand callbacks and higher order functions, then follow an array through code, memory, and the call stack.",
+    topic: "JavaScript",
+    category: "Callbacks and higher order functions",
+    date: "Oct 7, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "45",
+    series: {
+      title: "JavaScript, made visible", order: 28, practiceTime: "3 min to explore",
+      nextTitle: "More callback lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "trace-the-code", label: "Trace the array" },
+      illustration: { line: "result = [2, 4, 6]", value: "[2, 4, 6]", notes: ["Read each input.", "Build a new array."] },
+    },
+    sections: javascriptGeneralizingFunctionsSections,
   },
 ];
 

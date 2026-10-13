@@ -1,0 +1,238 @@
+Source: https://master.dev/courses/javascript-hard-parts-v3/copy-and-change-an-array/
+User-supplied transcript.
+
+>> Will Sentance: But it all begins, people, with a function,
+copy array and multiply by 2.
+We're going to define a function, copy array and multiply by 2.
+We're then going to define an array, my array.
+We're then going to call copy array and multiply each element by 2 with the input of 1
+2, 3. In it we're
+going to create a new output array, empty array.
+We're then going to loop through, grab each element from the input array 1
+2, 3, multiply each elementby 2, push that multiplied element into the new output array.
+Note already not changing the input array, and then return out that fully populated output array
+Well, first we turn on
+JavaScript. Joe, what do we turn on? Two things, well, three things.
+Global scope, global execution context is where we're going to.
+We'll hear the difference between scope and
+execution context in a little bit.
+The place where we execute code, where we run code.
+The global execution context, which comprises a place to store data,
+the global memory, and a single thread, one thing at a time,
+down the page, line by line.
+We'll see later on that there may be ways that we can do multiple things at a time in JavaScript
+but for now, single thread
+line by line by line
+and then a call stack
+to track where we're currently at in our function execution journey.
+Beautiful. Joe, let's. There's our memory into which we're going
+to start storing stuff as we go. Joe, what's the first thing we're storing?
+And if you don't mind, Joe, just kind of talking me through line by line,
+and you keep going. Yeah, a function called copy array and multiplied by 2.
+Yeah, that will be uninitialized.
+So the function definition, copy array, multiplied by 2,
+the whole block of code, copy array, multiplied by 2,
+the whole text of that code.
+You know, it's literally going to be thought of as grab all that code as a string of letters and
+also the parameter as a string of letters, store it in this little.
+I'm describing it as a little box, but we're actually grabbing all
+the code and storing it in memory.
+Then we jump all the way down to declaring what.
+Then we go down to constant my array. Yeah, why don't we go inside of copy array and multiply by
+2? We haven't invoked or called.
+We haven't invoked, called, or run it. Excellent, so we declare my array and store what in it?
+1, 2, and 3. Excellent, next line, Joe.
+And then we have constant results. Beautiful, will be the return value of calling copy
+array multiplied by 2, passing as an argument, my array.
+Yeah. Okay, well done, Joe.
+I know this is. That's what we want to hear, that sort of precision,
+that sort of precision. Joe's going to be earning the big bucks for that sort of precision.
+You know, they love that in those interviews.
+Result is the return value of calling copy array and multiply
+by 2, passing in my array, which is 1,
+2, 3. And then everybody, we're going to create a brand new what?
+Execution. Well done, Chris. Everyone together, a brand new what?
+Execution context. I got you all to do it.
+There it is, it's a place in which we go and execute,
+run our code. Simple as that, and it's got exactly the same things that we had out
+here, but a mini one. We had memory and thread, a thread weaves in.
+We have a mini or local place to store data,
+known as a local memory.
+Memory being the programming term for place that I store labels with data so I can go back and get
+it later. But this one's only going to be available while I'm inside executing copy array and multiplied
+by 2. So how do I keep track of the fact that I'm currently inside copy array and multiply by
+2 and not somewhere else? Stack.
+Excellent, the call stack. Let's put it on here, the
+call stack, and it always has global running on the bottom as long as we're running
+our global execution context, as long as we're in our code.
+And as soon as we start running copy array and multiply by 2, we add it,
+copy array, multiply by 2, passing in 1
+2, 3. I don't knowwhat is going on with my handwriting.
+Oh, look at that, people.
+But out the side, not out the top.
+What do we think of that?
+Excellent, and we now are inside copy array and multiply by 2.
+Our thread is inside, and what's top of our call stack?
+Copy array and multiply by 2. Into it we go.
+First thing Tenzin, in our local memory, we deal with our what?
+The declaration or the input parameter, right.
+Exactly, and assign it what value?
+The array of values 1, 2, 3.
+Beautiful, there it is. And then we declare what?
+A brand new, not execution context, a brand new what?
+Constant output, which is an empty array.
+Empty array, well done to Tenzin.
+And then we're going to hit our for loop. People, for loop is a really
+interesting way of us interfacing as engineers with data because it's far
+from the most intuitive way of doing so.
+In fact, we'll see later on when we introduce closure that there is a beautiful structure called iterators
+in JavaScript that allow us to run a function, and each time it runs,
+it returns out our next value from an array.
+But in this case, we're going to. And we're not going to dwell too much on the for loop,
+but to say that we are going to hit the body of the for loop,
+the bits between the curly brace, as many times as long as I is below the length of the array
+which is 1, 2, 3
+It's going up each time
+the value of I, first
+at 0, then at 1, then at 2, and then at 3,
+we don't rerun the body of the for loop.
+So into it we go, and I'm going to just, for my purposes here,
+I'm not actually copying the array in any way here.
+I'm just sort of drawing it up so it's easier for us to work with.
+There's our array 1, 2, 3.
+Here's our output, which is an empty array,
+and we're going to hit the body of the for loop for the I equals 0,
+the 0th time. And what do we do, Chris, when I equals 0?
+We grab element what from the array?
+Isn't the conditional checked first?
+Right, so we're just going to keep our for loop interaction relatively light here.
+You're absolutely right, we check it's all correct and we hit the body of the for loop,
+and our I value is going to be what the first time?
+0. 0, so at 0th hitting of the for loop, where we grab array position 0,
+which is what? 1. 1, and we do 1 multiplied by what?
+2. 2, and we evaluate that and push that 2 to what?
+Output. Beautiful. Okay, but we're going to do it again.
+And Ryan, you're up. Ryan, this time our value of I will be what?
+1. 1, and therefore our position 1 of the array is what number?
+1 or 2, sorry, 2.
+2, and then 2 multiply. No, I tell you, can I just say,
+every time, I don't care how experienced one is as an engineer,
+for loops are a funny old interface for arrays.
+And that's why we increasingly have alternative ways of interacting with arrays of data
+So 2 multiplied by 2
+is 4, push to where?
+The output array. Yep, and then we do it again for the last 1, 6.
+Good. There it is, 2, 4, 6.
+We then hit the last line of our copy array and multiplied by 2, which says finish this execution context
+finish this mini program, jump
+out, return out. Okay, what, yeah, and return the value of what
+locally defined constant, Ryan? Output.
+Output, exactly, and that is going to be returned out into what global label,
+Ryan? Result. Excellent, so we assigned to result
+2, 4, 6. Well done, everybody. What a great function.
+We like this function. We can now copy an array and multiply each element by 2.
+What if we were then to create another function?
+This is part of my repartee.
+What if we would create another function, copy array and divide
+by 2? I will tell you this, people,
+the sense of frustration that we're doing this again is part of the why
+that we might want to find a better way. But in order.
+And every time I question myself, should I make us do this
+again? But we're going to
+Okay, here we go.
+So copy array and divide by 2.
+Are we really going to do it again?
+Oh. Yes, oh no, we
+are. Well, oh my God, I literally can't decide.
+Copy array and divide by 2. Let's at least walk through it so we can know together,
+and we're not going to, because I'm removing the whiteboard again.
+Copy array and divide by 2, let's walk through it. Michael, talk me through line by line what we're doing
+Folks, we are completely and
+utterly starting again. We are not going to get to reuse this code or diagram,
+but we are just going to point to it as we go. Michael, line 1, what are we doing?
+We're declaring what? We turn JavaScript on with the global execution.
+Exactly, and then we declare a function called copy array and divide by 2.
+Exactly, then declare what? Let's see, we declared the function,
+we store that in memory, move. We move to my array.
+Yes, and assign what value?
+An array of 1, 2, 3.
+Spot on. Then we hit the declaration of result, and do we know what to assign to it yet?
+To. No. So we have to do another execution context.
+We go into the function, declare output.
+But first we do, array is set to, array is equal to the parameter we passed in,
+which is array of 1, 2, 3. Let's get really precise.
+Array is the parameter. My array 1, 2,
+3 is our argument. So we match our argument with our parameter.
+Our parameter is a fancy word for the label, the placeholder.
+We then assign it the argument whose value is 1,
+2, 3. Excellent. Then we declare output.
+Then we're going to hit each element of our input array,
+first one, divide by 2 and get what, Michael?
+1 divided by 2, 1/2. 0.5, beautiful.
+And we're going to push that to our output array.
+Then we're going to do it with our next element, 2.
+2 divided by 2 is what, Michael?
+1. Well done. Yeah, I know.
+And then 3 divided by 2 is 1.5, so we get an output array,
+1, 1, and 1.5, which we return into result.
+You like this function? You'll love my next function.
+Copy array and add 3.
+Are we going to do it again? I promise, people, my discomfort is real.
+No. Are we going to do it again?
+No, please. What principle are we breaking, Michael?
+DRY, don't repeat yourself. People, we created a function,
+copy array and multiply by 2, copy array and divide by 2,
+copy array and add 3.
+And what's the only thing that changed each time, Michael?
+Can you see the only thing in the function that changed each time?
+What we're doing to each value of the, or each item in the array.
+I like the way you put that. Let's give a hand, yeah, exactly.
+So people, could we do something. What could we do, back to Joe,
+our specialist in this. What could we do, Joe?
+Add more parameters to the function. Add more parameters to the function in order to do what more?
+Programmatically be able to pass the. Yeah, yeah, yeah, so what's that phrase I use?
+We could generalize our function to make it more reusable.
+Exactly, we could generalize our function exactly as Joe said by passing another parameter,
+a parameter to handle being filled in with not data,
+but with what, Joe? An operator?
+Well, that would be nice, right? I really like that.
+That's exactly right. We want to pass in some functionality.
+And what is an operator, but technically it's called an action dispatcher.
+It's going to go and do some action.
+So we want to say, can I pass in here, plus 3 maybe as a.
+Can I do that, Joe
+Who thinks I can do
+that, people? No, you can't do that, people.
+You can't pass little bits of functionality, right?
+I mean, you could technically take a string and then run some sort of eval on it,
+which turns it into code, but that's going to be very high risk within any.
+How do we instead in
+JavaScript wrap up some functionality, the ability to add 3,
+wrap up some functionality? Yeah, Tenzin?
+Function. In a function. Exactly.
+When we passed into copy array and add 3, copy array and divide by 2,
+copy array and multiply by 2, we passed in my array, 1,
+2, 3. Were we passing in the original array as defined outside of copy array and add 3,
+or were we actually making a copy of that array as we pass it in?
+Absolutely, we were passing in a link back to our originally defined my array
+which is why it was
+so important inside of copy array and add 3, copy array and divide by 2,
+copy array and multiply by 2, that we created a brand new empty array into which we copied
+element by element our mutated, our changed values.
+We did not change the input array.
+We'll see, I mean I can say it right now, that that is by choice because we ideally want our
+functions, even ones like copy array and add 3 here,
+to not have what we call side effects.
+That is to say, things that are happening inside of them that are going to have consequences outside
+of them that are not defined by the return value.
+That is, we pass in an array that we then change from inside it,
+we're having unexpected consequences to our global data.
+Versus we pass in an array and then make changes to a new array inside,
+return that out, our only consequence from that function is that output array
+We know exactly what our
+function is going to do. It's going to take in an input array,
+create a new array inside, return that out.
+The input array didn't get changed, which is important because the input array was defined globally,
+and we want our function's behavior to be entirely defined by its return value,
+not that each time it runs it can have unexpected consequences to our global data,
+except that that came out the bottom of it, the return value.

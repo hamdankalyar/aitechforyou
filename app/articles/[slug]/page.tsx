@@ -41,7 +41,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const topicSlug = article.topic.toLowerCase().replaceAll(" ", "-");
   const runnableCode = article.topic === "JavaScript";
   const categorizedCourse = article.topic === "JavaScript" || article.topic === "React Native";
-  const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : categorizedCourse ? `/courses/${article.topic === "JavaScript" ? "javascript" : "react-native"}#${article.category.toLowerCase()}` : `/articles?topic=${article.topic}`;
+  const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : categorizedCourse ? `/courses/${article.topic === "JavaScript" ? "javascript" : "react-native"}#${article.category.toLowerCase().replaceAll(" ", "-")}` : `/articles?topic=${article.topic}`;
   const courseArticles = series ? articles.filter(candidate => candidate.series?.title === series.title && (!categorizedCourse || candidate.category === article.category)).sort((a, b) => a.series!.order - b.series!.order) : [];
   const seriesIndex = courseArticles.findIndex(candidate => candidate.slug === article.slug);
   const nextArticle = courseArticles[seriesIndex + 1];

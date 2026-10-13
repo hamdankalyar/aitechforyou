@@ -4,6 +4,7 @@ import { ArrayMutationDiagram, ObjectMutationDiagram, PrimitiveMemoryDiagram, Re
 import { CodeRunner } from "@/topics/javascript/components/code-runner";
 import { ReduceStepper } from "@/topics/javascript/components/reduce-stepper";
 import { EventLoopTrace } from "@/topics/javascript/components/event-loop-trace";
+import { CallStackTrace, ExecutionContextTrace } from "@/topics/javascript/components/execution-context-trace";
 import { snapshots } from "@/topics/git/content/git-snapshots";
 import { SnapshotTimeline } from "@/topics/git/components/snapshot-timeline";
 import { KnowledgeCheck } from "@/components/articles/knowledge-check";
@@ -44,6 +45,8 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "array-mutation-diagram": return <ArrayMutationDiagram />;
     case "reduce-diagram": return <ReduceStepper />;
     case "event-loop-trace": return <EventLoopTrace />;
+    case "execution-context-trace": return <ExecutionContextTrace example={block.example} />;
+    case "call-stack-trace": return <CallStackTrace />;
     case "package-manager-architecture": return <PackageManagerArchitecture />;
     case "timeline": return <SnapshotTimeline />;
     case "save-commit-comparison": return <figure className="save-commit-comparison"><div><article><span className="learning-kicker">Your editor</span><h3>Save</h3><p>Updates the file on your computer.</p><strong>Current file changes</strong></article><article><span className="learning-kicker">Git</span><h3>Commit</h3><p>Records a chosen project version in its history.</p><strong>A saved moment appears</strong></article></div><figcaption>Saving answers “What is in my file now?” Committing answers “Which version should Git remember?”</figcaption></figure>;
