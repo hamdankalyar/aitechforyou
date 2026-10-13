@@ -58,4 +58,33 @@ export const javascriptGeneralizingFunctionsSections: ArticleSection[] = [
     code: "function copyArrayAndManipulate(array, instructions) {\n  const output = [];\n  for (let i = 0; i < array.length; i++) output.push(instructions(array[i]));\n  return output;\n}\nfunction multiplyBy2(input) { return input * 2; }\nconst result = copyArrayAndManipulate([1, 2, 3], multiplyBy2);\nconsole.log(result); // [2, 4, 6]",
     blocks: [{ type: "execution-context-trace", example: "callback-array" }],
   },
+  {
+    id: "review-questions", heading: "Review questions",
+    paragraphs: [],
+    blocks: [
+      { type: "details", title: "In a higher-order function that processes an array, what is the purpose of using a parameter like 'instructions' instead of hardcoding specific operations?", paragraphs: [
+        "**instructions** is a placeholder for the operation on each element.",
+        "**The specific functionality** is passed in when the function is called.",
+        "**The same function** can perform different operations without changing its shared code.",
+        "**multiplyBy2, add3, or divideBy2** can supply the operation.",
+      ] },
+      { type: "details", title: "What happens when a function label like 'multiplyBy2' is passed as an argument to another function in JavaScript?", paragraphs: [
+        "**multiplyBy2** passes a reference to the function itself.",
+        "**instructions** is the receiving parameter name for that function reference.",
+      ] },
+      { type: "details", title: "What happens to execution contexts when instructions(1) calls multiplyBy2?", paragraphs: [
+        "**The multiplyBy2 call** creates a new execution context.",
+        "**The new context** is added to the call stack.",
+        "**Local memory** contains input = 1.",
+        "**1 * 2** evaluates to 2.",
+        "**The function** returns 2.",
+        "**The execution context** is then popped off the call stack.",
+      ] },
+      { type: "details", title: "What is the purpose of parentheses when invoking a function that has been passed as a parameter?", paragraphs: [
+        "**Parentheses** tell JavaScript to execute the function.",
+        "**instructions(1)** runs the function with input 1.",
+        "**instructions without parentheses** refers to the function without executing it.",
+      ] },
+    ],
+  },
 ];

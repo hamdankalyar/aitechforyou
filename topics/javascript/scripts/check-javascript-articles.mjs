@@ -493,7 +493,7 @@ for (const [index, input] of [1, 2, 3].entries()) {
   assert.deepEqual(callbackArraySteps.slice(start, start + 6).map(step => step.callbacks[index]), ["entered", "bound", "calculated", "returning", "closed", "closed"]);
   assert.ok(callbackArraySteps.slice(start, start + 6).every(step => step.stage === "loop"), "the outer context remains open during callbacks");
 }
-assert.equal(javascriptGeneralizingFunctionsSections.length, 5);
+assert.equal(javascriptGeneralizingFunctionsSections.length, 6);
 console.log(`The execution-context trace and every Node-compatible snippet across the ${Object.keys(articles).length} JavaScript lessons match JavaScript execution.`);
 
 if (process.argv[2]) {
