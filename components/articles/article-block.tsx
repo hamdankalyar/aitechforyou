@@ -4,6 +4,7 @@ import { ArrayMutationDiagram, ObjectMutationDiagram, PrimitiveMemoryDiagram, Re
 import { CodeRunner } from "@/topics/javascript/components/code-runner";
 import { ReduceStepper } from "@/topics/javascript/components/reduce-stepper";
 import { EventLoopTrace } from "@/topics/javascript/components/event-loop-trace";
+import { CallStackTrace, ExecutionContextTrace } from "@/topics/javascript/components/execution-context-trace";
 import { snapshots } from "@/topics/git/content/git-snapshots";
 import { SnapshotTimeline } from "@/topics/git/components/snapshot-timeline";
 import { KnowledgeCheck } from "@/components/articles/knowledge-check";
@@ -50,6 +51,8 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "array-mutation-diagram": return <ArrayMutationDiagram />;
     case "reduce-diagram": return <ReduceStepper />;
     case "event-loop-trace": return <EventLoopTrace />;
+    case "execution-context-trace": return <ExecutionContextTrace example={block.example} />;
+    case "call-stack-trace": return <CallStackTrace />;
     case "package-manager-architecture": return <PackageManagerArchitecture />;
     case "electron-runtime-diagram": return <ElectronRuntimeDiagram />;
     case "electron-process-diagram": return <ElectronProcessDiagram />;

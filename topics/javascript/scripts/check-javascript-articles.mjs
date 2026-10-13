@@ -15,6 +15,11 @@ import { javascriptObjectsSections } from "../content/javascript-objects-article
 import { javascriptArraysSections } from "../content/javascript-arrays-article.ts";
 import { javascriptImmutableMutableSections } from "../content/javascript-immutable-vs-mutable-article.ts";
 import { javascriptFunctionsSections } from "../content/javascript-functions-article.ts";
+import { javascriptPrinciplesSections } from "../content/javascript-principles-article.ts";
+import { javascriptGeneralizingFunctionsSections } from "../content/javascript-generalizing-functions-article.ts";
+import { callStackSteps, principlesSource, principlesSteps } from "../content/javascript-principles-trace.ts";
+import { callbackArraySource, callbackArraySteps } from "../content/javascript-callback-array-trace.ts";
+import { copyArraySource, copyArraySteps } from "../content/javascript-copy-array-trace.ts";
 import { javascriptArrowFunctionsSections } from "../content/javascript-arrow-functions-article.ts";
 import { javascriptScopeSections } from "../content/javascript-scope-article.ts";
 import { javascriptEventsSections } from "../content/javascript-events-article.ts";
@@ -56,6 +61,8 @@ const articles = {
   "javascript-event-loop": javascriptEventLoopSections,
   "javascript-error-handling": javascriptErrorHandlingSections,
   "javascript-modules": javascriptModulesSections,
+  "javascript-principles": javascriptPrinciplesSections,
+  "javascript-generalizing-functions": javascriptGeneralizingFunctionsSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -78,6 +85,13 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-generalizing-functions": {
+    "trace-the-callback": { output: ["2,4,6"] },
+    "repeated-array-work": { examples: [{ output: ["2,4,6"] }, { output: ["0.5,1,1.5"] }, { output: ["4,5,6"] }] },
+  },
+  "javascript-principles": {
+    "quick-check": { output: ["6", "20"] },
+  },
   "javascript-modules": {
     "default-export": { examples: [{ output: ["5"], browserOnly: true }] },
     "named-exports": { examples: [{ output: ["5", "6"], browserOnly: true }] },
@@ -427,7 +441,60 @@ const typeTable = allSections.flatMap(section => section.blocks ?? []).find(bloc
 assert.deepEqual(typeTable.rows.map(row => row[0]), ["string", "number", "boolean", "undefined", "null", "bigint", "symbol"]);
 assert.equal(typeof null, "object");
 assert.equal(typeof BigInt("12345678901234567890"), "bigint");
-console.log(`All five interaction states and every Node-compatible snippet across the ${Object.keys(articles).length} JavaScript lessons match JavaScript execution.`);
+const tracedProgram = execute(principlesSource.join("\n"));
+assert.equal(tracedProgram.error, null);
+assert.deepEqual(Array.from(runInContext("[num, output, newOutput]", tracedProgram.context)), principlesSteps.at(-1).globals);
+assert.deepEqual(principlesSteps.map(step => step.line), [null, 1, 2, 7, 2, 3, 4, 7, 8, 2, 3, 4, 8, null]);
+for (const [call, input, start, end] of [[0, 3, 3, 7], [1, 10, 8, 12]]) {
+  assert.deepEqual(principlesSteps.slice(start, end + 1).map(step => step.calls[call]), ["entered", "bound", "calculated", "returning", "closed"]);
+  assert.equal(principlesSteps[start - 1].calls[call], "waiting");
+  for (const step of principlesSteps.slice(start, end)) assert.equal(step.globals[call + 1], null, "the caller must wait for return");
+  assert.equal(principlesSteps[end].globals[call + 1], runInContext(`multiplyBy2(${input})`, tracedProgram.context));
+}
+assert.equal(runInContext("typeof inputNumber", tracedProgram.context), "undefined", "parameters do not leak globally");
+assert.equal(runInContext("typeof result", tracedProgram.context), "undefined", "local results do not leak globally");
+assert.deepEqual(callStackSteps.map(step => step.stack), [
+  [], ["global"], ["multiplyBy2(3)", "global"], ["global"],
+  ["multiplyBy2(10)", "global"], ["global"], [],
+]);
+assert.equal(javascriptPrinciplesSections.find(section => section.id === "call-stack").paragraphs.length, 4);
+const arrayProgram = execute("const snapshots = [];\n" + copyArraySource.join("\n")
+  .replace("i < array.length", "(snapshots.push({ index: i, output: [...output] }), i < array.length)")
+  .replace("output.push(array[i] * 2);", "output.push(array[i] * 2); snapshots.push({ index: i, output: [...output] });"));
+assert.equal(arrayProgram.error, null);
+assert.equal(JSON.stringify(runInContext("snapshots", arrayProgram.context)), JSON.stringify(copyArraySteps
+  .filter(step => /^(Check |Multiply |Stop )/.test(step.title))
+  .map(step => ({ index: step.index, output: step.output }))), "the loop trace matches live checks and pushes");
+assert.equal(JSON.stringify(runInContext("result", arrayProgram.context)), JSON.stringify(copyArraySteps.at(-1).output));
+assert.equal(JSON.stringify(runInContext("myArray", arrayProgram.context)), "[1,2,3]", "the input stays unchanged");
+assert.equal(runInContext("myArray === result", arrayProgram.context), false, "output is a new array");
+assert.equal(runInContext("typeof i", arrayProgram.context), "undefined", "the loop index does not leak");
+assert.equal(runInContext("typeof output", arrayProgram.context), "undefined", "output stays local");
+assert.equal(copyArraySteps.find(step => step.stage === "returning").line, 6);
+assert.equal(copyArraySteps.find(step => step.stage === "closed").line, 10);
+const callbackProgram = execute("const snapshots = [];\n" + callbackArraySource.join("\n")
+  .replace("const output = [];", "const output = []; if (instructions !== multiplyBy2) throw Error('wrong reference');")
+  .replace("i < array.length", "(snapshots.push({ event: 'check', index: i, output: [...output] }), i < array.length)")
+  .replace("output.push(instructions(array[i]));", "const value = instructions(array[i]); snapshots.push({ event: 'return', index: i, output: [...output], value }); output.push(value); snapshots.push({ event: 'push', index: i, output: [...output] });")
+  .replace("return input * 2;", "snapshots.push({ event: 'callback', input }); return input * 2;"));
+assert.equal(callbackProgram.error, null);
+const callbackSnapshots = JSON.parse(JSON.stringify(runInContext("snapshots", callbackProgram.context)));
+assert.deepEqual(callbackSnapshots, callbackArraySteps.flatMap(step => {
+  if (/^(Check |Stop )/.test(step.title)) return [{ event: "check", index: step.index, output: step.output }];
+  if (step.title.startsWith("Call instructions")) return [{ event: "callback", input: step.index + 1 }];
+  if (step.title.startsWith("Resume after")) return [{ event: "return", index: step.index, output: step.output, value: (step.index + 1) * 2 }];
+  if (step.title.startsWith("Push ")) return [{ event: "push", index: step.index, output: step.output }];
+  return [];
+}), "callback calls finish before their returned values are pushed");
+assert.equal(JSON.stringify(runInContext("result", callbackProgram.context)), JSON.stringify(callbackArraySteps.at(-1).output));
+for (const name of ["input", "instructions", "output", "i"]) assert.equal(runInContext(`typeof ${name}`, callbackProgram.context), "undefined", `${name} stays local`);
+for (const [index, input] of [1, 2, 3].entries()) {
+  const start = callbackArraySteps.findIndex(step => step.title === `Call instructions(${input})`);
+  assert.deepEqual(callbackArraySteps.slice(start, start + 6).map(step => step.callbacks[index]), ["entered", "bound", "calculated", "returning", "closed", "closed"]);
+  assert.ok(callbackArraySteps.slice(start, start + 6).every(step => step.stage === "loop"), "the outer context remains open during callbacks");
+}
+assert.equal(javascriptGeneralizingFunctionsSections.length, 6);
+console.log(`The execution-context trace and every Node-compatible snippet across the ${Object.keys(articles).length} JavaScript lessons match JavaScript execution.`);
 
 if (process.argv[2]) {
   const base = process.argv[2];
@@ -447,11 +514,23 @@ if (process.argv[2]) {
   }
   const slugs = Object.keys(articles);
   const categoryLessons = {
-    Basic: slugs.filter(slug => !["javascript-symbol", "javascript-event-loop", "javascript-functions", "javascript-arrow-functions"].includes(slug)),
+    Basic: slugs.filter(slug => !["javascript-symbol", "javascript-event-loop", "javascript-functions", "javascript-arrow-functions", "javascript-principles", "javascript-generalizing-functions"].includes(slug)),
     Advanced: ["javascript-symbol", "javascript-event-loop"],
     Functions: ["javascript-functions", "javascript-arrow-functions"],
+    "Principles of JavaScript": ["javascript-principles"],
+    "Callbacks and higher order functions": ["javascript-generalizing-functions"],
   };
   assert.match(await page("/articles/javascript-map-filter-reduce"), /class="snapshot-lab variables-lab reduce-lab"/, "the reduce stepper renders");
+  const principlesLesson = await page("/articles/javascript-principles");
+  assert.match(principlesLesson, /Follow the thread of execution/, "the execution-context trace renders");
+  assert.match(principlesLesson, /<div class="execution-board"><\/div>/, "the blackboard starts with no runtime panels");
+  assert.match(principlesLesson, /Watch the stack change/, "the dedicated call stack walkthrough renders");
+  assert.doesNotMatch(principlesLesson, /<dt>(num|multiplyBy2|output|newOutput|inputNumber|result)<\/dt>/, "the blackboard starts with no memory entries");
+  const generalizingLesson = await page("/articles/javascript-generalizing-functions");
+  assert.match(generalizingLesson, /callbacks.js/, "the callback trace renders below the array examples");
+  assert.equal((generalizingLesson.match(/class="execution-board copy-array-board"><\/div>/g) ?? []).length, 2, "both array boards start empty");
+  assert.match(generalizingLesson, /copy-array.js/, "the array trace renders in the callback lesson");
+  assert.match(generalizingLesson, /<div class="execution-board copy-array-board"><\/div>/, "the array board starts empty");
   const eventLoopLesson = await page("/articles/javascript-event-loop");
   assert.match(eventLoopLesson, /Watch one event-loop turn unfold\./, "the event loop trace renders");
   for (const label of ["CALL STACK", "MICROTASK QUEUE", "TASK QUEUE", "EVENT"]) assert.ok(eventLoopLesson.includes(label), `event loop diagram label: ${label}`);
@@ -477,7 +556,7 @@ if (process.argv[2]) {
   assert.match(await page("/articles/javascript-equality-operators"), /<li><strong>A comparison operator<\/strong>[^<]+<ul><li><strong>Operands<\/strong>/, "comparison details render as nested list items");
   assert.match(await page("/articles/javascript-equality-operators"), /id="interview-questions"[^>]*>[\s\S]*?<h2>Interview questions<\/h2>/, "equality interview questions render");
   const home = await page("/");
-  assert.ok(home.includes(`/articles/${slug}`));
+  assert.ok(home.includes("/courses/javascript"), "the home page links to the JavaScript course");
   assert.match(home, /href="\/learn\/git"/);
   assert.doesNotMatch(home, />Web development</);
   for (const query of ["JavaScript", "javascript", "JAVASCRIPT", "JavaScript&topic=Git"]) {
@@ -507,18 +586,29 @@ if (process.argv[2]) {
   const course = await page("/courses/javascript");
   assert.doesNotMatch(course, /Lesson [0-9]+:|<div class="card-topline"><span>JavaScript<\/span><span>/);
   const groupedSlugs = [];
-  for (const category of ["Basic", "Advanced", "Functions", "Interviews", "Performance", "OOP"]) {
-    const id = category.toLowerCase();
+  for (const category of ["Basic", "Advanced", "Functions", "Mental Model", "Interviews", "Performance", "OOP"]) {
+    const id = category.toLowerCase().replaceAll(" ", "-");
     assert.ok(course.includes(`href="#${id}"`));
     const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
     assert.ok(section, `${category} section exists`);
-    const listed = [...section.matchAll(/<h3><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
-    const expected = categoryLessons[category] ?? [];
+    const listed = [...section.matchAll(/<h[34]><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
+    const expected = category === "Mental Model" ? [...categoryLessons["Principles of JavaScript"], ...categoryLessons["Callbacks and higher order functions"]] : categoryLessons[category] ?? [];
     assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
+    if (category === "Mental Model") {
+      for (const group of ["Principles of JavaScript", "Callbacks and higher order functions"]) {
+        const groupId = group.toLowerCase().replaceAll(" ", "-");
+        const subgroup = section.match(new RegExp(`<div class="course-subsection" id="${groupId}">([\\s\\S]*?)(?=<div class="course-subsection"|$)`))?.[1];
+        assert.ok(subgroup, `${group} is inside Mental Model`);
+        assert.ok(subgroup.includes(`<h3>${group}</h3>`));
+        assert.deepEqual([...subgroup.matchAll(/<h4><a href="\/articles\/([^"]+)"/g)].map(match => match[1]), categoryLessons[group]);
+      }
+    }
     if (!listed.length) assert.match(section, /No articles yet/);
     for (const articleSlug of listed) {
       const articlePage = await page(`/articles/${articleSlug}`);
-      assert.ok(articlePage.includes(`href="/courses/javascript#${id}"`));
+      const articleCategory = Object.keys(categoryLessons).find(group => categoryLessons[group].includes(articleSlug));
+      const articleCategoryId = articleCategory.toLowerCase().replaceAll(" ", "-");
+      assert.ok(articlePage.includes(`href="/courses/javascript#${articleCategoryId}"`));
       assert.doesNotMatch(articlePage, /Lesson [0-9]+:/);
     }
     groupedSlugs.push(...listed);
