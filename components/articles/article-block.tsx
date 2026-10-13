@@ -23,6 +23,7 @@ import { StashPlayground } from "@/topics/git/components/stash-playground";
 import { PackageManagerArchitecture } from "@/topics/react-native/components/package-manager-architecture";
 import { ElectronRuntimeDiagram } from "@/topics/electron/components/electron-runtime-diagram";
 import { ElectronProcessDiagram } from "@/topics/electron/components/electron-process-diagram";
+import { ElectronStartupDiagram } from "@/topics/electron/components/electron-startup-diagram";
 
 // Renders **term** as <strong>. Only bold is supported on purpose.
 export function Emphasis({ text }: { text: string }) {
@@ -50,6 +51,7 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "package-manager-architecture": return <PackageManagerArchitecture />;
     case "electron-runtime-diagram": return <ElectronRuntimeDiagram />;
     case "electron-process-diagram": return <ElectronProcessDiagram />;
+    case "electron-startup-diagram": return <ElectronStartupDiagram />;
     case "timeline": return <SnapshotTimeline />;
     case "save-commit-comparison": return <figure className="save-commit-comparison"><div><article><span className="learning-kicker">Your editor</span><h3>Save</h3><p>Updates the file on your computer.</p><strong>Current file changes</strong></article><article><span className="learning-kicker">Git</span><h3>Commit</h3><p>Records a chosen project version in its history.</p><strong>A saved moment appears</strong></article></div><figcaption>Saving answers “What is in my file now?” Committing answers “Which version should Git remember?”</figcaption></figure>;
     case "config-playground": return <ConfigPlayground />;

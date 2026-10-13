@@ -62,6 +62,7 @@ import { gitStashSections } from "@/topics/git/content/git-stash-article";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
 import { electronIntroductionSections } from "@/topics/electron/content/electron-introduction-article";
 import { electronProcessModelSections } from "@/topics/electron/content/electron-process-model-article";
+import { electronSmallestAppSections } from "@/topics/electron/content/electron-smallest-app-article";
 
 export type ArticleBlock =
   | { type: "variables-playground" }
@@ -76,6 +77,7 @@ export type ArticleBlock =
   | { type: "package-manager-architecture" }
   | { type: "electron-runtime-diagram" }
   | { type: "electron-process-diagram" }
+  | { type: "electron-startup-diagram" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -1607,8 +1609,8 @@ export const articles: Article[] = [
       title: "Electron, made visible",
       order: 2,
       practiceTime: "10 questions in quiz mode",
-      nextTitle: "More Electron lectures",
-      nextDescription: "More lectures are in preparation.",
+      nextTitle: "The smallest Electron app",
+      nextDescription: "Walk through the four files of a hello world Electron app and see what each one does.",
       exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
       illustration: { line: "main ↔ renderer", value: "IPC", notes: ["One main process.", "Many windows."] },
     },
@@ -1621,6 +1623,37 @@ export const articles: Article[] = [
       { title: "Electron · Inter-process communication", url: "https://www.electronjs.org/docs/latest/tutorial/ipc" },
       { title: "Electron · Electron releases", url: "https://www.electronjs.org/docs/latest/tutorial/electron-timelines" },
       { title: "Electron · Updating applications", url: "https://www.electronjs.org/docs/latest/tutorial/updates" },
+    ],
+  },
+  {
+    slug: "electron-smallest-app",
+    title: "The smallest Electron app",
+    excerpt: "Walk through the four files of a hello world Electron app, see what each one does, and learn why real projects start with Electron Forge.",
+    topic: "Electron",
+    category: "Basics",
+    date: "Oct 13, 2026",
+    readTime: "9 min read",
+    accent: "blue",
+    number: "67",
+    series: {
+      title: "Electron, made visible",
+      order: 3,
+      practiceTime: "10 questions in quiz mode",
+      nextTitle: "More Electron lectures",
+      nextDescription: "More lectures are in preparation.",
+      exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
+      illustration: { line: "new BrowserWindow()", value: "4 files", notes: ["main.js starts.", "The window loads."] },
+    },
+    sections: electronSmallestAppSections,
+    sources: [
+      { title: "Steve Kinney · Electron, v3 (Frontend Masters)", url: "https://frontendmasters.com/courses/electron-v3/" },
+      { title: "Electron Fiddle", url: "https://www.electronjs.org/fiddle" },
+      { title: "Electron · Building your first app", url: "https://www.electronjs.org/docs/latest/tutorial/tutorial-first-app" },
+      { title: "Electron · BrowserWindow", url: "https://www.electronjs.org/docs/latest/api/browser-window" },
+      { title: "Electron · app", url: "https://www.electronjs.org/docs/latest/api/app" },
+      { title: "Electron · Security: Content Security Policy", url: "https://www.electronjs.org/docs/latest/tutorial/security#7-define-a-content-security-policy" },
+      { title: "Node.js · process.platform", url: "https://nodejs.org/api/process.html#processplatform" },
+      { title: "Electron Forge · Getting started", url: "https://www.electronforge.io/" },
     ],
   },
 ];

@@ -1,10 +1,12 @@
 // Run: node topics/electron/scripts/check-electron-articles.mjs [local base URL]
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { Script } from "node:vm";
 import { electronIntroductionSections } from "../content/electron-introduction-article.ts";
 import { electronProcessModelSections } from "../content/electron-process-model-article.ts";
+import { electronSmallestAppSections } from "../content/electron-smallest-app-article.ts";
 
-const lectures = { "electron-introduction": electronIntroductionSections, "electron-process-model": electronProcessModelSections };
+const lectures = { "electron-introduction": electronIntroductionSections, "electron-process-model": electronProcessModelSections, "electron-smallest-app": electronSmallestAppSections };
 const registry = readFileSync(new URL("../../../lib/articles.ts", import.meta.url), "utf8").replaceAll("\r\n", "\n");
 const boldStart = /^\*\*[^*]+\*\*/;
 
@@ -25,6 +27,14 @@ for (const [slug, sections] of Object.entries(lectures)) {
     for (const bullet of typeof paragraph === "string" ? [] : paragraph.bullets ?? []) assert.match(bullet, boldStart, `${slug}#${section.id}: "${bullet}" starts with a bold term`);
     // Consistent UI: code goes in the dark command block, never the plain paragraph code box.
     assert.ok(typeof paragraph === "string" || !paragraph.code, `${slug}#${section.id}: "${text}" uses a command block for code`);
+  }
+
+  // Code blocks labelled as a file must at least parse: .js compiles, .json parses.
+  const commands = sections.flatMap(section => [...(section.blocks ?? []), ...section.paragraphs.flatMap(paragraph => typeof paragraph === "string" || !paragraph.block ? [] : [paragraph.block])]).filter(block => block.type === "command");
+  for (const block of commands) {
+    if (block.label?.endsWith(".js")) assert.doesNotThrow(() => new Script(block.command), `${slug}: ${block.label} parses`);
+    if (block.label?.endsWith(".json")) assert.doesNotThrow(() => JSON.parse(block.command), `${slug}: ${block.label} parses`);
+    for (const line of block.highlightLines ?? []) assert.ok(line <= block.command.split("\n").length, `${slug}: ${block.label} highlights a real line`);
   }
 
   // Quiz mode: the last section holds exactly one quiz, and every question has one right answer.
@@ -54,6 +64,12 @@ for (const detail of ["Chromium", "Node.js", "renderer process", "main process",
 const processModel = JSON.stringify(electronProcessModelSections);
 for (const detail of ["main process", "renderer process", "preload script", "IPC", "inter-process communication", "allow list", "Least access", "Electron 12", "fs.writeFile", "Squirrel", "server"]) {
   assert.ok(processModel.includes(detail), `the process model lecture explains ${detail}`);
+}
+
+// Lecture 3 tours the four files of the smallest app.
+const smallestApp = JSON.stringify(electronSmallestAppSections);
+for (const detail of ["Electron Fiddle", "Electron Forge", "package.json", "main.js", "preload.js", "renderer.js", "index.html", "BrowserWindow", "webPreferences", "window-all-closed", "activate", "darwin", "win32", "process.versions", "Content-Security-Policy"]) {
+  assert.ok(smallestApp.includes(detail), `the smallest app lecture explains ${detail}`);
 }
 
 const base = process.argv[2];
