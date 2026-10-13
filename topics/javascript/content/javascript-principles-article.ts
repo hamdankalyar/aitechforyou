@@ -42,21 +42,6 @@ export const javascriptPrinciplesSections: ArticleSection[] = [
     blocks: [{ type: "call-stack-trace" }],
   },
   {
-    id: "quick-check", heading: "Run it yourself",
-    paragraphs: [
-      "**Press Run** to check the walkthrough's final values.",
-      "**Change the argument 10 to 7** in this editor.",
-      "**Predict newOutput** before running again.",
-      "**The blackboard** continues to trace the original example.",
-    ],
-    code: "const num = 3;\nfunction multiplyBy2(inputNumber) {\n  const result = inputNumber * 2;\n  return result;\n}\nconst output = multiplyBy2(num);\nconst newOutput = multiplyBy2(10);\nconsole.log(output); // 6\nconsole.log(newOutput); // 20",
-    blocks: [{ type: "quiz", question: "Which value does inputNumber hold during the second call?", answers: [
-      { text: "10", correct: true, explanation: "The second call supplies 10 as its argument." },
-      { text: "3", correct: false, explanation: "3 belongs to the first call's parameter." },
-      { text: "6", correct: false, explanation: "6 is the first returned value stored in output." },
-    ] }],
-  },
-  {
     id: "remember", heading: "Remember",
     paragraphs: [
       "**The thread** enters a function when it is called.",

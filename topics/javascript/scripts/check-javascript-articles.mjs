@@ -89,9 +89,6 @@ const expected = {
     "trace-the-callback": { output: ["2,4,6"] },
     "repeated-array-work": { examples: [{ output: ["2,4,6"] }, { output: ["0.5,1,1.5"] }, { output: ["4,5,6"] }] },
   },
-  "javascript-principles": {
-    "quick-check": { output: ["6", "20"] },
-  },
   "javascript-modules": {
     "default-export": { examples: [{ output: ["5"], browserOnly: true }] },
     "named-exports": { examples: [{ output: ["5", "6"], browserOnly: true }] },
@@ -508,7 +505,8 @@ if (process.argv[2]) {
     const guide = await page(`/articles/${articleSlug}`);
     assert.match(guide, /topic-javascript/);
     assert.match(guide, /variables-hero-art/);
-    assert.match(guide, /code-runner-editor/);
+    if (articleSlug === "javascript-principles") assert.doesNotMatch(guide, /code-runner-editor/);
+    else assert.match(guide, /code-runner-editor/);
     for (const section of sections) assert.ok(guide.includes(`id="${section.id}"`), `${articleSlug} ${section.id}`);
     assert.equal(new Set(sections.map(section => section.id)).size, sections.length, articleSlug);
   }
@@ -522,6 +520,7 @@ if (process.argv[2]) {
   };
   assert.match(await page("/articles/javascript-map-filter-reduce"), /class="snapshot-lab variables-lab reduce-lab"/, "the reduce stepper renders");
   const principlesLesson = await page("/articles/javascript-principles");
+  assert.doesNotMatch(principlesLesson, /Run it yourself|id="quick-check"|Which value does inputNumber hold during the second call\?/);
   assert.match(principlesLesson, /Follow the thread of execution/, "the execution-context trace renders");
   assert.match(principlesLesson, /<div class="execution-board"><\/div>/, "the blackboard starts with no runtime panels");
   assert.match(principlesLesson, /Watch the stack change/, "the dedicated call stack walkthrough renders");
