@@ -179,6 +179,22 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 .quiz-feedback { min-height: 92px; padding: 18px; margin-top: 18px; background: var(--paper); font-size: 13px; line-height: 1.8; border-radius: 6px; color: var(--prose); }
 .quiz-feedback.is-correct { background: var(--lab-added); color: var(--lab-added-text); }
 .quiz-explanation { margin-top: 10px; }
+.commit-lab-steps.lab-steps-count { grid-template-columns: repeat(var(--count), minmax(0, 1fr)); }
+.lab-steps-count li { overflow-wrap: anywhere; }
+.quiz-mode .quiz-mode-steps { margin: 22px 0 6px; }
+.quiz-mode h3 { font-size: 25px; line-height: 1.35; letter-spacing: -.025em; }
+.quiz-mode-steps li.is-right { border-color: var(--lab-added-text); color: var(--lab-added-text); }
+.quiz-mode-steps li.is-wrong { border-color: var(--lab-removed-text); color: var(--lab-removed-text); }
+.quiz-mode h3 + .lab-instruction { margin-bottom: 22px; }
+.quiz-mode .quiz-answers button:disabled { cursor: default; }
+.quiz-mode .quiz-answers button:disabled:not(.is-right):not(.is-wrong) { opacity: .6; }
+.quiz-mode .quiz-answers .is-right { background: var(--lab-added); color: var(--lab-added-text); border-color: currentColor; }
+.quiz-mode .quiz-answers .is-wrong { background: var(--lab-removed); color: var(--lab-removed-text); border-color: currentColor; }
+.quiz-mode .is-right .answer-selection, .quiz-mode .is-wrong .answer-selection, .quiz-mode .is-right .answer-letter, .quiz-mode .is-wrong .answer-letter { color: inherit; }
+.quiz-mode .lab-primary:disabled { cursor: default; opacity: .5; }
+.quiz-mode-review { margin: 20px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--border); }
+.quiz-mode-review li { padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.7; }
+.quiz-mode-review p { margin: 4px 0 0; font-size: 13px; line-height: 1.7; color: var(--lab-added-text); }
 .learning-recap { padding: 0; list-style: none; border-top: 1px solid var(--border); margin-top: 30px; }
 .learning-recap li { display: flex; gap: 22px; padding: 20px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
 .learning-recap li > span { color: var(--muted); font: 600 12px/1 var(--font-body); }
@@ -314,6 +330,7 @@ a.series-nav-card:hover { border-color: var(--text); box-shadow: 3px 3px 0 var(-
   .lab-actions { align-items: stretch; flex-direction: column; gap: 8px; }
   .lab-actions .lab-primary { justify-content: space-between; }
   .learning-callout, .knowledge-check { padding: 22px; }
+  .commit-lab-steps.lab-steps-count { gap: 4px; }
   .knowledge-check { margin-inline: -6px; }
   .quiz-answers button { flex-wrap: wrap; }
   .answer-selection { flex-basis: 100%; }

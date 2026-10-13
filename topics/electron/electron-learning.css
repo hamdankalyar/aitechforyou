@@ -1,0 +1,18 @@
+.topic-electron .variables-hero-art { background: var(--blue); }
+.topic-electron .series-dot { background: var(--blue); }
+.topic-electron .learning-callout { border-left-color: var(--blue); }
+.topic-electron .architecture-course-path:not(.architecture-problem-path) { border-top-color: var(--blue); }
+.topic-electron .architecture-folder { background: var(--blue); }
+.electron-bridge { margin-top: 12px; text-align: center; }
+.electron-process-main { text-align: center; }
+.electron-process-ipc { justify-content: center; }
+.electron-process-windows { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.electron-process-windows .architecture-course-path { padding: 16px; }
+.lifecycle-lab .inspection-questions { margin-block: 20px 0; }
+.lifecycle-lab .branch-panels { margin-top: 20px; }
+.lifecycle-lab .inspection-answer pre { min-height: 0; margin-bottom: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.lifecycle-lab .commit-empty { font-size: 13px; color: var(--muted); padding: 8px 12px; }
+
+@media (max-width: 700px) {
+  .electron-process-windows { grid-template-columns: minmax(0, 1fr); }
+}

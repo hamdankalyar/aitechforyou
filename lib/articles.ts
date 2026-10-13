@@ -62,6 +62,9 @@ import { gitPushSections } from "@/topics/git/content/git-push-article";
 import { gitForkSections } from "@/topics/git/content/git-fork-article";
 import { gitStashSections } from "@/topics/git/content/git-stash-article";
 import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-agentic-guide";
+import { electronIntroductionSections } from "@/topics/electron/content/electron-introduction-article";
+import { electronProcessModelSections } from "@/topics/electron/content/electron-process-model-article";
+import { electronSmallestAppSections } from "@/topics/electron/content/electron-smallest-app-article";
 
 export type ArticleBlock =
   | { type: "variables-playground" }
@@ -76,6 +79,11 @@ export type ArticleBlock =
   | { type: "execution-context-trace"; example?: "copy-array" | "callback-array" }
   | { type: "call-stack-trace" }
   | { type: "package-manager-architecture" }
+  | { type: "electron-runtime-diagram" }
+  | { type: "electron-process-diagram" }
+  | { type: "electron-startup-diagram" }
+  | { type: "electron-lifecycle-playground" }
+  | { type: "electron-startup-playground" }
   | { type: "timeline" }
   | { type: "save-commit-comparison" }
   | { type: "config-playground" }
@@ -96,6 +104,7 @@ export type ArticleBlock =
   | { type: "figure"; caption: string }
   | { type: "command"; command: string; explanation?: string; output?: string; label?: string; highlightLines?: number[] }
   | { type: "quiz"; question: string; answers: { text: string; explanation: string; correct: boolean }[] }
+  | { type: "quiz-mode"; title: string; questions: { question: string; answers: { text: string; explanation: string; correct: boolean }[] }[] }
   | { type: "recap"; items: string[] };
 
 export type ArticleSection = {
@@ -113,6 +122,7 @@ export type ArticleSection = {
 export const javascriptCategories = ["Basic", "Advanced", "Functions", "Mental Model", "Interviews", "Performance", "OOP"] as const;
 export const javascriptMentalModelCategories = ["Principles of JavaScript", "Callbacks and higher order functions"] as const;
 export const reactNativeCategories = ["Basics", "Components", "Styling", "Navigation", "State", "Device", "Performance"] as const;
+export const electronCategories = ["Basics", "Processes", "Files", "Frameworks", "Desktop", "Native"] as const;
 
 export type Article = {
   slug: string;
@@ -138,6 +148,7 @@ export type Article = {
 } & (
   | { topic: "JavaScript"; category: Exclude<(typeof javascriptCategories)[number], "Mental Model"> | (typeof javascriptMentalModelCategories)[number] }
   | { topic: "React Native"; category: (typeof reactNativeCategories)[number] }
+  | { topic: "Electron"; category: (typeof electronCategories)[number] }
   | { topic: "Git" | "AI"; category?: never }
 );
 
@@ -1607,6 +1618,96 @@ export const articles: Article[] = [
     },
     sections: javascriptGeneralizingFunctionsSections,
   },
+  {
+    slug: "electron-introduction",
+    title: "Introduction to Electron",
+    excerpt: "See how Electron joins Chromium and Node.js so web developers can build desktop apps, and meet the three apps this course builds.",
+    topic: "Electron",
+    category: "Basics",
+    date: "Oct 13, 2026",
+    readTime: "6 min read",
+    accent: "blue",
+    number: "65",
+    series: {
+      title: "Electron, made visible",
+      order: 1,
+      practiceTime: "10 questions in quiz mode",
+      nextTitle: "Electron's process model",
+      nextDescription: "See why an app has one main process and many renderer processes, and how preload scripts connect them safely.",
+      exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
+      illustration: { line: "Chromium + Node.js", value: "Electron", notes: ["Web UI.", "Desktop powers."] },
+    },
+    sections: electronIntroductionSections,
+    sources: [
+      { title: "Steve Kinney · Electron, v3 (Frontend Masters)", url: "https://frontendmasters.com/courses/electron-v3/" },
+      { title: "Electron · What is Electron?", url: "https://www.electronjs.org/docs/latest/" },
+      { title: "Electron · Process model", url: "https://www.electronjs.org/docs/latest/tutorial/process-model" },
+      { title: "Electron · contextBridge", url: "https://www.electronjs.org/docs/latest/api/context-bridge" },
+      { title: "Electron · Security checklist", url: "https://www.electronjs.org/docs/latest/tutorial/security" },
+      { title: "Electron Forge", url: "https://www.electronforge.io/" },
+    ],
+  },
+  {
+    slug: "electron-process-model",
+    title: "Electron's process model",
+    excerpt: "See why an Electron app has one main process and one or more renderer processes, and how preload scripts and IPC let them talk safely.",
+    topic: "Electron",
+    category: "Basics",
+    date: "Oct 13, 2026",
+    readTime: "7 min read",
+    accent: "blue",
+    number: "66",
+    series: {
+      title: "Electron, made visible",
+      order: 2,
+      practiceTime: "10 questions in quiz mode",
+      nextTitle: "The smallest Electron app",
+      nextDescription: "Walk through the four files of a hello world Electron app and see what each one does.",
+      exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
+      illustration: { line: "main ↔ renderer", value: "IPC", notes: ["One main process.", "Many windows."] },
+    },
+    sections: electronProcessModelSections,
+    sources: [
+      { title: "Steve Kinney · Electron, v3 (Frontend Masters)", url: "https://frontendmasters.com/courses/electron-v3/" },
+      { title: "Electron · Process model", url: "https://www.electronjs.org/docs/latest/tutorial/process-model" },
+      { title: "Electron · Using preload scripts", url: "https://www.electronjs.org/docs/latest/tutorial/tutorial-preload" },
+      { title: "Electron · Context isolation", url: "https://www.electronjs.org/docs/latest/tutorial/context-isolation" },
+      { title: "Electron · Inter-process communication", url: "https://www.electronjs.org/docs/latest/tutorial/ipc" },
+      { title: "Electron · Electron releases", url: "https://www.electronjs.org/docs/latest/tutorial/electron-timelines" },
+      { title: "Electron · Updating applications", url: "https://www.electronjs.org/docs/latest/tutorial/updates" },
+    ],
+  },
+  {
+    slug: "electron-smallest-app",
+    title: "The smallest Electron app",
+    excerpt: "Walk through the four files of a hello world Electron app, see what each one does, and learn why real projects start with Electron Forge.",
+    topic: "Electron",
+    category: "Basics",
+    date: "Oct 13, 2026",
+    readTime: "9 min read",
+    accent: "blue",
+    number: "67",
+    series: {
+      title: "Electron, made visible",
+      order: 3,
+      practiceTime: "10 questions in quiz mode",
+      nextTitle: "More Electron lectures",
+      nextDescription: "More lectures are in preparation.",
+      exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
+      illustration: { line: "new BrowserWindow()", value: "4 files", notes: ["main.js starts.", "The window loads."] },
+    },
+    sections: electronSmallestAppSections,
+    sources: [
+      { title: "Steve Kinney · Electron, v3 (Frontend Masters)", url: "https://frontendmasters.com/courses/electron-v3/" },
+      { title: "Electron Fiddle", url: "https://www.electronjs.org/fiddle" },
+      { title: "Electron · Building your first app", url: "https://www.electronjs.org/docs/latest/tutorial/tutorial-first-app" },
+      { title: "Electron · BrowserWindow", url: "https://www.electronjs.org/docs/latest/api/browser-window" },
+      { title: "Electron · app", url: "https://www.electronjs.org/docs/latest/api/app" },
+      { title: "Electron · Security: Content Security Policy", url: "https://www.electronjs.org/docs/latest/tutorial/security#7-define-a-content-security-policy" },
+      { title: "Node.js · process.platform", url: "https://nodejs.org/api/process.html#processplatform" },
+      { title: "Electron Forge · Getting started", url: "https://www.electronforge.io/" },
+    ],
+  },
 ];
 
 export const courses = [
@@ -1637,6 +1738,13 @@ export const courses = [
     description: "Build mobile apps through practical lessons on components, navigation, device APIs, and performance.",
     index: "04",
     className: "lime",
+  },
+  {
+    name: "Electron",
+    href: "/courses/electron",
+    description: "Build desktop apps with web skills: two processes, the file system, and the operating system.",
+    index: "05",
+    className: "blue",
   },
 ];
 

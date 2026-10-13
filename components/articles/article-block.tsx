@@ -8,6 +8,7 @@ import { CallStackTrace, ExecutionContextTrace } from "@/topics/javascript/compo
 import { snapshots } from "@/topics/git/content/git-snapshots";
 import { SnapshotTimeline } from "@/topics/git/components/snapshot-timeline";
 import { KnowledgeCheck } from "@/components/articles/knowledge-check";
+import { QuizMode } from "@/components/articles/quiz-mode";
 import { CommandBlock } from "@/components/articles/command-block";
 import { ConfigPlayground } from "@/topics/git/components/config-playground";
 import { CommitPlayground } from "@/topics/git/components/commit-playground";
@@ -21,6 +22,11 @@ import { PushPlayground } from "@/topics/git/components/push-playground";
 import { ForkPlayground } from "@/topics/git/components/fork-playground";
 import { StashPlayground } from "@/topics/git/components/stash-playground";
 import { PackageManagerArchitecture } from "@/topics/react-native/components/package-manager-architecture";
+import { ElectronRuntimeDiagram } from "@/topics/electron/components/electron-runtime-diagram";
+import { ElectronProcessDiagram } from "@/topics/electron/components/electron-process-diagram";
+import { ElectronStartupDiagram } from "@/topics/electron/components/electron-startup-diagram";
+import { LifecyclePlayground } from "@/topics/electron/components/lifecycle-playground";
+import { StartupPlayground } from "@/topics/electron/components/startup-playground";
 
 // Renders **term** as <strong>. Only bold is supported on purpose.
 export function Emphasis({ text }: { text: string }) {
@@ -48,6 +54,11 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "execution-context-trace": return <ExecutionContextTrace example={block.example} />;
     case "call-stack-trace": return <CallStackTrace />;
     case "package-manager-architecture": return <PackageManagerArchitecture />;
+    case "electron-runtime-diagram": return <ElectronRuntimeDiagram />;
+    case "electron-process-diagram": return <ElectronProcessDiagram />;
+    case "electron-startup-diagram": return <ElectronStartupDiagram />;
+    case "electron-lifecycle-playground": return <LifecyclePlayground />;
+    case "electron-startup-playground": return <StartupPlayground />;
     case "timeline": return <SnapshotTimeline />;
     case "save-commit-comparison": return <figure className="save-commit-comparison"><div><article><span className="learning-kicker">Your editor</span><h3>Save</h3><p>Updates the file on your computer.</p><strong>Current file changes</strong></article><article><span className="learning-kicker">Git</span><h3>Commit</h3><p>Records a chosen project version in its history.</p><strong>A saved moment appears</strong></article></div><figcaption>Saving answers “What is in my file now?” Committing answers “Which version should Git remember?”</figcaption></figure>;
     case "config-playground": return <ConfigPlayground />;
@@ -65,6 +76,7 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "table": return <div className="learning-table" role="region" aria-label={block.caption} tabIndex={0}><table><caption>{block.caption}</caption><thead><tr>{block.columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead><tbody>{block.rows.map((row, index) => <tr key={index}>{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row">{cell}</th> : <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
     case "details": return <details className={`learning-details${block.icon === "info" ? " learning-info" : ""}`}><summary>{block.icon === "info" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7v2" /></svg>}{block.title}</summary><ArticlePoints paragraphs={block.paragraphs} runnableCode={runnableCode} compact />{block.sections?.map(section => <div key={section.heading}><h3>{section.heading}</h3><ArticlePoints paragraphs={section.paragraphs} runnableCode={runnableCode} compact /></div>)}{block.code && (runnableCode ? <CodeRunner code={block.code} /> : <pre tabIndex={0} aria-label="Code example"><code>{block.code}</code></pre>)}{block.commands?.map(command => <CommandBlock {...command} key={command.command} />)}</details>;
     case "quiz": return <KnowledgeCheck {...block} />;
+    case "quiz-mode": return <QuizMode title={block.title} questions={block.questions} />;
     case "command": return <CommandBlock {...block} />;
     case "callout": return <div className="learning-callout"><span className="learning-kicker">{block.title}</span><p>{block.text}</p></div>;
     case "recap": return <ol className="learning-recap">{block.items.map((item, i) => <li key={item}><span aria-hidden="true">0{i + 1}</span><p>{item}</p></li>)}</ol>;

@@ -120,6 +120,7 @@ button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 .topics-section, .latest-section { padding-block: 105px; }
 .dark-heading { border-bottom: 1px solid var(--border); padding-bottom: 20px; }
 .topic-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.topic-grid > .topic-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .topic-card { min-height: 350px; padding: 28px; border: 2px solid var(--ink); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; }
 .topic-card:hover { transform: translateY(-5px); box-shadow: 8px 8px 0 var(--ink); }
 .topic-card.coral { background: var(--coral); color: var(--ink); }.topic-card.blue { background: var(--blue); color: var(--ink); }.topic-card.lime { background: var(--lime); color: var(--ink); }.topic-card.yellow { background: var(--yellow); color: var(--ink); }
