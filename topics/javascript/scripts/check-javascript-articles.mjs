@@ -20,6 +20,7 @@ import { javascriptGeneralizingFunctionsSections } from "../content/javascript-g
 import { callStackSteps, principlesSource, principlesSteps } from "../content/javascript-principles-trace.ts";
 import { callbackArraySource, callbackArraySteps } from "../content/javascript-callback-array-trace.ts";
 import { copyArraySource, copyArraySteps } from "../content/javascript-copy-array-trace.ts";
+import { arrowMapSource, arrowMapSteps } from "../content/javascript-arrow-map-trace.ts";
 import { javascriptArrowFunctionsSections } from "../content/javascript-arrow-functions-article.ts";
 import { javascriptScopeSections } from "../content/javascript-scope-article.ts";
 import { javascriptEventsSections } from "../content/javascript-events-article.ts";
@@ -86,6 +87,9 @@ for (const states of Object.values(variablesExamples)) {
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
   "javascript-generalizing-functions": {
+    "more-useful-array-methods": { output: ["1,2,1,2,2", "4", "2,2,2", "1,1"] },
+    "more-array-methods": { output: ["1,3,6", "1,2,3 3,2,1 1,6,3 1,2,3"] },
+    "first-class-functions": { examples: [{ output: ["6"] }, { output: ["6"] }, { output: ["6"] }] },
     "trace-the-callback": { output: ["2,4,6"] },
     "repeated-array-work": { examples: [{ output: ["2,4,6"] }, { output: ["0.5,1,1.5"] }, { output: ["4,5,6"] }] },
   },
@@ -490,7 +494,32 @@ for (const [index, input] of [1, 2, 3].entries()) {
   assert.deepEqual(callbackArraySteps.slice(start, start + 6).map(step => step.callbacks[index]), ["entered", "bound", "calculated", "returning", "closed", "closed"]);
   assert.ok(callbackArraySteps.slice(start, start + 6).every(step => step.stage === "loop"), "the outer context remains open during callbacks");
 }
-assert.equal(javascriptGeneralizingFunctionsSections.length, 6);
+const arrowMapProgram = execute("const snapshots = [];\n" + arrowMapSource.join("\n")
+  .replaceAll("input => input * 2", "input => { const value = input * 2; snapshots.push({ input, value }); return value; }"));
+assert.equal(arrowMapProgram.error, null);
+assert.deepEqual(arrowMapProgram.output, ["6", "2,4,6"]);
+const arrowCalls = JSON.parse(JSON.stringify(runInContext("snapshots", arrowMapProgram.context)));
+assert.deepEqual(arrowCalls.map(call => call.input), [3, 1, 2, 3], "the named call runs before the three anonymous callbacks");
+for (const [index, call] of arrowCalls.entries()) {
+  const start = arrowMapSteps.findIndex(step => step.calls[index] === "entered");
+  assert.ok(start > 0);
+  assert.equal(arrowMapSteps[start - 1].calls[index], "waiting");
+  assert.deepEqual(arrowMapSteps.slice(start, start + 5).map(step => step.calls[index]), ["entered", "bound", "calculated", "returning", "closed"]);
+  if (index === 0) {
+    assert.ok(arrowMapSteps.slice(start, start + 5).every(step => step.printed.length === 0), "the first function returns before the console prints");
+    assert.deepEqual(arrowMapSteps[start + 5].printed, [String(call.value)]);
+  } else {
+    const previous = arrowCalls.slice(1, index).map(call => call.value);
+    assert.ok(arrowMapSteps.slice(start, start + 5).every(step => step.map === "running"), "map remains on the stack during callback calls");
+    for (const step of arrowMapSteps.slice(start, start + 5)) assert.deepEqual(step.output, previous, "map waits for the callback's return before storing its value");
+    assert.deepEqual(arrowMapSteps[start + 5].output, [...previous, call.value]);
+  }
+}
+assert.deepEqual(arrowMapSteps.at(-1).output, Array.from(runInContext("result", arrowMapProgram.context)));
+assert.deepEqual(arrowMapSteps.at(-1).printed, [arrowMapProgram.output[0], `[${arrowMapProgram.output[1]}]`]);
+assert.equal(runInContext("typeof input", arrowMapProgram.context), "undefined", "arrow parameters do not leak globally");
+assert.ok(arrowMapSteps.every(step => step.line === null || step.line >= 1 && step.line <= arrowMapSource.length));
+assert.equal(javascriptGeneralizingFunctionsSections.length, 11);
 console.log(`The execution-context trace and every Node-compatible snippet across the ${Object.keys(articles).length} JavaScript lessons match JavaScript execution.`);
 
 if (process.argv[2]) {
@@ -526,6 +555,9 @@ if (process.argv[2]) {
   assert.match(principlesLesson, /Watch the stack change/, "the dedicated call stack walkthrough renders");
   assert.doesNotMatch(principlesLesson, /<dt>(num|multiplyBy2|output|newOutput|inputNumber|result)<\/dt>/, "the blackboard starts with no memory entries");
   const generalizingLesson = await page("/articles/javascript-generalizing-functions");
+  assert.match(generalizingLesson, /Functions are values/, "the first-class functions explanation renders in the callback lesson");
+  assert.match(generalizingLesson, /arrow-map.js/, "the arrow and map execution trace renders");
+  assert.match(generalizingLesson, /<div class="execution-board arrow-map-board"><\/div>/, "the arrow and map board starts empty");
   assert.match(generalizingLesson, /callbacks.js/, "the callback trace renders below the array examples");
   assert.equal((generalizingLesson.match(/class="execution-board copy-array-board"><\/div>/g) ?? []).length, 2, "both array boards start empty");
   assert.match(generalizingLesson, /copy-array.js/, "the array trace renders in the callback lesson");

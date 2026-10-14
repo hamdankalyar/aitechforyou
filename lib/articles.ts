@@ -76,7 +76,7 @@ export type ArticleBlock =
   | { type: "array-mutation-diagram" }
   | { type: "reduce-diagram" }
   | { type: "event-loop-trace" }
-  | { type: "execution-context-trace"; example?: "copy-array" | "callback-array" }
+  | { type: "execution-context-trace"; example?: "copy-array" | "callback-array" | "arrow-map" }
   | { type: "call-stack-trace" }
   | { type: "package-manager-architecture" }
   | { type: "electron-runtime-diagram" }

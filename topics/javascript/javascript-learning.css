@@ -429,9 +429,9 @@ html[data-theme="dark"] .topic-javascript .reduce-node.is-current, html[data-the
   .topic-javascript .article-body:has(.execution-lab) > aside { position: static; }
   .topic-javascript .article-prose:has(.execution-lab) { display: contents; }
   .topic-javascript .article-prose:has(.execution-lab) > * { grid-column: 2; }
-  .topic-javascript .article-prose:has(.execution-lab) > :is(#trace-the-code, #trace-the-callback) { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; row-gap: 0; }
-  .topic-javascript :is(#trace-the-code, #trace-the-callback) > * { grid-column: 2; }
-  .topic-javascript :is(#trace-the-code, #trace-the-callback) > .execution-lab { grid-column: 1 / -1; }
+  .topic-javascript .article-prose:has(.execution-lab) > :is(#trace-the-code, #trace-the-callback, #arrow-function-styles) { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; row-gap: 0; }
+  .topic-javascript :is(#trace-the-code, #trace-the-callback, #arrow-function-styles) > * { grid-column: 2; }
+  .topic-javascript :is(#trace-the-code, #trace-the-callback, #arrow-function-styles) > .execution-lab { grid-column: 1 / -1; }
   .topic-javascript .execution-workspace { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr); gap: 20px; align-items: start; }
   .topic-javascript .execution-board { margin-top: 0; }
 }
