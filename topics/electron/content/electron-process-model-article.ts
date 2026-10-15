@@ -185,6 +185,41 @@ export const electronProcessModelSections: ArticleSection[] = [
     ],
   },
   {
+    id: "flashcards",
+    heading: "Flashcards: recall the big ideas",
+    paragraphs: [
+      "**Read the question** on each card.",
+      "**Answer it yourself** before you look.",
+      "**Show the answer** and compare it with yours.",
+    ],
+    blocks: [{
+      type: "flashcards",
+      title: "Electron's process model",
+      cards: [
+        {
+          question: "What are the two main process types in an Electron app?",
+          answer: "The main process and the renderer processes. The main process runs Node.js and acts like a server. Renderer processes run Chromium, one for each window. There is one main process, and there can be many renderer processes.",
+        },
+        {
+          question: "Why is direct Node.js access from the renderer process off by default in modern Electron?",
+          answer: "For security. Since Electron 12, you have to switch it on yourself. If the page had full Node.js access, any third-party script loaded from a CDN could use things like fs.writeFile on the user's computer.",
+        },
+        {
+          question: "What is a preload script for?",
+          answer: "It runs in the renderer process before the page loads and before any third-party script runs. It safely shares a small set of functions that let the page talk to the main process. This follows the rule of least access.",
+        },
+        {
+          question: "How does the main and renderer setup compare to a normal web app?",
+          answer: "The main process is like the server, and renderer processes are like browser tabs, the clients. On the web, many tabs talk to one server. In the same way, one main process starts and manages many renderer processes.",
+        },
+        {
+          question: "Why do Electron version numbers go up so quickly, and what does a new number mean?",
+          answer: "The numbers follow the release rhythm of Chromium and Node.js, not strict semantic versioning. A new version often just means a newer Chromium or Node.js inside, without breaking changes to Electron's own API.",
+        },
+      ],
+    }],
+  },
+  {
     id: "lecture-quiz",
     heading: "Quiz mode: check this lecture",
     paragraphs: [
@@ -206,39 +241,39 @@ export const electronProcessModelSections: ArticleSection[] = [
           ],
         },
         {
-          question: "How many main processes does an Electron app have?",
+          question: "An app has three windows open. How many main processes and renderer processes are running?",
           answers: [
-            { text: "One for each window", correct: false, explanation: "Windows get renderer processes. The main process is shared." },
-            { text: "Exactly one", correct: true, explanation: "Every Electron app has one main process that is in charge." },
-            { text: "None", correct: false, explanation: "Every Electron app needs a main process to start." },
-            { text: "One for each CPU core", correct: false, explanation: "The number of main processes does not depend on your computer." },
+            { text: "Three main processes and three renderer processes", correct: false, explanation: "An app never has more than one main process." },
+            { text: "One main process and three renderer processes", correct: true, explanation: "One main process runs the app, and each window usually gets its own renderer process." },
+            { text: "One main process and one renderer shared by all windows", correct: false, explanation: "Each window usually gets its own renderer process, like browser tabs." },
+            { text: "Three main processes and no renderer processes", correct: false, explanation: "Windows need renderer processes to show their pages." },
           ],
         },
         {
-          question: "An app has three windows open. How many renderer processes does it usually have?",
+          question: "A to-do app shows the list in a window and saves it to a file. Which process does each job?",
           answers: [
-            { text: "One shared by all windows", correct: false, explanation: "Each window usually gets its own renderer process." },
-            { text: "None", correct: false, explanation: "Every window needs a renderer process to show its page." },
-            { text: "Three, one for each window", correct: true, explanation: "Like browser tabs, each window usually runs in its own renderer process." },
-            { text: "Six, two for each window", correct: false, explanation: "A window usually has one renderer process." },
+            { text: "The renderer saves the file, and the main process shows the list", correct: false, explanation: "It is the other way around. Only the main process should touch files." },
+            { text: "A server process saves the file, and a client process shows the list", correct: false, explanation: "The idea is close, but Electron calls them the main process and the renderer process." },
+            { text: "The renderer process does both jobs", correct: false, explanation: "The renderer cannot use Node, so it cannot save files on its own." },
+            { text: "The main process saves the file, and the renderer process shows the list", correct: true, explanation: "The main process runs Node and can write files. The renderer runs Chromium and shows the page." },
           ],
         },
         {
-          question: "Which web picture is a good way to think about the main process?",
+          question: "If the main process is like a web server, what is a renderer process most like?",
           answers: [
-            { text: "A CSS file", correct: false, explanation: "CSS only styles a page." },
-            { text: "A browser tab", correct: false, explanation: "Browser tabs are more like renderer processes." },
-            { text: "A cookie", correct: false, explanation: "A cookie stores a small piece of data. It does not do work." },
-            { text: "A server that many browsers talk to", correct: true, explanation: "Renderer processes ask the main process for work, like browsers ask a server." },
+            { text: "A browser tab that asks the server for things", correct: true, explanation: "Renderers ask the main process for work, like tabs ask a server." },
+            { text: "A database", correct: false, explanation: "A database stores data. A renderer shows a page." },
+            { text: "Another server", correct: false, explanation: "There is only one main process, which plays the server's part." },
+            { text: "A CDN that hosts files", correct: false, explanation: "A CDN serves files over the internet. A renderer shows your app's page." },
           ],
         },
         {
-          question: "Why is it risky to let the page use Node directly?",
+          question: "Your page loads an analytics script from a CDN. Why is it good that the page cannot use Node?",
           answers: [
-            { text: "A bad script loaded from a CDN could write files on the user's computer", correct: true, explanation: "Any script on the page would get the same power as your own code." },
-            { text: "Node makes the page load slower", correct: false, explanation: "The problem is safety, not speed." },
-            { text: "Node cannot read HTML", correct: false, explanation: "That is not the reason. The reason is security." },
-            { text: "It breaks the page's CSS", correct: false, explanation: "Node does not change how CSS works." },
+            { text: "Node modules would break normal DOM code on the page", correct: false, explanation: "Node and the DOM can work side by side. The real reason is security." },
+            { text: "If that script is ever hacked, it still cannot write files on the user's computer", correct: true, explanation: "Without Node in the page, a bad script cannot reach things like fs.writeFile." },
+            { text: "Running Node in every window would make the app too slow", correct: false, explanation: "Speed is not the reason. Safety is." },
+            { text: "The script would bypass the same-origin policy", correct: false, explanation: "The concern is file and system access, not the same-origin policy." },
           ],
         },
         {
@@ -251,30 +286,30 @@ export const electronProcessModelSections: ArticleSection[] = [
           ],
         },
         {
-          question: "Where does a preload script run?",
+          question: "You want the page to be able to save a note, and nothing else. Where do you set that up?",
           answers: [
-            { text: "In its own separate process", correct: false, explanation: "A preload script does not get its own process." },
-            { text: "Inside the renderer process, before the page loads", correct: true, explanation: "It runs early in the renderer, before the DOM and any third-party scripts." },
-            { text: "Inside the main process", correct: false, explanation: "The preload script belongs to the renderer side." },
-            { text: "On a remote server", correct: false, explanation: "It runs on the user's computer, inside the app." },
+            { text: "In the main process, before any window starts", correct: false, explanation: "The main process does the saving, but the page's list of allowed actions is set up in the preload script." },
+            { text: "On an update server that checks every request", correct: false, explanation: "Update servers deliver new versions of the app. They do not control what the page can do." },
+            { text: "In the preload script, which runs before the page and shares a short allow list", correct: true, explanation: "The preload script decides exactly which actions the page may use." },
+            { text: "In a cache that loads common modules into memory", correct: false, explanation: "Caching makes things faster. It does not decide what the page may do." },
           ],
         },
         {
-          question: "What should a preload script share with the page?",
+          question: "A teammate's preload script shares every Node module with the page, just in case. What is wrong with that?",
           answers: [
-            { text: "All of Node", correct: false, explanation: "That would bring back the old security problem." },
-            { text: "Nothing at all", correct: false, explanation: "Then the page could never ask the main process for help." },
-            { text: "Everything while you are developing", correct: false, explanation: "Habits from development often reach the real app. Share only what is needed." },
-            { text: "Only the few features the page needs", correct: true, explanation: "This is least access: as much as needed, as little as possible." },
+            { text: "Nothing, sharing more makes the app easier to build", correct: false, explanation: "It also hands every script on the page full power over the computer." },
+            { text: "Preload scripts are not allowed to share anything", correct: false, explanation: "Sharing a few chosen functions is exactly what preload scripts are for." },
+            { text: "It makes the CSS load slower", correct: false, explanation: "The problem is safety, not speed." },
+            { text: "It breaks least access, because the page gets far more power than it needs", correct: true, explanation: "Least access means sharing only what the page needs." },
           ],
         },
         {
-          question: "Why do Electron version numbers go up so fast?",
+          question: "Your app uses Electron 25, and Electron 26 comes out. What does the new number most likely mean?",
           answers: [
-            { text: "Each version follows new Chromium and Node releases", correct: true, explanation: "A new number often just means newer Chromium or Node inside." },
-            { text: "Every version breaks all your code", correct: false, explanation: "Many new versions have no breaking changes for your code." },
-            { text: "The numbers are chosen at random", correct: false, explanation: "They follow the release rhythm of Chromium and Node." },
-            { text: "Each app picks its own Electron number", correct: false, explanation: "Electron versions are set by the Electron project." },
+            { text: "The release came out in a new month, like a calendar version", correct: false, explanation: "Electron numbers are not dates." },
+            { text: "Only security patches were added", correct: false, explanation: "New major versions also bring newer Chromium and Node.js." },
+            { text: "Mostly a newer Chromium or Node.js inside, often with no breaking changes for your code", correct: true, explanation: "The numbers follow Chromium and Node.js releases, not big rewrites." },
+            { text: "Every app must be rewritten to keep working", correct: false, explanation: "Many new versions need no changes to your code at all." },
           ],
         },
         {

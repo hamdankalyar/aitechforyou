@@ -1661,7 +1661,7 @@ export const articles: Article[] = [
     series: {
       title: "Electron, made visible",
       order: 2,
-      practiceTime: "10 questions in quiz mode",
+      practiceTime: "5 flashcards · 10 quiz questions",
       nextTitle: "The smallest Electron app",
       nextDescription: "Walk through the four files of a hello world Electron app and see what each one does.",
       exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
