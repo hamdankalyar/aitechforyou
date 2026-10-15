@@ -188,6 +188,41 @@ export const electronIntroductionSections: ArticleSection[] = [
     blocks: [{ type: "command", command: "npm run package", label: "Command", explanation: "Package an Electron Forge app for your current operating system." }],
   },
   {
+    id: "flashcards",
+    heading: "Flashcards: recall the big ideas",
+    paragraphs: [
+      "**Read the question** on each card.",
+      "**Answer it yourself** before you look.",
+      "**Show the answer** and compare it with yours.",
+    ],
+    blocks: [{
+      type: "flashcards",
+      title: "Introduction to Electron",
+      cards: [
+        {
+          question: "What are the two main runtimes Electron combines to build desktop apps?",
+          answer: "A full Node.js runtime and a full Chromium runtime. Both are packed inside your app, so you do not need to worry about which Node or browser version the user has installed.",
+        },
+        {
+          question: "What does bundling Chromium with an Electron app give you for browser support?",
+          answer: "Your app ships with its own browser engine, so you stop worrying about different browsers and missing features. You know the exact Chromium version because you chose it with your Electron version, so you can rely on its web features and APIs.",
+        },
+        {
+          question: "What can the Node.js runtime do in Electron beyond standard Node.js features?",
+          answer: "Besides full file system access, you can compile and bundle native modules written in C, C++, or Rust. That lets you ship fast modules, such as database drivers written in C or C++, inside your app.",
+        },
+        {
+          question: "Why are the main process and the renderer process kept separate?",
+          answer: "Mostly for security. The renderer process is the part users interact with. The main process can do powerful things, like writing files. A wall between them stops the user-facing part from having free access to the computer.",
+        },
+        {
+          question: "What is the context bridge for?",
+          answer: "It is a safe connection point between the UI, which is the renderer process, and the Node side, which is the main process. It controls how the two talk, instead of letting the page call Node directly.",
+        },
+      ],
+    }],
+  },
+  {
     id: "lecture-quiz",
     heading: "Quiz mode: check this lecture",
     paragraphs: [
@@ -209,12 +244,12 @@ export const electronIntroductionSections: ArticleSection[] = [
           ],
         },
         {
-          question: "Which two runtimes does Electron bring together?",
+          question: "Your app's page needs the DOM and Web APIs. Which runtime inside Electron provides them?",
           answers: [
-            { text: "Safari and Deno", correct: false, explanation: "Electron does not use Safari or Deno." },
-            { text: "Chromium and Node.js", correct: true, explanation: "Chromium shows the interface, and Node.js gives access to the computer." },
-            { text: "Firefox and Node.js", correct: false, explanation: "The browser side of Electron is Chromium, not Firefox." },
-            { text: "Chromium and Bun", correct: false, explanation: "The server-side runtime in Electron is Node.js." },
+            { text: "Node.js", correct: false, explanation: "Node.js gives file access and native modules, but it has no DOM." },
+            { text: "Electron Forge", correct: false, explanation: "Electron Forge is a tool for setting up and packaging apps. It does not run your page." },
+            { text: "V8 on its own", correct: false, explanation: "V8 only runs JavaScript. The DOM and Web APIs come from the rest of Chromium." },
+            { text: "Chromium", correct: true, explanation: "Chromium is the browser side of Electron, so it brings the DOM and Web APIs." },
           ],
         },
         {
@@ -245,21 +280,21 @@ export const electronIntroductionSections: ArticleSection[] = [
           ],
         },
         {
-          question: "Why should the renderer not call Node directly?",
+          question: "A teammate wants the page to write files directly, because it would mean less code. What is the main risk?",
           answers: [
-            { text: "Chromium cannot run JavaScript", correct: false, explanation: "Chromium runs JavaScript with V8." },
-            { text: "The part users interact with should not be able to write to their file system", correct: true, explanation: "Keeping a wall between the two sides is mainly about security." },
-            { text: "TypeScript does not allow it", correct: false, explanation: "TypeScript has nothing to do with this rule." },
-            { text: "Node is slower than Chromium", correct: false, explanation: "The separation is about security, not speed." },
+            { text: "The app would start more slowly", correct: false, explanation: "Speed is not the problem. Safety is." },
+            { text: "Any script that ends up on the page could also write files on the user's computer", correct: true, explanation: "The page is what users interact with, so it should not have that much power." },
+            { text: "CSS would stop working on that page", correct: false, explanation: "File access has nothing to do with CSS." },
+            { text: "TypeScript would refuse to compile the app", correct: false, explanation: "TypeScript does not block this. It is a security choice, not a type rule." },
           ],
         },
         {
-          question: "Which Electron module connects the renderer and the main process safely?",
+          question: "The page needs the main process to save a file. What is the safe way for the page to ask?",
           answers: [
-            { text: "Blink", correct: false, explanation: "Blink is Chromium's rendering engine." },
-            { text: "Electron Forge", correct: false, explanation: "Electron Forge is a build and packaging tool." },
-            { text: "The context bridge", correct: true, explanation: "The context bridge exposes chosen main process features to the renderer." },
-            { text: "Webpack", correct: false, explanation: "Webpack bundles files. It does not connect processes." },
+            { text: "Call require('fs') directly in the page", correct: false, explanation: "That gives the page full Node power, which is the unsafe old way." },
+            { text: "Ask Electron Forge to save it", correct: false, explanation: "Electron Forge sets up and packages apps. It does not run inside your app." },
+            { text: "Go through the context bridge, which shares only chosen features", correct: true, explanation: "The context bridge gives the page a short list of safe actions, like saving a file." },
+            { text: "Turn off web security in the window", correct: false, explanation: "That removes protections instead of adding a safe path." },
           ],
         },
         {
@@ -287,6 +322,33 @@ export const electronIntroductionSections: ArticleSection[] = [
             { text: "Global shortcuts", correct: false, explanation: "Global shortcuts are covered with Clipmaster." },
             { text: "Packaging and code signing", correct: true, explanation: "Signing is different on every operating system and can require a paid developer account." },
             { text: "Clipboard access", correct: false, explanation: "Clipboard access is covered with Clipmaster." },
+          ],
+        },
+        {
+          question: "Your page uses a new CSS feature that Chromium supports but Safari does not. What happens for a Mac user?",
+          answers: [
+            { text: "The feature breaks, because Macs use Safari", correct: false, explanation: "Electron apps do not use the user's browser. They ship their own Chromium." },
+            { text: "The feature works, because the app uses the Chromium it ships with", correct: true, explanation: "Every user gets the same Chromium version you chose, whatever browser they use." },
+            { text: "The user has to install Chrome first", correct: false, explanation: "Chromium is already inside the app." },
+            { text: "Electron converts the CSS for Safari", correct: false, explanation: "Electron does not convert CSS. It simply ships Chromium." },
+          ],
+        },
+        {
+          question: "Your app needs a fast database driver written in C++. Where can it run?",
+          answers: [
+            { text: "In the page, as a normal script tag", correct: false, explanation: "Browser scripts cannot load compiled C++ code." },
+            { text: "Nowhere, because Electron only runs JavaScript", correct: false, explanation: "Electron can bundle native modules written in C, C++, or Rust." },
+            { text: "In the main process, as a native module loaded by Node", correct: true, explanation: "Node can load compiled native modules, like many database drivers." },
+            { text: "In Chromium's GPU process", correct: false, explanation: "The GPU process draws graphics. It does not load your modules." },
+          ],
+        },
+        {
+          question: "Which popular desktop apps are built with Electron?",
+          answers: [
+            { text: "Safari and Firefox, which are browsers with their own engines and native code", correct: false, explanation: "These browsers are built with their own native code, not Electron." },
+            { text: "Windows Explorer and Finder, the built-in file managers", correct: false, explanation: "These come with the operating system and are built natively." },
+            { text: "Adobe Photoshop and Microsoft Word, built with platform-specific frameworks", correct: false, explanation: "These are native apps, not Electron apps." },
+            { text: "Visual Studio Code, Slack, Figma, and GitHub Desktop", correct: true, explanation: "All four ship desktop apps built with Electron." },
           ],
         },
       ],

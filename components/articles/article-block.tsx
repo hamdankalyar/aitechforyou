@@ -9,6 +9,7 @@ import { snapshots } from "@/topics/git/content/git-snapshots";
 import { SnapshotTimeline } from "@/topics/git/components/snapshot-timeline";
 import { KnowledgeCheck } from "@/components/articles/knowledge-check";
 import { QuizMode } from "@/components/articles/quiz-mode";
+import { Flashcards } from "@/components/articles/flashcards";
 import { CommandBlock } from "@/components/articles/command-block";
 import { ConfigPlayground } from "@/topics/git/components/config-playground";
 import { CommitPlayground } from "@/topics/git/components/commit-playground";
@@ -77,6 +78,7 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "details": return <details className={`learning-details${block.icon === "info" ? " learning-info" : ""}`}><summary>{block.icon === "info" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7v2" /></svg>}{block.title}</summary><ArticlePoints paragraphs={block.paragraphs} runnableCode={runnableCode} compact />{block.sections?.map(section => <div key={section.heading}><h3>{section.heading}</h3><ArticlePoints paragraphs={section.paragraphs} runnableCode={runnableCode} compact /></div>)}{block.code && (runnableCode ? <CodeRunner code={block.code} /> : <pre tabIndex={0} aria-label="Code example"><code>{block.code}</code></pre>)}{block.commands?.map(command => <CommandBlock {...command} key={command.command} />)}</details>;
     case "quiz": return <KnowledgeCheck {...block} />;
     case "quiz-mode": return <QuizMode title={block.title} questions={block.questions} />;
+    case "flashcards": return <Flashcards title={block.title} cards={block.cards} />;
     case "command": return <CommandBlock {...block} />;
     case "callout": return <div className="learning-callout"><span className="learning-kicker">{block.title}</span><p>{block.text}</p></div>;
     case "recap": return <ol className="learning-recap">{block.items.map((item, i) => <li key={item}><span aria-hidden="true">0{i + 1}</span><p>{item}</p></li>)}</ol>;

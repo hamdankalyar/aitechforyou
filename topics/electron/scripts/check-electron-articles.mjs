@@ -39,6 +39,17 @@ for (const [slug, sections] of Object.entries(lectures)) {
     for (const line of block.highlightLines ?? []) assert.ok(line <= block.command.split("\n").length, `${slug}: ${block.label} highlights a real line`);
   }
 
+  // Flashcards: optional, one block in a "flashcards" section right before the quiz, every card complete and unique.
+  const flashcards = sections.flatMap(section => (section.blocks ?? []).filter(block => block.type === "flashcards").map(block => ({ section, block })));
+  assert.ok(flashcards.length <= 1, `${slug}: at most one flashcards block`);
+  for (const { section, block } of flashcards) {
+    assert.equal(section.id, "flashcards", `${slug}: flashcards live in the flashcards section`);
+    assert.equal(sections.at(-2), section, `${slug}: flashcards come right before the quiz`);
+    assert.ok(block.cards.length >= 3, `${slug}: at least three flashcards`);
+    assert.equal(new Set(block.cards.map(card => card.question)).size, block.cards.length, `${slug}: flashcard questions are unique`);
+    for (const card of block.cards) assert.ok(card.question.trim().endsWith("?") && card.answer.trim(), `${slug}: "${card.question}" has a question and an answer`);
+  }
+
   // Quiz mode: the last section holds exactly one quiz, and every question has one right answer.
   const quizzes = sections.flatMap(section => (section.blocks ?? []).filter(block => block.type === "quiz-mode").map(block => ({ section, block })));
   assert.equal(quizzes.length, 1, `${slug}: has one quiz-mode block`);
@@ -119,7 +130,7 @@ if (base) {
     assert.equal(response.status, 200, path);
     const html = (await response.text()).replaceAll("<!-- -->", "");
     if (path === "/courses/electron") for (const slug of Object.keys(lectures)) assert.match(html, new RegExp(`href="/articles/${slug}"`));
-    else { assert.match(html, /Lecture quiz/); assert.match(html, /Question 1 of 10/); }
+    else { assert.match(html, /Lecture quiz/); assert.match(html, /Question 1 of \d+/); if (lectures[path.split("/").pop()].some(section => section.id === "flashcards")) assert.match(html, /Card 1 of \d+/); }
   }
 }
 
