@@ -321,6 +321,41 @@ export const electronSmallestAppSections: ArticleSection[] = [
     blocks: [{ type: "command", label: "main.js", command: "mainWindow.loadFile('index.html')\nmainWindow.webContents.openDevTools()", highlightLines: [2], explanation: "Add the second line inside createWindow to open DevTools when the window starts." }],
   },
   {
+    id: "flashcards",
+    heading: "Flashcards: recall the big ideas",
+    paragraphs: [
+      "**Read the question** on each card.",
+      "**Answer it yourself** before you look.",
+      "**Show the answer** and compare it with yours.",
+    ],
+    blocks: [{
+      type: "flashcards",
+      title: "The smallest Electron app",
+      cards: [
+        {
+          question: "What is the entry point of an Electron app, and how does Electron find it?",
+          answer: "The main field in package.json names the entry point. Electron looks for that file, often main.js or index.js, when the app starts. A Node.js program finds its main file the same way.",
+        },
+        {
+          question: "Which two Electron modules do you need to create a basic window, and what does the code look like?",
+          answer: "You need app and BrowserWindow. createWindow makes the window, and app.whenReady waits until Electron is ready to call it.",
+          code: `${createWindowCode}\n\napp.whenReady().then(() => {\n  createWindow()\n})`,
+          codeLabel: "main.js",
+        },
+        {
+          question: "What is the preload script for, and when does it run?",
+          answer: "It runs after Chromium starts but before the HTML file is read. It sits between the main process and the page, and it can use both the DOM and a few Node.js features, like the process object. That makes it the safe place to share chosen features with the page.",
+        },
+        {
+          question: "How should closing the last window work on macOS compared with Windows and Linux, and how do you code it?",
+          answer: "On macOS, the app keeps running, and clicking the Dock icon opens a new window. On Windows and Linux, closing the last window quits the app. The code checks process.platform, which is darwin on a Mac.",
+          code: appLifecycleCode,
+          codeLabel: "main.js",
+        },
+      ],
+    }],
+  },
+  {
     id: "lecture-quiz",
     heading: "Quiz mode: check this lecture",
     paragraphs: [
@@ -342,12 +377,12 @@ export const electronSmallestAppSections: ArticleSection[] = [
           ],
         },
         {
-          question: "How does Electron know which file to run first?",
+          question: "You rename main.js to app.js. What else must change so the app still starts?",
           answers: [
-            { text: "It always runs index.html first", correct: false, explanation: "index.html is loaded later by main.js." },
-            { text: "It reads the main field in package.json", correct: true, explanation: "The main field names the first file, like main.js." },
-            { text: "It runs every .js file in the folder", correct: false, explanation: "Electron starts from one entry file." },
-            { text: "It asks the user to choose a file", correct: false, explanation: "The entry file is set in package.json." },
+            { text: "The script tag in index.html", correct: false, explanation: "index.html loads renderer.js, not the main file." },
+            { text: "The main field in package.json", correct: true, explanation: "Electron finds its first file through the main field, so it must say app.js now." },
+            { text: "The preload path in BrowserWindow", correct: false, explanation: "That path points to preload.js, which did not change." },
+            { text: "Nothing, Electron finds the new name by itself", correct: false, explanation: "Electron only knows the file named in package.json." },
           ],
         },
         {
@@ -360,12 +395,12 @@ export const electronSmallestAppSections: ArticleSection[] = [
           ],
         },
         {
-          question: "What does new BrowserWindow do?",
+          question: "You call createWindow twice when the app starts. What does the user see?",
           answers: [
-            { text: "Opens a new tab in Chrome", correct: false, explanation: "Electron windows are part of your app, not Chrome tabs." },
-            { text: "Loads the preload script into the main process", correct: false, explanation: "The preload script runs in the renderer process." },
-            { text: "Starts a new main process", correct: false, explanation: "An app always has one main process." },
-            { text: "Creates a window on the screen with the options you give it", correct: true, explanation: "Options like width, height, and webPreferences shape the window." },
+            { text: "One window, because the second call is ignored", correct: false, explanation: "Each call runs new BrowserWindow again, so each one makes a window." },
+            { text: "The app quits, because only one window is allowed", correct: false, explanation: "Electron apps can have many windows." },
+            { text: "The DevTools panel opens twice", correct: false, explanation: "DevTools open only when you call openDevTools." },
+            { text: "Two windows, because each call runs new BrowserWindow", correct: true, explanation: "Every new BrowserWindow creates another window on the screen." },
           ],
         },
         {
@@ -387,21 +422,30 @@ export const electronSmallestAppSections: ArticleSection[] = [
           ],
         },
         {
-          question: "What does process.platform return on macOS?",
+          question: "A Mac user closes the last window, then clicks the app's Dock icon. What happens?",
           answers: [
-            { text: "macos", correct: false, explanation: "Node uses the name of the core system instead." },
-            { text: "darwin", correct: true, explanation: "macOS is built on a core system called Darwin." },
-            { text: "apple", correct: false, explanation: "Node does not use the company name." },
-            { text: "win32", correct: false, explanation: "win32 is what Windows returns." },
+            { text: "Nothing, because there are no windows left", correct: false, explanation: "The activate event runs and opens a new window." },
+            { text: "The app starts again from scratch, because it had quit", correct: false, explanation: "On macOS the app did not quit. It kept running in the Dock." },
+            { text: "A new window opens, because the app kept running and activate creates one", correct: true, explanation: "With no windows open, the activate check is true and createWindow runs." },
+            { text: "An error appears", correct: false, explanation: "Reopening from the Dock is normal macOS behavior." },
           ],
         },
         {
-          question: "When does preload.js run?",
+          question: "A teammate writes if (process.platform === 'macos') to run Mac-only code. What happens on a Mac?",
           answers: [
-            { text: "After renderer.js finishes", correct: false, explanation: "preload.js runs before the page and its scripts." },
-            { text: "Only when the user clicks a button", correct: false, explanation: "It runs automatically when the window starts." },
-            { text: "Inside the main process, before the app is ready", correct: false, explanation: "It runs in the renderer process." },
-            { text: "In the renderer process, before index.html loads", correct: true, explanation: "Chromium has started, but no page has been read yet." },
+            { text: "It works, because macos is the right name", correct: false, explanation: "Node does not use the name macos." },
+            { text: "The check is false, because Node calls macOS darwin", correct: true, explanation: "process.platform is darwin on a Mac, so the Mac-only code never runs." },
+            { text: "The app crashes", correct: false, explanation: "A false check does not crash anything. The code inside is just skipped." },
+            { text: "It works only on older Macs, which use osx", correct: false, explanation: "Every Mac returns darwin. Node never returns osx or mac." },
+          ],
+        },
+        {
+          question: "Code at the top of preload.js calls document.getElementById('node-version'), and it finds nothing. Why?",
+          answers: [
+            { text: "preload.js cannot use the DOM at all", correct: false, explanation: "It can use the DOM, but only once the page exists." },
+            { text: "The id is spelled wrong in index.html", correct: false, explanation: "The id is right. The problem is timing." },
+            { text: "The page has not loaded yet, because preload.js runs before index.html", correct: true, explanation: "That is why the lecture's preload code waits for DOMContentLoaded before it changes the page." },
+            { text: "Only renderer.js may look up elements", correct: false, explanation: "Both can look up elements once the page has loaded." },
           ],
         },
         {

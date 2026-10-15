@@ -48,6 +48,7 @@ for (const [slug, sections] of Object.entries(lectures)) {
     assert.ok(block.cards.length >= 3, `${slug}: at least three flashcards`);
     assert.equal(new Set(block.cards.map(card => card.question)).size, block.cards.length, `${slug}: flashcard questions are unique`);
     for (const card of block.cards) assert.ok(card.question.trim().endsWith("?") && card.answer.trim(), `${slug}: "${card.question}" has a question and an answer`);
+    for (const card of block.cards.filter(item => item.code)) assert.ok(card.codeLabel?.endsWith(".js") ? new Script(card.code) : true, `${slug}: "${card.question}" code parses`);
   }
 
   // Quiz mode: the last section holds exactly one quiz, and every question has one right answer.

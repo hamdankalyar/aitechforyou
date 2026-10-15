@@ -104,7 +104,7 @@ export type ArticleBlock =
   | { type: "figure"; caption: string }
   | { type: "command"; command: string; explanation?: string; output?: string; label?: string; highlightLines?: number[] }
   | { type: "quiz"; question: string; answers: { text: string; explanation: string; correct: boolean }[] }
-  | { type: "flashcards"; title: string; cards: { question: string; answer: string }[] }
+  | { type: "flashcards"; title: string; cards: { question: string; answer: string; code?: string; codeLabel?: string }[] }
   | { type: "quiz-mode"; title: string; questions: { question: string; answers: { text: string; explanation: string; correct: boolean }[] }[] }
   | { type: "recap"; items: string[] };
 
@@ -1691,7 +1691,7 @@ export const articles: Article[] = [
     series: {
       title: "Electron, made visible",
       order: 3,
-      practiceTime: "10 questions in quiz mode",
+      practiceTime: "4 flashcards · 11 quiz questions",
       nextTitle: "More Electron lectures",
       nextDescription: "More lectures are in preparation.",
       exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },

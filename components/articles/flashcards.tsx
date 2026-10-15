@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
+import { CommandBlock } from "@/components/articles/command-block";
 
 // Question on the front, answer on the back. Reuses the quiz-mode look (snapshot-lab, lab-topline, commit-lab-steps, quiz-feedback, lab-actions).
-export function Flashcards({ title, cards }: { title: string; cards: { question: string; answer: string }[] }) {
+export function Flashcards({ title, cards }: { title: string; cards: { question: string; answer: string; code?: string; codeLabel?: string }[] }) {
   const [position, setPosition] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const card = cards[position];
@@ -18,6 +19,7 @@ export function Flashcards({ title, cards }: { title: string; cards: { question:
     <h3 id={`flashcard-${position}`}>{card.question}</h3>
     <p className="lab-instruction">Say your answer out loud or in your head first. Then show the answer and compare.</p>
     <div className={`quiz-feedback ${revealed ? "is-correct" : ""}`} role="status" aria-live="polite">{revealed ? <><strong>Answer.</strong> {card.answer}</> : "The answer is hidden. Press Show answer when you are ready."}</div>
+    {revealed && card.code && <CommandBlock command={card.code} label={card.codeLabel ?? "Code"} />}
     <div className="lab-actions">
       <button type="button" className="lab-primary" onClick={() => go(last ? 0 : position + 1)}>{last ? "Start over" : "Next card"}<span aria-hidden="true">→</span></button>
       <div className="lab-step-buttons">
