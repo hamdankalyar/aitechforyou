@@ -2,7 +2,7 @@
 
 Read this before writing or editing any JavaScript article. Each article teaches one thing.
 
-The course lives at `/courses/javascript`, with separate sections for Basic, Advanced, Functions, Mental Model, Interviews, Performance, and OOP. Mental Model contains Principles of JavaScript and Callbacks and higher order functions. Set each JavaScript article's `category` in `lib/articles.ts` to its section or Mental Model subgroup. The first five articles are Basic; Symbol is Advanced. Keep the reading order in `series.order`, but do not show numbers in article titles or cards. Sections without published articles show an empty state.
+The course lives at `/courses/javascript`, with separate sections for Basic, Advanced, Functions, Mental Model, Interviews, Performance, and OOP. Mental Model contains Principles of JavaScript, Callbacks and higher order functions, and Closure. Set each JavaScript article's `category` in `lib/articles.ts` to its section or Mental Model subgroup. The first five articles are Basic; Symbol is Advanced. Keep the reading order in `series.order`, but do not show numbers in article titles or cards. Sections without published articles show an empty state.
 
 ## The course
 
@@ -23,6 +23,7 @@ The course lives at `/courses/javascript`, with separate sections for Basic, Adv
 | `javascript-functions` | Declarations, calls, parameters, arguments, local names, and return values |
 | `javascript-principles` | Line-by-line execution, function contexts, local memory, and returned values |
 | `javascript-generalizing-functions` | DRY, reusable parameters, arguments, and choosing behavior with callbacks |
+| `javascript-closure` | Returned functions, nested and returned add1 blackboard walkthroughs, scope lookup, and captured state |
 | `javascript-arrow-functions` | Fat arrow syntax, implicit return, parentheses rules, and block bodies |
 | `javascript-scope` | Global and function scope, nesting, reading outward, and changing outer variables |
 | `javascript-events` | Event listeners, handler functions, the event object, and common event names |

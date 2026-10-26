@@ -1,0 +1,35 @@
+# Closure source notes
+
+- **Source** is the author's supplied Closure transcript and three screenshots from October 14, 2026.
+- **Lecture** is [JavaScript: The Hard Parts, Closure](https://master.dev/courses/javascript-hard-parts-v3/closure/).
+- **Opening example** calls multiplyBy2 with 7 and 10 to produce 14 and 20.
+- **Local memory** starts fresh for each function call.
+- **Returning a function** introduces persistent access to an outer call's data.
+- **State** means data at a particular moment.
+- **Uses** include once, memoization, the module pattern, iterators, partial application, and asynchronous callbacks.
+- **The opening slide** introduces these uses before the returned-function walkthrough.
+- **The video-app example** describes a callback running after a list of videos arrives from a server.
+- **Added illustrations** use setup, a private counter, and a captured multiplier to explain the named patterns.
+- **Memoization** corrects the transcript's "memorize" wording.
+- **Memory cleanup** requires data to become unreachable rather than merely leave the call stack.
+- **Captured data** can remain reachable after the outer function returns.
+- **Closure creation** does not require returning a function.
+- **Accuracy reference** is [MDN's Closures guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures).
+- **Returned-function notes** include the follow-up transcript and two screenshots supplied by the author.
+- **The exact example** defines createFunction with a nested multiplyBy2 function.
+- **generatedFunc** receives the returned function reference from one createFunction call.
+- **generatedFunc(3)** then returns 6 into result.
+- **The blackboard** follows the existing Principles lesson's code, memory, and call stack walkthrough.
+- **Function identity** remains the same when its reference is returned.
+- **Calling generatedFunc** does not call createFunction again.
+- **Lexical scope** still belongs to the returned function despite the outer call finishing.
+- **The multiplication example** introduces returned functions without reading captured outer data.
+- **Counter notes** include the author's follow-up transcript and two outer/add1 screenshots.
+- **The inside-call example** calls add1 while outer is still running.
+- **The returned-call example** assigns outer's returned add1 to newFunc.
+- **Two newFunc calls** update the original counter from 0 to 1 to 2.
+- **Variable lookup** follows the function's definition scope rather than the call stack.
+- **The captured scope panel** shows live counter data after the outer context closes.
+- **Closed context panels** show historical memory rather than live execution.
+- **add1's return value** is undefined because the supplied code has no return statement.
+- **Runnable copies** add console.log so the counter updates can be observed.

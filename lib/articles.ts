@@ -13,6 +13,7 @@ import { javascriptImmutableMutableSections } from "@/topics/javascript/content/
 import { javascriptFunctionsSections } from "@/topics/javascript/content/javascript-functions-article";
 import { javascriptPrinciplesSections } from "@/topics/javascript/content/javascript-principles-article";
 import { javascriptGeneralizingFunctionsSections } from "@/topics/javascript/content/javascript-generalizing-functions-article";
+import { javascriptClosureSections } from "@/topics/javascript/content/javascript-closure-article";
 import { javascriptArrowFunctionsSections } from "@/topics/javascript/content/javascript-arrow-functions-article";
 import { javascriptScopeSections } from "@/topics/javascript/content/javascript-scope-article";
 import { javascriptEventsSections } from "@/topics/javascript/content/javascript-events-article";
@@ -76,7 +77,7 @@ export type ArticleBlock =
   | { type: "array-mutation-diagram" }
   | { type: "reduce-diagram" }
   | { type: "event-loop-trace" }
-  | { type: "execution-context-trace"; example?: "copy-array" | "callback-array" | "arrow-map" }
+  | { type: "execution-context-trace"; example?: "copy-array" | "callback-array" | "arrow-map" | "closure" | "closure-inside" | "closure-returned" }
   | { type: "call-stack-trace" }
   | { type: "package-manager-architecture" }
   | { type: "electron-runtime-diagram" }
@@ -120,7 +121,7 @@ export type ArticleSection = {
 };
 
 export const javascriptCategories = ["Basic", "Advanced", "Functions", "Mental Model", "Interviews", "Performance", "OOP"] as const;
-export const javascriptMentalModelCategories = ["Principles of JavaScript", "Callbacks and higher order functions"] as const;
+export const javascriptMentalModelCategories = ["Principles of JavaScript", "Callbacks and higher order functions", "Closure"] as const;
 export const reactNativeCategories = ["Basics", "Components", "Styling", "Navigation", "State", "Device", "Performance"] as const;
 export const electronCategories = ["Basics", "Processes", "Files", "Frameworks", "Desktop", "Native"] as const;
 
@@ -1617,6 +1618,29 @@ export const articles: Article[] = [
       illustration: { line: "result = [2, 4, 6]", value: "[2, 4, 6]", notes: ["Read each input.", "Build a new array."] },
     },
     sections: javascriptGeneralizingFunctionsSections,
+  },
+  {
+    slug: "javascript-closure",
+    title: "Closure",
+    excerpt: "See how returned functions keep access to local variables and remember live data between calls.",
+    topic: "JavaScript",
+    category: "Closure",
+    date: "Oct 14, 2026",
+    readTime: "5 min read",
+    accent: "yellow",
+    number: "68",
+    series: {
+      title: "JavaScript, made visible", order: 29, practiceTime: "3 min to explore",
+      nextTitle: "More closure lessons",
+      nextDescription: "More lessons are in preparation.",
+      exercise: { id: "trace-the-code", label: "Trace the returned function" },
+      illustration: { line: "generatedFunc(3)", value: "6", notes: ["Return a function.", "Call its saved code."] },
+    },
+    sections: javascriptClosureSections,
+    sources: [
+      { title: "JavaScript: The Hard Parts · Closure", url: "https://master.dev/courses/javascript-hard-parts-v3/closure/" },
+      { title: "MDN · Closures", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures" },
+    ],
   },
   {
     slug: "electron-introduction",

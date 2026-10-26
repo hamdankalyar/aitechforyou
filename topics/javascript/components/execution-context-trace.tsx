@@ -4,6 +4,9 @@ import { useId, useState } from "react";
 import { arrowMapSource, arrowMapSteps } from "../content/javascript-arrow-map-trace";
 import { callbackArraySource, callbackArraySteps } from "../content/javascript-callback-array-trace";
 import { copyArraySource, copyArraySteps } from "../content/javascript-copy-array-trace";
+import { closureSource, closureSteps } from "../content/javascript-closure-trace";
+import { counterInsideSource, counterInsideSteps, counterReturnedSource, counterReturnedSteps } from "../content/javascript-closure-counter-trace";
+import { ClosureCounterBoard } from "./closure-counter-board";
 import { callStackSteps, principlesSource, principlesSteps, type CallStage } from "../content/javascript-principles-trace";
 
 function Points({ points }: { points: string[] }) {
@@ -173,20 +176,71 @@ function ArrowMapBoard({ step }: { step: number }) {
   </>}</div>;
 }
 
-export function ExecutionContextTrace({ example }: { example?: "copy-array" | "callback-array" | "arrow-map" }) {
+function ClosureBoard({ step }: { step: number }) {
+  const moment = closureSteps[step];
+  const inOuter = moment.outer !== "waiting" && moment.outer !== "closed";
+  const inInner = moment.inner !== "waiting" && moment.inner !== "closed";
+  const finished = step === closureSteps.length - 1;
+  const hasFunction = ["defined", "returning", "closed"].includes(moment.outer);
+  const hasInput = ["bound", "calculated", "returning", "closed"].includes(moment.inner);
+
+  return <div className="execution-board closure-board">{step > 0 && <>
+    <div className="execution-contexts">
+      <h4>Execution contexts</h4>
+      <div className={`execution-global${!inOuter && !inInner && !finished ? " is-active" : ""}`}><strong>Global context</strong><span>{finished ? "Complete" : inOuter ? "Paused at line 8" : inInner ? "Paused at line 9" : "Running"}</span></div>
+      {moment.outer !== "waiting" && <div className={`execution-context${inOuter ? " is-active" : " is-closed"}`}>
+        <div className="execution-context-heading"><strong>Outer call</strong><span>{moment.outer === "closed" ? "Closed · history" : moment.outer === "returning" ? "Returning" : "Running"}</span></div>
+        <code>createFunction()</code>
+        <div className="execution-context-body">
+          <div className="execution-thread"><span>Thread</span><strong>{moment.outer === "entered" ? "Enter function" : moment.outer === "defined" ? "Save multiplyBy2" : moment.outer === "returning" ? "return multiplyBy2" : "Call ended"}</strong></div>
+          <div className="execution-local"><span>Local memory</span><dl>{hasFunction && <div><dt>multiplyBy2</dt><dd>ƒ₂<small>returned function</small></dd></div>}</dl></div>
+        </div>
+        {["returning", "closed"].includes(moment.outer) && <div className="execution-return"><span aria-hidden="true">↗</span> ƒ₂ {moment.outer === "closed" ? "stored in" : "returns to"} <code>generatedFunc</code></div>}
+      </div>}
+      {moment.inner !== "waiting" && <div className={`execution-context${inInner ? " is-active" : " is-closed"}`}>
+        <div className="execution-context-heading"><strong>Returned function call</strong><span>{moment.inner === "closed" ? "Closed · history" : moment.inner === "returning" ? "Returning" : "Running"}</span></div>
+        <code>generatedFunc(3) = multiplyBy2(3)</code>
+        <div className="execution-context-body">
+          <div className="execution-thread"><span>Thread</span><strong>{moment.inner === "entered" ? "Enter saved function" : moment.inner === "bound" ? "num = 3" : moment.inner === "calculated" ? "3 * 2 = 6" : moment.inner === "returning" ? "return 6" : "Call ended"}</strong></div>
+          <div className="execution-local"><span>Local memory</span><dl>{hasInput && <div><dt>num</dt><dd>3</dd></div>}</dl></div>
+        </div>
+        {["returning", "closed"].includes(moment.inner) && <div className="execution-return"><span aria-hidden="true">↗</span> 6 {moment.inner === "closed" ? "stored in" : "returns to"} <code>result</code></div>}
+      </div>}
+    </div>
+    <div className="execution-memory">
+      <h4>Global memory</h4>
+      <dl>
+        <div><dt>createFunction</dt><dd>ƒ₁<small>outer function</small></dd></div>
+        {moment.outer !== "waiting" && <div className={!moment.generated ? "is-uninitialized" : undefined}><dt>generatedFunc</dt><dd>{moment.generated ? <>ƒ₂<small>multiplyBy2 reference</small></> : "uninitialized"}</dd></div>}
+        {moment.inner !== "waiting" && <div className={moment.result === null ? "is-uninitialized" : undefined}><dt>result</dt><dd>{moment.result ?? "uninitialized"}</dd></div>}
+      </dl>
+      <div className="execution-stack"><h4>Call stack <small>Top first</small></h4><ol>
+        {inOuter && <li className="is-active">createFunction()</li>}
+        {inInner && <li className="is-active">generatedFunc(3) · multiplyBy2(3)</li>}
+        {!finished && <li>global</li>}
+        {finished && <li className="execution-stack-empty">Empty</li>}
+      </ol></div>
+    </div>
+  </>}</div>;
+}
+
+export function ExecutionContextTrace({ example }: { example?: "copy-array" | "callback-array" | "arrow-map" | "closure" | "closure-inside" | "closure-returned" }) {
   const [step, setStep] = useState(0);
   const titleId = useId();
   const arrowMap = example === "arrow-map";
   const callback = example === "callback-array";
   const copyArray = example === "copy-array" || callback;
-  const steps = arrowMap ? arrowMapSteps : callback ? callbackArraySteps : copyArray ? copyArraySteps : principlesSteps;
-  const source = arrowMap ? arrowMapSource : callback ? callbackArraySource : copyArray ? copyArraySource : principlesSource;
+  const closure = example === "closure";
+  const counter = example === "closure-inside" || example === "closure-returned";
+  const returned = example === "closure-returned";
+  const steps = counter ? returned ? counterReturnedSteps : counterInsideSteps : closure ? closureSteps : arrowMap ? arrowMapSteps : callback ? callbackArraySteps : copyArray ? copyArraySteps : principlesSteps;
+  const source = counter ? returned ? counterReturnedSource : counterInsideSource : closure ? closureSource : arrowMap ? arrowMapSource : callback ? callbackArraySource : copyArray ? copyArraySource : principlesSource;
   const moment = steps[step];
   const finished = step === steps.length - 1;
 
   return <section className="execution-lab" aria-labelledby={titleId}>
     <div className="execution-topline"><span>Interactive blackboard</span><span>Step {step + 1} / {steps.length}</span></div>
-    <h3 id={titleId}>{arrowMap ? "Follow the arrow functions and map" : callback ? "Follow the callback calls" : "Follow the thread of execution"}</h3>
+    <h3 id={titleId}>{counter ? returned ? "Call add1 after outer returns" : "Call add1 inside outer" : closure ? "Follow the returned function" : arrowMap ? "Follow the arrow functions and map" : callback ? "Follow the callback calls" : "Follow the thread of execution"}</h3>
     <Points points={["**Next step** moves the code and memory together.", "**Back** revisits the previous state."]} />
     <div className="execution-controls">
       <button type="button" onClick={() => setStep(step - 1)} disabled={step === 0}>Back</button>
@@ -197,11 +251,11 @@ export function ExecutionContextTrace({ example }: { example?: "copy-array" | "c
 
     <div className="execution-workspace">
     <div className="execution-code" role="region" aria-label="Code being traced" tabIndex={0}>
-      <div className="execution-panel-title"><strong>{arrowMap ? "arrow-map.js" : callback ? "callbacks.js" : copyArray ? "copy-array.js" : "principles.js"}</strong><span>{moment.line ? `Line ${moment.line}` : finished ? "Finished" : "Before line 1"}</span></div>
+      <div className="execution-panel-title"><strong>{counter ? returned ? "closure-returned.js" : "closure-inside.js" : closure ? "closure.js" : arrowMap ? "arrow-map.js" : callback ? "callbacks.js" : copyArray ? "copy-array.js" : "principles.js"}</strong><span>{moment.line ? `Line ${moment.line}` : finished ? "Finished" : "Before line 1"}</span></div>
       <pre>{source.map((line, index) => <code key={index} className={moment.line === index + 1 ? "is-active" : undefined} aria-current={moment.line === index + 1 ? "step" : undefined}><span className="execution-line-number">{index + 1}</span><span className="execution-line-marker" aria-hidden="true">{moment.line === index + 1 ? "→" : ""}</span><span>{line || " "}</span></code>)}</pre>
     </div>
 
-    {arrowMap ? <ArrowMapBoard step={step} /> : copyArray ? <CopyArrayBoard step={step} callback={callback} /> : <PrinciplesBoard step={step} />}
+    {counter ? <ClosureCounterBoard step={step} returned={returned} /> : closure ? <ClosureBoard step={step} /> : arrowMap ? <ArrowMapBoard step={step} /> : copyArray ? <CopyArrayBoard step={step} callback={callback} /> : <PrinciplesBoard step={step} />}
     </div>
 
     <div className="execution-status" role="status" aria-atomic="true"><span>Step {step + 1}{moment.line ? ` · Line ${moment.line}` : ""}</span><h4>{moment.title}</h4><Points points={moment.points} /></div>

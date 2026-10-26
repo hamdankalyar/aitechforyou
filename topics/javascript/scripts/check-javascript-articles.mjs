@@ -17,6 +17,9 @@ import { javascriptImmutableMutableSections } from "../content/javascript-immuta
 import { javascriptFunctionsSections } from "../content/javascript-functions-article.ts";
 import { javascriptPrinciplesSections } from "../content/javascript-principles-article.ts";
 import { javascriptGeneralizingFunctionsSections } from "../content/javascript-generalizing-functions-article.ts";
+import { javascriptClosureSections } from "../content/javascript-closure-article.ts";
+import { closureSource, closureSteps } from "../content/javascript-closure-trace.ts";
+import { counterInsideSource, counterInsideSteps, counterReturnedSource, counterReturnedSteps } from "../content/javascript-closure-counter-trace.ts";
 import { callStackSteps, principlesSource, principlesSteps } from "../content/javascript-principles-trace.ts";
 import { callbackArraySource, callbackArraySteps } from "../content/javascript-callback-array-trace.ts";
 import { copyArraySource, copyArraySteps } from "../content/javascript-copy-array-trace.ts";
@@ -64,6 +67,7 @@ const articles = {
   "javascript-modules": javascriptModulesSections,
   "javascript-principles": javascriptPrinciplesSections,
   "javascript-generalizing-functions": javascriptGeneralizingFunctionsSections,
+  "javascript-closure": javascriptClosureSections,
 };
 const allSections = Object.values(articles).flat();
 
@@ -86,6 +90,9 @@ for (const states of Object.values(variablesExamples)) {
 }
 // Expected console output per article and section id. `error` names an intended thrown error.
 const expected = {
+  "javascript-closure": {
+    "quick-check": { output: ["1", "2"] },
+  },
   "javascript-generalizing-functions": {
     "more-useful-array-methods": { output: ["1,2,1,2,2", "4", "2,2,2", "1,1"] },
     "more-array-methods": { output: ["1,3,6", "1,2,3 3,2,1 1,6,3 1,2,3"] },
@@ -393,6 +400,8 @@ const expected = {
   },
 };
 const expectedDetails = {
+  "Run the inside-call example": [{ output: ["1"] }],
+  "Why can't global code read counter?": [{ output: [], error: "ReferenceError" }],
   "Try the same thing with let": [{ output: [], error: "SyntaxError" }, { output: [], error: "ReferenceError" }],
 };
 const seenDetails = {};
@@ -459,6 +468,49 @@ assert.deepEqual(callStackSteps.map(step => step.stack), [
   ["multiplyBy2(10)", "global"], ["global"], [],
 ]);
 assert.equal(javascriptPrinciplesSections.find(section => section.id === "call-stack").paragraphs.length, 4);
+const closureProgram = execute("let factoryCalls = 0; let returnedFunction;\n" + closureSource.join("\n")
+  .replace("function createFunction() {", "function createFunction() { factoryCalls++;")
+  .replace("return multiplyBy2;", "returnedFunction = multiplyBy2; return multiplyBy2;"));
+assert.equal(closureProgram.error, null);
+assert.equal(runInContext("generatedFunc === returnedFunction", closureProgram.context), true, "returning preserves the function object's identity");
+assert.equal(runInContext("generatedFunc.name", closureProgram.context), "multiplyBy2", "storing the function under a new label keeps its name");
+assert.equal(runInContext("factoryCalls", closureProgram.context), 1, "calling generatedFunc does not call createFunction again");
+assert.equal(runInContext("result", closureProgram.context), closureSteps.at(-1).result);
+assert.equal(runInContext("typeof num", closureProgram.context), "undefined", "the returned function's parameter remains local");
+assert.equal(runInContext("typeof multiplyBy2", closureProgram.context), "undefined", "the inner function's label does not become global");
+assert.deepEqual(closureSteps.map(step => step.line), [null, 1, 8, 2, 5, 8, 9, 2, 3, 3, 9, null]);
+assert.deepEqual(closureSteps.slice(2, 6).map(step => step.outer), ["entered", "defined", "returning", "closed"]);
+assert.ok(closureSteps.slice(0, 5).every(step => !step.generated), "generatedFunc waits until the outer function returns");
+assert.ok(closureSteps.slice(5).every(step => step.generated), "the returned function remains in global memory");
+assert.deepEqual(closureSteps.slice(6, 11).map(step => step.inner), ["entered", "bound", "calculated", "returning", "closed"]);
+assert.ok(closureSteps.slice(6).every(step => step.outer === "closed"), "the outer call has already left the stack before the inner call");
+assert.ok(closureSteps.slice(0, 10).every(step => step.result === null), "result waits until the inner function returns");
+for (const [source, steps, updates, returned] of [
+  [counterInsideSource, counterInsideSteps, [1], false],
+  [counterReturnedSource, counterReturnedSteps, [1, 2], true],
+]) {
+  const program = execute("const snapshots = []; const results = []; let counter = 100;\n" + source.join("\n")
+    .replace("counter++;", "counter++; snapshots.push(counter);")
+    .replaceAll("newFunc();", "results.push(newFunc());"));
+  assert.equal(program.error, null);
+  assert.deepEqual(Array.from(runInContext("snapshots", program.context)), updates, "the supplied code updates the captured counter");
+  assert.equal(runInContext("counter", program.context), 100, "the inner function never updates the global counter");
+  assert.equal(runInContext("typeof add1", program.context), "undefined", "the add1 label stays local to outer");
+  assert.equal(steps.at(-1).counter, updates.at(-1));
+  assert.deepEqual(steps.flatMap(step => step.calls.includes("incremented") ? [step.counter] : []), updates, "the board matches the runtime counter updates");
+  assert.ok(steps.every(step => step.line === null || step.line >= 1 && step.line <= source.length));
+  const activeSteps = steps.filter(step => step.calls.some(stage => stage !== "waiting" && stage !== "closed"));
+  assert.ok(activeSteps.every(step => step.outer === (returned ? "closed" : "defined")), "outer is paused for the inside call and closed for returned calls");
+  assert.equal(activeSteps.filter(step => step.calls.includes("lookup-local")).length, updates.length);
+  assert.equal(activeSteps.filter(step => step.calls.includes("lookup-outer")).length, updates.length);
+  if (returned) {
+    assert.deepEqual(Array.from(runInContext("results", program.context)), [undefined, undefined], "add1 changes counter but returns undefined");
+    assert.equal(runInContext("newFunc.name", program.context), "add1");
+    runInContext("function callElsewhere() { let counter = 999; newFunc(); } callElsewhere();", program.context);
+    assert.deepEqual(Array.from(runInContext("snapshots", program.context)), [1, 2, 3], "a different caller's local counter cannot replace the captured counter");
+    assert.equal(runInContext("counter", program.context), 100);
+  }
+}
 const arrayProgram = execute("const snapshots = [];\n" + copyArraySource.join("\n")
   .replace("i < array.length", "(snapshots.push({ index: i, output: [...output] }), i < array.length)")
   .replace("output.push(array[i] * 2);", "output.push(array[i] * 2); snapshots.push({ index: i, output: [...output] });"));
@@ -541,11 +593,12 @@ if (process.argv[2]) {
   }
   const slugs = Object.keys(articles);
   const categoryLessons = {
-    Basic: slugs.filter(slug => !["javascript-symbol", "javascript-event-loop", "javascript-functions", "javascript-arrow-functions", "javascript-principles", "javascript-generalizing-functions"].includes(slug)),
+    Basic: slugs.filter(slug => !["javascript-symbol", "javascript-event-loop", "javascript-functions", "javascript-arrow-functions", "javascript-principles", "javascript-generalizing-functions", "javascript-closure"].includes(slug)),
     Advanced: ["javascript-symbol", "javascript-event-loop"],
     Functions: ["javascript-functions", "javascript-arrow-functions"],
     "Principles of JavaScript": ["javascript-principles"],
     "Callbacks and higher order functions": ["javascript-generalizing-functions"],
+    Closure: ["javascript-closure"],
   };
   assert.match(await page("/articles/javascript-map-filter-reduce"), /class="snapshot-lab variables-lab reduce-lab"/, "the reduce stepper renders");
   const principlesLesson = await page("/articles/javascript-principles");
@@ -554,6 +607,13 @@ if (process.argv[2]) {
   assert.match(principlesLesson, /<div class="execution-board"><\/div>/, "the blackboard starts with no runtime panels");
   assert.match(principlesLesson, /Watch the stack change/, "the dedicated call stack walkthrough renders");
   assert.doesNotMatch(principlesLesson, /<dt>(num|multiplyBy2|output|newOutput|inputNumber|result)<\/dt>/, "the blackboard starts with no memory entries");
+  const closureLesson = await page("/articles/javascript-closure");
+  assert.match(closureLesson, /Follow the returned function/, "the closure walkthrough renders");
+  assert.match(closureLesson, /closure.js/, "the supplied returned-function code renders");
+  assert.equal((closureLesson.match(/<div class="execution-board closure-board"><\/div>/g) ?? []).length, 3, "all three closure boards start empty like Principles");
+  for (const label of ["Call add1 inside outer", "Call add1 after outer returns", "closure-inside.js", "closure-returned.js"]) assert.ok(closureLesson.includes(label), `${label} renders`);
+  assert.doesNotMatch(closureLesson, /<dt>(createFunction|generatedFunc|multiplyBy2|num|result)<\/dt>/, "closure memory appears only as the trace advances");
+  assert.match(closureLesson, /href="#trace-the-code"/, "the hero links to the blackboard");
   const generalizingLesson = await page("/articles/javascript-generalizing-functions");
   assert.match(generalizingLesson, /Functions are values/, "the first-class functions explanation renders in the callback lesson");
   assert.match(generalizingLesson, /arrow-map.js/, "the arrow and map execution trace renders");
@@ -623,10 +683,10 @@ if (process.argv[2]) {
     const section = course.match(new RegExp(`<section[^>]*id="${id}"[^>]*>([\\s\\S]*?)</section>`))?.[1];
     assert.ok(section, `${category} section exists`);
     const listed = [...section.matchAll(/<h[34]><a href="\/articles\/([^"]+)"/g)].map(match => match[1]);
-    const expected = category === "Mental Model" ? [...categoryLessons["Principles of JavaScript"], ...categoryLessons["Callbacks and higher order functions"]] : categoryLessons[category] ?? [];
+    const expected = category === "Mental Model" ? [...categoryLessons["Principles of JavaScript"], ...categoryLessons["Callbacks and higher order functions"], ...categoryLessons.Closure] : categoryLessons[category] ?? [];
     assert.deepEqual(listed, expected, `${category} articles are separate and in lesson order`);
     if (category === "Mental Model") {
-      for (const group of ["Principles of JavaScript", "Callbacks and higher order functions"]) {
+      for (const group of ["Principles of JavaScript", "Callbacks and higher order functions", "Closure"]) {
         const groupId = group.toLowerCase().replaceAll(" ", "-");
         const subgroup = section.match(new RegExp(`<div class="course-subsection" id="${groupId}">([\\s\\S]*?)(?=<div class="course-subsection"|$)`))?.[1];
         assert.ok(subgroup, `${group} is inside Mental Model`);
