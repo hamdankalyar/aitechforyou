@@ -65,6 +65,7 @@ import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-a
 import { electronIntroductionSections } from "@/topics/electron/content/electron-introduction-article";
 import { electronProcessModelSections } from "@/topics/electron/content/electron-process-model-article";
 import { electronSmallestAppSections } from "@/topics/electron/content/electron-smallest-app-article";
+import { electronForgeFirstAppSections } from "@/topics/electron/content/electron-forge-first-app-article";
 
 export type ArticleBlock =
   | { type: "variables-playground" }
@@ -1692,8 +1693,8 @@ export const articles: Article[] = [
       title: "Electron, made visible",
       order: 3,
       practiceTime: "4 flashcards · 11 quiz questions",
-      nextTitle: "More Electron lectures",
-      nextDescription: "More lectures are in preparation.",
+      nextTitle: "Your first Electron Forge app",
+      nextDescription: "Open the Firesale repo, read the Forge main file, and hide the window until it is ready to show.",
       exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
       illustration: { line: "new BrowserWindow()", value: "4 files", notes: ["main.js starts.", "The window loads."] },
     },
@@ -1707,6 +1708,35 @@ export const articles: Article[] = [
       { title: "Electron · Security: Content Security Policy", url: "https://www.electronjs.org/docs/latest/tutorial/security#7-define-a-content-security-policy" },
       { title: "Node.js · process.platform", url: "https://nodejs.org/api/process.html#processplatform" },
       { title: "Electron Forge · Getting started", url: "https://www.electronforge.io/" },
+    ],
+  },
+  {
+    slug: "electron-forge-first-app",
+    title: "Your first Electron Forge app",
+    excerpt: "Open the Firesale repo, see how the Electron Forge main file differs from the vanilla app, and hide the window until it is ready to show.",
+    topic: "Electron",
+    category: "Basics",
+    date: "Oct 31, 2026",
+    readTime: "7 min read",
+    accent: "blue",
+    number: "68",
+    series: {
+      title: "Electron, made visible",
+      order: 4,
+      practiceTime: "5 flashcards · 12 quiz questions",
+      nextTitle: "More Electron lectures",
+      nextDescription: "More lectures are in preparation.",
+      exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
+      illustration: { line: "show: false", value: "ready-to-show", notes: ["Load hidden.", "Show when ready."] },
+    },
+    sections: electronForgeFirstAppSections,
+    sources: [
+      { title: "Steve Kinney · Electron, v3 (Frontend Masters)", url: "https://frontendmasters.com/courses/electron-v3/" },
+      { title: "Electron Forge · Vite plugin", url: "https://www.electronforge.io/config/plugins/vite" },
+      { title: "Electron · BrowserWindow: ready-to-show", url: "https://www.electronjs.org/docs/latest/api/browser-window#event-ready-to-show" },
+      { title: "Electron · webContents.openDevTools", url: "https://www.electronjs.org/docs/latest/api/web-contents#contentsopendevtoolsoptions" },
+      { title: "Node.js · EventEmitter", url: "https://nodejs.org/api/events.html#class-eventemitter" },
+      { title: "MDN · Web Workers API", url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API" },
     ],
   },
 ];

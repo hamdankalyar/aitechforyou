@@ -5,10 +5,11 @@ import { Script, createContext, runInContext } from "node:vm";
 import { electronIntroductionSections } from "../content/electron-introduction-article.ts";
 import { electronProcessModelSections } from "../content/electron-process-model-article.ts";
 import { appLifecycleCode, electronSmallestAppSections } from "../content/electron-smallest-app-article.ts";
+import { electronForgeFirstAppSections } from "../content/electron-forge-first-app-article.ts";
 import { lifecycle, platforms } from "../content/electron-lifecycle-lab.ts";
 import { startupSteps } from "../content/electron-startup-lab.ts";
 
-const lectures = { "electron-introduction": electronIntroductionSections, "electron-process-model": electronProcessModelSections, "electron-smallest-app": electronSmallestAppSections };
+const lectures = { "electron-introduction": electronIntroductionSections, "electron-process-model": electronProcessModelSections, "electron-smallest-app": electronSmallestAppSections, "electron-forge-first-app": electronForgeFirstAppSections };
 const registry = readFileSync(new URL("../../../lib/articles.ts", import.meta.url), "utf8").replaceAll("\r\n", "\n");
 const boldStart = /^\*\*[^*]+\*\*/;
 
@@ -84,6 +85,12 @@ for (const detail of ["main process", "renderer process", "preload script", "IPC
 const smallestApp = JSON.stringify(electronSmallestAppSections);
 for (const detail of ["Electron Fiddle", "Electron Forge", "package.json", "main.js", "preload.js", "renderer.js", "index.html", "BrowserWindow", "webPreferences", "window-all-closed", "activate", "darwin", "win32", "process.versions", "Content-Security-Policy"]) {
   assert.ok(smallestApp.includes(detail), `the smallest app lecture explains ${detail}`);
+}
+
+// Lecture 4 opens the Forge app and hides the window until it is ready.
+const forgeApp = JSON.stringify(electronForgeFirstAppSections);
+for (const detail of ["Electron Forge", "Firesale", "TypeScript", "Webpack", "Vite", "localhost:9000", "localhost:5173", "detach", "View menu", "show: false", "ready-to-show", "focus", "EventEmitter", "once", "GPU", "Canvas", "Service workers", "Nodemon"]) {
+  assert.ok(forgeApp.includes(detail), `the Forge lecture explains ${detail}`);
 }
 
 // The lifecycle simulation must match the lecture's real main.js code, run against a mock of Electron's app events.
