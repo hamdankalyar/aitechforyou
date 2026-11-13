@@ -107,6 +107,7 @@ export type ArticleBlock =
   | { type: "figure"; caption: string }
   | { type: "command"; command: string; explanation?: string; output?: string; label?: string; highlightLines?: number[] }
   | { type: "quiz"; question: string; answers: { text: string; explanation: string; correct: boolean }[] }
+  | { type: "flashcards"; title: string; cards: { question: string; answer: string; code?: string; codeLabel?: string }[] }
   | { type: "quiz-mode"; title: string; questions: { question: string; answers: { text: string; explanation: string; correct: boolean }[] }[] }
   | { type: "recap"; items: string[] };
 
@@ -1658,7 +1659,7 @@ export const articles: Article[] = [
     series: {
       title: "Electron, made visible",
       order: 1,
-      practiceTime: "10 questions in quiz mode",
+      practiceTime: "5 flashcards · 13 quiz questions",
       nextTitle: "Electron's process model",
       nextDescription: "See why an app has one main process and many renderer processes, and how preload scripts connect them safely.",
       exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
@@ -1687,7 +1688,7 @@ export const articles: Article[] = [
     series: {
       title: "Electron, made visible",
       order: 2,
-      practiceTime: "10 questions in quiz mode",
+      practiceTime: "5 flashcards · 10 quiz questions",
       nextTitle: "The smallest Electron app",
       nextDescription: "Walk through the four files of a hello world Electron app and see what each one does.",
       exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
@@ -1717,7 +1718,7 @@ export const articles: Article[] = [
     series: {
       title: "Electron, made visible",
       order: 3,
-      practiceTime: "10 questions in quiz mode",
+      practiceTime: "4 flashcards · 11 quiz questions",
       nextTitle: "More Electron lectures",
       nextDescription: "More lectures are in preparation.",
       exercise: { id: "lecture-quiz", label: "Take the lecture quiz" },
