@@ -7,6 +7,7 @@ topics/
   ai/          Generative and agentic AI guides
   git/         Git guides, short lessons, config reference, interactive labs
   javascript/  JavaScript guides, runnable code boxes, variable playground
+  python/      Python FM notes
   react-native/ React Native guides and mobile app lessons
 ```
 

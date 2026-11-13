@@ -16,9 +16,9 @@ export function ArticleCard({ article, headingLevel = 3 }: { article: Article; h
         <span className="art-line" />
       </div>
       <div className="card-copy">
-        <p><time dateTime={isoDate(article.date)}>{article.date}</time> · {article.readTime}</p>
+        <p><time dateTime={isoDate(article.date)}>{article.date}</time>{article.readTime && <> · {article.readTime}</>}</p>
         <Heading><Link href={`/articles/${article.slug}`}>{article.title}</Link></Heading>
-        <p>{article.excerpt}</p>
+        {article.excerpt && <p>{article.excerpt}</p>}
       </div>
       <Link className="card-link" href={`/articles/${article.slug}`} aria-label={`Read ${article.title}`}>
         Read {article.series ? "guide" : "article"} <ArrowUpRight size={18} />

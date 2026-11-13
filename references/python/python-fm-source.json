@@ -1,0 +1,2173 @@
+[
+  {
+    "blocks": [
+      {
+        "level": "1",
+        "text": "In the folder first make the env "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "source venv/bin/activate"
+      },
+      {
+        "text": ""
+      },
+      {
+        "level": "2",
+        "text": "Activate the env "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "source venv/bin/activate"
+      },
+      {
+        "text": ""
+      },
+      {
+        "level": "2",
+        "text": "Make the requirements.txt file and put libraries in it "
+      },
+      {
+        "level": "2",
+        "text": "Install the libraries by running this command "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "pip install -r requirements.txt"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "\n"
+      }
+    ],
+    "date": [
+      "Thursday, January 23, 2025",
+      "7:30 PM"
+    ],
+    "images": [],
+    "title": "Basic Setup",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "level": "1",
+        "text": "ipykernel: A library that provides a Jupyter kernel for Python, enabling interactive computing with notebooks."
+      },
+      {
+        "level": "1",
+        "text": "numpy: A fundamental library for numerical computing in Python, offering support for arrays, matrices, and various mathematical operations."
+      },
+      {
+        "level": "1",
+        "text": "pandas: A powerful data manipulation and analysis library for Python, offering data structures like DataFrames for tabular data."
+      },
+      {
+        "level": "1",
+        "text": "matplotlib: A plotting library for creating static, interactive, and animated visualizations in Python."
+      },
+      {
+        "level": "1",
+        "text": "seaborn: A data visualization library built on Matplotlib, providing an easy way to create informative and aesthetically pleasing statistical graphics."
+      },
+      {
+        "level": "1",
+        "text": "flask: A lightweight Python web framework for building web applications with minimal setup and complexity."
+      },
+      {
+        "level": "1",
+        "text": "memory_profiler: A Python module for monitoring memory usage during code execution, especially useful for optimization."
+      },
+      {
+        "level": "1",
+        "text": "streamlit: A Python library for building interactive, web-based data apps quickly and easily without extensive front-end development."
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Thursday, January 23, 2025",
+      "7:37 PM"
+    ],
+    "images": [],
+    "title": "Libraries",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "level": "1",
+        "text": "No-Value, None, or Null Value"
+      },
+      {
+        "level": "1",
+        "text": "Variables types are objects under the hood "
+      },
+      {
+        "level": "1",
+        "text": "Everthing inside the python is the object "
+      },
+      {
+        "level": "1",
+        "text": "There is complex numbers in py x = 42j"
+      },
+      {
+        "level": "1",
+        "text": "String Formatting (f formating)"
+      },
+      {
+        "text": " name = \"Nina\""
+      },
+      {
+        "text": "greeting = f\"Hello, {name}\""
+      },
+      {
+        "text": "print(greeting)"
+      },
+      {
+        "text": ""
+      },
+      {
+        "level": "1",
+        "text": "If a function doesn’t have a return statement, it implicitly returns None."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "\n"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "\n"
+      }
+    ],
+    "date": [
+      "Monday, December 30, 2024",
+      "12:13 PM"
+    ],
+    "images": [],
+    "title": "Important to note",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "list (array)"
+      },
+      {
+        "table": [
+          [
+            "type",
+            "list"
+          ],
+          [
+            "use",
+            "Used for storing similar items, and in cases where items need to be added or removed."
+          ],
+          [
+            "creation",
+            "[] or list() for empty list, or [1, 2, 3] for a list with items."
+          ],
+          [
+            "search methods",
+            "my_list.index(item) or item in my_list"
+          ],
+          [
+            "search speed",
+            "Searching in an item in a large list is slow. Each item must be checked."
+          ],
+          [
+            "common methods",
+            "len(my_list), append(item) to add, insert(index, item) to insert in the middle, pop() to remove."
+          ],
+          [
+            "order preserved?",
+            "Yes. Items can be accessed by index."
+          ],
+          [
+            "mutable?",
+            "Yes"
+          ],
+          [
+            "in-place sortable?",
+            "Yes. my_list.sort() will sort the list in-place. my_list.sort(reverse=True) will sort the list in-place in descending order. my_list.reverse() will reverse the items in my_list in-place."
+          ]
+        ]
+      },
+      {
+        "text": "Adding, Removing, Changing, and Finding Items in lists cheat sheet"
+      },
+      {
+        "table": [
+          [
+            "action",
+            "method",
+            "returns",
+            "possible errors"
+          ],
+          [
+            "check length",
+            "len(my_list)",
+            "int",
+            ""
+          ],
+          [
+            "add: to the end",
+            "my_list.append(item)",
+            "-",
+            ""
+          ],
+          [
+            "insert: at position",
+            "my_list.insert(pos, item)",
+            "-",
+            ""
+          ],
+          [
+            "update: at position",
+            "my_list[pos] = item",
+            "- -",
+            "IndexError if pos is >= len(my_list)"
+          ],
+          [
+            "extend: add items from another list",
+            "my_list.extend(other_list)",
+            "-",
+            ""
+          ],
+          [
+            "is item in list?",
+            "item in my_list",
+            "True or False",
+            ""
+          ],
+          [
+            "index of item",
+            "my_list.index(item)",
+            "int",
+            "ValueError if item is not in my_list"
+          ],
+          [
+            "count of item",
+            "my_list.count(item)",
+            "int",
+            ""
+          ],
+          [
+            "remove an item",
+            "my_list.remove(item)",
+            "-",
+            "ValueError if item not in my_list"
+          ],
+          [
+            "remove the last item, or an item at an index",
+            "my_list.pop() or my_list.pop(pos)",
+            "item",
+            "IndexError if pos >= len(my_list)"
+          ]
+        ]
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Tuesday, December 31, 2024",
+      "10:07 AM"
+    ],
+    "images": [],
+    "title": "List",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "List comprehensions are a unique way to create lists in Python. A list comprehension consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The expressions can be any kind of Python object. List comprehensions will commonly take the form of [<value> for <vars> in <iter>]."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "names = [\"Nina\", \"Max\", \"Rose\", \"Jimmy\"]"
+      },
+      {
+        "text": "my_list = [] # empty list"
+      },
+      {
+        "text": "for name in names:"
+      },
+      {
+        "text": "    my_list.append(len(name))"
+      },
+      {
+        "text": "print(my_list)"
+      },
+      {
+        "text": "[4, 3, 4, 5]"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "This above code will convert to below one "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "names = [\"Nina\", \"Max\", \"Rose\", \"Jimmy\"]"
+      },
+      {
+        "text": "my_list = [len(name) for name in names]"
+      },
+      {
+        "text": "print(my_list)"
+      },
+      {
+        "text": "[4, 3, 4, 5]"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "We can also use comprehensions to perform operations, and the lists we assemble can be composed of any type of Python object."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "names = [\"Nina\", \"Max\", \"Rose\", \"Jimmy\"]"
+      },
+      {
+        "text": "my_list = [(\"length\", len(name) * 2) for name in names]"
+      },
+      {
+        "text": "print(my_list)"
+      },
+      {
+        "text": "In the above example, we assemble a list of tuples - each tuple contains the element “length” as well as each number from the len() function multiplied by two."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Conditionals"
+      },
+      {
+        "text": "You can also use conditionals (if statements) in your list comprehensions. For example, to quickly make a list of only the even lengths, you could do:"
+      },
+      {
+        "text": ">>> names = [\"Nina\", \"Max\", \"Rose\", \"Jimmy\"]\n>>> my_list = [len(name) for name in names if len(name) % 2 == 0]\n>>> print(my_list)\n[4, 4]\n"
+      },
+      {
+        "text": "Here, we check divide every string length by 2, and check to see if the remainder is 0 (using the modulo operator)."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "String Joining with a List Comprehension"
+      },
+      {
+        "text": "Back in our exercise on converting between types, we introduced the string.join() function. You can call this function on any string, pass it a list, and it will spit out a string with every element from the list “joined” by the string. For example, to get a comma-delimited list of numbers, you might be tempted to do:"
+      },
+      {
+        "text": ">>> my_string = \",\".join([0, 1, 2, 3, 4])\nTraceback (most recent call last):\n  File \"<stdin>\", line 1, in <module>\nTypeError: sequence item 0: expected str instance, int found\n"
+      },
+      {
+        "text": "Unfortunately, you can’t join a list of numbers without first converting them to strings. But you can do this easily with a list comprehension:"
+      },
+      {
+        "text": ">>> my_list = [0, 1, 2, 3, 4]\n>>> my_string = \",\".join([str(num) for num in my_list])\n>>> print(my_string)\n0,1,2,3,4"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "sum, min, max"
+      },
+      {
+        "text": "Some mathematical functions, such as sum, min, and max, accept lists of numbers to operate on. For example, to get the sum of numbers between zero and five, you could do:"
+      },
+      {
+        "text": "my_sum = sum([0, 1, 2, 3, 4])\nprint(my_sum)\n"
+      },
+      {
+        "text": "But remember, anywhere you can use a list, you can use a list comprehension. Say you want to get sum, minimum, and maximum of every number between 0 and 100 that is evenly divisible by 3? No sense typing out a whole list in advance, just use a comprehension:"
+      },
+      {
+        "text": ">>> my_sum = sum([num for num in range(0, 100) if num % 3 == 0])\n>>> print(my_sum)\n1683\n>>> my_min = min([num for num in range(0, 100) if num % 3 == 0])\n>>> print(my_min)\n0\n>>> my_max = max([num for num in range(0, 100) if num % 3 == 0])\n>>> print(my_max)\n99"
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Thursday, January 02, 2025",
+      "11:31 PM"
+    ],
+    "images": [],
+    "title": "List comprehensions",
+    "parentTitle": "List"
+  },
+  {
+    "blocks": [
+      {
+        "text": "tuple (constant array/list)"
+      },
+      {
+        "table": [
+          [
+            "type",
+            "tuple"
+          ],
+          [
+            "use",
+            "Used for storing a snapshot of related items when we don’t plan on modifying, adding, or removing data."
+          ],
+          [
+            "creation",
+            "() or tuple() for empty tuple. (1, ) for one item, or (1, 2, 3) for a tuple with items."
+          ],
+          [
+            "search methods",
+            "my_tuple.index(item) or item in my_tuple"
+          ],
+          [
+            "search speed",
+            "Searching for an item in a large tuple is slow. Each item must be checked."
+          ],
+          [
+            "common methods",
+            "Can’t add or remove from tuples."
+          ],
+          [
+            "order preserved?",
+            "Yes. Items can be accessed by index."
+          ],
+          [
+            "mutable?",
+            "No"
+          ],
+          [
+            "in-place sortable?",
+            "No"
+          ]
+        ]
+      },
+      {
+        "text": "Uses"
+      },
+      {
+        "text": "A good use of a tuple might be for storing the information for a row in a spreadsheet. That data is information only. We don’t necessarily care about updating or manipulating that data. We just want a read-only snapshot."
+      },
+      {
+        "text": "Tuples are an interesting and powerful datatype, and one of the more unique aspects of Python. Most other programming languages have ways of representing lists and dictionaries, but only a small subset contain tuples. Use them to your advantage."
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Tuesday, December 31, 2024",
+      "11:47 AM"
+    ],
+    "images": [],
+    "title": "Tuples",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "Sets are a datatype that allows you to store other immutable types in an unsorted way. An item can only be contained in a set once. There are no duplicates allowed. The benefits of a set are: very fast membership testing along with being able to use powerful set operations, like union, difference, and intersection."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "cheat sheet"
+      },
+      {
+        "table": [
+          [
+            "type",
+            "set"
+          ],
+          [
+            "use",
+            "Used for storing immutable data types uniquely. Easy to compare the items in sets."
+          ],
+          [
+            "creation",
+            "set() for an empty set ({} makes an empty dict) and {1, 2, 3} for a set with items in it"
+          ],
+          [
+            "search methods",
+            "item in my_set"
+          ],
+          [
+            "search speed",
+            "Searching for an item in a large set is very fast."
+          ],
+          [
+            "common methods",
+            "my_set.add(item), my_set.discard(item) to remove the item if it’s present, my_set.update(other_set)"
+          ],
+          [
+            "order preserved?",
+            "No. Items can’t be accessed by index."
+          ],
+          [
+            "mutable?",
+            "Yes. Can add to or remove from sets."
+          ],
+          [
+            "in-place sortable?",
+            "No, because items aren’t ordered."
+          ]
+        ]
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Empty sets"
+      },
+      {
+        "text": "Let’s create our first few sets."
+      },
+      {
+        "text": "The first thing we might try to do is create an empty set with {}, but we’ll come across a hurdle."
+      }
+    ],
+    "date": [
+      "Tuesday, December 31, 2024",
+      "1:01 PM"
+    ],
+    "images": [],
+    "title": "Sets",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "Dictionaries are a useful type that allow us to store our data in key, value pairs. Dictionaries themselves are mutable, but, dictionary keys can only be immutable types."
+      },
+      {
+        "text": "We use dictionaries when we want to be able to quickly access additional data associated with a particular key. A great practical application for dictionaries is memoization. Let’s say you want to save computing power, and store the result for a function called with particular arguments. The arguments could be the key, with the result stored as the value. Next time someone calls your function, you can check your dictionary to see if the answer is pre-computed."
+      },
+      {
+        "text": "Looking for a key in a large dictionary is extremely fast. Unlike lists, we don’t have to check every item for a match."
+      },
+      {
+        "text": "dictionary cheat sheet"
+      },
+      {
+        "table": [
+          [
+            "type",
+            "dict"
+          ],
+          [
+            "use",
+            "Use for storing data in key, value pairs. Keys used must be immutable data types."
+          ],
+          [
+            "creation",
+            "{} or dict() for an empty dict. {1: \"one\", 2: \"two\"} for a dict with items."
+          ],
+          [
+            "search methods",
+            "key in my_dict"
+          ],
+          [
+            "search speed",
+            "Searching for a key in a large dictionary is fast."
+          ],
+          [
+            "common methods",
+            "my_dict[key] to get the value by key, and throw a KeyError if key is not in the dictionary. Use my_dict.get(key) to fail silently if key is not in my_dict. my_dict.items() for all key, value pairs, my_dict.keys() for all keys, and my_dict.values() for all values."
+          ],
+          [
+            "order preserved?",
+            "Sort of. As of Python 3.6 a dict is sorted by insertion order. Items can’t be accessed by index, only by key."
+          ],
+          [
+            "mutable?",
+            "Yes. Can add or remove keys from dicts."
+          ],
+          [
+            "in-place sortable?",
+            "No. dicts don’t have an index, only keys."
+          ]
+        ]
+      }
+    ],
+    "date": [
+      "Wednesday, January 01, 2025",
+      "12:16 PM"
+    ],
+    "images": [],
+    "title": "Dictionaries",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "Dictionary comprehensions are a quick and easy way of assembling dictionaries in Python. They work just like list comprehensions, and look almost the same. They use curly braces instead of square brackets, and they contain two variables (for key and value), separated by a colon."
+      },
+      {
+        "text": "For example, to assemble a dict in which the keys are numbers between 0 and 10, and the values are the same number squared, we could do:"
+      },
+      {
+        "text": ">>> squares = {num:num * num for num in range(10)}\n"
+      },
+      {
+        "text": ">>> print(squares)\n{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81}\n"
+      },
+      {
+        "text": "Or we could use f-strings to assemble a dict to keep game scores:"
+      },
+      {
+        "text": ">>> scores = {f\"player-{num}\":0 for num in range(0, 5)}\n"
+      },
+      {
+        "text": ">>> print(scores)\n{'player-0': 0, 'player-1': 0, 'player-2': 0, 'player-3': 0, 'player-4': 0}\n"
+      },
+      {
+        "text": "In the above example, the f-string gets turned into the dict keys (player-0, etc.) and each value is set to 0. "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "You can also operate on tuples for setting keys and values. For example, we’ll use a list comprehension to create a list of tuples, then turn the tuples into dict keys and values:"
+      },
+      {
+        "text": ">>> my_list = [(f\"player-{num}\", num * 2) for num in range(0, 5)]\n"
+      },
+      {
+        "text": ">>> print(my_list)\n[('player-0', 0), ('player-1', 2), ('player-2', 4), ('player-3', 6), ('player-4', 8)]\n"
+      },
+      {
+        "text": ">>> scores = {key:value for (key, value) in my_list}\n>>> print(scores)\n{'player-0': 0, 'player-1': 2, 'player-2': 4, 'player-3': 6, 'player-4': 8}"
+      }
+    ],
+    "date": [
+      "Thursday, January 09, 2025",
+      "8:03 PM"
+    ],
+    "images": [],
+    "title": "Dictionary Comprehensions",
+    "parentTitle": "Dictionaries"
+  },
+  {
+    "blocks": [
+      {
+        "text": "Truthiness"
+      },
+      {
+        "text": "Evaluating expression to be True or False will help us control the flow of our program."
+      },
+      {
+        "text": "cheat sheet"
+      },
+      {
+        "table": [
+          [
+            "type",
+            "truthiness",
+            ""
+          ],
+          [
+            "int",
+            "0 is False, all other numbers are True (including negative)",
+            ""
+          ],
+          [
+            "containers - list, tuple, set, dict",
+            "empty container evaluates to False, container with items evaluates to True)",
+            ""
+          ],
+          [
+            "None",
+            "False",
+            ""
+          ]
+        ]
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Wednesday, January 01, 2025",
+      "12:27 PM"
+    ],
+    "images": [],
+    "title": "Boolean",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "Equality Cheat Sheet"
+      },
+      {
+        "table": [
+          [
+            "Operator",
+            "Means"
+          ],
+          [
+            "==",
+            "equals"
+          ],
+          [
+            "!=",
+            "not-equals"
+          ]
+        ]
+      },
+      {
+        "text": "The equality operators val1 == val2 (val1 equals val2) and val1 != val2 (val1 doesn’t equal val2) compare the contents of two different values and return a boolean."
+      },
+      {
+        "text": "Equality works like you’d expect it to for simple data types."
+      },
+      {
+        "text": ">>> a = 1\n>>> b = 1\n>>> a == b\nTrue\n>>> a != b\nFalse\n\n>>> a = \"Nina\"\n>>> b = \"Nina\"\n>>> a == b\nTrue\n>>> a != b\nFalse\n"
+      },
+      {
+        "text": "Equality for container types is interesting. Even though a and b are two different lists, their contents are still the same. So compared two lists containing the same values with == will return True."
+      },
+      {
+        "text": ">>> a = [1, 2, 3]\n>>> b = [1, 2, 3]\n>>> a == b\nTrue\n>>> a != b\nFalse\n"
+      },
+      {
+        "text": "Identity Cheat Sheet"
+      },
+      {
+        "table": [
+          [
+            "Operator",
+            "Means"
+          ],
+          [
+            "is",
+            "is the same object in memory? (not equality!)"
+          ],
+          [
+            "is not",
+            "is not the same object in memory? (not equality!)"
+          ]
+        ]
+      },
+      {
+        "text": "This is something that trips up Python beginners, so make sure you remember that equality (==, !=) is not the same as identity (is, not is)."
+      },
+      {
+        "text": "The is keywords tests if the two compared objects are stored in the same memory location. I won’t go into too much detail into why, but remember not to use is when what you actually want to check for is equality."
+      },
+      {
+        "text": ">>> a = [1, 2, 3]\n>>> b = [1, 2, 3]\n\n>>> a == b  # Testing for equality. a and b contain the same values\nTrue\n>>> a is b  # Testing for identity. a and b are NOT the same object.\nFalse\n"
+      },
+      {
+        "text": "When you’re first starting out, the only place you’ll want to use the is keyword is to explicitly compare a value to the built-in types of None, True, or False."
+      },
+      {
+        "text": ">>> a = True\n>>> a is True\nTrue\n\n>>> b = False\n>>> b is False\nTrue\n>>> b is not True   # Opposite of is b True. aka is b False?\nTrue\n\n>>> c = None\n>>> c is None\nTrue\n>>> c is not None\nFalse"
+      }
+    ],
+    "date": [
+      "Wednesday, January 01, 2025",
+      "12:29 PM"
+    ],
+    "images": [],
+    "title": "Equality vs Identity",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "colors = [\"Red\", \"Green\", \"Blue\", \"Orange\"]"
+      },
+      {
+        "text": "for color in colors:"
+      },
+      {
+        "text": "    print(f\"The color is: {color}\")"
+      },
+      {
+        "text": "The color is: Red"
+      },
+      {
+        "text": "The color is: Green"
+      },
+      {
+        "text": "The color is: Blue"
+      },
+      {
+        "text": "The color is: Orange\n\n\nthis is loop in python \n"
+      },
+      {
+        "text": "Looping over a dictionary"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Remember, a dictionary is composed of key, value pairs. When we loop over a dictionary with the for item in my_dict syntax, we’ll end up looping over just the keys."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "We can use tuple unpacking along with the my_dict.items() list to loop over both the keys and the values at the same time."
+      },
+      {
+        "text": ">>> for color, hex_value in hex_colors.items():\n"
+      },
+      {
+        "text": "...    print(f\"For color {color}, the hex value is: {hex_value}\")\n"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "For color Red, the hex value is: #FF0000\n"
+      },
+      {
+        "text": "For color Green, the hex value is: #008000"
+      },
+      {
+        "text": "\nFor color Blue, the hex value is: #0000FF\n"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Wednesday, January 01, 2025",
+      "1:17 PM"
+    ],
+    "images": [],
+    "title": "loop",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "level": "1",
+        "text": "The range function in python produces a sequence of integers from an optional and inclusive start, to a defined and exclusive finish."
+      },
+      {
+        "level": "1",
+        "text": "range() can be called with start and stop parameters, range(1,4) where stop is exclusive "
+      },
+      {
+        "level": "1",
+        "text": "You can also pass an a third optional step parameter in. Let’s say I quickly wanted to print out all the even numbers from 2 to 10. I would call range(2, 11, 2)."
+      },
+      {
+        "text": "for num in range(2, 11, 2):"
+      },
+      {
+        "text": "    print(f\"The number is: {num}\")"
+      },
+      {
+        "text": "The number is: 2"
+      },
+      {
+        "text": "The number is: 4"
+      },
+      {
+        "text": "The number is: 6"
+      },
+      {
+        "text": "The number is: 8"
+      },
+      {
+        "text": "The number is: 10"
+      }
+    ],
+    "date": [
+      "Wednesday, January 01, 2025",
+      "1:43 PM"
+    ],
+    "images": [],
+    "title": "Range()",
+    "parentTitle": "loop"
+  },
+  {
+    "blocks": [
+      {
+        "level": "1",
+        "text": "The function takes a sequence, like a list, and it returns a list of tuples, containing the index of the item in the sequence, and the sequence itself."
+      },
+      {
+        "level": "1",
+        "text": "Because enumerate() returns a structure that looks like a list of tuples under the hood, we can take advantage of tuple unpacking in the for loop."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "for index, item in enumerate(colors):"
+      },
+      {
+        "text": "    print(f\"Item: {item} is at index: {index}.\")"
+      }
+    ],
+    "date": [
+      "Wednesday, January 01, 2025",
+      "1:46 PM"
+    ],
+    "images": [],
+    "title": "enumerate()",
+    "parentTitle": "loop"
+  },
+  {
+    "blocks": [
+      {
+        "text": "a = 5"
+      },
+      {
+        "text": "if a > 10:"
+      },
+      {
+        "text": "    print(\"Greater than 10\")"
+      },
+      {
+        "text": "elif a < 10:"
+      },
+      {
+        "text": "    print(\"Less than 10\")"
+      },
+      {
+        "text": "elif a < 20:"
+      },
+      {
+        "text": "    print(\"Less than 20\")"
+      },
+      {
+        "text": "else:"
+      },
+      {
+        "text": "    print(\"Dunno\")"
+      }
+    ],
+    "date": [
+      "Wednesday, January 01, 2025",
+      "2:05 PM"
+    ],
+    "images": [],
+    "title": "If - else",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "The main Method"
+      },
+      {
+        "text": "Once you start writing more comprehensive Python programs, you’ll want to include a main method in your code."
+      },
+      {
+        "text": "The purpose of checking for the main method is to make sure that the code in your main method is only run when it’s executed as a stand-alone program. Because of how Python’s import system works, if someone else imports your Python program, any code in it is executed on import."
+      },
+      {
+        "text": "We’ll talk more about imports and modules on day two, but let’s look at a quick example."
+      },
+      {
+        "text": "Let’s say we had a Python file named name_lib.py"
+      },
+      {
+        "text": "def name_length(name):\n    return len(name)\n\ndef upper_case_name(name):\n    return name.upper()\n\ndef lower_case_name(name):\n    return name.lower()\n\nname = \"Nina\"\nlength = name_length(name)\nupper_case = upper_case_name(name)\n\nprint(f\"The length is {length} and the uppercase version is: {upper_case}\")\n"
+      },
+      {
+        "text": "If we ran this code, we’d see exactly what we expect."
+      },
+      {
+        "text": "(env) $ python name_lib.py\nname_lib.py\nThe length is 4 and the uppercase version is: NINA\n"
+      },
+      {
+        "text": "Writing Reusable Code"
+      },
+      {
+        "text": "We went through all this trouble of writing a useful name library. What if someone else wanted to use our library in their own code by importing it?"
+      },
+      {
+        "text": "Let’s say someone else wrote their own program, in other_program.py"
+      },
+      {
+        "text": "import name_lib\n\nmy_name = \"Fred\"\n\nmy_length = name_lib.name_length(my_name)\nmy_lower_case = name_lib.lower_case_name(my_name)\n\nprint(f\"In my code, my length is {my_length} and my lower case name is: {my_lower_case}\")\n"
+      },
+      {
+        "text": "If we ran this, we’d see the following result:"
+      },
+      {
+        "text": "(env) $ python other_program.py\n\nThe length is 4 and the uppercase version is: NINA\nIn my code, my length is 4 and my lower case name is: fred\n"
+      },
+      {
+        "text": "If I’m Fred, I just wanted to use this cool library. But all of a sudden, I’m seeing information about Nina!"
+      },
+      {
+        "text": "To prevent this from happening, we want to write a conditional that will only run our code if we’re the ones running the program directly."
+      },
+      {
+        "text": "To do that, we’ll need to check if __name__ == __main__."
+      },
+      {
+        "text": "Let’s unwrap that."
+      },
+      {
+        "text": "__name__ is a special variable that’s set by Python that tells it where it was called from. We can tell it’s a special variable because it starts and ends with __. That’s a hint that you don’t want to change the value of this variable, or it could adversely affect the execution of your Python program."
+      },
+      {
+        "text": "In Python, __ is also called double underscore, or dunder."
+      },
+      {
+        "text": "Let’s comment out our original print, and add the following line to the end of name_lib.py:"
+      },
+      {
+        "text": "# Note: add to the bottom of name_lib.py\n\n# print(f\"The length is {length} and the uppercase version is: {upper_case}\")\nprint(f\"The value of __name__ is: {__name__}\")\n"
+      },
+      {
+        "text": "Now, let’s run name_lib.py again. We should see:"
+      },
+      {
+        "text": "(env) $ python name_lib.py\nThe value of __name__ is: __main__\n"
+      },
+      {
+        "text": "We’re getting somewhere. When we run this file directly, we’ll see that __name__ has the value of __main__."
+      },
+      {
+        "text": "What if we run our other program again?"
+      },
+      {
+        "text": "(env) $ python other_program.py\nThe value of __name__ is: name_lib\n"
+      },
+      {
+        "text": "When we “run” our library by importing it, we’ll see that it’s __name__ is set to the name of the file that it’s in, minus the .py extension. In this case, __name__ is set to name_lib."
+      },
+      {
+        "text": "Putting Code in a main Conditional"
+      },
+      {
+        "text": "To avoid running our code when it’s imported by other modules, we put it in a conditional statement, and explicitly check if __name__ == \"__main__\"."
+      },
+      {
+        "text": "Let’s update name_lib.py, and put our own code inside of the conditional check."
+      },
+      {
+        "text": "def name_length(name):\n    return len(name)\n\ndef upper_case_name(name):\n    return name.upper()\n\ndef lower_case_name(name):\n    return name.lower()\n\nif __name__ == \"__main__\":\n    name = \"Nina\"\n    length = name_length(name)\n    upper_case = upper_case_name(name)\n\n    print(f\"The length is {length} and the uppercase version is: {upper_case}\")\n"
+      },
+      {
+        "text": "Now, if we run other_program.py, we’ll see:"
+      },
+      {
+        "text": "(env) $ python other_program.py\nIn my code, my length is 4 and my lower case name is: fred\n"
+      },
+      {
+        "text": "Much better!"
+      },
+      {
+        "text": "Using a main method is a common pattern that you’ll see in Python programs, and it comes in handy for being able to write programs that work both on their own and when imported into other programs."
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Thursday, January 02, 2025",
+      "2:48 PM"
+    ],
+    "images": [],
+    "title": "Main method",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "the split() method in Python is used to divide a string into a list of substrings based on a specified delimiter. "
+      },
+      {
+        "text": "If no delimiter is provided, it defaults to splitting on any whitespace (spaces, tabs, or newlines)."
+      },
+      {
+        "text": "Here’s how it works:"
+      },
+      {
+        "text": "Basic Usage"
+      },
+      {
+        "text": "text = \"hello world\"\nresult = text.split()  # Splits by whitespace\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "['hello', 'world']\n "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Using a Custom Delimiter"
+      },
+      {
+        "text": "You can specify a delimiter to split the string:"
+      },
+      {
+        "text": "text = \"apple,banana,grape\"\nresult = text.split(\",\")  # Splits by comma\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "['apple', 'banana', 'grape']\n "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Without a Delimiter"
+      },
+      {
+        "text": "If there’s no delimiter in the string or the delimiter is not found, the entire string becomes a single element in the list:"
+      },
+      {
+        "text": "text = \"helloworld\"\nresult = text.split(\",\")  # No comma in the string\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "['helloworld']\n "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Splitting into Characters"
+      },
+      {
+        "text": "If you want to split the string into individual characters, you don’t use split. Instead, you can use list() or a comprehension:"
+      },
+      {
+        "text": "text = \"hello\"\nresult = list(text)  # Converts into a list of characters\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "['h', 'e', 'l', 'l', 'o']\n"
+      }
+    ],
+    "date": [
+      "Thursday, January 09, 2025",
+      "1:44 PM"
+    ],
+    "images": [],
+    "title": "String split",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "The join() method in Python is used to combine the elements of a list (or any iterable) into a single string, with a specified delimiter placed between each element."
+      },
+      {
+        "text": "Basic Usage"
+      },
+      {
+        "text": "The syntax is:"
+      },
+      {
+        "text": "delimiter.join(iterable)\n "
+      },
+      {
+        "level": "2",
+        "text": "delimiter: The string that will be placed between each element (e.g., space, comma, etc.)."
+      },
+      {
+        "level": "2",
+        "text": "iterable: The list (or other iterable, like a tuple) whose elements will be joined."
+      },
+      {
+        "text": "Example 1: Joining a List with a Space"
+      },
+      {
+        "text": "words = ['hello', 'world']\nresult = \" \".join(words)  # Joins with a space\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "hello world\n "
+      },
+      {
+        "text": "Example 2: Joining with a Custom Delimiter"
+      },
+      {
+        "text": "fruits = ['apple', 'banana', 'grape']\nresult = \", \".join(fruits)  # Joins with a comma and space\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "apple, banana, grape\n "
+      },
+      {
+        "text": "Example 3: Joining Characters into a String"
+      },
+      {
+        "text": "If you have a list of characters, you can use join() to combine them into a single string:"
+      },
+      {
+        "text": "chars = ['h', 'e', 'l', 'l', 'o']\nresult = \"\".join(chars)  # Joins with no space (empty string as delimiter)\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "hello\n "
+      },
+      {
+        "text": "Example 4: Joining with No Separator"
+      },
+      {
+        "text": "You can also use an empty string (\"\") as the delimiter to combine elements without any separator:"
+      },
+      {
+        "text": "numbers = ['1', '2', '3']\nresult = \"\".join(numbers)\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "123\n "
+      },
+      {
+        "text": "Important Notes:"
+      },
+      {
+        "level": "1",
+        "text": "All elements in the list (or iterable) must be strings. If they are not, you'll get a TypeError. To fix this, you can convert non-string elements to strings first:"
+      },
+      {
+        "text": "items = [1, 2, 3]\nresult = \"-\".join(map(str, items))  # Convert integers to strings\nprint(result)\n "
+      },
+      {
+        "text": "Output:"
+      },
+      {
+        "text": "1-2-3\n "
+      },
+      {
+        "level": "1",
+        "text": "The join() method does not modify the original list; it creates and returns a new string."
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Thursday, January 09, 2025",
+      "1:47 PM"
+    ],
+    "images": [],
+    "title": "String join",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "Generator expressions are a little more advanced. A generator is a type of iterable object - like a list, you can iterate through each element - however, unlike a list, generators evaluate elements on demand, instead of assembling them all at once."
+      },
+      {
+        "text": "A generator comprehension looks just like a list comprehension, except we use parenthesis instead of brackets. For example, to get a list of the square of every even number between 0 and 10, we could do:"
+      },
+      {
+        "text": "# List comprehension\n>>> list_comp = [x ** 2 for x in range(10) if x % 2 == 0]\n"
+      },
+      {
+        "text": ">>> print(list_comp)\n[0, 4, 16, 36, 64]\n\n# Generator expression\n"
+      },
+      {
+        "text": ">>> gen_exp = (x ** 2 for x in range(10) if x % 2 == 0)\n"
+      },
+      {
+        "text": ">>> print(gen_exp)\n<generator object <genexpr> at 0x10d48cc00>"
+      },
+      {
+        "text": "\n>>> for num in gen_exp:\n...    print(num)\n...\n0\n4\n16\n36\n64\n"
+      },
+      {
+        "text": "Generator comprehensions can be beneficial in circumstances where you want to iterate over very large lists without storing the entire list in memory. "
+      },
+      {
+        "text": "For example, if you tried to assemble a list of every number between 0 and 10 ** 8 (10 to the 8th power), Python will try to assemble the entire list in memory. Using the timeit library to create this list only once, we can see how long this takes:"
+      },
+      {
+        "text": ">>> list_comp = \"[num for num in range(0, 10 ** 8)]\"\n>>> import timeit\n>>> timeit.timeit(list_comp, number=1)\n7.578090285999998\n# Over 7 seconds just to assemble one huge list\n# Let's do the same with a generator comprehension instead:\n>>> gen_comp = \"(num for num in range(0, 10 ** 8))\"\n>>> timeit.timeit(gen_comp, number=1)\n9.919999996554907e-06\n>>> timeit.timeit(gen_comp, number=10000000)\n7.211805443999992\n"
+      },
+      {
+        "text": "As you can see, assembling the generator is almost instantaneous, in fact we can run the generator expression over 10 million times in less time than it takes to assemble the full list once, and the generator will take far less memory."
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Thursday, January 09, 2025",
+      "8:12 PM"
+    ],
+    "images": [],
+    "title": "Generator expression",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "Slicing is a easy way to create sub-lists from larger lists. "
+      },
+      {
+        "text": " Remember that a string is just a list of characters. "
+      },
+      {
+        "text": "For example:"
+      },
+      {
+        "text": ">>> my_string = \"Hello, world!\""
+      },
+      {
+        "text": "\n>>> my_string[7:12] # from 7 to 12\n'world'"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Lopsided Slicing"
+      },
+      {
+        "level": "2",
+        "text": "You can also leave out one of the numbers in the slice. "
+      },
+      {
+        "level": "2",
+        "text": "Leaving out the first number is equivalent to using a zero - you can think of this as “from the beginning.” "
+      },
+      {
+        "level": "2",
+        "text": "Leaving out the last number is equivalent to using the length of the list you’re slicing - you can think of this as “until the end.” "
+      },
+      {
+        "text": "For example:"
+      },
+      {
+        "text": ">>> my_string = \"Hello, world!\"\n"
+      },
+      {
+        "text": ">>> my_string[:5] # from zero to 5\n'Hello'\n"
+      },
+      {
+        "text": ">>> my_string[7:] # from 7 to the end\n'world!'\n"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "You can also leave out both sides of the slice! You can think of this as “from the beginning, until the end.” Why? This is an easy way to copy a list!"
+      },
+      {
+        "text": ">>> my_new_string = my_string[:]\n>>> my_new_string\n'Hello, world!'"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Negative Indexing"
+      },
+      {
+        "level": "2",
+        "text": "A negative number on the left side will wrap around to the other side of your list. "
+      },
+      {
+        "level": "2",
+        "text": "A negative number on the right side is equivalent to the length of the list minus your number. "
+      },
+      {
+        "level": "2",
+        "text": "For example:"
+      },
+      {
+        "text": ">>> my_string = \"Hello, world!\"\n"
+      },
+      {
+        "text": ">>> my_string[-6:] # from the end - 6 to the end\n'world!'\n"
+      },
+      {
+        "text": ">>> my_string[-10:-4] # from the end - 10 to the end - 4\n'lo, wo'\n"
+      },
+      {
+        "text": "You can also use just a single negative number to get an item counting backwards from the end of a list. "
+      },
+      {
+        "text": "For example, to get the last item from a list:"
+      },
+      {
+        "text": ">>> my_list = [1, 3, 3, 7]\n"
+      },
+      {
+        "text": ">>> my_list[-1]\n"
+      },
+      {
+        "text": ">>> 7"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Stride or Step"
+      },
+      {
+        "level": "2",
+        "text": "Python slices also have a third, optional argument, called “step” or “stride”, separated by a second colon. "
+      },
+      {
+        "level": "2",
+        "text": "This lets you skip elements of a list or even reverse them. "
+      },
+      {
+        "text": "For example:"
+      },
+      {
+        "text": ">>> my_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+      },
+      {
+        "text": "\n>>> my_list[::2] # move forward by 2, or skip every other index\n[0, 2, 4, 6, 8]\n"
+      },
+      {
+        "text": ">>> my_list[::-1] # move backward by 1, and easy way to reverse a list\n[9, 8, 7, 6, 5, 4, 3, 2, 1,0]\n>>> my_list[1:7:2] # get every other index between 1 and 7\n[1, 3, 5]\n"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "You can use a slice to get a subset of items from any data type that maintains an order, such as a list or tuple, but not from any non-ordered data types, such as dict or set."
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Wednesday, January 15, 2025",
+      "11:32 PM"
+    ],
+    "images": [],
+    "title": "Slicing",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "It’s often necessary to iterate over multiple lists simultaneously. "
+      },
+      {
+        "text": "Suppose we’re keeping score of a game and we have two lists, one for names and one for scores:"
+      },
+      {
+        "text": ">>> names = [\"Bob\", \"Alice\", \"Eve\"]"
+      },
+      {
+        "text": "\n>>> scores = [42, 97, 68]\n"
+      },
+      {
+        "level": "2",
+        "text": "The zip function takes any number of iterable arguments and steps through all of them at the same time until the end of the shortest iterable has been reached:"
+      },
+      {
+        "text": ">>> for name, score in zip(names, scores):\n"
+      },
+      {
+        "text": ">>>    print(f\"{name} had a score of {score}.\")\n"
+      },
+      {
+        "text": "...\nBob had a score of 42.\n"
+      },
+      {
+        "text": "Alice had a score of 97.\n"
+      },
+      {
+        "text": "Eve had a score of 68.\n"
+      },
+      {
+        "text": "What will the above loop print after removing the last element from scores?"
+      },
+      {
+        "text": ">>> scores.pop(-1)\n"
+      },
+      {
+        "text": "68\n"
+      },
+      {
+        "text": ">>> for name, score in zip(names, scores):\n"
+      },
+      {
+        "text": ">>>    print(f\"{name} had a score of {score}.\")\n"
+      },
+      {
+        "text": "...\nBob had a score of 42.\nAlice had a score of 97.\n"
+      },
+      {
+        "text": "The loop terminates even though there are more values in names. Here, Eve isn’t included because scores only has two elements."
+      },
+      {
+        "text": "We can also use zip() to quickly and easily create a dict from two lists. "
+      },
+      {
+        "text": "For example:"
+      },
+      {
+        "text": ">>> scores = [42, 97, 68]\n"
+      },
+      {
+        "text": ">>> score_dict = dict(zip(names, scores))\n"
+      },
+      {
+        "text": ">>> print(score_dict)\n"
+      },
+      {
+        "text": "{'Bob': 42, 'Alice': 97, 'Eve': 68}"
+      }
+    ],
+    "date": [
+      "Wednesday, January 15, 2025",
+      "11:45 PM"
+    ],
+    "images": [],
+    "title": "zip function",
+    "parentTitle": null
+  },
+  {
+    "blocks": [],
+    "date": [
+      "Friday, January 17, 2025",
+      "3:54 PM"
+    ],
+    "images": [],
+    "title": "OOP",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "Every thing or object in Python is an instance of a class. "
+      },
+      {
+        "level": "2",
+        "text": "The number 42 is an instance of the class int. "
+      },
+      {
+        "level": "2",
+        "text": "The string Hello, world is an instance of the str (or string) class. "
+      },
+      {
+        "level": "2",
+        "text": "These classes, in turn, are subclasses of the master object class."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "It seems you found the concept of classes and instances in Python confusing. Let me break it down step by step and explain each part clearly:"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "1. What is a Class?"
+      },
+      {
+        "level": "2",
+        "text": "A class is a blueprint or template for creating objects."
+      },
+      {
+        "level": "2",
+        "text": "Think of it as a recipe that defines the structure and behavior (properties and methods) that its objects will have."
+      },
+      {
+        "text": "Example:"
+      },
+      {
+        "text": "class Car:\n    runs = True  # This is a class variable (shared by all instances of Car)\n\n    def start(self):\n        if self.runs:\n            print(\"Car is started. Vroom vroom!\")\n        else:\n            print(\"Car is broken :(\")\n "
+      },
+      {
+        "text": "2. What is an Instance?"
+      },
+      {
+        "level": "2",
+        "text": "An instance is a specific object created from a class."
+      },
+      {
+        "level": "2",
+        "text": "When you create an instance, you are making a unique object that can have its own data."
+      },
+      {
+        "text": "Example:"
+      },
+      {
+        "text": "my_car = Car()  # my_car is an instance of the Car class\n "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "3. Class vs Instance Variables"
+      },
+      {
+        "level": "2",
+        "text": "Class Variable: Shared by all instances of the class. Changing it in one place can affect all instances unless overridden."
+      },
+      {
+        "level": "2",
+        "text": "Instance Variable: Specific to the instance and doesn’t affect other instances."
+      },
+      {
+        "text": "Example:"
+      },
+      {
+        "text": "my_car.runs = False  # This creates an instance variable for my_car\n "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "4. The self Keyword"
+      },
+      {
+        "level": "2",
+        "text": "self is a reference to the current instance of the class."
+      },
+      {
+        "level": "2",
+        "text": "It allows you to access instance variables and methods."
+      },
+      {
+        "text": "Example:"
+      },
+      {
+        "text": "my_car.start()  # self refers to my_car inside the start() method\n "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "5. How self Works"
+      },
+      {
+        "text": "When you call a method on an instance, Python automatically passes the instance as the first argument to the method. This is why we always include self as the first parameter in instance methods."
+      },
+      {
+        "text": "Example:"
+      },
+      {
+        "text": "my_car.start()  # Equivalent to Car.start(my_car)\n "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "6. Class vs Instance Behavior"
+      },
+      {
+        "text": "When you call start() on:"
+      },
+      {
+        "level": "1",
+        "text": "An Instance (e.g., my_car.start()):"
+      },
+      {
+        "level": "2",
+        "text": "self refers to that specific instance (my_car)."
+      },
+      {
+        "level": "2",
+        "text": "If runs is set as an instance variable, the method will use it."
+      },
+      {
+        "level": "2",
+        "text": "If no instance variable is found, the method will fall back to the class variable."
+      },
+      {
+        "level": "2",
+        "text": "The Class (e.g., Car.start()):"
+      },
+      {
+        "level": "3",
+        "text": "Since self is missing, Python throws an error because it doesn’t know which instance to use."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Visual Summary"
+      },
+      {
+        "level": "1",
+        "text": "Creating an instance:"
+      },
+      {
+        "text": "my_car = Car()\nmy_car.runs  # Uses the class variable (True by default)\n "
+      },
+      {
+        "level": "1",
+        "text": "Overriding the class variable:"
+      },
+      {
+        "text": "my_car.runs = False  # Creates an instance variable only for my_car\n "
+      },
+      {
+        "level": "1",
+        "text": "Creating another instance:"
+      },
+      {
+        "text": "my_other_car = Car()\nmy_other_car.runs  # Still uses the class variable (True)\n "
+      },
+      {
+        "level": "1",
+        "text": "Error when calling on class:"
+      },
+      {
+        "text": "Car.start()  # Raises TypeError because `self` is not provided\n "
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Example"
+      },
+      {
+        "text": "# car.py"
+      },
+      {
+        "text": "class Car:"
+      },
+      {
+        "text": "    def __init__(self, make, model):"
+      },
+      {
+        "text": "        self.make = make"
+      },
+      {
+        "text": "        self.model = model"
+      },
+      {
+        "text": "    "
+      },
+      {
+        "text": "    def start(self):"
+      },
+      {
+        "text": "        print(f\"{self.make} {self.model} is starting. Vroom vroom!\")"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "# main.py"
+      },
+      {
+        "text": "from car import Car  # Import the Car class from car.py"
+      },
+      {
+        "text": " "
+      },
+      {
+        "text": "# Create an instance of the Car class"
+      },
+      {
+        "text": "my_car = Car(make=\"Toyota\", model=\"Corolla\")"
+      },
+      {
+        "text": "my_car.start()"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Friday, January 17, 2025",
+      "3:55 PM"
+    ],
+    "images": [],
+    "title": "Classes",
+    "parentTitle": "OOP"
+  },
+  {
+    "blocks": [
+      {
+        "text": " Classes can also have class methods - methods that are shared among all instances of a certain type. "
+      },
+      {
+        "text": "As with variables, they can be overriden in a specific instance or subclass."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Let’s add a class method to our Car class:"
+      },
+      {
+        "text": "class Car:\n"
+      },
+      {
+        "text": "    runs = True\n"
+      },
+      {
+        "text": "    number_of_wheels = 4\n\n    "
+      },
+      {
+        "text": " @classmethod\n    def get_number_of_wheels(cls):\n  "
+      },
+      {
+        "text": "      return cls.number_of_wheels\n\n"
+      },
+      {
+        "text": "    def start(self):\n"
+      },
+      {
+        "text": "        if self.runs:\n            print(\"Car is started. Vroom vroom!\")\n  "
+      },
+      {
+        "text": "      else:\n            print(\"Car is broken :(\")\n"
+      },
+      {
+        "text": "And call it:"
+      },
+      {
+        "text": ">>> my_car = Car()\n"
+      },
+      {
+        "text": ">>> print(f\"Cars have {Car.get_number_of_wheels()} wheels.\")\nCars have 4 wheels.\n# Of course, we can override this in our instance:"
+      },
+      {
+        "text": "\n>>> my_car.number_of_wheels = 6\n# And when we access our new instance variable:\n"
+      },
+      {
+        "text": ">>> print(f\"My car has {my_car.number_of_wheels} wheels.\")\nMy car has 6 wheels.\n# But, when we call our class method on our instance:\n"
+      },
+      {
+        "text": ">>> print(f\"My car has {my_car.get_number_of_wheels()} wheels.\")\nMy car has 4 wheels.\n"
+      },
+      {
+        "text": "Why? Because get_number_of_wheels() is a class method, and when it’s called, the class (Car) gets passed in, and the value of Car.number_of_wheels is returned. Although we can access the instance variable (with a value of 6), the get_number_of_wheels() class method still returns the class variable, which is 4."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Bonus"
+      },
+      {
+        "text": "You don’t have to instantiate everything by hand, you can instantiate objects in for loops or even comprehensions. "
+      },
+      {
+        "text": "This is useful for running a function on a list of objects. "
+      },
+      {
+        "text": "For example, to convert a list of number-strings into a list of integers, you could do:"
+      },
+      {
+        "text": ">>> my_ints = [int(str_num) for str_num in [\"1\", \"2\", \"3\"]]\n>>> print(my_ints)\n[1, 2, 3]"
+      }
+    ],
+    "date": [
+      "Sunday, January 19, 2025",
+      "11:57 AM"
+    ],
+    "images": [],
+    "title": "Methods",
+    "parentTitle": "OOP"
+  },
+  {
+    "blocks": [
+      {
+        "text": "magic methods that come in handy for debugging, __str__() and __repr__(). "
+      },
+      {
+        "text": "Both functions return a string representation of an object. __str__() should return readable end-user output,"
+      },
+      {
+        "text": " __repr__() should return the Python code necessary to rebuild the object. "
+      },
+      {
+        "text": "__str__() maps to the built-in function str() and __repr__() maps to the built-in function repr()."
+      },
+      {
+        "text": "For example, we’ll use the datetime library to generate a datetime object for right now:"
+      },
+      {
+        "text": ">>> import datetime\n>>> now = datetime.datetime.now()\n>>> str(now)\n'2019-03-16 21:04:01.396256'\n>>> repr(now)\n'datetime.datetime(2019, 3, 16, 21, 4, 1, 396256)'\n"
+      },
+      {
+        "text": "You can see that str() has returned a human-readable date/time, and repr() has returned a string that represents the Python code we would need to run to recreate this object."
+      },
+      {
+        "text": "We can, of course, set our own __str__() and __repr__() methods in our custom classes:"
+      },
+      {
+        "text": "class Car:\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def __str__(self):\n        return f\"<<Car object: {self.make} {self.model}>>\"\n\n    def __repr__(self):\n        return f\"Car('{self.make}', '{self.model}')\"\n>>> my_car = Car(\"Ford\", \"Thunderbird\")\n>>> print(f\"This object is a {str(my_car)}\")\nThis object is a <<Car object: Ford Thunderbird>>\n>>> print(f\"To reproduce it, type: {repr(my_car)}\")\nTo reproduce it, type: Car('Ford', 'Thunderbird')"
+      },
+      {
+        "text": ""
+      },
+      {
+        "level": "2",
+        "text": "str() and repr() automatically call the __str__() and __repr__() methods if they exist."
+      },
+      {
+        "level": "2",
+        "text": "Direct calls to __str__() and __repr__() are redundant because Python handles this for you."
+      },
+      {
+        "level": "2",
+        "text": "Always prefer str() and repr() for a more Pythonic and consistent approach."
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Sunday, January 19, 2025",
+      "12:41 PM"
+    ],
+    "images": [],
+    "title": "__str__ and __repr__",
+    "parentTitle": "Methods"
+  },
+  {
+    "blocks": [
+      {
+        "text": "Classes can have an optional magic method called __init__() that gets run when you instantiate an instance of a class. "
+      },
+      {
+        "text": "You can use the __init__() method to do any special thing you want to happen when your instance is instantiated, including setting instance variables. __init__ can take arguments, too."
+      },
+      {
+        "text": "Methods that are bracketed by underscores are sometimes called “magic methods.”"
+      },
+      {
+        "text": "For example:"
+      },
+      {
+        "text": "class Car:\n    runs = True\n\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def start(self):\n        if self.runs:\n            print(f\"Your {self.make} {self.model} is started. Vroom vroom!\")\n        else:\n            print(f\"Your {self.make} {self.model} is broken :(\"\n>>> my_car = Car(\"Ford\", \"Thunderbird\")\n>>> my_car.start()\nYour Ford Thunderbird is started. Vroom vroom!"
+      },
+      {
+        "text": ""
+      },
+      {
+        "text": "Here, we accept two required variables, make and model in our __init__() method, and set instance variables of the same names using self. "
+      },
+      {
+        "text": "Later, when we call start(), we can grab self.make and self.model from the bound instance and use them in our string."
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Sunday, January 19, 2025",
+      "12:10 PM"
+    ],
+    "images": [],
+    "title": "__init__",
+    "parentTitle": "Methods"
+  },
+  {
+    "blocks": [
+      {
+        "text": "Python comes with some built-in functions for inspecting classes and types:"
+      },
+      {
+        "text": " the type() function returns the type of the object you pass it, or it’s class. "
+      },
+      {
+        "text": "For example:"
+      },
+      {
+        "text": ">>> type(42)\n<class 'int'>\n>>> type(\"Hello world!\")\n<class 'str'>\n>>> type(my_car)\n<class '__main__.Car'>\n"
+      },
+      {
+        "text": "The isinstance() function takes an object and a class, and returns True if the object you pass it is an instance of the class. "
+      },
+      {
+        "text": "For example:"
+      },
+      {
+        "text": ">>> isinstance(42, int)\nTrue\n>>> isinstance(\"Hello world!\", str)\nTrue\n>>> isinstance(my_car, float)\nFalse\n>>> isinstance(my_car, Car)\nTrue\n"
+      },
+      {
+        "text": "The issubclass function takes two classes, and returns True if the first class is a subclass of the second. For example:"
+      },
+      {
+        "text": "# bool is a subclass of int\n>>> issubclass(bool, int)\nTrue\n# int is a subclass of object\n>>> issubclass(int, object)\nTrue\n# technically, everything is a subclass of object\n>>> issubclass(bool, object)\nTrue\n"
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Sunday, January 19, 2025",
+      "12:00 PM"
+    ],
+    "images": [],
+    "title": "type, isinstance, and issubclass",
+    "parentTitle": "Methods"
+  },
+  {
+    "blocks": [
+      {
+        "level": "1",
+        "text": "Class inheritance is a very useful Object-oriented Programming construct for sharing and reusing code. "
+      },
+      {
+        "level": "1",
+        "text": "Inheritance makes it possible to break up and organize your code into a hierarchy, from generic to specific. "
+      },
+      {
+        "level": "1",
+        "text": "Parent (generic) class properties are available in child classes, but child properties are NOT available in parent"
+      },
+      {
+        "level": "1",
+        "text": "Earlier, we saw that bool is a subclass of int, thus, it inherited the properties and methods of the int class, and then extended it to be more specific to booleans."
+      },
+      {
+        "text": "We can do the same with our own classes, too. In a file called vehicle.py, let’s create a parent Vehicle class, and have our Car class be a subclass."
+      },
+      {
+        "text": "class Vehicle:\n    def __init__(self, make, model, fuel=\"gas\"):\n        self.make = make\n        self.model = model\n        self.fuel = fuel\n\n\nclass Car(Vehicle):\n    def __init__(self, make, model, fuel=\"gas\"):\n        super().__init__(make, model, fuel)\n"
+      },
+      {
+        "text": "When we instantiate a Car instance, the interpreter calls __init__(), where we pass in two arguments (make and model) and an optional 3rd (fuel, which defaults to “gas”). In __init__(), we call super().__init__(), which resolves to our parent class, Vehicle, and runs its __init__ function, where the variables are stored. Note that even though the variables are stored at the Vehicle level, they are instance variables because self is bound to my_car, which is a Car, which is a Vehicle. Don’t forget to import your Vehicle and Car classes. Behold:"
+      },
+      {
+        "text": ">>> from vehicle import Vehicle, Car\n>>> my_car = Car(\"Ford\", \"Thunderbird\")\n>>> print(type(my_car))\n<class '__main__.Car'>\n>>> print(my_car.fuel)\ngas\n>>> print(isinstance(my_car, Car))\nTrue\n>>> print(isinstance(my_car, Vehicle))\nTrue\n>>> print(issubclass(Car, Vehicle))\nTrue\n"
+      },
+      {
+        "text": "Overriding Variables in a Subclass"
+      },
+      {
+        "text": "We can, of course, use a subclass to override variables that belong to a parent class. Let’s update our vehicle.py file:"
+      },
+      {
+        "text": "class Vehicle:\n    number_of_wheels = 4\n\n    def __init__(self, make, model, fuel=\"gas\"):\n        self.make = make\n        self.model = model\n        self.fuel = fuel\n\nclass Car(Vehicle):\n\n    def __init__(self, make, model, fuel=\"gas\"):\n        super().__init__(make, model, fuel)\n\nclass Truck(Vehicle):\n    number_of_wheels = 6\n\n    def __init__(self, make, model, fuel=\"diesel\"):\n        super().__init__(make, model, fuel)\n\nclass Motorcycle(Vehicle):\n    number_of_wheels = 2\n>>> my_truck = Truck(\"Ford\", \"F350\")\n>>> print(type(my_truck))\n<class '__main__.Truck'>\n>>> print(my_truck.fuel)\ndiesel\n>>> print(my_truck.number_of_wheels)\n6\n"
+      },
+      {
+        "text": "Note how our Truck’s class variable number_of_wheels overrode the parent class Vehicle’s number_of_wheels (or, to be more specific, the interpreter found number_of_wheels in a closer scope, the Truck class, and did not need to continue searching up the hierarchy). Likewise, Motorcycle overrides just the number_of_wheels variable to equal 2. Notice there is no __init__() function in Motorcycle - the number_of_wheels variable is overridden but instantiating a Motorcycle just goes straight to the Vehicle.__init__() method."
+      },
+      {
+        "text": "Multiple Inheritance in Python"
+      },
+      {
+        "text": "Can Python classes inherit from multiple parent classes? Yes, this is called multiple inheritance. It’s not as commonly used for simple programs, but you’ll see it more often as you start using libraries."
+      },
+      {
+        "text": "One common use case for multiple inheritance in Python is for a type of class called a Mixin. Mixin classes tend to be used to quickly and easily add additional properties and methods into a class. This type of design pattern encourages code with composable architecture."
+      },
+      {
+        "text": ""
+      }
+    ],
+    "date": [
+      "Sunday, January 19, 2025",
+      "2:03 PM"
+    ],
+    "images": [],
+    "title": "Inheritance",
+    "parentTitle": null
+  },
+  {
+    "blocks": [
+      {
+        "text": "https://www.learnpython.dev/"
+      }
+    ],
+    "date": [
+      "Monday, December 30, 2024",
+      "12:15 PM"
+    ],
+    "images": [],
+    "title": "Reference",
+    "parentTitle": null
+  }
+]

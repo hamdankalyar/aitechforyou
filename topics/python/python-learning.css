@@ -1,0 +1,5 @@
+.python-outline { list-style: none; padding: 0; margin: 0; }
+.python-outline a { display: block; min-height: 44px; padding-block: 10px; line-height: 1.5; overflow-wrap: anywhere; }
+.python-outline a:hover, .python-outline a[aria-current] { color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
+.python-outline .python-outline,
+.learning-article .article-body aside nav .python-outline .python-outline { margin: 0 0 8px 12px; padding-left: 12px; border-left: 1px solid var(--border); }

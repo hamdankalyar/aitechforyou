@@ -30,13 +30,13 @@ import { StartupPlayground } from "@/topics/electron/components/startup-playgrou
 
 // Renders **term** as <strong>. Only bold is supported on purpose.
 export function Emphasis({ text }: { text: string }) {
-  return <>{text.split("**").map((part, index) => index % 2 ? <strong key={index}>{part}</strong> : part)}</>;
+  return <>{text.split(/(\*\*\S(?:.*?\S)?\*\*)/g).map((part, index) => index % 2 ? <strong key={index}>{part.slice(2, -2)}</strong> : part)}</>;
 }
 
 export function ArticlePoints({ paragraphs, runnableCode = false, compact = false }: { paragraphs: ArticleSection["paragraphs"]; runnableCode?: boolean; compact?: boolean }) {
-  return (<ul className={compact ? "guide-points compact" : "guide-points"}>{paragraphs.map(paragraph => {
+  return (<ul className={compact ? "guide-points compact" : "guide-points"}>{paragraphs.map((paragraph, index) => {
     const text = typeof paragraph === "string" ? paragraph : paragraph.text;
-    return <li className={typeof paragraph !== "string" && paragraph.code ? "guide-example" : undefined} key={text}><Emphasis text={text} />{typeof paragraph !== "string" && <>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} module={paragraph.module} moduleFiles={paragraph.moduleFiles} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</>}</li>;
+    return <li className={!text ? "guide-block" : typeof paragraph !== "string" && paragraph.code ? "guide-example" : undefined} key={index}><Emphasis text={text} />{typeof paragraph !== "string" && <>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} module={paragraph.module} moduleFiles={paragraph.moduleFiles} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</>}</li>;
   })}</ul>);
 }
 
@@ -73,7 +73,8 @@ export function ArticleBlock({ block, runnableCode = false }: { block: Block; ru
     case "fork-playground": return <ForkPlayground />;
     case "stash-playground": return <StashPlayground />;
     case "bullets": return <ul className="learning-bullets">{block.items.map(item => <li key={item.label}><strong><span aria-hidden="true">•</span>{item.label}</strong><p>{item.text}</p></li>)}</ul>;
-    case "table": return <div className="learning-table" role="region" aria-label={block.caption} tabIndex={0}><table><caption>{block.caption}</caption><thead><tr>{block.columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead><tbody>{block.rows.map((row, index) => <tr key={index}>{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row">{cell}</th> : <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
+    case "link": return <a href={block.href}>{block.text}</a>;
+    case "table": return <div className="learning-table" role="region" aria-label={block.caption || block.columns.join(" / ")} tabIndex={0}><table>{block.caption && <caption>{block.caption}</caption>}<thead><tr>{block.columns.map(column => <th key={column} scope="col">{column}</th>)}</tr></thead><tbody>{block.rows.map((row, index) => <tr key={index}>{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row">{cell}</th> : <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
     case "details": return <details className={`learning-details${block.icon === "info" ? " learning-info" : ""}`}><summary>{block.icon === "info" && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7v2" /></svg>}{block.title}</summary><ArticlePoints paragraphs={block.paragraphs} runnableCode={runnableCode} compact />{block.sections?.map(section => <div key={section.heading}><h3>{section.heading}</h3><ArticlePoints paragraphs={section.paragraphs} runnableCode={runnableCode} compact /></div>)}{block.code && (runnableCode ? <CodeRunner code={block.code} /> : <pre tabIndex={0} aria-label="Code example"><code>{block.code}</code></pre>)}{block.commands?.map(command => <CommandBlock {...command} key={command.command} />)}</details>;
     case "quiz": return <KnowledgeCheck {...block} />;
     case "quiz-mode": return <QuizMode title={block.title} questions={block.questions} />;

@@ -7,6 +7,7 @@ import { articles, getArticle } from "@/lib/articles";
 import { JsonLd, articleSchema, breadcrumbSchema, isoDate, site } from "@/lib/seo";
 import { ArticleBlock, ArticlePoints, Emphasis } from "@/components/articles/article-block";
 import { ActiveSection } from "@/components/articles/active-section";
+import { PythonOutline } from "@/topics/python/components/python-outline";
 import { CodeRunner } from "@/topics/javascript/components/code-runner";
 import { GitNavigation } from "@/topics/git/components/git-navigation";
 import { gitReferences } from "@/topics/git/content/git-references";
@@ -37,33 +38,37 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!article) notFound();
   const series = article.series;
   const learning = Boolean(series);
+  const python = article.topic === "Python";
+  const parentArticle = python && article.parentSlug ? getArticle(article.parentSlug) : undefined;
   const heroCard = series && typeof series.illustration === "object" ? series.illustration : undefined;
   const showSectionNumbers = learning && article.topic !== "AI";
   const topicSlug = article.topic.toLowerCase().replaceAll(" ", "-");
   const runnableCode = article.topic === "JavaScript";
   const categorizedCourse = article.topic === "JavaScript" || article.topic === "React Native" || article.topic === "Electron";
-  const topicGuidesHref = article.topic === "Git" ? "/learn/git?view=guides" : categorizedCourse ? `/courses/${topicSlug}#${article.category.toLowerCase().replaceAll(" ", "-")}` : `/articles?topic=${article.topic}`;
+  const topicGuidesHref = python ? "/courses/python" : article.topic === "Git" ? "/learn/git?view=guides" : categorizedCourse ? `/courses/${topicSlug}#${article.category.toLowerCase().replaceAll(" ", "-")}` : `/articles?topic=${article.topic}`;
   const quizSection = article.sections.find(section => section.blocks?.some(block => block.type === "quiz-mode"));
-  const courseArticles = series ? articles.filter(candidate => candidate.series?.title === series.title && (!categorizedCourse || candidate.category === article.category)).sort((a, b) => a.series!.order - b.series!.order) : [];
+  const courseArticles = python ? articles.filter(candidate => candidate.topic === "Python") : series ? articles.filter(candidate => candidate.series?.title === series.title && (!categorizedCourse || candidate.category === article.category)).sort((a, b) => a.series!.order - b.series!.order) : [];
   const seriesIndex = courseArticles.findIndex(candidate => candidate.slug === article.slug);
   const nextArticle = courseArticles[seriesIndex + 1];
   const previousArticle = courseArticles[seriesIndex - 1];
   const sections = article.sections.map((section, index) => ({ ...section, id: section.id ?? `section-${index + 1}` }));
   const contents = <ol>{sections.map((section, index) => <li key={section.id}><a href={`#${section.id}`}>{showSectionNumbers && <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>}{section.heading}</a></li>)}</ol>;
 
+  const pythonContents = <PythonOutline currentSlug={article.slug} />;
+
   return (
-    <main id="main" className={`article-page topic-${topicSlug} ${learning ? "learning-article" : ""}`}>
+    <main id="main" className={`article-page topic-${topicSlug} ${learning || python ? "learning-article" : ""}`}>
       <JsonLd data={articleSchema(article)} />
       <JsonLd data={breadcrumbSchema([{ name: "Articles", path: "/articles" }, { name: article.title, path: `/articles/${article.slug}` }])} />
       {article.topic === "Git" && <div className="shell git-article-navigation"><GitNavigation current="guides" /></div>}
       <header className={`article-hero ${article.accent}`}>
         <div className="shell article-hero-grid">
           <div>
-            <Link className="back-link" href={learning ? topicGuidesHref : "/articles"}>← {categorizedCourse ? `${article.topic} course · ${article.category}` : learning ? `All ${article.topic} guides` : "All articles"}</Link>
+            <Link className="back-link" href={parentArticle ? `/articles/${parentArticle.slug}` : learning || python ? topicGuidesHref : "/articles"}>← {parentArticle ? parentArticle.title : python ? "Python FM" : categorizedCourse ? `${article.topic} course · ${article.category}` : learning ? `All ${article.topic} guides` : "All articles"}</Link>
             {article.series && <div className="series-eyebrow"><span className="series-dot" />{article.topic} Guide<span>{article.series.title}</span></div>}
-            <div className="article-meta"><span>{article.topic}</span><time dateTime={isoDate(article.date)}>{article.date}</time><span>{article.readTime}</span></div>
+            <div className="article-meta"><span>{article.topic}</span><time dateTime={isoDate(article.date)}>{article.date}</time>{article.readTime && <span>{article.readTime}</span>}</div>
             <h1>{article.title}</h1>
-            <p>{article.excerpt}</p>
+            {article.excerpt && <p>{article.excerpt}</p>}
             {article.series && <div className="learning-hero-actions"><a href={`#${article.series.exercise.id}`} className="button dark">{article.series.exercise.label} <ArrowRight /></a><span>{article.series.practiceTime}</span>{quizSection?.id && quizSection.id !== article.series.exercise.id && <a className="text-link" href={`#${quizSection.id}`}>Lecture quiz <ArrowRight size={18} /></a>}</div>}
             {article.shortLesson && <div className="short-lesson-link"><span>{gitReferences.some(reference => reference.href === article.shortLesson?.href) ? "Need the commands?" : "Prefer a short lesson?"}</span><Link href={article.shortLesson.href}>{gitReferences.some(reference => reference.href === article.shortLesson?.href) ? `${article.shortLesson.title} reference` : `Short lesson: ${article.shortLesson.title}`} <ArrowRight size={16} /></Link></div>}
           </div>
@@ -71,22 +76,23 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
       </header>
       <article className="article-body shell">
-        <aside>{learning ? <><div className="desktop-contents"><span>Inside this article</span><nav aria-label="Article contents">{contents}</nav><ActiveSection links='nav[aria-label="Article contents"] a' /><div className="contents-footnote">One idea at a time.<br />At your own pace.</div></div><details className="mobile-contents"><summary>Inside this article</summary><nav aria-label="Article contents">{contents}</nav></details></> : <><span>In one sentence</span><p>{article.excerpt}</p></>}</aside>
+        <aside>{python ? <><div className="desktop-contents"><span>Python FM</span><nav aria-label="Python FM">{pythonContents}</nav></div><details className="mobile-contents"><summary>Python FM</summary><nav aria-label="Python FM">{pythonContents}</nav></details></> : learning ? <><div className="desktop-contents"><span>Inside this article</span><nav aria-label="Article contents">{contents}</nav><ActiveSection links='nav[aria-label="Article contents"] a' /><div className="contents-footnote">One idea at a time.<br />At your own pace.</div></div><details className="mobile-contents"><summary>Inside this article</summary><nav aria-label="Article contents">{contents}</nav></details></> : <><span>In one sentence</span>{article.excerpt && <p>{article.excerpt}</p>}</>}</aside>
         <div className="article-prose">
           {sections.map((section, index) => (
             <section key={section.id} id={section.id}>
               {showSectionNumbers && <div className="section-counter" aria-hidden="true">{String(index + 1).padStart(2, "0")}<span /></div>}
-              <h2>{section.heading}</h2>
-              {learning ? <ArticlePoints paragraphs={section.paragraphs} runnableCode={runnableCode} /> : section.paragraphs.map(paragraph => typeof paragraph === "string" ? <p key={paragraph}>{paragraph}</p> : <div key={paragraph.text}><p><Emphasis text={paragraph.text} /></p>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</div>)}
+              {section.heading && <h2>{section.heading}</h2>}
+              {learning || python ? <ArticlePoints paragraphs={section.paragraphs} runnableCode={runnableCode} /> : section.paragraphs.map(paragraph => typeof paragraph === "string" ? <p key={paragraph}>{paragraph}</p> : <div key={paragraph.text}><p><Emphasis text={paragraph.text} /></p>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</div>)}
               {section.code && (runnableCode ? <CodeRunner code={section.code} page={section.page} module={section.module} moduleFiles={section.moduleFiles} /> : <pre tabIndex={0} aria-label="Code example"><code>{section.code}</code></pre>)}
               {section.blocks?.map((block, index) => <ArticleBlock block={block} runnableCode={runnableCode} key={index} />)}
             </section>
           ))}
+          {python && <PythonOutline parentSlug={article.slug} />}
           {article.sources && <div className="article-sources"><span className="learning-kicker">Further reading · {article.topic} sources</span><ul>{article.sources.map(source => <li key={source.url}><a href={source.url}>{source.title} ↗</a></li>)}</ul></div>}
-          {article.series ? <nav className="series-navigation" aria-label={`${article.topic} course navigation`}>
+          {article.series || python ? <nav className="series-navigation" aria-label={`${article.topic} course navigation`}>
             {previousArticle && <Link className="series-nav-card series-previous" href={`/articles/${previousArticle.slug}`}><span>← Previous article</span><strong>{previousArticle.title}</strong></Link>}
-            <Link className="series-nav-card series-course" href={topicGuidesHref}><span>Course</span><strong>{article.topic === "Git" ? "Git guides" : `${article.topic} course`}</strong></Link>
-            {nextArticle ? <Link className="series-nav-card series-next" href={`/articles/${nextArticle.slug}`}><span>Next article →</span><strong>{nextArticle.title}</strong></Link> : <div className="series-nav-card series-next is-disabled" aria-disabled="true"><span>Next article · In preparation</span><strong>{article.series.nextTitle}</strong></div>}
+            <Link className="series-nav-card series-course" href={topicGuidesHref}><span>Course</span><strong>{python ? "Python FM" : article.topic === "Git" ? "Git guides" : `${article.topic} course`}</strong></Link>
+            {nextArticle ? <Link className="series-nav-card series-next" href={`/articles/${nextArticle.slug}`}><span>Next article →</span><strong>{nextArticle.title}</strong></Link> : article.series ? <div className="series-nav-card series-next is-disabled" aria-disabled="true"><span>Next article · In preparation</span><strong>{article.series.nextTitle}</strong></div> : null}
           </nav> : <div className="article-end">
             <span>Keep learning</span>
             <h2>One idea understood.<br />Many more to explore.</h2>

@@ -66,6 +66,7 @@ import { aiGenerativeAgenticSections } from "@/topics/ai/content/ai-generative-a
 import { electronIntroductionSections } from "@/topics/electron/content/electron-introduction-article";
 import { electronProcessModelSections } from "@/topics/electron/content/electron-process-model-article";
 import { electronSmallestAppSections } from "@/topics/electron/content/electron-smallest-app-article";
+import { pythonArticles } from "@/topics/python/content/python-articles";
 
 export type ArticleBlock =
   | { type: "variables-playground" }
@@ -99,6 +100,7 @@ export type ArticleBlock =
   | { type: "fork-playground" }
   | { type: "stash-playground" }
   | { type: "bullets"; items: { label: string; text: string }[] }
+  | { type: "link"; text: string; href: string }
   | { type: "table"; caption: string; columns: string[]; rows: string[][] }
   | { type: "details"; title: string; icon?: "info"; paragraphs: ArticleSection["paragraphs"]; sections?: Pick<ArticleSection, "heading" | "paragraphs">[]; code?: string; commands?: { command: string; explanation: string; output?: string }[] }
   | { type: "callout"; title: string; text: string }
@@ -150,6 +152,7 @@ export type Article = {
   | { topic: "JavaScript"; category: Exclude<(typeof javascriptCategories)[number], "Mental Model"> | (typeof javascriptMentalModelCategories)[number] }
   | { topic: "React Native"; category: (typeof reactNativeCategories)[number] }
   | { topic: "Electron"; category: (typeof electronCategories)[number] }
+  | { topic: "Python"; category?: never; parentSlug?: string }
   | { topic: "Git" | "AI"; category?: never }
 );
 
@@ -1732,6 +1735,7 @@ export const articles: Article[] = [
       { title: "Electron Forge · Getting started", url: "https://www.electronforge.io/" },
     ],
   },
+  ...pythonArticles,
 ];
 
 export const courses = [
@@ -1769,6 +1773,13 @@ export const courses = [
     description: "Build desktop apps with web skills: two processes, the file system, and the operating system.",
     index: "05",
     className: "blue",
+  },
+  {
+    name: "Python",
+    href: "/courses/python",
+    description: "Python FM",
+    index: "06",
+    className: "yellow",
   },
 ];
 
