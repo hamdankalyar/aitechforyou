@@ -52,6 +52,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const nextArticle = courseArticles[seriesIndex + 1];
   const previousArticle = courseArticles[seriesIndex - 1];
   const sections = article.sections.map((section, index) => ({ ...section, id: section.id ?? `section-${index + 1}` }));
+  const flashcards = python ? sections.flatMap(section => section.blocks?.filter(block => block.type === "flashcards") ?? []) : [];
   const contents = <ol>{sections.map((section, index) => <li key={section.id}><a href={`#${section.id}`}>{showSectionNumbers && <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>}{section.heading}</a></li>)}</ol>;
 
   const pythonContents = <PythonOutline currentSlug={article.slug} />;
@@ -84,11 +85,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               {section.heading && <h2>{section.heading}</h2>}
               {learning || python ? <ArticlePoints paragraphs={section.paragraphs} runnableCode={runnableCode} /> : section.paragraphs.map(paragraph => typeof paragraph === "string" ? <p key={paragraph}>{paragraph}</p> : <div key={paragraph.text}><p><Emphasis text={paragraph.text} /></p>{paragraph.block && <ArticleBlock block={paragraph.block} runnableCode={runnableCode} />}{paragraph.bullets?.length ? <ul>{paragraph.bullets.map(bullet => <li key={bullet}><Emphasis text={bullet} /></li>)}</ul> : null}{paragraph.code && (runnableCode ? <CodeRunner code={paragraph.code} page={paragraph.page} /> : <pre tabIndex={0} aria-label="Code example"><code>{paragraph.code}</code></pre>)}{paragraph.info && <ArticleBlock block={paragraph.info} runnableCode={runnableCode} />}</div>)}
               {section.code && (runnableCode ? <CodeRunner code={section.code} page={section.page} module={section.module} moduleFiles={section.moduleFiles} /> : <pre tabIndex={0} aria-label="Code example"><code>{section.code}</code></pre>)}
-              {section.blocks?.map((block, index) => <ArticleBlock block={block} runnableCode={runnableCode} key={index} />)}
+              {section.blocks?.filter(block => !python || block.type !== "flashcards").map((block, index) => <ArticleBlock block={block} runnableCode={runnableCode} key={index} />)}
             </section>
           ))}
           {python && <PythonOutline parentSlug={article.slug} />}
           {article.sources && <div className="article-sources"><span className="learning-kicker">Further reading · {article.topic} sources</span><ul>{article.sources.map(source => <li key={source.url}><a href={source.url}>{source.title} ↗</a></li>)}</ul></div>}
+          {flashcards.map((block, index) => <ArticleBlock block={block} key={index} />)}
           {article.series || python ? <nav className="series-navigation" aria-label={`${article.topic} course navigation`}>
             {previousArticle && <Link className="series-nav-card series-previous" href={`/articles/${previousArticle.slug}`}><span>← Previous article</span><strong>{previousArticle.title}</strong></Link>}
             <Link className="series-nav-card series-course" href={topicGuidesHref}><span>Course</span><strong>{python ? "Python FM" : article.topic === "Git" ? "Git guides" : `${article.topic} course`}</strong></Link>

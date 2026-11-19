@@ -196,6 +196,26 @@ html[data-theme="dark"] .learning-article { --lab-added: #283b1c; --lab-added-te
 .quiz-mode-review { margin: 20px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--border); }
 .quiz-mode-review li { padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.7; }
 .quiz-mode-review p { margin: 4px 0 0; font-size: 13px; line-height: 1.7; color: var(--lab-added-text); }
+
+html:has(.flashcards-dialog[open]) { overflow: hidden; }
+.flashcards-launch { margin-top: 20px; cursor: pointer; font: inherit; }
+.flashcards-dialog { position: fixed; inset: 0; width: 100%; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: clamp(20px, 4vw, 56px); border: 0; background: var(--paper); color: var(--text); overflow-y: auto; overscroll-behavior: contain; }
+.flashcards-dialog[open] { display: flex; flex-direction: column; gap: 32px; }
+.flashcards-header { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 8px; background: var(--paper); }
+.article-prose .flashcards-header h2 { margin: 0; font-size: clamp(20px, 3vw, 32px); }
+.flashcards-header .button { flex-shrink: 0; cursor: pointer; font: inherit; }
+.flashcards-dialog .flashcards { width: 100%; max-width: 880px; margin: auto; }
+.flashcards button { font-family: inherit; cursor: pointer; }
+.flashcards .lab-actions { flex-direction: row; }
+.flashcards .flashcard { display: block; width: 100%; padding: 0; border: 0; background: transparent; color: var(--text); perspective: 1200px; text-align: center; }
+.flashcard-inner { display: grid; transform-style: preserve-3d; transition: transform .5s ease; }
+.flashcard.is-flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-face { grid-area: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; min-height: clamp(240px, 42dvh, 440px); padding: clamp(24px, 5vw, 64px); border: 1px solid var(--border); border-radius: 16px; background: var(--white); backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow-wrap: anywhere; }
+.flashcard-front { font: 600 clamp(26px, 4vw, 44px)/1.3 var(--font-display); }
+.flashcard-back { transform: rotateY(180deg); font-size: clamp(18px, 2.5vw, 28px); line-height: 1.6; }
+.flashcards-dialog .flashcard-code { max-width: 100%; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 16px; }
+.flashcards button:disabled { cursor: default; opacity: .5; }
+@media (prefers-reduced-motion: reduce) { .flashcard-inner { transition: none; } }
 .learning-recap { padding: 0; list-style: none; border-top: 1px solid var(--border); margin-top: 30px; }
 .learning-recap li { display: flex; gap: 22px; padding: 20px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
 .learning-recap li > span { color: var(--muted); font: 600 12px/1 var(--font-body); }

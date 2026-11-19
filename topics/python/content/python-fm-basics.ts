@@ -12,22 +12,52 @@ export const pythonBasicsArticles: Article[] = [
     "number": "01",
     "sections": [
       {
-        "heading": "",
+        "heading": "Why use a virtual environment?",
+        "paragraphs": [
+          "**Virtual environment** gives a project its own place to install Python packages.",
+          "**Isolation** keeps one project's packages separate from other projects.",
+          {
+            "text": "**Version conflicts** are avoided when projects need different versions of the same package.",
+            "bullets": [
+              "**Project A** can use Django 4 in its environment.",
+              "**Project B** can use Django 5 in a separate environment."
+            ]
+          },
+          "**Global Python** stays unchanged when you install packages inside the environment.",
+          "**Repeatable setup** is easier when requirements.txt records exact package versions.",
+          "**Recommendation** is to create one virtual environment per project."
+        ]
+      },
+      {
+        "heading": "Set up the environment",
         "paragraphs": [
           {
-            "text": "In the folder first make the **env**",
-            "code": "source venv/bin/activate"
+            "text": "**Create** the venv folder from your project directory on macOS or Linux.",
+            "code": "python3 -m venv venv"
           },
           {
-            "text": "Activate the **env**",
+            "text": "**Activate** the environment in Bash or Zsh on macOS or Linux.",
             "code": "source venv/bin/activate"
           },
-          "Make the **requirements.txt** file and put libraries in it",
+          "**requirements.txt** lists the packages your project needs.",
+          "**Exact versions** use entries such as requests==2.32.3 in requirements.txt.",
           {
-            "text": "Install the libraries by running this command",
-            "code": "pip install -r requirements.txt"
+            "text": "**Install** the listed packages into the active environment.",
+            "code": "python -m pip install -r requirements.txt"
           }
         ]
+      },
+      {
+        "heading": "Practice with flashcards",
+        "paragraphs": ["**Flashcards** review virtual environments and their benefits."],
+        "blocks": [{
+          "type": "flashcards",
+          "title": "Python basic setup",
+          "cards": [
+            { "question": "What is a virtual environment?", "answer": "A virtual environment is an isolated Python environment with its own installed packages." },
+            { "question": "Why use a virtual environment?", "answer": "Each project can use the package versions it needs without affecting other projects or global Python packages." }
+          ]
+        }]
       }
     ]
   },
@@ -52,7 +82,21 @@ export const pythonBasicsArticles: Article[] = [
           "**flask**: A lightweight Python web framework for building web applications with minimal setup and complexity.",
           "**memory_profiler**: A Python module for monitoring memory usage during code execution, especially useful for optimization.",
           "**streamlit**: A Python library for building interactive, web-based data apps quickly and easily without extensive front-end development."
-        ]
+        ],
+        "blocks": [{
+          "type": "flashcards",
+          "title": "Python libraries",
+          "cards": [
+            { "question": "What is ipykernel used for?", "answer": "Runs Python code inside Jupyter notebooks." },
+            { "question": "What is NumPy used for?", "answer": "Performs fast numerical calculations on multidimensional arrays." },
+            { "question": "What is pandas used for?", "answer": "Cleans and analyzes table-like data using labeled rows and columns in DataFrames." },
+            { "question": "What is Matplotlib used for?", "answer": "Creates plots with fine control over individual chart details." },
+            { "question": "What is Seaborn used for?", "answer": "Simplifies statistical charts with built-in themes on top of Matplotlib." },
+            { "question": "What is Flask used for?", "answer": "Builds web backends and APIs using URL routes connected to Python functions." },
+            { "question": "What is memory_profiler used for?", "answer": "Tracks RAM usage line by line as Python code runs." },
+            { "question": "What is Streamlit used for?", "answer": "Turns Python scripts into interactive data apps with ready-made widgets." }
+          ]
+        }]
       }
     ]
   },
@@ -140,7 +184,19 @@ export const pythonBasicsArticles: Article[] = [
               ]
             }
           }
-        ]
+        ],
+        "blocks": [{
+          "type": "flashcards",
+          "title": "Python lists",
+          "cards": [
+            { "question": "What is a list?", "answer": "An ordered collection of items (like an array in JavaScript)." },
+            { "question": "How do you create an empty list?", "answer": "[] or list()" },
+            { "question": "What is the time complexity of searching a list?", "answer": "O(n) in the worst case, where n is the number of items." },
+            { "question": "Does a list preserve order?", "answer": "Yes, items keep their order unless you rearrange them." },
+            { "question": "Is a list mutable?", "answer": "Yes, you can add, remove, or replace items." },
+            { "question": "Can a list be sorted in place?", "answer": "Yes, my_list.sort() sorts the existing list in place." }
+          ]
+        }]
       },
       {
         "heading": "Adding, Removing, Changing, and Finding Items in lists cheat sheet",
@@ -236,6 +292,15 @@ export const pythonBasicsArticles: Article[] = [
     "number": "05",
     "sections": [
       {
+        "heading": "Syntax",
+        "paragraphs": [
+          { "text": "", "code": "[expression for item in collection]" },
+          "**Expression** calculates the value to put in the new list.",
+          "**Item** is the variable holding the current element.",
+          "**Collection** supplies the elements to loop through."
+        ]
+      },
+      {
         "heading": "",
         "paragraphs": [
           "List comprehensions are a unique way to create **lists** in Python.",
@@ -254,7 +319,16 @@ export const pythonBasicsArticles: Article[] = [
             "code": "names = [\"Nina\", \"Max\", \"Rose\", \"Jimmy\"]\nmy_list = [(\"length\", len(name) * 2) for name in names]\nprint(my_list)"
           },
           "In the above example, we assemble a list of **tuples** - each tuple contains the element “length” as well as each number from the len() function multiplied by two."
-        ]
+        ],
+        "blocks": [{
+          "type": "flashcards",
+          "title": "List comprehensions",
+          "cards": [
+            { "question": "What is a list comprehension?", "answer": "A concise way to build a new list by applying an expression to each item in a collection." },
+            { "question": "What is the syntax of a list comprehension?", "answer": "[expression for item in collection]" },
+            { "question": "What is one example of a list comprehension?", "answer": "Creates a list of name lengths: [3, 4].", "code": "[len(name) for name in [\"Ali\", \"Sara\"]]" }
+          ]
+        }]
       },
       {
         "heading": "Conditionals",
@@ -312,7 +386,7 @@ export const pythonBasicsArticles: Article[] = [
     "number": "06",
     "sections": [
       {
-        "heading": "tuple (constant array/list)",
+        "heading": "tuple (immutable sequence)",
         "paragraphs": [
           {
             "text": "",
@@ -371,7 +445,19 @@ export const pythonBasicsArticles: Article[] = [
           "**Tuples** are an interesting and powerful datatype, and one of the more unique aspects of Python.",
           "Most other programming languages have ways of representing **lists** and dictionaries, but only a small subset contain tuples.",
           "Use them to your advantage."
-        ]
+        ],
+        "blocks": [{
+          "type": "flashcards",
+          "title": "Python tuples",
+          "cards": [
+            { "question": "What is a tuple?", "answer": "An ordered, immutable collection of items." },
+            { "question": "How do you create an empty tuple?", "answer": "() or tuple()" },
+            { "question": "What is the time complexity of searching a tuple?", "answer": "O(n) in the worst case, where n is the number of items." },
+            { "question": "Does a tuple preserve order?", "answer": "Yes, items keep their order and can be accessed by index." },
+            { "question": "Is a tuple mutable?", "answer": "No, you cannot add, remove, or replace its items." },
+            { "question": "Can a tuple be sorted in place?", "answer": "No, a tuple cannot be rearranged in place." }
+          ]
+        }]
       }
     ]
   },
@@ -449,7 +535,23 @@ export const pythonBasicsArticles: Article[] = [
         "paragraphs": [
           "Let’s create our first few sets.",
           "The first thing we might try to do is create an empty **set** with {}, but we’ll come across a hurdle."
-        ]
+        ],
+        "blocks": [{
+          "type": "flashcards",
+          "title": "Python sets",
+          "cards": [
+            { "question": "What is a set?", "answer": "An unordered collection of unique items (similar to JavaScript's Set)." },
+            { "question": "How do you create an empty set?", "answer": "set() ({} creates an empty dictionary)." },
+            { "question": "What is the time complexity of checking set membership?", "answer": "O(1) on average, but O(n) in the worst case." },
+            { "question": "Does a set preserve insertion order?", "answer": "No, insertion order is not guaranteed." },
+            { "question": "Is a set mutable?", "answer": "Yes, you can add or remove items." },
+            { "question": "Can a set be sorted in place?", "answer": "No, sorted(my_set) creates a new list instead." },
+            { "question": "What kind of items can a set contain?", "answer": "Hashable items, such as numbers, strings, or tuples of hashable items." },
+            { "question": "What does set union do?", "answer": "a | b collects all unique items from either set." },
+            { "question": "What does set intersection do?", "answer": "a & b keeps only items found in both sets." },
+            { "question": "What does set difference do?", "answer": "a - b keeps items in a that are not in b." }
+          ]
+        }]
       }
     ]
   },

@@ -1778,7 +1778,7 @@ export const courses = [
   {
     name: "Python",
     href: "/courses/python",
-    description: "Python FM",
+    description: "",
     index: "06",
     className: "yellow",
   },
